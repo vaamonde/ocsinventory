@@ -41,6 +41,11 @@ then
 					 APP_PASS="123456"
 					 WEBSERVER="apache2"
 					 ADMINUSER="root"
+					 
+					 # Variáveis do OCS Inventory Server
+					 OCSVERSION="2.2.1/OCSNG_UNIX_SERVER-2.2.1.tar.gz"
+					 OCSTAR="OCSNG_UNIX_SERVER-2.2.1.tar.gz"
+					 OCSINSTALL="OCSNG_UNIX_SERVER-2.2.1"
 
 					 #Exportando a variavel do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
@@ -88,8 +93,6 @@ then
 
 					 echo -e "Instalação das Dependências do Perl XML::Entities via CPAN, pressione <Enter> para continuar"
 					 read
-					 sleep 2
-					 clear
 					 #Instalação do XML::Entities					 
 					 perl -MCPAN -e 'install XML::Entities'
 					 echo -e "Instalação concluida com sucesso, pressione <Enter> para continuar"
@@ -99,8 +102,6 @@ then
 					 
 					 echo -e "Instalação das Dependências do Perl SOAP::Lite via CPAN, pressione <Enter> para continuar"
 					 read
-					 sleep 2
-					 clear
 					 #Instalação do SOAP::Lite					 
 					 perl -MCPAN -e 'install SOAP::Lite'
 					 echo -e "Instalação concluida com sucesso, pressione <Enter> para continuar"
@@ -110,8 +111,6 @@ then
 
 					 echo -e "Instalação das Dependências do Perl XML::Simple via CPAN, pressione <Enter> para continuar"
 					 read
-					 sleep 2
-					 clear
 					 #Instalação do XML::Simple					 
 					 perl -MCPAN -e 'install XML::Simple'
 					 echo -e "Instalação concluida com sucesso, pressione <Enter> para continuar"
@@ -121,8 +120,6 @@ then
 
 					 echo -e "Instalação das Dependências do Perl Compress::Zlib via CPAN, pressione <Enter> para continuar"
 					 read
-					 sleep 2
-					 clear
 					 #Instalação do Compress::Zlib					 
 					 perl -MCPAN -e 'install Compress::Zlib'
 					 echo -e "Instalação concluida com sucesso, pressione <Enter> para continuar"
@@ -132,8 +129,6 @@ then
 
 					 echo -e "Instalação das Dependências do Perl DBD::Mysql via CPAN, pressione <Enter> para continuar"
 					 read
-					 sleep 2
-					 clear
 					 #Instalação do DBD::Mysql					 
 					 perl -MCPAN -e 'install DBD::Mysql'
 					 echo -e "Instalação concluida com sucesso, pressione <Enter> para continuar"
@@ -143,8 +138,6 @@ then
 
 					 echo -e "Instalação das Dependências do Perl Apache::DBI via CPAN, pressione <Enter> para continuar"
 					 read
-					 sleep 2
-					 clear
 					 #Instalação do Apache::DBI					 
 					 perl -MCPAN -e 'install Apache::DBI'
 					 echo -e "Instalação concluida com sucesso, pressione <Enter> para continuar"
@@ -154,8 +147,6 @@ then
 
 					 echo -e "Instalação das Dependências do Perl Net::IP via CPAN, pressione <Enter> para continuar"
 					 read
-					 sleep 2
-					 clear
 					 #Instalação do Net::IP					 
 					 perl -MCPAN -e 'install Net::IP'
 					 echo -e "Instalação concluida com sucesso, pressione <Enter> para continuar"
@@ -165,14 +156,37 @@ then
 
 					 echo -e "Instalação das Dependências do Perl Linux::Ethtool via CPAN, pressione <Enter> para continuar"
 					 read
-					 sleep 2
-					 clear
 					 #Instalação do Linux::Ethtool					 
 					 perl -MCPAN -e 'install Linux::Ethtool'
 					 echo -e "Instalação concluida com sucesso, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
+
+					 echo -e "Download do OCS Inventory Server do Github, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 #Fazendo o download do código fonte do OCS Inventory Server
+					 wget https://github.com/OCSInventory-NG/OCSInventory-ocsreports/releases/download/$OCSVERSION &>> $LOG
+					 #Descompactando o OCS Inventory
+					 tar -zxvf $OCSTAR &>> $LOG
+					 #Acessando a pasta do OCS Inventory
+					 cd $OCSINSTALL
+					 echo -e "Download do OCS Inventory feito com sucesso, pressione <Enter> para instalar o OCS Inventory Server"
+					 echo -e "Cuidado com as opções que serão solicitadas no decorrer da instalação"
+					 read
+					 clear
+					 #Executando a instalação do OCS Inventory Server e Reports
+					 ./setup.sh
+					 #Atualizando as informações do Apache2 para o suporte do OCS Inventory
+					 a2dissite 000-default
+					 #Habilitando o conf do OCS Inventory Reports
+					 a2enconf ocsinventory-reports
+					 #Habilitando o conf do OCS Inventory Server
+					 a2enconf z-ocsinventory-server
+					 #Reinicializando o Apache2
+					 sudo service apache2 restart
+
 	
 					 echo -e "Limpando o Cache do Apt-Get"
 					 #Limpando o diretório de cache do apt-get
