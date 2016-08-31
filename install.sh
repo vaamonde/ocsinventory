@@ -32,11 +32,13 @@ then
 			if [ "$KERNEL" == "4.4" ]
 				then
 					 clear
+					 # Variáveis de configuração da senha do MySQL é PhpMyAdmin
+					 PASSWORD="123456"
+					 
 					 echo -e "Usuário é `whoami`, continuando a executar o Install.sh"
-					 echo -e "Aguarde..."
 					 echo  ============================================================ >> $LOG
 					 
-					 echo -e "Atualizando as Listas do Apt-Get"
+					 echo -e "Atualizando as Listas do Apt-Get, aguarde..."
 					 #Exportando a variavel do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
 					 #Atualizando as listas do apt-get
@@ -44,8 +46,13 @@ then
 					 echo -e "Listas Atualizadas com Sucesso!!!"
 					 echo  ============================================================ >> $LOG
 
-					 echo -e "Instalando os principais pacotes do OCS Inventory"
-					 #Instalação do principais pacotes do OCS Inventory, integrado com o Apache2 e MySQL
+					 echo -e "Instalando os principais pacotes do OCS Inventory, aguarde..."
+					 #Instalação do principais pacotes do OCS Inventory integrado com o Apache2 e MySQL
+					 #Configurando as variaveis do Debconf para a instalação do MySQL em modo Noninteractive
+					 echo "mysql-server-5.7 mysql-server/root_password password $PASSWORD" |  debconf-set-selections
+					 echo "mysql-server-5.7 mysql-server/root_password_again password $PASSWORD" |  debconf-set-selections
+					 #Instalando o LAMP Server completo e as dependêncais do OCS Inventory
+					 apt-get -y install lamp-server^ perl python &>> $LOG
 
 					 echo -e "Instalação dos principais pacotes do OCS Invetory feito com sucesso!!!"
 					 echo  ============================================================ >> $LOG
