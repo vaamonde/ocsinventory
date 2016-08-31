@@ -186,6 +186,50 @@ then
 					 a2enconf z-ocsinventory-server
 					 #Reinicializando o Apache2
 					 sudo service apache2 restart
+					 echo -e "Instalação do OCS Inventory Server e Reports feito com sucesso, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Atualizando os arquivos de configuração do OCS Inventory"
+					 echo -e "Editando o arquivo do OCS Inventory Server, pressione <Enter> para continuar"
+					 read
+					 cp conf/z-ocsinventory-server.conf /etc/apache2/conf-available/
+					 vim /etc/apache2/conf-available/z-ocsinventory-server.conf
+					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Editando o arquivo do OCS Inventory Server DBConfig, pressione <Enter> para continuar"
+					 read
+					 cp conf/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/
+					 vim /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php
+					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Editando o arquivo do MySQL Server, pressione <Enter> para continuar"
+					 read
+					 cp conf/mysqld.cnf /etc/mysql/mysql.conf.d/
+					 vim /etc/mysql/mysql.conf.d/mysqld.cnf
+					 sudo service mysql restart
+					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Editando o arquivo do PHP, pressione <Enter> para continuar"
+					 read
+					 cp conf/php.ini /etc/php/7.0/apache2/
+					 vim /etc/php/7.0/apache2/php.ini
+					 sudo service apache2 restart
+					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
 
 	
 					 echo -e "Limpando o Cache do Apt-Get"
