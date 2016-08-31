@@ -21,7 +21,7 @@
 #
 # Utilizar o comando: sudo -i para executar o script
 #
-# Caminho para o Log do Script-00.sh
+# Caminho para o Log do update.sh
 LOG="/var/log/update.log"
 #
 # Variável da Data Inicial para calcular tempo de execução do Script
@@ -43,53 +43,39 @@ then
 					 echo -e "Atualização das listas do Apt-Get"
 					 echo -e "Atualização dos Aplicativos Instalados"
 					 echo -e "Atualização da Distribuição Ubuntu Server (Kernel)"
-					 echo -e "Auto-Limpeza do Apt-Get"
 					 echo -e "Limpando o repositório Local do Apt-Get (Cache)"
 					 echo -e "Após o término será reinicializado o Servidor"
-					 echo -e "Aguarde..."
-					 echo -e "Rodando o Script-00.sh em: `date`" > $LOG
 					 echo  ============================================================ >> $LOG
-					 echo -e "Atualizando as Listas do Apt-Get" >> $LOG
+					 echo -e "Atualizando as Listas do Apt-Get, aguarde..."
 					 #Exportando a variavel do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
 					 #Atualizando as listas do apt-get
 					 apt-get update &>> $LOG
 					 echo -e "Listas Atualizadas com Sucesso!!!"
-					 echo
-					 echo -e "Listas Atualizadas com Sucesso!!!" >> $LOG
 					 echo  ============================================================ >> $LOG
 
-					 echo -e "Atualizando o Sistema" >> $LOG
+					 echo -e "Atualizando o Sistema, aguarde..."
 					 echo  >> $LOG
 					 #Fazendo a atualização de todos os pacotes instalados no servidor
 					 apt-get -o Dpkg::Options::="--force-confold" upgrade -q -y --force-yes &>> $LOG
 					 echo -e "Sistema Atualizado com Sucesso!!!"
-					 echo
-					 echo -e "Sistema Atualizado com Sucesso!!!" >> $LOG
 					 echo  ============================================================ >> $LOG
 
-					 echo -e "Atualizando o Kernel" >> $LOG
+					 echo -e "Atualizando o Kernel, aguarde..."
 					 echo  >> $LOG
-					 echo -e "Kernel atual: `uname -r`" >> $LOG
 					 echo -e "Kernel atual: `uname -r`"
 					 #Fazendo a atualização do Kernel
 					 apt-get -o Dpkg::Options::="--force-confold" dist-upgrade -q -y --force-yes &>> $LOG
 					 echo -e "Kernel Atualizado com Sucesso!!!"
-					 echo -e "Kernel Novo: `uname -r`"
-					 echo
-					 echo -e "Kernel Novo: `uname -r`" >> $LOG
-					 echo -e "Kernel Atualizado com Sucesso!!!" >> $LOG
 					 echo ============================================================ >> $LOG
 
-					 echo -e "Limpando o Cache do Apt-Get" >> $LOG
+					 echo -e "Limpando o Cache do Apt-Get, aguarde..."
 					 #Limpando o diretório de cache do apt-get
 					 apt-get clean &>> $LOG
 					 echo -e "Cache Limpo com Sucesso!!!"
-					 echo
-					 echo -e "Cache Limpo com Sucesso!!!" >> $LOG
 					 echo ============================================================ >> $LOG
 					 echo >> $LOG
-					 echo -e "Fim do Script-00.sh em: `date`" >> $LOG
+					 echo -e "Fim do Update.sh em: `date`" >> $LOG
 
 					 echo
 					 echo -e "Atualização das Listas do Apt-Get, Atualização dos Aplicativos e Atualização do Kernel Feito com Sucesso!!!!!"
@@ -99,7 +85,7 @@ then
 						 SOMA=`expr $DATAFINAL - $DATAINICIAL`
 						 RESULTADO=`expr 10800 + $SOMA`
 						 TEMPO=`date -d @$RESULTADO +%H:%M:%S`
-					 echo -e "Tempo gasto para execução do script-00.sh: $TEMPO"
+					 echo -e "Tempo gasto para execução do update.sh: $TEMPO"
 					 echo -e "Pressione <Enter> para reinicializar o servidor: `hostname`"
 					 read
 					 sleep 2
