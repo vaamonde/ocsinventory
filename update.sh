@@ -39,7 +39,7 @@ then
 			if [ "$KERNEL" == "4.4" ]
 				then
 					 clear
-					 echo -e "Usuário é `whoami`, continuando a executar o Script-00.sh"
+					 echo -e "Usuário é `whoami`, continuando a executar o update.sh"
 					 echo -e "Atualização das listas do Apt-Get"
 					 echo -e "Atualização dos Aplicativos Instalados"
 					 echo -e "Atualização da Distribuição Ubuntu Server (Kernel)"
