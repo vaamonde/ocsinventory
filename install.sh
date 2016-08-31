@@ -194,7 +194,7 @@ then
 					 echo -e "Atualizando os arquivos de configuração do OCS Inventory"
 					 echo -e "Editando o arquivo do OCS Inventory Server, pressione <Enter> para continuar"
 					 read
-					 cp conf/z-ocsinventory-server.conf /etc/apache2/conf-available/
+					 cp -v conf/z-ocsinventory-server.conf /etc/apache2/conf-available/ >> $LOG
 					 vim /etc/apache2/conf-available/z-ocsinventory-server.conf
 					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
 					 read
@@ -203,7 +203,7 @@ then
 					 
 					 echo -e "Editando o arquivo do OCS Inventory Server DBConfig, pressione <Enter> para continuar"
 					 read
-					 cp conf/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/
+					 cp -v conf/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/ >> $LOG
 					 vim /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php
 					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
 					 read
@@ -212,7 +212,7 @@ then
 					 
 					 echo -e "Editando o arquivo do MySQL Server, pressione <Enter> para continuar"
 					 read
-					 cp conf/mysqld.cnf /etc/mysql/mysql.conf.d/
+					 cp -v conf/mysqld.cnf /etc/mysql/mysql.conf.d/ >> $LOG
 					 vim /etc/mysql/mysql.conf.d/mysqld.cnf
 					 sudo service mysql restart
 					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
@@ -222,7 +222,7 @@ then
 					 
 					 echo -e "Editando o arquivo do PHP, pressione <Enter> para continuar"
 					 read
-					 cp conf/php.ini /etc/php/7.0/apache2/
+					 cp -v conf/php.ini /etc/php/7.0/apache2/ >> $LOG
 					 vim /etc/php/7.0/apache2/php.ini
 					 sudo service apache2 restart
 					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
@@ -230,17 +230,23 @@ then
 					 sleep 2
 					 clear
 					 
+					 echo -e "Instalando o Cliente do OCS Inventory, pressione <Enter> para continuar"
+					 echo -e "Indicar local é a URL http://localhost/ocsinventory"
+					 read
+					 sleep 2
+					 apt-get -y install ocsinventory-agent
+					 echo -e "Instalação feita com sucesso, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
 
-	
 					 echo -e "Limpando o Cache do Apt-Get"
 					 #Limpando o diretório de cache do apt-get
 					 apt-get clean &>> $LOG
 					 echo -e "Cache Limpo com Sucesso!!!"
 					 echo ============================================================ >> $LOG
-					 
-					 echo >> $LOG
+
 					 echo -e "Fim do Install.sh em: `date`" >> $LOG
-					 echo
 					 echo -e "Instalação do OCS Inventory Feito com Sucesso!!!!!"
 					 echo
 					 # Script para calcular o tempo gasto para a execução do script-00.sh
