@@ -66,7 +66,7 @@ then
 					 echo "mysql-server-5.7 mysql-server/root_password_again password $PASSWORD" |  debconf-set-selections
 					 #Instalando o LAMP Server completo e as dependêncais do OCS Inventory
 					 apt-get -y install lamp-server^ perl python make libapache2-mod-perl2 libapache2-mod-php snmp libio-compress-perl libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libsoap-lite-perl libnet-ip-perl php-mysql php7.0-dev php-mbstring php-soap php7.0-zip php7.0-gd php7.0-mysql dmidecode libxml-simple-perl libcompress-raw-zlib-perl libnet-ip-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl libcrypt-ssleay-perl libnet-snmp-perl libproc-pid-file-perl libproc-daemon-perl net-tools pciutils smartmontools read-edid nmap libc6-dev &>> $LOG
-					 echo -e "Instalação dos principais pacotes do OCS Invetory feito com sucesso!!!"
+					 echo -e "Instalação dos principais pacotes do OCS Inventory feito com sucesso!!!"
 					 echo  ============================================================ >> $LOG
 
 					 echo -e "Instalando o PhpMyAdmin, aguarde..."
@@ -245,6 +245,15 @@ then
 					 sleep 2
 					 apt-get -y install ocsinventory-agent
 					 echo -e "Instalação feita com sucesso, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
+					 echo -e "Editando o arquivo do OCS Inventory Agent, pressione <Enter> para continuar"
+					 read
+					 cp -v conf/ocsinventory-agent.cfg /etc/ocsinventory/ >> $LOG
+					 vim /etc/ocsinventory/ocsinventory-agent.cfg
+					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
