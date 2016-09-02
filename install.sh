@@ -129,8 +129,8 @@ then
 
 					 echo -e "Instalação das Dependências do Perl DBD::Mysql via CPAN, pressione <Enter> para continuar"
 					 read
-					 #Instalação do DBD::Mysql					 
-					 perl -MCPAN -e 'install DBD::Mysql'
+					 #Instalação do DBD::mysql					 
+					 perl -MCPAN -e 'install DBD::mysql'
 					 echo -e "Instalação concluida com sucesso, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -163,6 +163,15 @@ then
 					 sleep 2
 					 clear
 
+					 echo -e "Instalação das Dependências do Perl Apache2::SOAP via CPAN, pressione <Enter> para continuar"
+					 read
+					 #Instalação do Apache2::SOAP					 
+					 perl -MCPAN -e 'install Apache2::SOAP'
+					 echo -e "Instalação concluida com sucesso, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
 					 echo -e "Download do OCS Inventory Server do Github, pressione <Enter> para continuar"
 					 read
 					 sleep 2
