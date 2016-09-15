@@ -16,10 +16,13 @@ Procedimento para utilizar os scripts.
 10: Finalize a instalação e criação da base de dados via navegador;<br>
 11: Acesse o PhpMyAdmin, utilize um navegador, recomendo o Firefox na URL: http://SEU_ENDEREÇO_IP/phpmyadmin;<br>
 12: Altere a senha do usuário: ocs no Banco de Dados mysql;<br>
-13: Após a instalação, remova o diretório: install.<br>
+13: Após a instalação, remova o arquivo: install.php localizado em: /usr/share/ocsinventory-reports/ocsreports;<br>
+14: Edite o arquivo dbconfig.inc.php e altere a senha do banco de dados;<br>
+15: Edite o arquivo z-ocsinventory-server.conf e altere a senha do banco de dados.<br>
 
 Sucesso sempre, Bora para Prática.<br>
 Robson Vaamonde<br>
 facebook.com/procedimentosemti<br>
 facebook.com/boraparapratica<br>
 youtube.com/boraparapratica<br>
+aulaead.com/cursos
