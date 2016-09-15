@@ -51,22 +51,25 @@ then
 					 export DEBIAN_FRONTEND=noninteractive
 					 
 					 echo -e "Usuário é `whoami`, continuando a executar o Install.sh"
+					 echo
 					 echo  ============================================================ >> $LOG
 					 
 					 echo -e "Atualizando as Listas do Apt-Get, aguarde..."
 					 #Atualizando as listas do apt-get
 					 apt-get update &>> $LOG
-					 echo -e "Listas Atualizadas com Sucesso!!!"
+					 echo -e "Listas Atualizadas com Sucesso!!!, continuando com o script."
+					 echo
 					 echo  ============================================================ >> $LOG
 
-					 echo -e "Instalando os principais pacotes do OCS Inventory, aguarde..."
+					 echo -e "Instalando os principais pacotes para o OCS Inventory - LAMP Server, aguarde..."
 					 #Instalação dos principais pacotes do OCS Inventory integrado com o Apache2 e MySQL
 					 #Configurando as variáveis do Debconf para a instalação do MySQL em modo Noninteractive
 					 echo "mysql-server-5.7 mysql-server/root_password password $PASSWORD" |  debconf-set-selections
 					 echo "mysql-server-5.7 mysql-server/root_password_again password $PASSWORD" |  debconf-set-selections
 					 #Instalando o LAMP Server completo e todas as dependêncais do OCS Inventory
 					 apt-get -y install lamp-server^ perl python make libapache2-mod-perl2 libapache2-mod-php snmp libio-compress-perl libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libsoap-lite-perl libnet-ip-perl php-mysql php7.0-dev php-mbstring php-soap php7.0-zip php7.0-gd php7.0-mysql dmidecode libxml-simple-perl libcompress-raw-zlib-perl libnet-ip-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl libcrypt-ssleay-perl libnet-snmp-perl libproc-pid-file-perl libproc-daemon-perl net-tools pciutils smartmontools read-edid nmap libc6-dev &>> $LOG
-					 echo -e "Instalação dos principais pacotes do OCS Inventory feito com sucesso!!!"
+					 echo -e "Instalação dos principais pacotes do OCS Inventory feito com sucesso!!!, continuando com o script."
+					 echo
 					 echo  ============================================================ >> $LOG
 
 					 echo -e "Instalando o PhpMyAdmin, aguarde..."
@@ -83,9 +86,16 @@ then
 					 #Atualizando as dependências do PhpMyAdmin, ativando os recursos dos módulos do PHP no Apache2
 					 phpenmod mcrypt
 					 phpenmod mbstring
+					 #Atualização o arquivo de configuração do Apache2
+					 #Fazendo o backup do arquivo original
+					 cp -v /etc/apache2/apache2.conf /etc/apache2/apache2.conf.bkp >> $LOG
+					 #Adicionando no final do arquivo a opção de ServerName
+					 echo "ServerName localhost" >> /etc/apache2/apache2.conf
 					 #Reinicializando o serviço do Apache2 Server
 					 sudo service apache2 restart
-					 echo -e "Instalação do LAMP e PhpMyAdmin Feito com Sucesso, pressione <Enter> para continuar"
+					 echo -e "Instalação do PhpMyAdmin Feito com Sucesso!!!"
+					 echo
+					 echo -e "Pressione <Enter> para continuar com o script."
 					 read
 					 sleep 2
 					 clear
@@ -93,7 +103,8 @@ then
 
 					 echo -e "Instalação das Dependências do Perl XML::Entities via CPAN, pressione <Enter> para continuar"
 					 read
-					 #Instalação do XML::Entities					 
+					 #Instalação do XML::Entities
+					 #Mensagem: Would you like to configure as much as possible automatically? Yes <-- digite Yes pressione <Enter>
 					 perl -MCPAN -e 'install XML::Entities'
 					 echo
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
@@ -103,7 +114,13 @@ then
 					 
 					 echo -e "Instalação das Dependências do Perl SOAP::Lite via CPAN, pressione <Enter> para continuar"
 					 read
-					 #Instalação do SOAP::Lite					 
+					 #Instalação do SOAP::Lite
+					 #Mensagem: WARNING: Please tell me where I can find your apache src: q <-- digite q pressione <Enter>
+					 #Mensagem: Do you want to install 'xml_pp' (XML pretty printer)?: y <-- digite y pressione <Enter>
+					 #Mensagem: Do you want to install 'xml_grep' (XML grep - grep XML files using XML::Twig's subset of XPath)?: y <-- digite y pressione <Enter>
+					 #Mensagem: Do you want to install 'xml_split' (split big XML files)?: y <-- digite y pressione <Enter>
+					 #Mensagem: Do you want to install 'xml_merge' (merge back files created by xml_split)?: y <-- digite y pressione <Enter>
+					 #Mensagem: Do you want to install 'xml_spellcheck' (spellcheck XML files skipping tags)?: y <-- digite y pressione <Enter>
 					 perl -MCPAN -e 'install SOAP::Lite'
 					 echo
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
@@ -113,7 +130,7 @@ then
 
 					 echo -e "Instalação das Dependências do Perl XML::Simple via CPAN, pressione <Enter> para continuar"
 					 read
-					 #Instalação do XML::Simple					 
+					 #Instalação do XML::Simple
 					 perl -MCPAN -e 'install XML::Simple'
 					 echo
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
@@ -121,10 +138,10 @@ then
 					 sleep 2
 					 clear
 
-					 echo -e "Instalação das Dependências do Perl Compress::Zlib via CPAN, pressione <Enter> para continuar"
+					 echo -e "Instalação das Dependências do Perl Bundle::Compress::Zlib via CPAN, pressione <Enter> para continuar"
 					 read
-					 #Instalação do Compress::Zlib					 
-					 perl -MCPAN -e 'install Compress::Zlib'
+					 #Instalação do Bundle::Compress::Zlib
+					 perl -MCPAN -e 'install install Bundle::Compress::Zlib'
 					 echo
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
@@ -191,11 +208,33 @@ then
 					 #Acessando a pasta do OCS Inventory
 					 cd $OCSINSTALL
 					 echo -e "Download do OCS Inventory feito com sucesso, pressione <Enter> para instalar o OCS Inventory Server"
-					 echo -e "Cuidado com as opções que serão solicitadas no decorrer da instalação"
+					 echo
+					 echo -e "CUIDADO com as opções que serão solicitadas no decorrer da instalação."
 					 read
 					 clear
 					 #Executando a instalação do OCS Inventory Server e Reports
 					 ./setup.sh
+					 #MENSAGENS QUE SERÃO SOLICIDATAS NA INSTALAÇÃO DO OCS INVENTORY SERVER:
+					 #01. Do you wish to continue ([y]/n): y <-- digite y pressione <Enter>;
+					 #02. Which host is running database server [localhost]?: Deixe o padrão pressione <Enter>;
+					 #03. On which port is running database server [3306]?: Deixe o padrão pressione <Enter>;
+					 #04. Where is Apache daemon binary [/usr/sbin/apache2ctl]?: Deixe o padrão pressione <Enter>;
+					 #05. Where is Apache main configuration file [/etc/apache2/apache2.conf]?: Deixe o padrão pressione <Enter>;
+					 #06. Which user account is running Apache Web Server [www-data]?: Deixe o padrão pressione <Enter>;
+					 #07. Which user group is running Apache web server [www-data]?: Deixe o padrão pressione <Enter>;
+					 #08. Where is Apache Include configuration directory [/etc/apache2/conf-available]?: Deixe o padrão pressione <Enter>;
+					 #09. Where is PERL Intrepreter binary [/usr/bin/perl]?: Deixe o padrão pressione <Enter>;
+					 #10. Do you wish to setup Communication server on this computer ([y]/n)?: y <-- digite y pressione <Enter>;
+					 #11. Where to put Communication server log directory [/var/log/ocsinventory-server]?: Deixe o padrão pressione <Enter>;
+					 #12. Where to put Communication server plugins configuration files [/etc/ocsinventory-server/plugins]?: Deixe o padrão pressione <Enter>;
+					 #13. Where to put Communication server plugins Perl module files [/etc/ocsinventory-server/perl]?: Deixe o padrão pressione <Enter>;
+					 #MENSAGEM: NÃO SE PREOCUPE COM A MENSAGEM DE ERRO DO Apache2::SOAP PERL module..
+					 #14. Do you wish to continue ([y]/n)?: y <-- digite y pressione <Enter>;
+					 #15. Do you allow Setup renaming Communication Server Apache configuration file to 'z-ocsinventory-server.conf' ([y]/n)?: y <-- digite y pressione <Enter>;
+					 #16. Do you wish to setup Administration Server (Web Administration Console) on this computer ([y]/n)?: y <-- digite y pressione <Enter>;
+					 #17. Do you wish to continue ([y]/n)?: y <-- digite y pressione <Enter>;
+					 #18. Where to copy Administration Server static files for PHP Web Console [/usr/share/ocsinventory-reports]?: Deixe o padrão pressione <Enter>;
+					 #19. Where to create writable/cache directories for deployment packages administration console logs, IPDiscover and SNMP [/var/lib/ocsinventory-reports]?: Deixe o padrão pressione <Enter>;
 					 #Atualizando as informações do Apache2 para o suporte ao OCS Inventory Server e Reports
 					 a2dissite 000-default
 					 #Habilitando o conf do OCS Inventory Reports no Apache2
@@ -204,18 +243,20 @@ then
 					 a2enconf z-ocsinventory-server
 					 #Reinicializando o Apache2
 					 sudo service apache2 restart
+					 echo
 					 echo -e "Instalação do OCS Inventory Server e Reports feito com sucesso, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
 					 
 					 echo -e "Atualizando os arquivos de configuração do OCS Inventory"
+					 echo
 					 echo -e "Editando o arquivo do OCS Inventory Server, pressione <Enter> para continuar"
 					 read
 					 #Fazendo o backup do arquivo de configuração original
-					 cp -v /etc/apache2/conf-available/z-ocsinventory-server.conf /etc/apache2/conf-available/z-ocsinventory-server.conf.bkp >> $LOG
+					 cp -v /etc/apache2/conf-available/z-ocsinventory-server.conf /etc/apache2/conf-available/z-ocsinventory-server.conf.bkp &>> $LOG
 					 #Atualizando para o novo arquivo de configuração
-					 cp -v conf/z-ocsinventory-server.conf /etc/apache2/conf-available/ >> $LOG
+					 cp -v conf/z-ocsinventory-server.conf /etc/apache2/conf-available/ &>> $LOG
 					 #Editando o arquivo de configuração
 					 vim /etc/apache2/conf-available/z-ocsinventory-server.conf
 					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
@@ -226,9 +267,9 @@ then
 					 echo -e "Editando o arquivo do OCS Inventory Server DBConfig, pressione <Enter> para continuar"
 					 read
 					 #Fazendo o backup do arquivo de configuração original
-					 cp -v /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php.bkp >> $LOG
+					 cp -v /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php.bkp &>> $LOG
 					 #Atualizando para o novo arquivo de configuração
-					 cp -v conf/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/ >> $LOG
+					 cp -v conf/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/ &>> $LOG
 					 #Editando o arquivo de configuração
 					 vim /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php
 					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
@@ -239,9 +280,9 @@ then
 					 echo -e "Editando o arquivo do MySQL Server, pressione <Enter> para continuar"
 					 read
 					 #Fazendo o backup do arquivo de configuração original
-					 cp -v /etc/mysql/mysql.conf.d/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf.bkp >> $LOG
+					 cp -v /etc/mysql/mysql.conf.d/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf.bkp &>> $LOG
 					 #Atualizando para o novo arquivo de configuração
-					 cp -v conf/mysqld.cnf /etc/mysql/mysql.conf.d/ >> $LOG
+					 cp -v conf/mysqld.cnf /etc/mysql/mysql.conf.d/ &>> $LOG
 					 #Editando o arquivo de configuração
 					 vim /etc/mysql/mysql.conf.d/mysqld.cnf
 					 #Reinicializando o serviço do MySQL Server
@@ -254,9 +295,9 @@ then
 					 echo -e "Editando o arquivo do PHP, pressione <Enter> para continuar"
 					 read
 					 #Fazendo o backup do arquivo de configuração original
-					 cp -v /etc/php/7.0/apache2/php.ini /etc/php/7.0/apache2/php.ini.bkp >> $LOG
+					 cp -v /etc/php/7.0/apache2/php.ini /etc/php/7.0/apache2/php.ini.bkp &>> $LOG
 					 #Atualizando para o novo arquivos de configuração
-					 cp -v conf/php.ini /etc/php/7.0/apache2/ >> $LOG
+					 cp -v conf/php.ini /etc/php/7.0/apache2/ &>> $LOG
 					 #Editando o arquivo de configuração
 					 vim /etc/php/7.0/apache2/php.ini
 					 #Reinicializando o serviço do Apache2
@@ -267,10 +308,10 @@ then
 					 clear
 					 
 					 echo -e "Instalando o Cliente do OCS Inventory, pressione <Enter> para continuar"
-					 echo -e "Indicar na configuração a opção: local é a URL: http://localhost/ocsinventory"
 					 read
 					 sleep 2
-					 apt-get -y install ocsinventory-agent
+					 echo
+					 apt-get -y install ocsinventory-agent &>> $LOG
 					 echo -e "Instalação feita com sucesso, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -279,9 +320,9 @@ then
 					 echo -e "Editando o arquivo do OCS Inventory Agent, pressione <Enter> para continuar"
 					 read
 					 #Fazendo o backup do arquivo de configuração original
-					 cp -v /etc/ocsinventory/ocsinventory-agent.cfg /etc/ocsinventory/ocsinventory-agent.cfg.bkp >> $LOG
+					 cp -v /etc/ocsinventory/ocsinventory-agent.cfg /etc/ocsinventory/ocsinventory-agent.cfg.bkp &>> $LOG
 					 #Atualizando para o novo arquivo de configuração
-					 cp -v conf/ocsinventory-agent.cfg /etc/ocsinventory/ >> $LOG
+					 cp -v conf/ocsinventory-agent.cfg /etc/ocsinventory/ &>> $LOG
 					 #Editando o arquivo de configuração
 					 vim /etc/ocsinventory/ocsinventory-agent.cfg
 					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
@@ -293,6 +334,7 @@ then
 					 #Limpando o diretório de cache do apt-get
 					 apt-get clean &>> $LOG
 					 echo -e "Cache Limpo com Sucesso!!!"
+					 echo
 					 echo ============================================================ >> $LOG
 
 					 echo -e "Fim do Install.sh em: `date`" >> $LOG
