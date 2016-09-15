@@ -12,6 +12,11 @@ Procedimento para utilizar os scripts.
 06: Execute primeiro o arquivo: update.sh utilizando o comando: ./update.sh;<br>
 07: Após a reinicialização, execute o arquivo: install.sh utilizando o comando: ./install.sh;<br>
 08: Siga a instruções que serão apresentadas na tela.;<br>
+09: Após a reinicialização, utilize um navegador, recomendo o Firefox na URL: http://SEU_ENDEREÇO_IP/ocsreports;<br>
+10: Finalize a instalação e criação da base de dados via navegador;<br>
+11: Acesse o PhpMyAdmin, utilize um navegador, recomendo o Firefox na URL: http://SEU_ENDEREÇO_IP/phpmyadmin;<br>
+12: Altere a senha do usuário: ocs no Banco de Dados mysql;<br>
+13: Após a instalação, remova o diretório: install.<br>
 
 Sucesso sempre, Bora para Prática.<br>
 Robson Vaamonde<br>
