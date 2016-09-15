@@ -254,6 +254,7 @@ then
 					 echo -e "Atualizando os arquivos de configuração do OCS Inventory"
 					 echo
 					 echo -e "Editando o arquivo do OCS Inventory Server, pressione <Enter> para continuar"
+					 #Arquivo de configuração do Servidor do OCS Inventory que vai receber as atualização do Clientes
 					 read
 					 #Fazendo o backup do arquivo de configuração original
 					 cp -v /etc/apache2/conf-available/z-ocsinventory-server.conf /etc/apache2/conf-available/z-ocsinventory-server.conf.bkp &>> $LOG
@@ -267,6 +268,8 @@ then
 					 clear
 					 
 					 echo -e "Editando o arquivo do OCS Inventory Server DBConfig, pressione <Enter> para continuar"
+					 #Arquivo de configuração para conexão com o Banco de Dados do MySQL
+					 #Configuração das variáveis de usuário e senha do banco de dados: database name (ocsweb) e user (ocs)
 					 read
 					 #Fazendo o backup do arquivo de configuração original
 					 cp -v /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php.bkp &>> $LOG
@@ -280,6 +283,8 @@ then
 					 clear
 					 
 					 echo -e "Editando o arquivo do MySQL Server, pressione <Enter> para continuar"
+					 #Arquivo de configuração do Banco de Dados do MySQL Server
+					 #Permitir acesso aremoto ao MySQL comentando a linha: bind-address
 					 read
 					 #Fazendo o backup do arquivo de configuração original
 					 cp -v /etc/mysql/mysql.conf.d/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf.bkp &>> $LOG
@@ -295,6 +300,8 @@ then
 					 clear
 					 
 					 echo -e "Editando o arquivo do PHP, pressione <Enter> para continuar"
+					 #Arquivo de configuração do PHP que será utilizado pelo Apache2
+					 #Aumentar os valores das váriaveis: post_max_size e upload_max_filesize para: 250MB
 					 read
 					 #Fazendo o backup do arquivo de configuração original
 					 cp -v /etc/php/7.0/apache2/php.ini /etc/php/7.0/apache2/php.ini.bkp &>> $LOG
@@ -309,7 +316,7 @@ then
 					 sleep 2
 					 clear
 					 
-					 echo -e "Instalando o Cliente do OCS Inventory, pressione <Enter> para continuar"
+					 echo -e "Instalando o Cliente do OCS Inventory Agent, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 echo
@@ -320,6 +327,7 @@ then
 					 clear
 
 					 echo -e "Editando o arquivo do OCS Inventory Agent, pressione <Enter> para continuar"
+					 #Arquivo de configuração do OCS Agent (Cliente)
 					 read
 					 #Fazendo o backup do arquivo de configuração original
 					 cp -v /etc/ocsinventory/ocsinventory-agent.cfg /etc/ocsinventory/ocsinventory-agent.cfg.bkp &>> $LOG
