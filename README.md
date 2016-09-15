@@ -22,7 +22,7 @@ Procedimento para utilizar os scripts.
 
 Sucesso sempre, Bora para Prática.<br>
 Robson Vaamonde<br>
-facebook.com/procedimentosemti<br>
-facebook.com/boraparapratica<br>
-youtube.com/boraparapratica<br>
-aulaead.com/cursos
+http://www.facebook.com/procedimentosemti<br>
+http://ww.facebook.com/boraparapratica<br>
+http://www.youtube.com/boraparapratica<br>
+http://aulaead.com/cursos
