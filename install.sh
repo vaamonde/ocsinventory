@@ -243,6 +243,8 @@ then
 					 a2enconf z-ocsinventory-server
 					 #Reinicializando o Apache2
 					 sudo service apache2 restart
+					 #Saindo do diretório do OCS Iventory
+					 cd ..
 					 echo
 					 echo -e "Instalação do OCS Inventory Server e Reports feito com sucesso, pressione <Enter> para continuar"
 					 read
