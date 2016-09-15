@@ -32,7 +32,7 @@ then
 			if [ "$KERNEL" == "4.4" ]
 				then
 					 clear
-					 # Variáveis de configuração da senha do MySQL
+					 # Variáveis de configuração da senha do MySQL Server
 					 PASSWORD="123456"
  					 
  					 # Variáveis de configuração do PhpMyAdmin
@@ -42,12 +42,12 @@ then
 					 WEBSERVER="apache2"
 					 ADMINUSER="root"
 					 
-					 # Variáveis do OCS Inventory Server
+					 # Variáveis de configuração do OCS Inventory Server
 					 OCSVERSION="2.2.1/OCSNG_UNIX_SERVER-2.2.1.tar.gz"
 					 OCSTAR="OCSNG_UNIX_SERVER-2.2.1.tar.gz"
 					 OCSINSTALL="OCSNG_UNIX_SERVER-2.2.1"
 
-					 #Exportando a variavel do Debian Frontend Noninteractive para não solicitar interação com o usuário
+					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
 					 
 					 echo -e "Usuário é `whoami`, continuando a executar o Install.sh"
@@ -60,17 +60,17 @@ then
 					 echo  ============================================================ >> $LOG
 
 					 echo -e "Instalando os principais pacotes do OCS Inventory, aguarde..."
-					 #Instalação do principais pacotes do OCS Inventory integrado com o Apache2 e MySQL
-					 #Configurando as variaveis do Debconf para a instalação do MySQL em modo Noninteractive
+					 #Instalação dos principais pacotes do OCS Inventory integrado com o Apache2 e MySQL
+					 #Configurando as variáveis do Debconf para a instalação do MySQL em modo Noninteractive
 					 echo "mysql-server-5.7 mysql-server/root_password password $PASSWORD" |  debconf-set-selections
 					 echo "mysql-server-5.7 mysql-server/root_password_again password $PASSWORD" |  debconf-set-selections
-					 #Instalando o LAMP Server completo e as dependêncais do OCS Inventory
+					 #Instalando o LAMP Server completo e todas as dependêncais do OCS Inventory
 					 apt-get -y install lamp-server^ perl python make libapache2-mod-perl2 libapache2-mod-php snmp libio-compress-perl libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libsoap-lite-perl libnet-ip-perl php-mysql php7.0-dev php-mbstring php-soap php7.0-zip php7.0-gd php7.0-mysql dmidecode libxml-simple-perl libcompress-raw-zlib-perl libnet-ip-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl libcrypt-ssleay-perl libnet-snmp-perl libproc-pid-file-perl libproc-daemon-perl net-tools pciutils smartmontools read-edid nmap libc6-dev &>> $LOG
 					 echo -e "Instalação dos principais pacotes do OCS Inventory feito com sucesso!!!"
 					 echo  ============================================================ >> $LOG
 
 					 echo -e "Instalando o PhpMyAdmin, aguarde..."
-					 #Configurando as variaveis do Debconf para a instalação do PhpMyAdmin em modo Noninteractive
+					 #Configurando as variáveis do Debconf para a instalação do PhpMyAdmin em modo Noninteractive
 					 echo "phpmyadmin phpmyadmin/internal/skip-preseed boolean true" |  debconf-set-selections
 					 echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" |  debconf-set-selections
 					 echo "phpmyadmin phpmyadmin/app-password-confirm password $APP_PASSWORD" |  debconf-set-selections
@@ -80,12 +80,12 @@ then
 					 echo "phpmyadmin phpmyadmin/mysql/app-pass password $APP_PASS" |  debconf-set-selections
 					 #Instalando o PhpMyAdmin
 					 apt-get -y install phpmyadmin php-mbstring php-gettext &>> $LOG
-					 #Atualizando as dependências do PhpMyAdmin, ativando os recursos de módulos do PHP no Apache2
+					 #Atualizando as dependências do PhpMyAdmin, ativando os recursos dos módulos do PHP no Apache2
 					 phpenmod mcrypt
 					 phpenmod mbstring
 					 #Reinicializando o serviço do Apache2 Server
 					 sudo service apache2 restart
-					 echo -e "Instalação do PhpMyAdmin Feito com Sucesso, pressione <Enter> para continuar"
+					 echo -e "Instalação do LAMP e PhpMyAdmin Feito com Sucesso, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
@@ -95,7 +95,8 @@ then
 					 read
 					 #Instalação do XML::Entities					 
 					 perl -MCPAN -e 'install XML::Entities'
-					 echo -e "Instalação concluida com sucesso, pressione <Enter> para continuar"
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
@@ -104,7 +105,8 @@ then
 					 read
 					 #Instalação do SOAP::Lite					 
 					 perl -MCPAN -e 'install SOAP::Lite'
-					 echo -e "Instalação concluida com sucesso, pressione <Enter> para continuar"
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
@@ -113,7 +115,8 @@ then
 					 read
 					 #Instalação do XML::Simple					 
 					 perl -MCPAN -e 'install XML::Simple'
-					 echo -e "Instalação concluida com sucesso, pressione <Enter> para continuar"
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
@@ -122,7 +125,8 @@ then
 					 read
 					 #Instalação do Compress::Zlib					 
 					 perl -MCPAN -e 'install Compress::Zlib'
-					 echo -e "Instalação concluida com sucesso, pressione <Enter> para continuar"
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
@@ -131,7 +135,8 @@ then
 					 read
 					 #Instalação do DBD::mysql					 
 					 perl -MCPAN -e 'install DBD::mysql'
-					 echo -e "Instalação concluida com sucesso, pressione <Enter> para continuar"
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
@@ -140,7 +145,8 @@ then
 					 read
 					 #Instalação do Apache::DBI					 
 					 perl -MCPAN -e 'install Apache::DBI'
-					 echo -e "Instalação concluida com sucesso, pressione <Enter> para continuar"
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
@@ -149,7 +155,8 @@ then
 					 read
 					 #Instalação do Net::IP					 
 					 perl -MCPAN -e 'install Net::IP'
-					 echo -e "Instalação concluida com sucesso, pressione <Enter> para continuar"
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
@@ -158,7 +165,8 @@ then
 					 read
 					 #Instalação do Linux::Ethtool					 
 					 perl -MCPAN -e 'install Linux::Ethtool'
-					 echo -e "Instalação concluida com sucesso, pressione <Enter> para continuar"
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
@@ -167,7 +175,8 @@ then
 					 read
 					 #Instalação do Apache2::SOAP					 
 					 perl -MCPAN -e 'install Apache2::SOAP'
-					 echo -e "Instalação concluida com sucesso, pressione <Enter> para continuar"
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
@@ -177,7 +186,7 @@ then
 					 sleep 2
 					 #Fazendo o download do código fonte do OCS Inventory Server
 					 wget https://github.com/OCSInventory-NG/OCSInventory-ocsreports/releases/download/$OCSVERSION &>> $LOG
-					 #Descompactando o OCS Inventory
+					 #Descompactando o arquivos do OCS Inventory Server
 					 tar -zxvf $OCSTAR &>> $LOG
 					 #Acessando a pasta do OCS Inventory
 					 cd $OCSINSTALL
@@ -187,11 +196,11 @@ then
 					 clear
 					 #Executando a instalação do OCS Inventory Server e Reports
 					 ./setup.sh
-					 #Atualizando as informações do Apache2 para o suporte do OCS Inventory
+					 #Atualizando as informações do Apache2 para o suporte ao OCS Inventory Server e Reports
 					 a2dissite 000-default
-					 #Habilitando o conf do OCS Inventory Reports
+					 #Habilitando o conf do OCS Inventory Reports no Apache2
 					 a2enconf ocsinventory-reports
-					 #Habilitando o conf do OCS Inventory Server
+					 #Habilitando o conf do OCS Inventory Server no Apache2
 					 a2enconf z-ocsinventory-server
 					 #Reinicializando o Apache2
 					 sudo service apache2 restart
@@ -203,7 +212,11 @@ then
 					 echo -e "Atualizando os arquivos de configuração do OCS Inventory"
 					 echo -e "Editando o arquivo do OCS Inventory Server, pressione <Enter> para continuar"
 					 read
+					 #Fazendo o backup do arquivo de configuração original
+					 cp -v /etc/apache2/conf-available/z-ocsinventory-server.conf /etc/apache2/conf-available/z-ocsinventory-server.conf.bkp >> $LOG
+					 #Atualizando para o novo arquivo de configuração
 					 cp -v conf/z-ocsinventory-server.conf /etc/apache2/conf-available/ >> $LOG
+					 #Editando o arquivo de configuração
 					 vim /etc/apache2/conf-available/z-ocsinventory-server.conf
 					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
 					 read
@@ -212,7 +225,11 @@ then
 					 
 					 echo -e "Editando o arquivo do OCS Inventory Server DBConfig, pressione <Enter> para continuar"
 					 read
+					 #Fazendo o backup do arquivo de configuração original
+					 cp -v /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php.bkp >> $LOG
+					 #Atualizando para o novo arquivo de configuração
 					 cp -v conf/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/ >> $LOG
+					 #Editando o arquivo de configuração
 					 vim /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php
 					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
 					 read
@@ -221,8 +238,13 @@ then
 					 
 					 echo -e "Editando o arquivo do MySQL Server, pressione <Enter> para continuar"
 					 read
+					 #Fazendo o backup do arquivo de configuração original
+					 cp -v /etc/mysql/mysql.conf.d/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf.bkp >> $LOG
+					 #Atualizando para o novo arquivo de configuração
 					 cp -v conf/mysqld.cnf /etc/mysql/mysql.conf.d/ >> $LOG
+					 #Editando o arquivo de configuração
 					 vim /etc/mysql/mysql.conf.d/mysqld.cnf
+					 #Reinicializando o serviço do MySQL Server
 					 sudo service mysql restart
 					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
 					 read
@@ -231,8 +253,13 @@ then
 					 
 					 echo -e "Editando o arquivo do PHP, pressione <Enter> para continuar"
 					 read
+					 #Fazendo o backup do arquivo de configuração original
+					 cp -v /etc/php/7.0/apache2/php.ini /etc/php/7.0/apache2/php.ini.bkp >> $LOG
+					 #Atualizando para o novo arquivos de configuração
 					 cp -v conf/php.ini /etc/php/7.0/apache2/ >> $LOG
+					 #Editando o arquivo de configuração
 					 vim /etc/php/7.0/apache2/php.ini
+					 #Reinicializando o serviço do Apache2
 					 sudo service apache2 restart
 					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
 					 read
@@ -240,7 +267,7 @@ then
 					 clear
 					 
 					 echo -e "Instalando o Cliente do OCS Inventory, pressione <Enter> para continuar"
-					 echo -e "Indicar local é a URL http://localhost/ocsinventory"
+					 echo -e "Indicar na configuração a opção: local é a URL: http://localhost/ocsinventory"
 					 read
 					 sleep 2
 					 apt-get -y install ocsinventory-agent
@@ -251,7 +278,11 @@ then
 
 					 echo -e "Editando o arquivo do OCS Inventory Agent, pressione <Enter> para continuar"
 					 read
+					 #Fazendo o backup do arquivo de configuração original
+					 cp -v /etc/ocsinventory/ocsinventory-agent.cfg /etc/ocsinventory/ocsinventory-agent.cfg.bkp >> $LOG
+					 #Atualizando para o novo arquivo de configuração
 					 cp -v conf/ocsinventory-agent.cfg /etc/ocsinventory/ >> $LOG
+					 #Editando o arquivo de configuração
 					 vim /etc/ocsinventory/ocsinventory-agent.cfg
 					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
 					 read
@@ -265,9 +296,9 @@ then
 					 echo ============================================================ >> $LOG
 
 					 echo -e "Fim do Install.sh em: `date`" >> $LOG
-					 echo -e "Instalação do OCS Inventory Feito com Sucesso!!!!!"
+					 echo -e "Instalação do OCS Inventory Server Feito com Sucesso!!!!!"
 					 echo
-					 # Script para calcular o tempo gasto para a execução do script-00.sh
+					 # Script para calcular o tempo gasto para a execução do Install.sh
 						 DATAFINAL=`date +%s`
 						 SOMA=`expr $DATAFINAL - $DATAINICIAL`
 						 RESULTADO=`expr 10800 + $SOMA`
