@@ -40,39 +40,46 @@ then
 				then
 					 clear
 					 echo -e "Usuário é `whoami`, continuando a executar o update.sh"
-					 echo -e "Atualização das listas do Apt-Get"
+					 echo
+					 echo -e "Atualização das Listas do Apt-Get"
 					 echo -e "Atualização dos Aplicativos Instalados"
 					 echo -e "Atualização da Distribuição Ubuntu Server (Kernel)"
 					 echo -e "Limpando o repositório Local do Apt-Get (Cache)"
+					 echo
 					 echo -e "Após o término será reinicializado o Servidor"
+					 echo
 					 echo  ============================================================ >> $LOG
 					 echo -e "Atualizando as Listas do Apt-Get, aguarde..."
 					 #Exportando a variavel do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
 					 #Atualizando as listas do apt-get
 					 apt-get update &>> $LOG
-					 echo -e "Listas Atualizadas com Sucesso!!!"
+					 echo -e "Listas Atualizadas com Sucesso!!!, continuando com o script"
+					 echo
 					 echo  ============================================================ >> $LOG
 
-					 echo -e "Atualizando o Sistema, aguarde..."
+					 echo -e "Atualizando os pacotes instalados, aguarde..."
 					 echo  >> $LOG
 					 #Fazendo a atualização de todos os pacotes instalados no servidor
 					 apt-get -o Dpkg::Options::="--force-confold" upgrade -q -y --force-yes &>> $LOG
-					 echo -e "Sistema Atualizado com Sucesso!!!"
+					 echo -e "Pacotes atualizados com Sucesso!!!"
+					 echo
 					 echo  ============================================================ >> $LOG
 
-					 echo -e "Atualizando o Kernel, aguarde..."
+					 echo -e "Atualizando a distribuição do Kernel, aguarde..."
 					 echo  >> $LOG
 					 echo -e "Kernel atual: `uname -r`"
 					 #Fazendo a atualização do Kernel
 					 apt-get -o Dpkg::Options::="--force-confold" dist-upgrade -q -y --force-yes &>> $LOG
 					 echo -e "Kernel Atualizado com Sucesso!!!"
+					 echo
 					 echo ============================================================ >> $LOG
 
 					 echo -e "Limpando o Cache do Apt-Get, aguarde..."
 					 #Limpando o diretório de cache do apt-get
 					 apt-get clean &>> $LOG
 					 echo -e "Cache Limpo com Sucesso!!!"
+					 echo
 					 echo ============================================================ >> $LOG
 					 echo >> $LOG
 					 echo -e "Fim do Update.sh em: `date`" >> $LOG
