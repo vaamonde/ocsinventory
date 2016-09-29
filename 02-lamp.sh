@@ -66,8 +66,8 @@ then
 					 #Configurando as variáveis do Debconf para a instalação do MySQL em modo Noninteractive
 					 echo "mysql-server-5.7 mysql-server/root_password password $PASSWORD" |  debconf-set-selections
 					 echo "mysql-server-5.7 mysql-server/root_password_again password $PASSWORD" |  debconf-set-selections
-					 #Instalando o LAMP Server completo e todas as suas dependêncais do OCS Inventory e do GLPI
-					 apt-get -y install lamp-server^ perl python make libapache2-mod-perl2 libapache2-mod-php snmp libio-compress-perl libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libsoap-lite-perl libnet-ip-perl php-mysql php7.0-dev php-mbstring php-soap php7.0-zip php7.0-gd php7.0-mysql dmidecode libxml-simple-perl libcompress-raw-zlib-perl libnet-ip-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl libcrypt-ssleay-perl libnet-snmp-perl libproc-pid-file-perl libproc-daemon-perl net-tools pciutils smartmontools read-edid nmap libc6-dev php-pclzip gcc libarchive-zip-perl php7.0-json php7.0-mbstring php7.0-mysql php7.0-curl php7.0-gd php7.0-imap php7.0-ldap &>> $LOG
+					 #Instalando o LAMP Server completo e todas as suas dependêncais do OCS Inventory Server, Agent e do GLPI Help Desk
+					 apt-get -y install lamp-server^ perl python make libapache2-mod-perl2 libapache2-mod-php snmp libio-compress-perl libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libsoap-lite-perl libnet-ip-perl php-mysql php7.0-dev php-mbstring php-soap php7.0-zip php7.0-gd php7.0-mysql dmidecode libxml-simple-perl libcompress-raw-zlib-perl libnet-ip-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl libcrypt-ssleay-perl libnet-snmp-perl libproc-pid-file-perl libproc-daemon-perl net-tools pciutils smartmontools read-edid nmap libc6-dev php-pclzip gcc libarchive-zip-perl php7.0-json php7.0-mbstring php7.0-mysql php7.0-curl php7.0-gd php7.0-imap php7.0-ldap ipmitool nmap &>> $LOG
 					 echo -e "Instalação do LAMP Server feito com sucesso!!!, continuando com o script."
 					 echo
 					 echo  ============================================================ >> $LOG
@@ -208,6 +208,127 @@ then
 					 sleep 2
 					 clear
 
+					 echo -e "Instalação das Dependências do Perl Proc::Daemon via CPAN, pressione <Enter> para continuar"
+					 read
+					 #Instalação do Proc::Daemon					 
+					 perl -MCPAN -e 'install Proc::Daemon'
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
+					 echo -e "Instalação das Dependências do Perl Proc::PID::File via CPAN, pressione <Enter> para continuar"
+					 read
+					 #Instalação do Proc::PID::File					 
+					 perl -MCPAN -e 'install Proc::PID::File'
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
+					 echo -e "Instalação das Dependências do Perl Linux::Ethtool::Settings via CPAN, pressione <Enter> para continuar"
+					 read
+					 #Instalação do Linux::Ethtool::Settings					 
+					 perl -MCPAN -e 'install Linux::Ethtool::Settings'
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
+					 echo -e "Instalação das Dependências do Perl nvidia::ml via CPAN, pressione <Enter> para continuar"
+					 read
+					 #Instalação do nvidia::ml					 
+					 perl -MCPAN -e 'install nvidia::ml'
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
+					 echo -e "Instalação das Dependências do Perl Crypt::SSLeay via CPAN, pressione <Enter> para continuar"
+					 read
+					 #Instalação do Crypt::SSLeay					 
+					 perl -MCPAN -e 'install Crypt::SSLeay'
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
+					 echo -e "Instalação das Dependências do Perl LWP::Protocol::https via CPAN, pressione <Enter> para continuar"
+					 read
+					 #Instalação do LWP::Protocol::https					 
+					 perl -MCPAN -e 'install LWP::Protocol::https'
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
+					 echo -e "Instalação das Dependências do Perl Net::CUPS via CPAN, pressione <Enter> para continuar"
+					 read
+					 #Instalação do Net::CUPS					 
+					 perl -MCPAN -e 'install Net::CUPS'
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
+					 echo -e "Instalação das Dependências do Perl Net::SNMP via CPAN, pressione <Enter> para continuar"
+					 read
+					 #Instalação do Net::SNMP					 
+					 perl -MCPAN -e 'install Net::SNMP'
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
+					 echo -e "Instalação das Dependências do Perl Net::Netmask via CPAN, pressione <Enter> para continuar"
+					 read
+					 #Instalação do Net::Netmask					 
+					 perl -MCPAN -e 'install Net::Netmask'
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
+					 echo -e "Instalação das Dependências do Perl Net::Ping via CPAN, pressione <Enter> para continuar"
+					 read
+					 #Instalação do Net::Ping					 
+					 perl -MCPAN -e 'install Net::Ping'
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
+					 echo -e "Instalação das Dependências do Nmap::Parser via CPAN, pressione <Enter> para continuar"
+					 read
+					 #Instalação do Nmap::Parser					 
+					 perl -MCPAN -e 'install Nmap::Parser'
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
+					 echo -e "Instalação das Dependências do Module::Install via CPAN, pressione <Enter> para continuar"
+					 read
+					 #Instalação do Module::Install
+					 #Mensagem: Continue anyways ? [y] <-- digite y pressione <Enter>
+					 perl -MCPAN -e 'install Module::Install'
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
 					 echo -e "Removendo aplicativos desnecessários, aguarde..."
 					 #Limpando o diretório de cache do apt-get
 					 apt-get autoremove &>> $LOG
@@ -222,7 +343,7 @@ then
 					 echo
 					 echo ============================================================ >> $LOG
 
-					 echo -e "Fim do Install.sh em: `date`" >> $LOG
+					 echo -e "Fim do lamp.sh em: `date`" >> $LOG
 					 echo -e "Instalação do LAMP Server Feito com Sucesso!!!!!"
 					 echo
 					 # Script para calcular o tempo gasto para a execução do lamp.sh
