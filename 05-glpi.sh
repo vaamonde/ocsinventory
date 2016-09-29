@@ -32,8 +32,6 @@ then
 			if [ "$KERNEL" == "4.4" ]
 				then
 					 clear
-					 # Variáveis de configuração da senha do MySQL Server
-					 PASSWORD="123456"
  					 
  					 #Variáveis de configuração do GLPI Help Desk
 					 GLPIVERSION="9.1/glpi-9.1.tar.gz"
@@ -80,9 +78,9 @@ then
 					 #08. Etapa 4: <Usar o GLPI>.
 					 #USUÁRIOS QUE SERÃO UTILIZADOS NO GLPI HELP DESK
 					 #glpi/glpi para a conta do usuário administrador
-    				 #tech/tech para a conta do usuário técnico
-    				 #normal/normal para a conta do usuário normal
-    				 #post-only/postonly para a conta do usuário postonly
+    				 	 #tech/tech para a conta do usuário técnico
+    				 	 #normal/normal para a conta do usuário normal
+    				 	 #post-only/postonly para a conta do usuário postonly
 					 #APÓS A INSTALAÇÃO VIA NAVEGADOR, REMOVER A PASTA glpi/install
 					 echo -e "Download do GLPI feito com sucesso, pressione <Enter> para continuar"
 					 read
