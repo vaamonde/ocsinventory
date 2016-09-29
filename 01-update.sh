@@ -46,11 +46,11 @@ then
 					 echo -e "Atualização da Distribuição Ubuntu Server (Kernel)"
 					 echo -e "Limpando o repositório Local do Apt-Get (Cache)"
 					 echo
-					 echo -e "Após o término será reinicializado o Servidor"
+					 echo -e "Após o término o Servidor será reinicializado"
 					 echo
 					 echo  ============================================================ >> $LOG
 					 echo -e "Atualizando as Listas do Apt-Get, aguarde..."
-					 #Exportando a variavel do Debian Frontend Noninteractive para não solicitar interação com o usuário
+					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
 					 #Atualizando as listas do apt-get
 					 apt-get update &>> $LOG
@@ -69,7 +69,7 @@ then
 					 echo -e "Atualizando a distribuição do Kernel, aguarde..."
 					 echo  >> $LOG
 					 echo -e "Kernel atual: `uname -r`"
-					 #Fazendo a atualização do Kernel
+					 #Fazendo a atualização da distribuição e do Kernel
 					 apt-get -o Dpkg::Options::="--force-confold" dist-upgrade -q -y --force-yes &>> $LOG
 					 echo -e "Kernel Atualizado com Sucesso!!!, continuando com o script"
 					 echo
