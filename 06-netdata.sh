@@ -46,12 +46,9 @@ then
 					 
 					 echo -e "Instalação do sistema de monitoramente em tempo real Netdata"
 					 echo -e "Após a instalação acessar a URL http://`hostname`:19999"
-					 echo -e "Download e instalação das dependências do Netdata"
 					 echo -e "Pressione <Enter> para instalar"
 					 read
-					 #Instalando as dependências do Netdata
-					 apt-get -y install zlib1g-dev gcc make git autoconf autogen automake pkg-config uuid-dev &>> $LOG
-					 echo -e "Instalação das dependêncais do Netdata feita com sucesso!!!"
+					 sleep 2
 					 echo
 					 #Clonando o site do GitHub do Netdata
 					 git clone https://github.com/firehol/$NETDATAVERSION --depth=1 &>> $LOG
@@ -72,20 +69,6 @@ then
 					 sleep 2
 					 clear
 					 
-					 echo -e "Removendo aplicativos desnecessários, aguarde..."
-					 #Limpando o diretório de cache do apt-get
-					 apt-get autoremove &>> $LOG
-					 echo -e "Aplicativos removidos com Sucesso!!!, continuando o script"
-					 echo
-					 echo ============================================================ >> $LOG
-
-					 echo -e "Limpando o Cache do Apt-Get, aguarde..."
-					 #Limpando o diretório de cache do apt-get
-					 apt-get clean &>> $LOG
-					 echo -e "Cache Limpo com Sucesso!!!, continuando o script"
-					 echo
-					 echo ============================================================ >> $LOG
-
 					 echo -e "Fim do netdata.sh em: `date`" >> $LOG
 					 echo -e "Instalação do Netdata feito com Sucesso!!!!!"
 					 echo
