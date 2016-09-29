@@ -208,14 +208,14 @@ then
 					 echo ============================================================ >> $LOG
 
 					 echo -e "Fim do Install.sh em: `date`" >> $LOG
-					 echo -e "Instalação do OCS Inventory Server Feito com Sucesso!!!!!"
+					 echo -e "Instalação do LAMP Server Feito com Sucesso!!!!!"
 					 echo
-					 # Script para calcular o tempo gasto para a execução do Install.sh
+					 # Script para calcular o tempo gasto para a execução do lamp.sh
 						 DATAFINAL=`date +%s`
 						 SOMA=`expr $DATAFINAL - $DATAINICIAL`
 						 RESULTADO=`expr 10800 + $SOMA`
 						 TEMPO=`date -d @$RESULTADO +%H:%M:%S`
-					 echo -e "Tempo gasto para execução do Install.sh: $TEMPO"
+					 echo -e "Tempo gasto para execução do lamp.sh: $TEMPO"
 					 echo -e "Pressione <Enter> para reinicializar o servidor: `hostname`"
 					 read
 					 sleep 2
