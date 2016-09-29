@@ -65,11 +65,11 @@ then
 					 read
 					 clear
 					 #Configurando o arquivo Makefile.PL do OCS Inventory Agent
-				     perl Makefile.PL &>> $LOG
+					 perl Makefile.PL &>> $LOG
 					 #Compilando o OCS Inventory Agent
-      				 make &>> $LOG
+					 make &>> $LOG
 					 #Instalando o OCS Inventory Agent
-      				 make install
+					 make install
 					 #MENSAGENS QUE SERÃO SOLICIDATAS NA INSTALAÇÃO DO OCS INVENTORY AGENT:
 					 #Please enter 'y' or 'n'?> [y] <-- pressione <Enter>
 					 #Where do you want to write the configuration file? <-- digite 2 pressione <Enter>
@@ -104,7 +104,7 @@ then
 					 #Fazendo o backup do arquivo de configuração original
 					 cp -v /etc/ocsinventory-agent/ocsinventory-agent.cfg /etc/ocsinventory-agent/ocsinventory-agent.cfg.bkp &>> $LOG
 					 #Atualizando para o novo arquivo de configuração
-					 cp -v conf/ocsinventory-agent.cfg /etc/ocsinventory/ &>> $LOG
+					 cp -v conf/ocsinventory-agent.cfg /etc/ocsinventory-agent/ &>> $LOG
 					 #Editando o arquivo de configuração
 					 vim /etc/ocsinventory-agent/ocsinventory-agent.cfg
 					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
