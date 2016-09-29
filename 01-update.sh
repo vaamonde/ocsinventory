@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 15/09/2016
-# Versão: 0.9
+# Data de atualização: 29/09/2016
+# Versão: 0.10
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -62,7 +62,7 @@ then
 					 echo  >> $LOG
 					 #Fazendo a atualização de todos os pacotes instalados no servidor
 					 apt-get -o Dpkg::Options::="--force-confold" upgrade -q -y --force-yes &>> $LOG
-					 echo -e "Pacotes atualizados com Sucesso!!!"
+					 echo -e "Pacotes atualizados com Sucesso!!!, continuando com o script"
 					 echo
 					 echo  ============================================================ >> $LOG
 
@@ -71,7 +71,7 @@ then
 					 echo -e "Kernel atual: `uname -r`"
 					 #Fazendo a atualização do Kernel
 					 apt-get -o Dpkg::Options::="--force-confold" dist-upgrade -q -y --force-yes &>> $LOG
-					 echo -e "Kernel Atualizado com Sucesso!!!"
+					 echo -e "Kernel Atualizado com Sucesso!!!, continuando com o script"
 					 echo
 					 echo ============================================================ >> $LOG
 
