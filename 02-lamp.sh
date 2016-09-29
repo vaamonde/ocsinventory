@@ -10,7 +10,12 @@
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
-# Instalação do OCS Inventory Server
+# Instalação do LAMP Server
+# Instalação do Apache2
+# Instalação do MySQL Server
+# Instalação do PhpMyAdmin
+# Instalação do PHP, Perl, Python
+# Instalação das Depedências via cpan
 #
 # Utilizar o comando: sudo -i para executar o script
 #
