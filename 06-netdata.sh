@@ -62,6 +62,8 @@ then
 					 read
 					 ./netdata-installer.sh
 					 #Saindo do diretório do Netdata
+					 #MENSAGENS QUE SERÃO SOLICITADAS NA INSTALAÇÃO DO NETDATA
+					 #Press ENTER to build and install netdata to your system
 					 cd ..
 					 echo
 					 echo -e "Instalação do Netdata feita com sucesso!!!, pressione <Enter> para continuar"
