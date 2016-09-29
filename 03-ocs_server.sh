@@ -34,7 +34,7 @@ then
 				then
 					 clear
 					 
-					 # Variáveis de configuração do OCS Inventory Server
+					 # Variáveis de configuração do OCS Inventory Server e Reports
 					 OCSVERSION="2.2.1/OCSNG_UNIX_SERVER-2.2.1.tar.gz"
 					 OCSTAR="OCSNG_UNIX_SERVER-2.2.1.tar.gz"
 					 OCSINSTALL="OCSNG_UNIX_SERVER-2.2.1"
@@ -55,7 +55,7 @@ then
 					 tar -zxvf $OCSTAR &>> $LOG
 					 #Acessando a pasta do OCS Inventory
 					 cd $OCSINSTALL
-					 echo -e "Download do OCS Inventory feito com sucesso, pressione <Enter> para instalar"
+					 echo -e "Download do OCS Inventory Server feito com Sucesso!!!, pressione <Enter> para instalar"
 					 echo
 					 echo -e "CUIDADO com as opções que serão solicitadas no decorrer da instalação."
 					 read
@@ -95,7 +95,7 @@ then
 					 #Saindo do diretório do OCS Iventory
 					 cd ..
 					 echo
-					 echo -e "Instalação do OCS Inventory Server e Reports feito com sucesso, pressione <Enter> para continuar"
+					 echo -e "Instalação do OCS Inventory Server e Reports feito com Sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
@@ -111,7 +111,7 @@ then
 					 cp -v conf/z-ocsinventory-server.conf /etc/apache2/conf-available/ &>> $LOG
 					 #Editando o arquivo de configuração
 					 vim /etc/apache2/conf-available/z-ocsinventory-server.conf
-					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
+					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
@@ -127,7 +127,7 @@ then
 					 cp -v conf/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/ &>> $LOG
 					 #Editando o arquivo de configuração
 					 vim /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php
-					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
+					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
@@ -144,7 +144,7 @@ then
 					 vim /etc/mysql/mysql.conf.d/mysqld.cnf
 					 #Reinicializando o serviço do MySQL Server
 					 sudo service mysql restart
-					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
+					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
@@ -161,15 +161,15 @@ then
 					 vim /etc/php/7.0/apache2/php.ini
 					 #Reinicializando o serviço do Apache2
 					 sudo service apache2 restart
-					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
+					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
 					 
 					 echo -e "Removendo aplicativos desnecessários, aguarde..."
-					 #Limpando o diretório de cache do apt-get
+					 #Removendo arquivos que não são mais utilizados
 					 apt-get autoremove &>> $LOG
-					 echo -e "Aplicativos removidos com Sucesso, continuando com o script!!!"
+					 echo -e "Aplicativos removidos com Sucesso!!!, continuando com o script!!!"
 					 echo
 					 echo ============================================================ >> $LOG
 
@@ -188,7 +188,7 @@ then
 						 SOMA=`expr $DATAFINAL - $DATAINICIAL`
 						 RESULTADO=`expr 10800 + $SOMA`
 						 TEMPO=`date -d @$RESULTADO +%H:%M:%S`
-					 echo -e "Tempo gasto para execução do Install.sh: $TEMPO"
+					 echo -e "Tempo gasto para execução do ocs_server.sh: $TEMPO"
 					 echo -e "Pressione <Enter> para reinicializar o servidor: `hostname`"
 					 read
 					 sleep 2
