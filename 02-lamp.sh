@@ -197,7 +197,17 @@ then
 					 read
 					 sleep 2
 					 clear
-					 
+
+					 echo -e "Instalação das Dependências do Perl Digest::MD5 via CPAN, pressione <Enter> para continuar"
+					 read
+					 #Instalação do Digest::MD5					 
+					 perl -MCPAN -e 'install Digest::MD5'
+					 echo
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
 					 echo -e "Removendo aplicativos desnecessários, aguarde..."
 					 #Limpando o diretório de cache do apt-get
 					 apt-get autoremove &>> $LOG
