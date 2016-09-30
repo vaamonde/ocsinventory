@@ -60,10 +60,11 @@ then
 					 echo -e "Pressione <Enter> para compilar o software do NetData"
 					 echo
 					 read
+					 #Executando o script de instalação do Netdata
 					 ./netdata-installer.sh
-					 #Saindo do diretório do Netdata
 					 #MENSAGENS QUE SERÃO SOLICITADAS NA INSTALAÇÃO DO NETDATA
 					 #Press ENTER to build and install netdata to your system? <-- pressione <Enter>
+					 #Saindo do diretório do Netdata
 					 cd ..
 					 echo
 					 echo -e "Instalação do Netdata feita com sucesso!!!, pressione <Enter> para continuar"
@@ -79,7 +80,7 @@ then
 						 SOMA=`expr $DATAFINAL - $DATAINICIAL`
 						 RESULTADO=`expr 10800 + $SOMA`
 						 TEMPO=`date -d @$RESULTADO +%H:%M:%S`
-					 echo -e "Tempo gasto para execução do Install.sh: $TEMPO"
+					 echo -e "Tempo gasto para execução do netdata.sh: $TEMPO"
 					 echo -e "Pressione <Enter> para reinicializar o servidor: `hostname`"
 					 read
 					 sleep 2
