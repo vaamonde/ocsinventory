@@ -61,7 +61,7 @@ then
 					 echo
 					 echo  ============================================================ >> $LOG
 
-					 echo -e "Instalando o LAMP Server (Linux, Apache, MySQL e PHP), aguarde..."
+					 echo -e "Instalando o LAMP Server (Linux, Apache, MySQL, PHP, Perl, Python), aguarde..."
 					 #Instalação dos principais pacotes do OCS Inventory e do GLPI integrado com o Apache2 e MySQL
 					 #Configurando as variáveis do Debconf para a instalação do MySQL em modo Noninteractive
 					 echo "mysql-server-5.7 mysql-server/root_password password $PASSWORD" |  debconf-set-selections
