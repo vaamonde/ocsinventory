@@ -44,6 +44,7 @@ then
 					 echo -e "Atualização das Listas do Apt-Get"
 					 echo -e "Atualização dos Aplicativos Instalados"
 					 echo -e "Atualização da Distribuição Ubuntu Server (Kernel)"
+					 echo -e "Remoção de aplicativas desnecessários"
 					 echo -e "Limpando o repositório Local do Apt-Get (Cache)"
 					 echo
 					 echo -e "Após o término o Servidor será reinicializado"
@@ -66,15 +67,26 @@ then
 					 echo
 					 echo  ============================================================ >> $LOG
 
-					 echo -e "Atualizando a distribuição do Kernel, aguarde..."
+					 echo -e "Atualizando a distribuição é o Kernel instalado, aguarde..."
 					 echo  >> $LOG
 					 echo -e "Kernel atual: `uname -r`"
 					 #Fazendo a atualização da distribuição e do Kernel
 					 apt-get -o Dpkg::Options::="--force-confold" dist-upgrade -q -y --force-yes &>> $LOG
-					 echo -e "Kernel Atualizado com Sucesso!!!, continuando com o script"
+					 echo -e "Kernel atualizado, versões instaladas."
+					 #Listando os pacotes instalados, filtrando por palavras, cortando por colunas.
+					 dpkg --list | grep linux-image-4.4 | cut -d' ' -f 3
+					 echo -e "Distribuição atualizada com Sucesso!!!, continuando com o script"
 					 echo
 					 echo ============================================================ >> $LOG
 
+					 echo -e "Remoção dos aplicativos desncessários, aguarde..."
+					 #Fazendo a autoremoção de aplicativas instalados
+					 apt-get -y autoremove &>> $LOG
+					 echo -e "Remoção concluida com Sucesso!!!, continuando com o script"
+					 echo
+					 echo ============================================================ >> $LOG
+					 echo >> $LOG
+					 
 					 echo -e "Limpando o Cache do Apt-Get, aguarde..."
 					 #Limpando o diretório de cache do apt-get
 					 apt-get clean &>> $LOG
