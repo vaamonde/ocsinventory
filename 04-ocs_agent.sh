@@ -50,7 +50,7 @@ then
 					 read
 					 sleep 2
 					 #Fazendo o download do código fonte do OCS Inventory Agent
-					 wget https://github.com/OCSInventory-NG/OCSInventory-ocsreports/releases/download/$OCSAGENTVERSION &>> $LOG
+					 wget https://github.com/OCSInventory-NG/UnixAgent/releases/download/$OCSAGENTVERSION &>> $LOG
 					 #Descompactando o arquivos do OCS Inventory Agent
 					 tar -zxvf OCSAGENTTAR &>> $LOG
 					 #Acessando a pasta do OCS Inventory Agent
