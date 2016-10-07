@@ -52,9 +52,9 @@ then
 					 #Fazendo o download do código fonte do OCS Inventory Agent
 					 wget https://github.com/OCSInventory-NG/UnixAgent/releases/download/$OCSAGENTVERSION &>> $LOG
 					 #Descompactando o arquivos do OCS Inventory Agent
-					 tar -zxvf OCSAGENTTAR &>> $LOG
+					 tar -zxvf $OCSAGENTTAR &>> $LOG
 					 #Acessando a pasta do OCS Inventory Agent
-					 cd OCSAGENTINSTALL
+					 cd $OCSAGENTINSTALL
 					 #Criando o diretório de Log do OCS Inventory Agent
 					 mkdir -v /var/log/ocsinventory-agent/ &>> $LOG
 					 #Criando o arquivo de Log do OCS Inventory Agent
