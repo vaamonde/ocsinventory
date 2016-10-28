@@ -49,15 +49,16 @@ then
 					 echo -e "Download do OCS Inventory Server do Github, pressione <Enter> para continuar"
 					 read
 					 sleep 2
+					 echo -e "Aguarde, fazendo o download..."
 					 #Fazendo o download do código fonte do OCS Inventory Server
 					 wget https://github.com/OCSInventory-NG/OCSInventory-ocsreports/releases/download/$OCSVERSION &>> $LOG
 					 #Descompactando o arquivos do OCS Inventory Server
 					 tar -zxvf $OCSTAR &>> $LOG
 					 #Acessando a pasta do OCS Inventory
 					 cd $OCSINSTALL
+					 echo -e "CUIDADO com as opções que serão solicitadas no decorrer da instalação."
 					 echo -e "Download do OCS Inventory Server feito com Sucesso!!!, pressione <Enter> para instalar"
 					 echo
-					 echo -e "CUIDADO com as opções que serão solicitadas no decorrer da instalação."
 					 read
 					 clear
 					 #Executando a instalação do OCS Inventory Server e Reports
