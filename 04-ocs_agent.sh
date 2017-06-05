@@ -34,9 +34,9 @@ then
 					 clear
 
 					 #Variáveis de configuração do OCS Inventory Agent
-					 OCSAGENTVERSION="2.1.1/Ocsinventory-Unix-Agent-2.1.1.tar.gz"
-					 OCSAGENTTAR="Ocsinventory-Unix-Agent-2.1.1.tar.gz"
-					 OCSAGENTINSTALL="Ocsinventory-Unix-Agent-2.1.1"
+					 OCSAGENTVERSION="2.3/Ocsinventory-Unix-Agent-2.3.tar.gz"
+					 OCSAGENTTAR="Ocsinventory-Unix-Agent-2.3.tar.gz"
+					 OCSAGENTINSTALL="Ocsinventory-Unix-Agent-2.3"
 					 
 					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
