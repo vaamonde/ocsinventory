@@ -34,13 +34,13 @@ then
 					 clear
  					 
  					 #Variáveis de configuração do GLPI Help Desk
-					 GLPIVERSION="9.1/glpi-9.1.tar.gz"
-					 GLPITAR="glpi-9.1.tar.gz"
+					 GLPIVERSION="9.1.3/glpi-9.1.3.tgz"
+					 GLPITAR="glpi-9.1.3.tgz"
 					 GLPIINSTALL="glpi"
 					 
 					 #Variáveis de configuração do Plugin do OCS Inventory do GLPI
-					 GLPIOCSVERSION="1.2.3/glpi-ocsinventoryng-1.2.3.tar.gz"
-					 GLPIOCSTAR="glpi-ocsinventoryng-1.2.3.tar.gz"
+					 GLPIOCSVERSION="1.3.3/glpi-ocsinventoryng-1.3.3.tar.gz"
+					 GLPIOCSTAR="glpi-ocsinventoryng-1.3.3.tar.gz"
 					 GLPIOCSINSTALL="ocsinventoryng"
 
 					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
