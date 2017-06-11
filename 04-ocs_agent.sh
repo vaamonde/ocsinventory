@@ -49,27 +49,37 @@ then
 					 echo -e "Download do OCS Inventory Agent do Github, pressione <Enter> para continuar"
 					 read
 					 sleep 2
+					 
 					 #Fazendo o download do código fonte do OCS Inventory Agent
 					 wget https://github.com/OCSInventory-NG/UnixAgent/releases/download/$OCSAGENTVERSION &>> $LOG
+					 
 					 #Descompactando o arquivos do OCS Inventory Agent
 					 tar -zxvf $OCSAGENTTAR &>> $LOG
+					 
 					 #Acessando a pasta do OCS Inventory Agent
 					 cd $OCSAGENTINSTALL
+					 
 					 #Criando o diretório de Log do OCS Inventory Agent
 					 mkdir -v /var/log/ocsinventory-agent/ &>> $LOG
+					 
 					 #Criando o arquivo de Log do OCS Inventory Agent
 					 touch /var/log/ocsinventory-agent/activity.log
+					 
 					 echo -e "Download do OCS Inventory Agent feito com Sucesso!!!, pressione <Enter> para continuar."
 					 echo
 					 echo -e "CUIDADO com as opções que serão solicitadas no decorrer da instalação."
 					 read
 					 clear
+					 
 					 #Configurando o arquivo Makefile.PL do OCS Inventory Agent
 					 perl Makefile.PL &>> $LOG
+					 
 					 #Compilando o OCS Inventory Agent
 					 make &>> $LOG
+					 
 					 #Instalando o OCS Inventory Agent
 					 make install
+					 
 					 #MENSAGENS QUE SERÃO SOLICIDATAS NA INSTALAÇÃO DO OCS INVENTORY AGENT:
 					 #Please enter 'y' or 'n'?> [y] <-- pressione <Enter>
 					 #Where do you want to write the configuration file? <-- digite 2 pressione <Enter>
@@ -92,6 +102,7 @@ then
 					 #Do you want to send an inventory of this machine? <-- pressione <Enter>
 					 #Saindo do diretório do OCS Inventory Agent
 					 cd ..
+					 
 					 echo
 					 echo -e "Instalação do OCS Inventory Agent feito com sucesso, pressione <Enter> para continuar"
 					 read
@@ -99,14 +110,18 @@ then
 					 clear
 					 
 					 echo -e "Editando o arquivo do OCS Inventory Agent, pressione <Enter> para continuar"
-					 #Arquivo de configuração do OCS Agent (Cliente)
 					 read
+					 
+					 #Arquivo de configuração do OCS Agent (Cliente)
 					 #Fazendo o backup do arquivo de configuração original
 					 cp -v /etc/ocsinventory-agent/ocsinventory-agent.cfg /etc/ocsinventory-agent/ocsinventory-agent.cfg.bkp &>> $LOG
+					 
 					 #Atualizando para o novo arquivo de configuração
 					 cp -v conf/ocsinventory-agent.cfg /etc/ocsinventory-agent/ &>> $LOG
+					 
 					 #Editando o arquivo de configuração
 					 vim /etc/ocsinventory-agent/ocsinventory-agent.cfg
+					 
 					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
 					 read
 					 sleep 2
