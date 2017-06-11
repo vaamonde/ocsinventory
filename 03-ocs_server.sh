@@ -61,8 +61,10 @@ then
 					 echo
 					 read
 					 clear
+					 
 					 #Executando a instalação do OCS Inventory Server e Reports
 					 ./setup.sh
+					 
 					 #MENSAGENS QUE SERÃO SOLICIDATAS NA INSTALAÇÃO DO OCS INVENTORY SERVER:
 					 #01. Do you wish to continue ([y]/n): y <-- digite y pressione <Enter>;
 					 #02. Which host is running database server [localhost]?: Deixe o padrão pressione <Enter>;
@@ -85,16 +87,22 @@ then
 					 #18. Where to copy Administration Server static files for PHP Web Console [/usr/share/ocsinventory-reports]?: Deixe o padrão pressione <Enter>;
 					 #19. Where to create writable/cache directories for deployment packages administration console logs, IPDiscover and SNMP [/var/lib/ocsinventory-reports]?: Deixe o padrão pressione <Enter>;
 					 #APÓS A INSTALAÇÃO VIA NAVEGADOR, REMOVER O ARQUIVO install
+					 
 					 #Atualizando as informações do Apache2 para o suporte ao OCS Inventory Server e Reports
 					 a2dissite 000-default
+					 
 					 #Habilitando o conf do OCS Inventory Reports no Apache2
 					 a2enconf ocsinventory-reports
+					 
 					 #Habilitando o conf do OCS Inventory Server no Apache2
 					 a2enconf z-ocsinventory-server
+					 
 					 #Reinicializando o Apache2
 					 sudo service apache2 restart
+					 
 					 #Saindo do diretório do OCS Iventory
 					 cd ..
+					 
 					 echo
 					 echo -e "Instalação do OCS Inventory Server e Reports feito com Sucesso!!!, pressione <Enter> para continuar"
 					 read
@@ -104,64 +112,82 @@ then
 					 echo -e "Atualizando os arquivos de configuração do OCS Inventory Server"
 					 echo
 					 echo -e "Editando o arquivo do OCS Inventory Server, pressione <Enter> para continuar"
-					 #Arquivo de configuração do Servidor do OCS Inventory que vai receber as atualização do Clientes
 					 read
+					 
+					 #Arquivo de configuração do Servidor do OCS Inventory que vai receber as atualização do Clientes
 					 #Fazendo o backup do arquivo de configuração original
 					 cp -v /etc/apache2/conf-available/z-ocsinventory-server.conf /etc/apache2/conf-available/z-ocsinventory-server.conf.bkp &>> $LOG
+					 
 					 #Atualizando para o novo arquivo de configuração
 					 cp -v conf/z-ocsinventory-server.conf /etc/apache2/conf-available/ &>> $LOG
+					 
 					 #Editando o arquivo de configuração
 					 vim /etc/apache2/conf-available/z-ocsinventory-server.conf
+					 
 					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
 					 
 					 echo -e "Editando o arquivo do OCS Inventory Server DBConfig, pressione <Enter> para continuar"
+					 read
+					 
 					 #Arquivo de configuração para conexão com o Banco de Dados do MySQL
 					 #Configuração das variáveis de usuário e senha do banco de dados: database name (ocsweb) e user (ocs)
-					 read
 					 #Esse arquivo será recriado novamente após a instalação via navegador
 					 #Fazendo o backup do arquivo de configuração original
 					 cp -v /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php.bkp &>> $LOG
+					 
 					 #Atualizando para o novo arquivo de configuração
 					 cp -v conf/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/ &>> $LOG
+					 
 					 #Editando o arquivo de configuração
 					 vim /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php
+					 
 					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
 					 
 					 echo -e "Editando o arquivo do MySQL Server, pressione <Enter> para continuar"
+					 read
+					 
 					 #Arquivo de configuração do Banco de Dados do MySQL Server
 					 #Permitir acesso aremoto ao MySQL comentando a linha: bind-address
-					 read
 					 #Fazendo o backup do arquivo de configuração original
 					 cp -v /etc/mysql/mysql.conf.d/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf.bkp &>> $LOG
+					 
 					 #Atualizando para o novo arquivo de configuração
 					 cp -v conf/mysqld.cnf /etc/mysql/mysql.conf.d/ &>> $LOG
+					 
 					 #Editando o arquivo de configuração
 					 vim /etc/mysql/mysql.conf.d/mysqld.cnf
+					 
 					 #Reinicializando o serviço do MySQL Server
 					 sudo service mysql restart
+					 
 					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
 					 
 					 echo -e "Editando o arquivo do PHP, pressione <Enter> para continuar"
+					 read
+					 
 					 #Arquivo de configuração do PHP que será utilizado pelo Apache2
 					 #Aumentar os valores das váriaveis: post_max_size e upload_max_filesize para: 250MB
-					 read
 					 #Fazendo o backup do arquivo de configuração original
 					 cp -v /etc/php/7.0/apache2/php.ini /etc/php/7.0/apache2/php.ini.bkp &>> $LOG
+					 
 					 #Atualizando para o novo arquivos de configuração
 					 cp -v conf/php.ini /etc/php/7.0/apache2/ &>> $LOG
+					 
 					 #Editando o arquivo de configuração
 					 vim /etc/php/7.0/apache2/php.ini
+					 
 					 #Reinicializando o serviço do Apache2
 					 sudo service apache2 restart
+					 
 					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
