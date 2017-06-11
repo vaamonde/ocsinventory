@@ -62,17 +62,21 @@ then
 					 echo  ============================================================ >> $LOG
 
 					 echo -e "Instalando o LAMP Server (Linux, Apache, MySQL, PHP, Perl, Python), aguarde..."
+					 
 					 #Instalação dos principais pacotes do OCS Inventory e do GLPI integrado com o Apache2 e MySQL
 					 #Configurando as variáveis do Debconf para a instalação do MySQL em modo Noninteractive
 					 echo "mysql-server-5.7 mysql-server/root_password password $PASSWORD" |  debconf-set-selections
 					 echo "mysql-server-5.7 mysql-server/root_password_again password $PASSWORD" |  debconf-set-selections
+					 
 					 #Instalando o LAMP Server completo e todas as suas dependêncais do OCS Inventory Server, Agent, GLPI Help Desk e do Netdata
 					 apt-get -y install lamp-server^ mysql-server perl python make libapache2-mod-perl2 libapache2-mod-php snmp libio-compress-perl libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libsoap-lite-perl libnet-ip-perl php-mysql php7.0-dev php-mbstring php-soap php7.0-zip php7.0-gd php7.0-mysql dmidecode libxml-simple-perl libcompress-raw-zlib-perl libnet-ip-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl libcrypt-ssleay-perl libnet-snmp-perl libproc-pid-file-perl libproc-daemon-perl net-tools pciutils smartmontools read-edid nmap libc6-dev php-pclzip gcc libarchive-zip-perl php7.0-json php7.0-mbstring php7.0-mysql php7.0-curl php7.0-gd php7.0-imap php7.0-ldap ipmitool nmap zlib1g-dev gcc autoconf autogen automake pkg-config uuid-dev &>> $LOG
+					 
 					 echo -e "Instalação do LAMP Server feito com sucesso!!!, continuando com o script."
 					 echo
 					 echo  ============================================================ >> $LOG
 
 					 echo -e "Instalando o PhpMyAdmin, aguarde..."
+					 
 					 #Configurando as variáveis do Debconf para a instalação do PhpMyAdmin em modo Noninteractive
 					 echo "phpmyadmin phpmyadmin/internal/skip-preseed boolean true" |  debconf-set-selections
 					 echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" |  debconf-set-selections
@@ -81,18 +85,24 @@ then
 					 echo "phpmyadmin phpmyadmin/mysql/admin-user string $ADMINUSER" |  debconf-set-selections
 					 echo "phpmyadmin phpmyadmin/mysql/admin-pass password $ADMIN_PASS" |  debconf-set-selections
 					 echo "phpmyadmin phpmyadmin/mysql/app-pass password $APP_PASS" |  debconf-set-selections
+					 
 					 #Instalando o PhpMyAdmin
 					 apt-get -y install phpmyadmin php-mbstring php-gettext &>> $LOG
+					 
 					 #Atualizando as dependências do PhpMyAdmin, ativando os recursos dos módulos do PHP no Apache2
 					 phpenmod mcrypt
 					 phpenmod mbstring
+					 
 					 #Atualização o arquivo de configuração do Apache2
 					 #Fazendo o backup do arquivo original
 					 cp -v /etc/apache2/apache2.conf /etc/apache2/apache2.conf.bkp >> $LOG
+					 
 					 #Adicionando no final do arquivo a opção de ServerName
 					 echo "ServerName localhost" >> /etc/apache2/apache2.conf
+					 
 					 #Reinicializando o serviço do Apache2 Server
 					 sudo service apache2 restart
+					 
 					 echo -e "Instalação do PhpMyAdmin Feito com Sucesso!!!"
 					 echo
 					 echo -e "Pressione <Enter> para continuar com o script."
