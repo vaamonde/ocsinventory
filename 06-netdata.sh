@@ -50,22 +50,29 @@ then
 					 read
 					 sleep 2
 					 echo
+					 
 					 #Clonando o site do GitHub do Netdata
 					 git clone https://github.com/firehol/$NETDATAVERSION --depth=1 &>> $LOG
+					 
 					 echo -e "Clonagem do software do Netdata feito com sucesso!!!"
 					 echo
+					 
 					 #Acessando o diretório do Netdata
 					 cd $NETDATAINSTALL
+					 
 					 #Compilando e instalando o Netdata
 					 echo -e "Pressione <Enter> para compilar o software do NetData"
 					 echo
 					 read
+					 
 					 #Executando o script de instalação do Netdata
 					 ./netdata-installer.sh
+					 
 					 #MENSAGENS QUE SERÃO SOLICITADAS NA INSTALAÇÃO DO NETDATA
 					 #Press ENTER to build and install netdata to your system? <-- pressione <Enter>
 					 #Saindo do diretório do Netdata
 					 cd ..
+					 
 					 echo
 					 echo -e "Instalação do Netdata feita com sucesso!!!, pressione <Enter> para continuar"
 					 read
