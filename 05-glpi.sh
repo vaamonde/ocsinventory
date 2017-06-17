@@ -17,7 +17,8 @@
 # Caminho para o Log do glpi.sh
 LOG="/var/log/glpi.log"
 #
-
+#Arquivo de configuração de parâmetros
+source 00-parametros.sh
 
 if [ "$USUARIO" == "0" ]
 then
@@ -26,11 +27,10 @@ then
 			if [ "$KERNEL" == "4.4" ]
 				then
 					 clear
-
+					 
+					 echo -e "Usuário é `whoami`, continuando a executar o 05-glpi.sh"
 					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
-					 
-					 echo -e "Usuário é `whoami`, continuando a executar o Install.sh"
 					 echo
 					 echo  ============================================================ >> $LOG
 					 
@@ -50,7 +50,7 @@ then
 					 #Fazendo o download do código fonte do Plugin do OCS Inventory Server
 					 wget https://github.com/pluginsGLPI/ocsinventoryng/releases/download/$GLPIOCSVERSION &>> $LOG
 					 
-					 #Descompactando o arquivo do Plugin do OCS Inventory
+					 #Descompactando o arquivo do Plugin do OCS Inventory Server para o GLPI
 					 tar -zxvf $GLPIOCSTAR &>> $LOG
 					 
 					 #Movendo a pasta do Plugin do OCS Inventory para o GLPI
