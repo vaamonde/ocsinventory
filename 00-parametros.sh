@@ -34,3 +34,9 @@ ADMINUSER="root"
 OCSVERSION="2.3.1/OCSNG_UNIX_SERVER-2.3.1.tar.gz"
 OCSTAR="OCSNG_UNIX_SERVER-2.3.1.tar.gz"
 OCSINSTALL="OCSNG_UNIX_SERVER-2.3.1"
+#
+# Variáveis de configuração do OCS Inventory Agent
+OCSAGENTVERSION="2.3/Ocsinventory-Unix-Agent-2.3.tar.gz"
+OCSAGENTTAR="Ocsinventory-Unix-Agent-2.3.tar.gz"
+OCSAGENTINSTALL="Ocsinventory-Unix-Agent-2.3"
+#
