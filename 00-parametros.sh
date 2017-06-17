@@ -50,3 +50,7 @@ GLPIOCSVERSION="1.3.3/glpi-ocsinventoryng-1.3.3.tar.gz"
 GLPIOCSTAR="glpi-ocsinventoryng-1.3.3.tar.gz"
 GLPIOCSINSTALL="ocsinventoryng"
 #
+# Variáveis de configuração do Netdata
+NETDATAVERSION="netdata.git"
+NETDATAINSTALL="netdata"
+#
