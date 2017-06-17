@@ -37,10 +37,13 @@ then
 					 echo  ============================================================ >> $LOG
 					 
 					 echo -e "Atualizando as Listas do Apt-Get, aguarde..."
+					 
 					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
+					 
 					 #Atualizando as listas do apt-get
 					 apt-get update &>> $LOG
+					 
 					 echo -e "Listas Atualizadas com Sucesso!!!, continuando com o script."
 					 echo
 					 echo  ============================================================ >> $LOG
