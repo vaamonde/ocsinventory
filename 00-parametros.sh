@@ -20,3 +20,13 @@ USUARIO=`id -u`
 UBUNTU=`lsb_release -rs`
 KERNEL=`uname -r | cut -d'.' -f1,2`
 #
+# Variáveis de configuração da senha do "root" do MySQL Server
+PASSWORD="123456"
+# 					 
+# Variáveis de configuração do PhpMyAdmin
+APP_PASSWORD="123456"
+ADMIN_PASS="123456"
+APP_PASS="123456"
+WEBSERVER="apache2"
+ADMINUSER="root"
+#
