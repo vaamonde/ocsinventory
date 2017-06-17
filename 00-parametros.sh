@@ -30,3 +30,7 @@ APP_PASS="123456"
 WEBSERVER="apache2"
 ADMINUSER="root"
 #
+# Variáveis de configuração do OCS Inventory Server e Reports
+OCSVERSION="2.3.1/OCSNG_UNIX_SERVER-2.3.1.tar.gz"
+OCSTAR="OCSNG_UNIX_SERVER-2.3.1.tar.gz"
+OCSINSTALL="OCSNG_UNIX_SERVER-2.3.1"
