@@ -15,7 +15,7 @@ Procedimento para utilizar os scripts.
 09: Após a reinicialização, execute o arquivo: <b>03-ocs_server.sh</b> utilizando o comando: <b>./03-ocs_server.sh</b>;<br><br>
 10: Siga as instruções que serão apresentadas na tela;<br><br>
 11: Após a reinicialização, utilize um navegador para finalizar a configuração, recomendo o Firefox acessando a URL: http://ENDEREÇO_IP_DO_SERVIDOR/ocsreports;<br><br>
-12: Finalize a instalação e criação da base de dados via navegador;<br><br>
+12: Finalize a instalação e criação da base de dados via navegador, utilizando o usuário: "root", senha: "123456", basse de dados: "ocsweb" e servidor: "localhost"";<br><br>
 13: Acesse o <b>PhpMyAdmin</b>, utilize um navegador, recomendo o Firefox acessando a URL: http://ENDEREÇO_IP_DO_SERVIDOR/phpmyadmin;<br><br>
 14: Altere a senha do usuário: <b>ocs@localhost</b> no Banco de Dados: <b>mysql</b> na tabela: <b>user</b>;<br><br>
 15: Após a instalação, remova o arquivo: <b>install.php</b> localizado em: <b>/usr/share/ocsinventory-reports/ocsreports/</b>;<br><br>
