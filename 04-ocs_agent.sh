@@ -17,13 +17,7 @@
 # Caminho para o Log do ocs_agent.sh
 LOG="/var/log/ocs_agent.log"
 #
-# Variável da Data Inicial para calcular tempo de execução do Script
-DATAINICIAL=`date +%s`
-#
-# Validando o ambiente, verificando se o usuário e "root"
-USUARIO=`id -u`
-UBUNTU=`lsb_release -rs`
-KERNEL=`uname -r | cut -d'.' -f1,2`
+
 
 if [ "$USUARIO" == "0" ]
 then
@@ -32,11 +26,6 @@ then
 			if [ "$KERNEL" == "4.4" ]
 				then
 					 clear
-
-					 #Variáveis de configuração do OCS Inventory Agent
-					 OCSAGENTVERSION="2.3/Ocsinventory-Unix-Agent-2.3.tar.gz"
-					 OCSAGENTTAR="Ocsinventory-Unix-Agent-2.3.tar.gz"
-					 OCSAGENTINSTALL="Ocsinventory-Unix-Agent-2.3"
 					 
 					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
