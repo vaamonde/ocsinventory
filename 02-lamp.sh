@@ -53,7 +53,7 @@ then
 					 echo "mysql-server-5.7 mysql-server/root_password_again password $PASSWORD" |  debconf-set-selections
 					 
 					 #Instalando o LAMP Server completo e todas as suas dependêncais do OCS Inventory Server, Agent, GLPI Help Desk e do Netdata
-					 apt-get -y install lamp-server^ mysql-server perl python make libapache2-mod-perl2 libapache2-mod-php snmp libio-compress-perl libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libsoap-lite-perl libnet-ip-perl php-mysql php7.0-dev php-mbstring php-soap php7.0-zip php7.0-gd php7.0-mysql dmidecode libxml-simple-perl libcompress-raw-zlib-perl libnet-ip-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl libcrypt-ssleay-perl libnet-snmp-perl libproc-pid-file-perl libproc-daemon-perl net-tools pciutils smartmontools read-edid nmap libc6-dev php-pclzip gcc libarchive-zip-perl php7.0-json php7.0-mbstring php7.0-mysql php7.0-curl php7.0-gd php7.0-imap php7.0-ldap ipmitool nmap zlib1g-dev gcc autoconf autogen automake pkg-config uuid-dev &>> $LOG
+					 apt-get -y install lamp-server^ mysql-server perl python make libapache2-mod-perl2 libapache2-mod-php snmp libio-compress-perl libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libsoap-lite-perl libnet-ip-perl php-mysql php7.0-dev php-mbstring php-soap php7.0-zip php7.0-gd php7.0-mysql dmidecode libxml-simple-perl libcompress-raw-zlib-perl libnet-ip-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl libcrypt-ssleay-perl libnet-snmp-perl libproc-pid-file-perl libproc-daemon-perl net-tools pciutils smartmontools read-edid nmap libc6-dev php-pclzip gcc libarchive-zip-perl php7.0-json php7.0-mbstring php7.0-mysql php7.0-curl php7.0-gd php7.0-imap php7.0-ldap ipmitool nmap zlib1g-dev gcc autoconf autogen automake pkg-config uuid-dev cups &>> $LOG
 					 
 					 echo -e "Instalação do LAMP Server feito com sucesso!!!, continuando com o script."
 					 echo
@@ -76,15 +76,6 @@ then
 					 #Atualizando as dependências do PhpMyAdmin, ativando os recursos dos módulos do PHP no Apache2
 					 phpenmod mcrypt
 					 phpenmod mbstring
-					 
-					 #Fazendo o backup do arquivo original
-					 mv -v /etc/apache2/apache2.conf /etc/apache2/apache2.conf.bkp >> $LOG
-					 
-					 #Atualização o arquivo de configuração do Apache2
-					 cp -v conf/apache2.conf /etc/apache2/apache2.conf >> $LOG
-					 
-					 #Reinicializando o serviço do Apache2 Server
-					 sudo service apache2 restart
 					 
 					 echo -e "Instalação do PhpMyAdmin Feito com Sucesso!!!"
 					 echo
@@ -318,6 +309,70 @@ then
 					 perl -MCPAN -e 'install Module::Install'
 					 echo
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
+					 echo -e "Editando o arquivo do Apache2, pressione <Enter> para continuar"
+					 read
+					 
+					 #Fazendo o backup do arquivo original
+					 mv -v /etc/apache2/apache2.conf /etc/apache2/apache2.conf.bkp >> $LOG
+					 
+					 #Atualização o arquivo de configuração do Apache2
+					 cp -v conf/apache2.conf /etc/apache2/apache2.conf >> $LOG
+					 
+					 #Editando o arquivo de configuração
+					 vim /etc/apache2/apache2.conf
+					 
+					 #Reinicializando o serviço do Apache2 Server
+					 sudo service apache2 restart
+					 
+					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Editando o arquivo do MySQL Server, pressione <Enter> para continuar"
+					 read
+					 
+					 #Arquivo de configuração do Banco de Dados do MySQL Server
+					 #Permitir acesso aremoto ao MySQL comentando a linha: bind-address
+					 #Fazendo o backup do arquivo de configuração original
+					 mv -v /etc/mysql/mysql.conf.d/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf.bkp &>> $LOG
+					 
+					 #Atualizando para o novo arquivo de configuração
+					 cp -v conf/mysqld.cnf /etc/mysql/mysql.conf.d/ &>> $LOG
+					 
+					 #Editando o arquivo de configuração
+					 vim /etc/mysql/mysql.conf.d/mysqld.cnf
+					 
+					 #Reinicializando o serviço do MySQL Server
+					 sudo service mysql restart
+					 
+					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Editando o arquivo do PHP, pressione <Enter> para continuar"
+					 read
+					 
+					 #Arquivo de configuração do PHP que será utilizado pelo Apache2
+					 #Aumentar os valores das váriaveis: post_max_size e upload_max_filesize para: 250MB
+					 #Fazendo o backup do arquivo de configuração original
+					 mv -v /etc/php/7.0/apache2/php.ini /etc/php/7.0/apache2/php.ini.bkp &>> $LOG
+					 
+					 #Atualizando para o novo arquivos de configuração
+					 cp -v conf/php.ini /etc/php/7.0/apache2/ &>> $LOG
+					 
+					 #Editando o arquivo de configuração
+					 vim /etc/php/7.0/apache2/php.ini
+					 
+					 #Reinicializando o serviço do Apache2
+					 sudo service apache2 restart
+					 
+					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
