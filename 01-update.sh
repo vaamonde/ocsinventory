@@ -24,6 +24,8 @@
 # Caminho para o Log do update.sh
 LOG="/var/log/update.log"
 #
+#Arquivo de configuração de parâmetros
+source 00-parametros.sh
 
 if [ "$USUARIO" == "0" ]
 then
