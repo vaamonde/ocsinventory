@@ -17,7 +17,8 @@
 # Caminho para o Log do netdata.sh
 LOG="/var/log/netdata.log"
 #
-
+#Arquivo de configuração de parâmetros
+source 00-parametros.sh
 
 if [ "$USUARIO" == "0" ]
 then
