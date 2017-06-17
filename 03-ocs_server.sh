@@ -18,7 +18,8 @@
 # Caminho para o Log do ocs_server.sh
 LOG="/var/log/ocs_server.log"
 #
-
+#Arquivo de configuração de parâmetros
+source 00-parametros.sh
 
 if [ "$USUARIO" == "0" ]
 then
@@ -27,10 +28,10 @@ then
 			if [ "$KERNEL" == "4.4" ]
 				then
 					 clear
-					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
-					 export DEBIAN_FRONTEND=noninteractive
 					 
 					 echo -e "Usuário é `whoami`, continuando a executar o ocs_server.sh"
+					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
+					 export DEBIAN_FRONTEND=noninteractive
 					 echo
 					 echo  ============================================================ >> $LOG
 					 
@@ -38,13 +39,17 @@ then
 					 read
 					 sleep 2
 					 echo -e "Aguarde, fazendo o download..."
+					 
 					 #Fazendo o download do código fonte do OCS Inventory Server
 					 wget https://github.com/OCSInventory-NG/OCSInventory-ocsreports/releases/download/$OCSVERSION &>> $LOG
+					 
 					 #Descompactando o arquivos do OCS Inventory Server
 					 tar -zxvf $OCSTAR &>> $LOG
-					 #Acessando a pasta do OCS Inventory
+					 
+					 #Acessando a pasta do OCS Inventory Server
 					 cd $OCSINSTALL
-					 echo -e "CUIDADO com as opções que serão solicitadas no decorrer da instalação."
+					 
+					 echo -e "CUIDADO!!! com as opções que serão solicitadas no decorrer da instalação."
 					 echo -e "Download do OCS Inventory Server feito com Sucesso!!!, pressione <Enter> para instalar"
 					 echo
 					 read
@@ -104,7 +109,7 @@ then
 					 
 					 #Arquivo de configuração do Servidor do OCS Inventory que vai receber as atualização do Clientes
 					 #Fazendo o backup do arquivo de configuração original
-					 cp -v /etc/apache2/conf-available/z-ocsinventory-server.conf /etc/apache2/conf-available/z-ocsinventory-server.conf.bkp &>> $LOG
+					 mv -v /etc/apache2/conf-available/z-ocsinventory-server.conf /etc/apache2/conf-available/z-ocsinventory-server.conf.bkp &>> $LOG
 					 
 					 #Atualizando para o novo arquivo de configuração
 					 cp -v conf/z-ocsinventory-server.conf /etc/apache2/conf-available/ &>> $LOG
@@ -124,7 +129,7 @@ then
 					 #Configuração das variáveis de usuário e senha do banco de dados: database name (ocsweb) e user (ocs)
 					 #Esse arquivo será recriado novamente após a instalação via navegador
 					 #Fazendo o backup do arquivo de configuração original
-					 cp -v /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php.bkp &>> $LOG
+					 mv -v /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php.bkp &>> $LOG
 					 
 					 #Atualizando para o novo arquivo de configuração
 					 cp -v conf/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/ &>> $LOG
@@ -143,7 +148,7 @@ then
 					 #Arquivo de configuração do Banco de Dados do MySQL Server
 					 #Permitir acesso aremoto ao MySQL comentando a linha: bind-address
 					 #Fazendo o backup do arquivo de configuração original
-					 cp -v /etc/mysql/mysql.conf.d/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf.bkp &>> $LOG
+					 mv -v /etc/mysql/mysql.conf.d/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf.bkp &>> $LOG
 					 
 					 #Atualizando para o novo arquivo de configuração
 					 cp -v conf/mysqld.cnf /etc/mysql/mysql.conf.d/ &>> $LOG
@@ -165,7 +170,7 @@ then
 					 #Arquivo de configuração do PHP que será utilizado pelo Apache2
 					 #Aumentar os valores das váriaveis: post_max_size e upload_max_filesize para: 250MB
 					 #Fazendo o backup do arquivo de configuração original
-					 cp -v /etc/php/7.0/apache2/php.ini /etc/php/7.0/apache2/php.ini.bkp &>> $LOG
+					 mv -v /etc/php/7.0/apache2/php.ini /etc/php/7.0/apache2/php.ini.bkp &>> $LOG
 					 
 					 #Atualizando para o novo arquivos de configuração
 					 cp -v conf/php.ini /etc/php/7.0/apache2/ &>> $LOG
