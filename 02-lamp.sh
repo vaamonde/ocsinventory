@@ -32,15 +32,13 @@ then
 			if [ "$KERNEL" == "4.4" ]
 				then
 					 clear
-					 
-					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
-					 export DEBIAN_FRONTEND=noninteractive
-					 
-					 echo -e "Usuário é `whoami`, continuando a executar o Install.sh"
+					 echo -e "Usuário é `whoami`, continuando a executar o 02-lamp.sh"
 					 echo
 					 echo  ============================================================ >> $LOG
 					 
 					 echo -e "Atualizando as Listas do Apt-Get, aguarde..."
+					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
+					 export DEBIAN_FRONTEND=noninteractive
 					 #Atualizando as listas do apt-get
 					 apt-get update &>> $LOG
 					 echo -e "Listas Atualizadas com Sucesso!!!, continuando com o script."
@@ -79,12 +77,11 @@ then
 					 phpenmod mcrypt
 					 phpenmod mbstring
 					 
-					 #Atualização o arquivo de configuração do Apache2
 					 #Fazendo o backup do arquivo original
-					 cp -v /etc/apache2/apache2.conf /etc/apache2/apache2.conf.bkp >> $LOG
+					 mv -v /etc/apache2/apache2.conf /etc/apache2/apache2.conf.bkp >> $LOG
 					 
-					 #Adicionando no final do arquivo a opção de ServerName
-					 echo "ServerName localhost" >> /etc/apache2/apache2.conf
+					 #Atualização o arquivo de configuração do Apache2
+					 cp -v conf/apache2.conf /etc/apache2/apache2.conf >> $LOG
 					 
 					 #Reinicializando o serviço do Apache2 Server
 					 sudo service apache2 restart
