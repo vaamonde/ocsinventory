@@ -17,7 +17,8 @@
 # Caminho para o Log do ocs_agent.sh
 LOG="/var/log/ocs_agent.log"
 #
-
+#Arquivo de configuração de parâmetros
+source 00-parametros.sh
 
 if [ "$USUARIO" == "0" ]
 then
@@ -27,10 +28,9 @@ then
 				then
 					 clear
 					 
+					 echo -e "Usuário é `whoami`, continuando a executar o ocs_agent.sh"
 					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
-					 
-					 echo -e "Usuário é `whoami`, continuando a executar o ocs_agent.sh"
 					 echo
 					 echo  ============================================================ >> $LOG
 					 
@@ -56,7 +56,7 @@ then
 					 
 					 echo -e "Download do OCS Inventory Agent feito com Sucesso!!!, pressione <Enter> para continuar."
 					 echo
-					 echo -e "CUIDADO com as opções que serão solicitadas no decorrer da instalação."
+					 echo -e "CUIDADO!!! com as opções que serão solicitadas no decorrer da instalação."
 					 read
 					 clear
 					 
@@ -103,7 +103,7 @@ then
 					 
 					 #Arquivo de configuração do OCS Agent (Cliente)
 					 #Fazendo o backup do arquivo de configuração original
-					 cp -v /etc/ocsinventory-agent/ocsinventory-agent.cfg /etc/ocsinventory-agent/ocsinventory-agent.cfg.bkp &>> $LOG
+					 mv -v /etc/ocsinventory-agent/ocsinventory-agent.cfg /etc/ocsinventory-agent/ocsinventory-agent.cfg.bkp &>> $LOG
 					 
 					 #Atualizando para o novo arquivo de configuração
 					 cp -v conf/ocsinventory-agent.cfg /etc/ocsinventory-agent/ &>> $LOG
