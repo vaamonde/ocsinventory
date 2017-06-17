@@ -93,65 +93,29 @@ then
 					 #Reinicializando o Apache2
 					 sudo service apache2 restart
 					 
-					 #Saindo do diretório do OCS Iventory
+					 #Saindo do diretório do OCS Iventory Server
 					 cd ..
 					 
 					 echo
-					 echo -e "Instalação do OCS Inventory Server e Reports feito com Sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
-					 echo -e "Atualizando os arquivos de configuração do OCS Inventory Server"
-					 echo
-					 echo -e "Editando o arquivo do OCS Inventory Server, pressione <Enter> para continuar"
-					 read
-					 
-					 #Arquivo de configuração do Servidor do OCS Inventory que vai receber as atualização do Clientes
-					 #Fazendo o backup do arquivo de configuração original
-					 mv -v /etc/apache2/conf-available/z-ocsinventory-server.conf /etc/apache2/conf-available/z-ocsinventory-server.conf.bkp &>> $LOG
-					 
-					 #Atualizando para o novo arquivo de configuração
-					 cp -v conf/z-ocsinventory-server.conf /etc/apache2/conf-available/ &>> $LOG
-					 
-					 #Editando o arquivo de configuração
-					 vim /etc/apache2/conf-available/z-ocsinventory-server.conf
-					 
-					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
-					 echo -e "Editando o arquivo do OCS Inventory Server DBConfig, pressione <Enter> para continuar"
-					 read
-					 
-					 #Arquivo de configuração para conexão com o Banco de Dados do MySQL
-					 #Configuração das variáveis de usuário e senha do banco de dados: database name (ocsweb) e user (ocs)
-					 #Esse arquivo será recriado novamente após a instalação via navegador
-					 #Fazendo o backup do arquivo de configuração original
-					 mv -v /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php.bkp &>> $LOG
-					 
-					 #Atualizando para o novo arquivo de configuração
-					 cp -v conf/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/ &>> $LOG
-					 
-					 #Editando o arquivo de configuração
-					 vim /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php
-					 
-					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
+					 echo -e "Instalação do OCS Inventory Server e Reports Service feito com Sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
 					 				 
 					 echo -e "Removendo aplicativos desnecessários, aguarde..."
+					 
 					 #Removendo arquivos que não são mais utilizados
 					 apt-get autoremove &>> $LOG
+					 
 					 echo -e "Aplicativos removidos com Sucesso!!!, continuando com o script!!!"
 					 echo
 					 echo ============================================================ >> $LOG
 
 					 echo -e "Limpando o Cache do Apt-Get, aguarde..."
+					 
 					 #Limpando o diretório de cache do apt-get
 					 apt-get clean &>> $LOG
+					 
 					 echo -e "Cache Limpo com Sucesso!!!"
 					 echo
 					 echo ============================================================ >> $LOG
