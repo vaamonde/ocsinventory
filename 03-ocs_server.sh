@@ -18,13 +18,7 @@
 # Caminho para o Log do ocs_server.sh
 LOG="/var/log/ocs_server.log"
 #
-# Variável da Data Inicial para calcular tempo de execução do Script
-DATAINICIAL=`date +%s`
-#
-# Validando o ambiente, verificando se o usuário e "root"
-USUARIO=`id -u`
-UBUNTU=`lsb_release -rs`
-KERNEL=`uname -r | cut -d'.' -f1,2`
+
 
 if [ "$USUARIO" == "0" ]
 then
@@ -33,12 +27,6 @@ then
 			if [ "$KERNEL" == "4.4" ]
 				then
 					 clear
-					 
-					 # Variáveis de configuração do OCS Inventory Server e Reports
-					 OCSVERSION="2.3.1/OCSNG_UNIX_SERVER-2.3.1.tar.gz"
-					 OCSTAR="OCSNG_UNIX_SERVER-2.3.1.tar.gz"
-					 OCSINSTALL="OCSNG_UNIX_SERVER-2.3.1"
-					 
 					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
 					 
