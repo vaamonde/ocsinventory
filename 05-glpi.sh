@@ -17,13 +17,7 @@
 # Caminho para o Log do glpi.sh
 LOG="/var/log/glpi.log"
 #
-# Variável da Data Inicial para calcular tempo de execução do Script
-DATAINICIAL=`date +%s`
-#
-# Validando o ambiente, verificando se o usuário e "root"
-USUARIO=`id -u`
-UBUNTU=`lsb_release -rs`
-KERNEL=`uname -r | cut -d'.' -f1,2`
+
 
 if [ "$USUARIO" == "0" ]
 then
@@ -32,16 +26,6 @@ then
 			if [ "$KERNEL" == "4.4" ]
 				then
 					 clear
- 					 
- 					 #Variáveis de configuração do GLPI Help Desk
-					 GLPIVERSION="9.1.3/glpi-9.1.3.tgz"
-					 GLPITAR="glpi-9.1.3.tgz"
-					 GLPIINSTALL="glpi"
-					 
-					 #Variáveis de configuração do Plugin do OCS Inventory do GLPI
-					 GLPIOCSVERSION="1.3.3/glpi-ocsinventoryng-1.3.3.tar.gz"
-					 GLPIOCSTAR="glpi-ocsinventoryng-1.3.3.tar.gz"
-					 GLPIOCSINSTALL="ocsinventoryng"
 
 					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
