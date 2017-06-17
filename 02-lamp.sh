@@ -22,13 +22,8 @@
 # Caminho para o Log do lamp.sh
 LOG="/var/log/lamp.log"
 #
-# Variável da Data Inicial para calcular tempo de execução do Script
-DATAINICIAL=`date +%s`
-#
-# Validando o ambiente, verificando se o usuário e "root"
-USUARIO=`id -u`
-UBUNTU=`lsb_release -rs`
-KERNEL=`uname -r | cut -d'.' -f1,2`
+#Arquivo de configuração de parâmetros
+source 00-parametros.sh
 
 if [ "$USUARIO" == "0" ]
 then
@@ -37,15 +32,6 @@ then
 			if [ "$KERNEL" == "4.4" ]
 				then
 					 clear
-					 # Variáveis de configuração da senha do MySQL Server
-					 PASSWORD="123456"
- 					 
- 					 # Variáveis de configuração do PhpMyAdmin
-					 APP_PASSWORD="123456"
-					 ADMIN_PASS="123456"
-					 APP_PASS="123456"
-					 WEBSERVER="apache2"
-					 ADMINUSER="root"
 					 
 					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
