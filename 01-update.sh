@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 29/09/2016
-# Versão: 0.10
+# Data de atualização: 17/06/2017
+# Versão: 0.11
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -24,13 +24,6 @@
 # Caminho para o Log do update.sh
 LOG="/var/log/update.log"
 #
-# Variável da Data Inicial para calcular tempo de execução do Script
-DATAINICIAL=`date +%s`
-#
-# Validando o ambiente, verificando se o usuário e "root"
-USUARIO=`id -u`
-UBUNTU=`lsb_release -rs`
-KERNEL=`uname -r | cut -d'.' -f1,2`
 
 if [ "$USUARIO" == "0" ]
 then
