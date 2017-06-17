@@ -22,6 +22,7 @@ KERNEL=`uname -r | cut -d'.' -f1,2`
 #
 # Variáveis de configuração da senha do "root" do MySQL Server
 PASSWORD="123456"
+USER="root"
 # 					 
 # Variáveis de configuração do PhpMyAdmin
 APP_PASSWORD="123456"
@@ -53,4 +54,9 @@ GLPIOCSINSTALL="ocsinventoryng"
 # Variáveis de configuração do Netdata
 NETDATAVERSION="netdata.git"
 NETDATAINSTALL="netdata"
+#
+# Variáveis de configuração da alteração de senha do OCS Reports
+OCSPWD="123456"
+SETOCSPWD="SET PASSWORD FOR 'ocs'@'localhost' = PASSWORD('$OCSPWD');"
+FLUSH="FLUSH PRIVILEGES;"
 #
