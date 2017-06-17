@@ -40,3 +40,13 @@ OCSAGENTVERSION="2.3/Ocsinventory-Unix-Agent-2.3.tar.gz"
 OCSAGENTTAR="Ocsinventory-Unix-Agent-2.3.tar.gz"
 OCSAGENTINSTALL="Ocsinventory-Unix-Agent-2.3"
 #
+# Variáveis de configuração do GLPI Help Desk
+GLPIVERSION="9.1.3/glpi-9.1.3.tgz"
+GLPITAR="glpi-9.1.3.tgz"
+GLPIINSTALL="glpi"
+#					 
+# Variáveis de configuração do Plugin do OCS Inventory do GLPI
+GLPIOCSVERSION="1.3.3/glpi-ocsinventoryng-1.3.3.tar.gz"
+GLPIOCSTAR="glpi-ocsinventoryng-1.3.3.tar.gz"
+GLPIOCSINSTALL="ocsinventoryng"
+#
