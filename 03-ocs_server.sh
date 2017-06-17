@@ -141,51 +141,7 @@ then
 					 read
 					 sleep 2
 					 clear
-					 
-					 echo -e "Editando o arquivo do MySQL Server, pressione <Enter> para continuar"
-					 read
-					 
-					 #Arquivo de configuração do Banco de Dados do MySQL Server
-					 #Permitir acesso aremoto ao MySQL comentando a linha: bind-address
-					 #Fazendo o backup do arquivo de configuração original
-					 mv -v /etc/mysql/mysql.conf.d/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf.bkp &>> $LOG
-					 
-					 #Atualizando para o novo arquivo de configuração
-					 cp -v conf/mysqld.cnf /etc/mysql/mysql.conf.d/ &>> $LOG
-					 
-					 #Editando o arquivo de configuração
-					 vim /etc/mysql/mysql.conf.d/mysqld.cnf
-					 
-					 #Reinicializando o serviço do MySQL Server
-					 sudo service mysql restart
-					 
-					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
-					 echo -e "Editando o arquivo do PHP, pressione <Enter> para continuar"
-					 read
-					 
-					 #Arquivo de configuração do PHP que será utilizado pelo Apache2
-					 #Aumentar os valores das váriaveis: post_max_size e upload_max_filesize para: 250MB
-					 #Fazendo o backup do arquivo de configuração original
-					 mv -v /etc/php/7.0/apache2/php.ini /etc/php/7.0/apache2/php.ini.bkp &>> $LOG
-					 
-					 #Atualizando para o novo arquivos de configuração
-					 cp -v conf/php.ini /etc/php/7.0/apache2/ &>> $LOG
-					 
-					 #Editando o arquivo de configuração
-					 vim /etc/php/7.0/apache2/php.ini
-					 
-					 #Reinicializando o serviço do Apache2
-					 sudo service apache2 restart
-					 
-					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
+					 				 
 					 echo -e "Removendo aplicativos desnecessários, aguarde..."
 					 #Removendo arquivos que não são mais utilizados
 					 apt-get autoremove &>> $LOG
