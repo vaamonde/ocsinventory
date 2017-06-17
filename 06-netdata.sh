@@ -26,10 +26,10 @@ then
 			if [ "$KERNEL" == "4.4" ]
 				then
 					 clear
-					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
-					 export DEBIAN_FRONTEND=noninteractive
 					 
 					 echo -e "Usuário é `whoami`, continuando a executar o netdata.sh"
+					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
+					 export DEBIAN_FRONTEND=noninteractive
 					 echo
 					 echo  ============================================================ >> $LOG
 					 
