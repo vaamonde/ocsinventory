@@ -90,10 +90,12 @@ then
 
 					 echo -e "Instalação das Dependências do Perl XML::Entities via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do XML::Entities
 					 #Mensagem: Would you like to configure as much as possible automatically? Yes <-- digite Yes pressione <Enter>
 					 perl -MCPAN -e 'install XML::Entities'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -101,6 +103,7 @@ then
 					 
 					 echo -e "Instalação das Dependências do Perl SOAP::Lite via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do SOAP::Lite
 					 #Mensagem: Do you want to install 'xml_pp' (XML pretty printer)?: y <-- digite y pressione <Enter>
 					 #Mensagem: Do you want to install 'xml_grep' (XML grep - grep XML files using XML::Twig's subset of XPath)?: y <-- digite y pressione <Enter>
@@ -110,6 +113,7 @@ then
 					 #Mensagem: WARNING: Please tell me where I can find your apache src: q <-- digite q pressione <Enter>
 					 perl -MCPAN -e 'install SOAP::Lite'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -117,8 +121,10 @@ then
 
 					 echo -e "Instalação das Dependências do Perl XML::Simple via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do XML::Simple
 					 perl -MCPAN -e 'install XML::Simple'
+					 
 					 echo
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
@@ -127,9 +133,11 @@ then
 
 					 echo -e "Instalação das Dependências do Perl Bundle::Compress::Zlib via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do Bundle::Compress::Zlib
 					 perl -MCPAN -e 'install install Bundle::Compress::Zlib'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -137,9 +145,11 @@ then
 
 					 echo -e "Instalação das Dependências do Perl DBD::Mysql via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do DBD::mysql					 
 					 perl -MCPAN -e 'install DBD::mysql'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -147,9 +157,11 @@ then
 
 					 echo -e "Instalação das Dependências do Perl Apache::DBI via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do Apache::DBI					 
 					 perl -MCPAN -e 'install Apache::DBI'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -157,9 +169,11 @@ then
 
 					 echo -e "Instalação das Dependências do Perl Net::IP via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do Net::IP					 
 					 perl -MCPAN -e 'install Net::IP'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -167,9 +181,11 @@ then
 
 					 echo -e "Instalação das Dependências do Perl Linux::Ethtool via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do Linux::Ethtool					 
 					 perl -MCPAN -e 'install Linux::Ethtool'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -177,9 +193,11 @@ then
 
 					 echo -e "Instalação das Dependências do Perl Apache2::SOAP via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do Apache2::SOAP					 
 					 perl -MCPAN -e 'install Apache2::SOAP'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -187,9 +205,11 @@ then
 
 					 echo -e "Instalação das Dependências do Perl Digest::MD5 via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do Digest::MD5					 
 					 perl -MCPAN -e 'install Digest::MD5'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -197,9 +217,11 @@ then
 
 					 echo -e "Instalação das Dependências do Perl Proc::Daemon via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do Proc::Daemon					 
 					 perl -MCPAN -e 'install Proc::Daemon'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -207,9 +229,11 @@ then
 
 					 echo -e "Instalação das Dependências do Perl Proc::PID::File via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do Proc::PID::File					 
 					 perl -MCPAN -e 'install Proc::PID::File'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -217,9 +241,11 @@ then
 
 					 echo -e "Instalação das Dependências do Perl Linux::Ethtool::Settings via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do Linux::Ethtool::Settings					 
 					 perl -MCPAN -e 'install Linux::Ethtool::Settings'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -227,9 +253,11 @@ then
 
 					 echo -e "Instalação das Dependências do Perl nvidia::ml via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do nvidia::ml					 
 					 perl -MCPAN -e 'install nvidia::ml'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -237,9 +265,11 @@ then
 
 					 echo -e "Instalação das Dependências do Perl Crypt::SSLeay via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do Crypt::SSLeay					 
 					 perl -MCPAN -e 'install Crypt::SSLeay'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -247,9 +277,11 @@ then
 
 					 echo -e "Instalação das Dependências do Perl LWP::Protocol::https via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do LWP::Protocol::https					 
 					 perl -MCPAN -e 'install LWP::Protocol::https'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -257,9 +289,11 @@ then
 
 					 echo -e "Instalação das Dependências do Perl Net::CUPS via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do Net::CUPS					 
 					 perl -MCPAN -e 'install Net::CUPS'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -267,9 +301,11 @@ then
 
 					 echo -e "Instalação das Dependências do Perl Net::SNMP via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do Net::SNMP					 
 					 perl -MCPAN -e 'install Net::SNMP'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -277,9 +313,11 @@ then
 
 					 echo -e "Instalação das Dependências do Perl Net::Netmask via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do Net::Netmask					 
 					 perl -MCPAN -e 'install Net::Netmask'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -287,9 +325,11 @@ then
 
 					 echo -e "Instalação das Dependências do Perl Net::Ping via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do Net::Ping					 
 					 perl -MCPAN -e 'install Net::Ping'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -297,9 +337,11 @@ then
 
 					 echo -e "Instalação das Dependências do Nmap::Parser via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do Nmap::Parser					 
 					 perl -MCPAN -e 'install Nmap::Parser'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -307,10 +349,12 @@ then
 
 					 echo -e "Instalação das Dependências do Module::Install via CPAN, pressione <Enter> para continuar"
 					 read
+					 
 					 #Instalação do Module::Install
 					 #Mensagem: Continue anyways ? [y] <-- digite y pressione <Enter>
 					 perl -MCPAN -e 'install Module::Install'
 					 echo
+					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -321,15 +365,21 @@ then
 					 
 					 #Fazendo o backup do arquivo original
 					 mv -v /etc/apache2/apache2.conf /etc/apache2/apache2.conf.bkp >> $LOG
+					 echo -e "Backup feito com sucesso!!!"
+					 sleep 2
 					 
 					 #Atualização o arquivo de configuração do Apache2
 					 cp -v conf/apache2.conf /etc/apache2/apache2.conf >> $LOG
+					 echo -e "Atualização feita com sucesso!!!"
+					 sleep 2
 					 
 					 #Editando o arquivo de configuração
 					 vim /etc/apache2/apache2.conf
 					 
 					 #Reinicializando o serviço do Apache2 Server
 					 sudo service apache2 restart
+					 echo -e "Servidor reinicializado com sucesso!!!"
+					 sleep 2
 					 
 					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
 					 read
@@ -343,15 +393,21 @@ then
 					 #Permitir acesso aremoto ao MySQL comentando a linha: bind-address
 					 #Fazendo o backup do arquivo de configuração original
 					 mv -v /etc/mysql/mysql.conf.d/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf.bkp &>> $LOG
+					 echo -e "Backup feito com sucesso!!!"
+					 sleep 2
 					 
 					 #Atualizando para o novo arquivo de configuração
 					 cp -v conf/mysqld.cnf /etc/mysql/mysql.conf.d/ &>> $LOG
+					 echo -e "Atualização feita com sucesso!!!"
+					 sleep 2
 					 
 					 #Editando o arquivo de configuração
 					 vim /etc/mysql/mysql.conf.d/mysqld.cnf
 					 
 					 #Reinicializando o serviço do MySQL Server
 					 sudo service mysql restart
+					 echo -e "Servidor reinicializado com sucesso!!!"
+					 sleep 2
 					 
 					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
 					 read
@@ -365,15 +421,21 @@ then
 					 #Aumentar os valores das váriaveis: post_max_size e upload_max_filesize para: 250MB
 					 #Fazendo o backup do arquivo de configuração original
 					 mv -v /etc/php/7.0/apache2/php.ini /etc/php/7.0/apache2/php.ini.bkp &>> $LOG
+					 echo -e "Backup feito com sucesso!!!"
+					 sleep 2
 					 
 					 #Atualizando para o novo arquivos de configuração
 					 cp -v conf/php.ini /etc/php/7.0/apache2/ &>> $LOG
+					 echo -e "Atualização feita com sucesso!!!"
+					 sleep 2
 					 
 					 #Editando o arquivo de configuração
 					 vim /etc/php/7.0/apache2/php.ini
 					 
 					 #Reinicializando o serviço do Apache2
 					 sudo service apache2 restart
+					 echo -e "Servidor reinicializado com sucesso!!!"
+					 sleep 2
 					 
 					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
 					 read
@@ -381,15 +443,20 @@ then
 					 clear
 
 					 echo -e "Removendo aplicativos desnecessários, aguarde..."
+					 
 					 #Limpando o diretório de cache do apt-get
 					 apt-get autoremove &>> $LOG
+					 apt-get autoclean &>> $LOG
+					 
 					 echo -e "Aplicativos removidos com Sucesso!!!, continuando com o script"
 					 echo
 					 echo ============================================================ >> $LOG
 
 					 echo -e "Limpando o Cache do Apt-Get, aguarde..."
+					 
 					 #Limpando o diretório de cache do apt-get
 					 apt-get clean &>> $LOG
+					 
 					 echo -e "Cache Limpo com Sucesso!!!"
 					 echo
 					 echo ============================================================ >> $LOG
