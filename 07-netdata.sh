@@ -41,6 +41,9 @@ then
 					 sleep 2
 					 echo
 					 
+					 #Removendo o diretório install do GLPI
+					 mv -v /var/www/html/glpi/install /var/www/html/glpi/install.bkp &>> $LOG
+					 
 					 #Clonando o site do GitHub do Netdata
 					 git clone https://github.com/firehol/$NETDATAVERSION --depth=1 &>> $LOG
 					 
