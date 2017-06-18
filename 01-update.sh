@@ -45,46 +45,58 @@ then
 					 echo -e "Após o término o Servidor será reinicializado"
 					 echo
 					 echo  ============================================================ >> $LOG
+					 
 					 echo -e "Atualizando as Listas do Apt-Get, aguarde..."
+					 
 					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
+					 
 					 #Atualizando as listas do apt-get
 					 apt-get update &>> $LOG
+					 
 					 echo -e "Listas Atualizadas com Sucesso!!!, continuando com o script"
 					 echo
 					 echo  ============================================================ >> $LOG
 
 					 echo -e "Atualizando os pacotes instalados, aguarde..."
-					 echo  >> $LOG
+					 
 					 #Fazendo a atualização de todos os pacotes instalados no servidor
 					 apt-get -o Dpkg::Options::="--force-confold" upgrade -q -y --force-yes &>> $LOG
+					 
 					 echo -e "Pacotes atualizados com Sucesso!!!, continuando com o script"
 					 echo
 					 echo  ============================================================ >> $LOG
 
 					 echo -e "Atualizando a distribuição é o Kernel instalado, aguarde..."
-					 echo  >> $LOG
 					 echo -e "Kernel atual: `uname -r`"
+					 
 					 #Fazendo a atualização da distribuição e do Kernel
 					 apt-get -o Dpkg::Options::="--force-confold" dist-upgrade -q -y --force-yes &>> $LOG
+					 
 					 echo -e "Kernel atualizado, versões instaladas."
 					 #Listando os pacotes instalados, filtrando por palavras, cortando por colunas.
 					 dpkg --list | grep linux-image-4.4 | cut -d' ' -f 3
+					 
 					 echo -e "Distribuição atualizada com Sucesso!!!, continuando com o script"
 					 echo
 					 echo ============================================================ >> $LOG
 
 					 echo -e "Remoção dos aplicativos desncessários, aguarde..."
+					 
 					 #Fazendo a autoremoção de aplicativas instalados
 					 apt-get -y autoremove &>> $LOG
+					 apt-get -y autoclean &>> $LOG
+					 
 					 echo -e "Remoção concluida com Sucesso!!!, continuando com o script"
 					 echo
 					 echo ============================================================ >> $LOG
 					 echo >> $LOG
 					 
 					 echo -e "Limpando o Cache do Apt-Get, aguarde..."
+					 
 					 #Limpando o diretório de cache do apt-get
 					 apt-get clean &>> $LOG
+					 
 					 echo -e "Cache Limpo com Sucesso!!!"
 					 echo
 					 echo ============================================================ >> $LOG
