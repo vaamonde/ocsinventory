@@ -28,7 +28,7 @@ then
 				then
 					 clear
 					 
-					 echo -e "Usuário é `whoami`, continuando a executar o ocs_server.sh"
+					 echo -e "Usuário é `whoami`, continuando a executar o po_ocs_server.sh"
 					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
 					 echo
@@ -107,6 +107,11 @@ then
 					 #Editando o arquivo de configuração
 					 vim /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php
 					 
+					 #Reinicializando o Apache2
+					 sudo service apache2 restart
+					 echo -e "Apache2 reinicializado com sucesso!!!"
+					 sleep 2
+					 
 					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -115,7 +120,7 @@ then
 					 echo ============================================================ >> $LOG
 
 					 echo -e "Fim do pos_ocs_server.sh em: `date`" >> $LOG
-					 echo -e "Finalização da Pos Instalação do OCS Inventory Server Feito com Sucesso!!!!!"
+					 echo -e "Finalização da Pós-Instalação do OCS Inventory Server Feito com Sucesso!!!!!"
 					 echo
 					 # Script para calcular o tempo gasto para a execução do ocs_server.sh
 						 DATAFINAL=`date +%s`
