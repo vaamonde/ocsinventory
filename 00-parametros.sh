@@ -56,7 +56,6 @@ NETDATAVERSION="netdata.git"
 NETDATAINSTALL="netdata"
 #
 # Variáveis de configuração da alteração de senha do OCS Reports
-OCSPWD="123456"
-SETOCSPWD="SET PASSWORD FOR 'ocs'@'localhost' = PASSWORD('$OCSPWD');"
+SETOCSPWD="SET PASSWORD FOR 'ocs'@'localhost' = PASSWORD('123456');"
 FLUSH="FLUSH PRIVILEGES;"
 #
