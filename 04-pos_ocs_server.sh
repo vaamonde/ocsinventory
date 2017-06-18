@@ -4,14 +4,13 @@
 # Facebook: facebook.com/ProcedimentosEmTI
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
-# Data de criação: 31/05/2016
-# Data de atualização: 17/06/2017
-# Versão: 0.11
+# Data de criação: 18/06/2017
+# Data de atualização: 18/06/2017
+# Versão: 0.1
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
-# Instalação do OCS Inventory Server
-# Instalação do OCS Inventory Reports
+#Pós instalação do OCS Inventory Server
 #
 # Utilizar o comando: sudo -i para executar o script
 #
@@ -34,7 +33,69 @@ then
 					 export DEBIAN_FRONTEND=noninteractive
 					 echo
 					 echo  ============================================================ >> $LOG
+
+ 					 echo -e "Alterando a senha do usuário ocs do MySQL, pressione <Enter> para continuar"
+					 read
 					 
+					 #Alterando a senha do usário ocs utilizando o mysql command line
+					 mysql -u $USER -p$PASSWORD -e $SETOCSPWD mysql &>> $LOG
+					 mysql -u $USER -p$PASSWORD -e "$FLUSH" mysql &>> $LOG
+					 
+					 echo -e "Senha alterada com Sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
+ 					 echo -e "Removendo o arquivo install.php do OCS Reports, pressione <Enter> para continuar"
+					 read
+					 
+					 #Fazendo o backup do arquivo install.php
+					 mv -v /usr/share/ocsinventory-reports/ocsreports/install.php /usr/share/ocsinventory-reports/ocsreports/install.php.bkp &>> $LOG
+					 
+					 echo -e "Arquivo removido com Sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
+					 echo -e "Atualizando os arquivos de configuração do OCS Inventory Server"
+					 echo
+					 echo -e "Editando o arquivo do OCS Inventory Server, pressione <Enter> para continuar"
+					 read
+					 
+					 #Arquivo de configuração do Servidor do OCS Inventory que vai receber as atualização do Clientes
+					 #Fazendo o backup do arquivo de configuração original
+					 mv -v /etc/apache2/conf-available/z-ocsinventory-server.conf /etc/apache2/conf-available/z-ocsinventory-server.conf.bkp &>> $LOG
+					 
+					 #Atualizando para o novo arquivo de configuração
+					 cp -v conf/z-ocsinventory-server.conf /etc/apache2/conf-available/ &>> $LOG
+					 
+					 #Editando o arquivo de configuração
+					 vim /etc/apache2/conf-available/z-ocsinventory-server.conf
+					 
+					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Editando o arquivo do OCS Inventory Server DBConfig, pressione <Enter> para continuar"
+					 read
+					 
+					 #Arquivo de configuração para conexão com o Banco de Dados do MySQL
+					 #Configuração das variáveis de usuário e senha do banco de dados: database name (ocsweb) e user (ocs)
+					 #Esse arquivo será recriado novamente após a instalação via navegador
+					 #Fazendo o backup do arquivo de configuração original
+					 mv -v /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php.bkp &>> $LOG
+					 
+					 #Atualizando para o novo arquivo de configuração
+					 cp -v conf/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/ &>> $LOG
+					 
+					 #Editando o arquivo de configuração
+					 vim /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php
+					 
+					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
 
 					 echo ============================================================ >> $LOG
 
