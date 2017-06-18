@@ -29,8 +29,10 @@ then
 					 clear
 					 
 					 echo -e "Usuário é `whoami`, continuando a executar o 06-glpi.sh"
+					 
 					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
+					 
 					 echo
 					 echo  ============================================================ >> $LOG
 					 
@@ -40,24 +42,38 @@ then
 					 
 					 #Fazendo o download do código fonte do GLPI Help Desk
 					 wget https://github.com/glpi-project/glpi/releases/download/$GLPIVERSION &>> $LOG
+					 echo -e "Download feito com sucesso!!!"
+					 sleep 2
 					 
 					 #Descompactando o arquivos do GLPI Help Desk
 					 tar -zxvf $GLPITAR &>> $LOG
+					 echo -e "Download descompactado com sucesso!!!"
+					 sleep 2
 					 
 					 #Movendo a pasta do GLPI Help Desk para /var/www/html/
 					 mv -v $GLPIINSTALL /var/www/html/ &>> $LOG
+					 echo -e "Diretório movido com sucesso!!!"
+					 sleep 2
 					 
 					 #Fazendo o download do código fonte do Plugin do OCS Inventory Server
 					 wget https://github.com/pluginsGLPI/ocsinventoryng/releases/download/$GLPIOCSVERSION &>> $LOG
+					 echo -e "Download do Plugin do OCS Inventory feito com sucesso!!!"
+					 sleep 2
 					 
 					 #Descompactando o arquivo do Plugin do OCS Inventory Server para o GLPI
 					 tar -zxvf $GLPIOCSTAR &>> $LOG
+					 echo -e "Download descompactado com sucesso!!!"
+					 sleep 2
 					 
 					 #Movendo a pasta do Plugin do OCS Inventory para o GLPI
 					 mv -v $GLPIOCSINSTALL /var/www/html/glpi/plugins/ &>> $LOG
+					 echo -e "Diretório movido com sucesso!!!"
+					 sleep 2
 					 
 					 #Alterando as permissões de Dono e Grupo da pasta do GLPI Help Desk
 					 chown -Rf www-data.www-data /var/www/html/glpi/ &>> $LOG
+					 echo -e "Permissões aplicada com sucesso!!!"
+					 sleep 2
 					 
 					 #MENSAGENS QUE SERÃO SOLICIDATAS NA INSTALAÇÃO DO GLPI HELP DESK VIA NAVEGADOR:
 					 #01. Selecione a linguage: Português do Brasil <OK>;
@@ -85,15 +101,20 @@ then
 					 clear
 					 
 					 echo -e "Removendo aplicativos desnecessários"
+					 
 					 #Limpando o diretório de cache do apt-get
 					 apt-get autoremove &>> $LOG
+					 apt-get autoclean &>> $LOG
+					 
 					 echo -e "Aplicativos removidos com Sucesso!!!"
 					 echo
 					 echo ============================================================ >> $LOG
 
 					 echo -e "Limpando o Cache do Apt-Get"
+					 
 					 #Limpando o diretório de cache do apt-get
 					 apt-get clean &>> $LOG
+					 
 					 echo -e "Cache Limpo com Sucesso!!!"
 					 echo
 					 echo ============================================================ >> $LOG
