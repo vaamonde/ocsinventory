@@ -80,8 +80,8 @@ then
 					 #02. Licença: Eu li e ACEITO os termons de licença acima: <Continuar>;
 					 #03. Início da Instalação: <Instalar>;
 					 #04. Etapa 0: <Continuar>;
-					 #05. Etapa 1: localhost, root, 123456 <Continuar>;
-					 #06. Etapa 2: Selecione o banco de dados: glpi <Continuar>;
+					 #05. Etapa 1: Servidor: localhost, Usuário: root, Senha: 123456 <Continuar>;
+					 #06. Etapa 2: Criar um novo banco de dados ou utilizar um existente: glpi <Continuar>;
 					 #07. Etapa 3: <Continuar>;
 					 #08. Etapa 4: <Usar o GLPI>.
 					 
