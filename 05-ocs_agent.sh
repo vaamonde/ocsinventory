@@ -41,18 +41,28 @@ then
 					 
 					 #Fazendo o download do código fonte do OCS Inventory Agent
 					 wget https://github.com/OCSInventory-NG/UnixAgent/releases/download/$OCSAGENTVERSION &>> $LOG
+					 echo -e "Download feito com sucesso!!!"
+					 sleep 2
 					 
 					 #Descompactando o arquivos do OCS Inventory Agent
 					 tar -zxvf $OCSAGENTTAR &>> $LOG
+					 echo -e "Descompactação feita com sucesso!!!"
+					 sleep 2
 					 
 					 #Acessando a pasta do OCS Inventory Agent
 					 cd $OCSAGENTINSTALL
+					 echo -e "Acessando a pasta do OCS Inventory Agent"
+					 sleep 2
 					 
 					 #Criando o diretório de Log do OCS Inventory Agent
 					 mkdir -v /var/log/ocsinventory-agent/ &>> $LOG
+					 echo -e "Criação do diretório de log feito com sucesso!!!"
+					 sleep 2
 					 
 					 #Criando o arquivo de Log do OCS Inventory Agent
 					 touch /var/log/ocsinventory-agent/activity.log
+					 echo -e "Criação do arquivo de log feito com sucesso!!!"
+					 sleep 2
 					 
 					 echo -e "Download do OCS Inventory Agent feito com Sucesso!!!, pressione <Enter> para continuar."
 					 echo
@@ -81,7 +91,7 @@ then
 					 #Do yo want to install the cron task in /etc/cron.d? <-- pressione <Enter>
 					 #Where do you want the agent to store its files? <-- pressione <Enter>
 					 #Should I remove the old linux_agent? <-- pressione <Enter>
-					 #Do you want to activate debung configuration option? <-- pressione <Enter>
+					 #Do you want to activate debug configuration option? <-- pressione <Enter>
 					 #Do you want to use OCS Inventory NG Unix Unified agent log file? <-- pressione <Enter>
 					 #Specify log file path you want to use?> digite: /var/log/ocsinventory-agent/activity.log, pressione <Enter>
 					 #Do you want disable SSL CA verification configuration option (not recommended)? digite: y, pressione <Enter>
@@ -104,9 +114,13 @@ then
 					 #Arquivo de configuração do OCS Agent (Cliente)
 					 #Fazendo o backup do arquivo de configuração original
 					 mv -v /etc/ocsinventory-agent/ocsinventory-agent.cfg /etc/ocsinventory-agent/ocsinventory-agent.cfg.bkp &>> $LOG
+					 echo -e "Backup feito com sucesso!!!"
+					 sleep 2
 					 
 					 #Atualizando para o novo arquivo de configuração
 					 cp -v conf/ocsinventory-agent.cfg /etc/ocsinventory-agent/ &>> $LOG
+					 echo -e "Atualização feita com sucesso!!!"
+					 sleep 2
 					 
 					 #Editando o arquivo de configuração
 					 vim /etc/ocsinventory-agent/ocsinventory-agent.cfg
