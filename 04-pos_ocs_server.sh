@@ -131,6 +131,7 @@ then
 					 echo -e "Pressione <Enter> para reinicializar o servidor: `hostname`"
 					 read
 					 sleep 2
+					 reboot
 					 else
 						 echo -e "Versão do Kernel: $KERNEL não homologada para esse script, versão: >= 4.4 "
 						 echo -e "Pressione <Enter> para finalizar o script"
