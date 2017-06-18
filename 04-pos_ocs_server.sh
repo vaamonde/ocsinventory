@@ -39,7 +39,12 @@ then
 					 
 					 #Alterando a senha do usário ocs utilizando o mysql command line
 					 mysql -u $USER -p$PASSWORD -e $SETOCSPWD mysql &>> $LOG
+					 echo -e "Senha alterada com suceso!!!"
+					 sleep 2
+					 
 					 mysql -u $USER -p$PASSWORD -e "$FLUSH" mysql &>> $LOG
+					 echo -e "Permissão alterada com sucesso!!!"
+					 sleep 2
 					 
 					 echo -e "Senha alterada com Sucesso!!!, pressione <Enter> para continuar"
 					 read
@@ -51,6 +56,8 @@ then
 					 
 					 #Fazendo o backup do arquivo install.php
 					 mv -v /usr/share/ocsinventory-reports/ocsreports/install.php /usr/share/ocsinventory-reports/ocsreports/install.php.bkp &>> $LOG
+					 echo -e "Backup feito com sucesso!!!!"
+					 sleep 2
 					 
 					 echo -e "Arquivo removido com Sucesso!!!, pressione <Enter> para continuar"
 					 read
@@ -65,9 +72,13 @@ then
 					 #Arquivo de configuração do Servidor do OCS Inventory que vai receber as atualização do Clientes
 					 #Fazendo o backup do arquivo de configuração original
 					 mv -v /etc/apache2/conf-available/z-ocsinventory-server.conf /etc/apache2/conf-available/z-ocsinventory-server.conf.bkp &>> $LOG
+					 echo -e "Backup feito com sucesso!!!"
+					 sleep 2
 					 
 					 #Atualizando para o novo arquivo de configuração
 					 cp -v conf/z-ocsinventory-server.conf /etc/apache2/conf-available/ &>> $LOG
+					 echo -e "Atualização feita com sucesso!!!"
+					 sleep 2
 					 
 					 #Editando o arquivo de configuração
 					 vim /etc/apache2/conf-available/z-ocsinventory-server.conf
@@ -85,9 +96,13 @@ then
 					 #Esse arquivo será recriado novamente após a instalação via navegador
 					 #Fazendo o backup do arquivo de configuração original
 					 mv -v /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php.bkp &>> $LOG
+					 echo -e "Backup feito com sucesso!!!"
+					 sleep 2
 					 
 					 #Atualizando para o novo arquivo de configuração
 					 cp -v conf/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/ &>> $LOG
+					 echo -e "Atualização feita com sucesso!!!"
+					 sleep 2
 					 
 					 #Editando o arquivo de configuração
 					 vim /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php
@@ -111,7 +126,6 @@ then
 					 echo -e "Pressione <Enter> para reinicializar o servidor: `hostname`"
 					 read
 					 sleep 2
-					 reboot
 					 else
 						 echo -e "Versão do Kernel: $KERNEL não homologada para esse script, versão: >= 4.4 "
 						 echo -e "Pressione <Enter> para finalizar o script"
