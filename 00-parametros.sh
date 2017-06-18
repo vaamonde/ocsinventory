@@ -59,3 +59,7 @@ NETDATAINSTALL="netdata"
 SETOCSPWD="SET PASSWORD FOR 'ocs'@'localhost' = PASSWORD('123456');"
 FLUSH="FLUSH PRIVILEGES;"
 #
+# Variáveis de configuração do GLPI Dashboard
+GLPIDASHBOARDVERSIONGLPI="_0.90.x_9.1.x/GLPI-dashboard_plugin-0.8.2.tar.gz"
+GLPIDASHBOARDTAR="GLPI-dashboard_plugin-0.8.2.tar.gz"
+GLPIDASHBOARDINSTALL="dashboard"
