@@ -70,6 +70,21 @@ then
 					 echo -e "Diretório movido com sucesso!!!"
 					 sleep 2
 					 
+					 #Fazendo o download do código fonte do Plugin do GLPI Dashboard
+					 wget https://downloads.sourceforge.net/project/glpidashboard/$GLPIDASHBOARDVERSION
+					 echo -e "Download do Plugin do GLPI Dashboard feito com sucesso!!!"
+					 sleep 2
+					 
+					 #Descompactando o arquivo do Plugin do GLPI Dashboard
+					 tar -zxvf $GLPIDASHBOARDTAR &>> $LOG
+					 echo -e "Download descompactado com sucesso!!!"
+					 sleep 2
+					 
+					 #Movendo a pasta do Plugin do GLPI Dashboard
+					 mv -v $GLPIDASHBOARDINSTALL /var/www/html/glpi/plugins/ &>> $LOG
+					 echo -e "Diretório movido com sucesso!!!"
+					 sleep 2
+					 
 					 #Alterando as permissões de Dono e Grupo da pasta do GLPI Help Desk
 					 chown -Rf www-data.www-data /var/www/html/glpi/ &>> $LOG
 					 echo -e "Permissões aplicada com sucesso!!!"
