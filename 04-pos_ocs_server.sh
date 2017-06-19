@@ -5,7 +5,7 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 18/06/2017
-# Data de atualização: 18/06/2017
+# Data de atualização: 19/06/2017
 # Versão: 0.1
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
@@ -15,7 +15,7 @@
 # Utilizar o comando: sudo -i para executar o script
 #
 # Caminho para o Log do ocs_server.sh
-LOG="/var/log/ocs_server.log"
+LOG="/var/log/pos_ocs_server.log"
 #
 #Arquivo de configuração de parâmetros
 source 00-parametros.sh
