@@ -80,25 +80,27 @@ then
 					 make install
 					 
 					 #MENSAGENS QUE SERÃO SOLICIDATAS NA INSTALAÇÃO DO OCS INVENTORY AGENT:
-					 #Please enter 'y' or 'n'?> [y] <-- pressione <Enter>
-					 #Where do you want to write the configuration file? <-- digite 2 pressione <Enter>
-					 #Do you want to create the directory /etc/ocsinventory-agent? <-- pressione <Enter>
-					 #Should the ond linux_agent settings be imported? <-- pressione <Enter>
-					 #What is the address of your ocs server? digite: http://localhost/ocsinventory, pressione <Enter>
-					 #Do you need credential for the server? (You probably don't) <-- pressione <Enter>
-					 #Do you want to apply an administrative tag on this machine? <-- pressione <Enter>
-					 #tag?> digite: server, pressione <Enter>
-					 #Do yo want to install the cron task in /etc/cron.d? <-- pressione <Enter>
-					 #Where do you want the agent to store its files? <-- pressione <Enter>
-					 #Should I remove the old linux_agent? <-- pressione <Enter>
-					 #Do you want to activate debug configuration option? <-- pressione <Enter>
-					 #Do you want to use OCS Inventory NG Unix Unified agent log file? <-- pressione <Enter>
-					 #Specify log file path you want to use?> digite: /var/log/ocsinventory-agent/activity.log, pressione <Enter>
-					 #Do you want disable SSL CA verification configuration option (not recommended)? digite: y, pressione <Enter>
-					 #Do you want to set CA certificate chain file path? digite: n, pressione <Enter>
-					 #Do you want to use OCS-Inventory software deployment feature? <-- pressione <Enter>
-					 #Do you want to use OCS-Inventory SNMP scans features? <-- pressione <Enter>
-					 #Do you want to send an inventory of this machine? <-- pressione <Enter>
+					 #
+					 #01: Please enter 'y' or 'n'?> [y] <-- pressione <Enter>
+					 #02: Where do you want to write the configuration file? <-- digite 2 pressione <Enter>
+					 #03: Do you want to create the directory /etc/ocsinventory-agent? <-- pressione <Enter>
+					 #04: Should the ond linux_agent settings be imported? <-- pressione <Enter>
+					 #05: What is the address of your ocs server? digite: http://localhost/ocsinventory, pressione <Enter>
+					 #06: Do you need credential for the server? (You probably don't) <-- pressione <Enter>
+					 #07: Do you want to apply an administrative tag on this machine? <-- pressione <Enter>
+					 #08: tag?> digite: server, pressione <Enter>
+					 #09: Do yo want to install the cron task in /etc/cron.d? <-- pressione <Enter>
+					 #10: Where do you want the agent to store its files? <-- pressione <Enter>
+					 #11: Should I remove the old linux_agent? <-- pressione <Enter>
+					 #12: Do you want to activate debug configuration option? <-- pressione <Enter>
+					 #13: Do you want to use OCS Inventory NG Unix Unified agent log file? <-- pressione <Enter>
+					 #14: Specify log file path you want to use?> digite: /var/log/ocsinventory-agent/activity.log, pressione <Enter>
+					 #15: Do you want disable SSL CA verification configuration option (not recommended)? digite: y, pressione <Enter>
+					 #16: Do you want to set CA certificate chain file path? digite: n, pressione <Enter>
+					 #17: Do you want to use OCS-Inventory software deployment feature? <-- pressione <Enter>
+					 #18: Do you want to use OCS-Inventory SNMP scans features? <-- pressione <Enter>
+					 #19: Do you want to send an inventory of this machine? <-- pressione <Enter>
+					 
 					 #Saindo do diretório do OCS Inventory Agent
 					 cd ..
 					 
@@ -124,6 +126,11 @@ then
 					 
 					 #Editando o arquivo de configuração
 					 vim /etc/ocsinventory-agent/ocsinventory-agent.cfg
+					 
+					 #Forçando a atualização do ocsinventory-agent
+					 ocsinventory-agent
+					 echo -e "Agent tualizado feita com sucesso!!!"
+					 sleep 2
 					 
 					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
 					 read
