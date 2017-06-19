@@ -38,7 +38,7 @@ then
 					 read
 					 
 					 #Alterando a senha do usário ocs utilizando o mysql command line
-					 mysql -u $USER -p$PASSWORD -e $SETOCSPWD mysql &>> $LOG
+					 mysql -u $USER -p$PASSWORD -e "$SETOCSPWD" mysql &>> $LOG
 					 echo -e "Senha alterada com suceso!!!"
 					 sleep 2
 					 
