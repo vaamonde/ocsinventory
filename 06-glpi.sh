@@ -71,7 +71,7 @@ then
 					 sleep 2
 					 
 					 #Fazendo o download do código fonte do Plugin do GLPI Dashboard
-					 wget https://downloads.sourceforge.net/project/glpidashboard/$GLPIDASHBOARDVERSION
+					 wget https://forge.glpi-project.org/projects/dashboard/files/$GLPIDASHBOARDVERSION &>> $LOG
 					 echo -e "Download do Plugin do GLPI Dashboard feito com sucesso!!!"
 					 sleep 2
 					 
