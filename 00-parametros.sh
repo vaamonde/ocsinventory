@@ -57,7 +57,7 @@ GLPIOCSINSTALL="ocsinventoryng"
 #
 # Variáveis de download do GLPI Dashboard
 # Site: https://forge.glpi-project.org/projects/dashboard/files
-GLPIDASHBOARDVERSIONGLPI="GLPI-dashboard_plugin-0.8.4.tar.gz"
+GLPIDASHBOARDVERSION="GLPI-dashboard_plugin-0.8.4.tar.gz"
 GLPIDASHBOARDTAR="GLPI-dashboard_plugin-0.8.4.tar.gz"
 GLPIDASHBOARDINSTALL="dashboard"
 #
