@@ -56,7 +56,7 @@ then
 					 echo "mysql-server-5.7 mysql-server/root_password_again password $PASSWORD" |  debconf-set-selections
 					 
 					 #Instalando o LAMP Server completo e todas as suas dependêncais do OCS Inventory Server, Agent, GLPI Help Desk e do Netdata
-					 apt-get -y install lamp-server^ mysql-server perl python make libapache2-mod-perl2 libapache2-mod-php snmp libio-compress-perl libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libsoap-lite-perl libnet-ip-perl php-mysql php7.0-dev php-mbstring php-soap php7.0-zip php7.0-gd php7.0-mysql dmidecode libxml-simple-perl libcompress-raw-zlib-perl libnet-ip-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl libcrypt-ssleay-perl libnet-snmp-perl libproc-pid-file-perl libproc-daemon-perl net-tools pciutils smartmontools read-edid nmap libc6-dev php-pclzip gcc libarchive-zip-perl php7.0-json php7.0-mbstring php7.0-mysql php7.0-curl php7.0-gd php7.0-imap php7.0-ldap ipmitool nmap zlib1g-dev gcc autoconf autogen automake pkg-config uuid-dev cups &>> $LOG
+					 apt-get -y install lamp-server^ mysql-server perl python make libmysqlclient-dev libapache2-mod-perl2 libapache2-mod-php snmp libio-compress-perl libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libsoap-lite-perl libnet-ip-perl php-mysql php7.0-dev php-mbstring php-soap php7.0-zip php7.0-gd php7.0-mysql dmidecode libxml-simple-perl libcompress-raw-zlib-perl libnet-ip-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl libcrypt-ssleay-perl libnet-snmp-perl libproc-pid-file-perl libproc-daemon-perl net-tools pciutils smartmontools read-edid nmap libc6-dev php-pclzip gcc libarchive-zip-perl php7.0-json php7.0-mbstring php7.0-mysql php7.0-curl php7.0-gd php7.0-imap php7.0-ldap ipmitool nmap zlib1g-dev gcc autoconf autogen automake pkg-config uuid-dev cups libnet-cups-perl &>> $LOG
 					 
 					 echo -e "Instalação do LAMP Server feito com sucesso!!!, continuando com o script."
 					 echo
@@ -194,7 +194,10 @@ then
 					 echo -e "Instalação das Dependências do Perl Apache2::SOAP via CPAN, pressione <Enter> para continuar"
 					 read
 					 
-					 #Instalação do Apache2::SOAP					 
+					 #Criando o diretório do SOAP para o Apache
+					 mkdir -v /usr/include/apache2 &>> $LOG
+					 
+					 #Instalação do Apache2::SOAP				 
 					 perl -MCPAN -e 'install Apache2::SOAP'
 					 echo
 					 
