@@ -15,7 +15,7 @@
 # Instalação do MySQL Server
 # Instalação do PhpMyAdmin
 # Instalação do PHP, Perl, Python
-# Instalação das Depedências via cpan
+# Instalação das Dependências via cpan
 #
 # Utilizar o comando: sudo -i para executar o script
 #
