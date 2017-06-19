@@ -254,7 +254,9 @@ then
 					 echo -e "Instalação das Dependências do Perl nvidia::ml via CPAN, pressione <Enter> para continuar"
 					 read
 					 
-					 #Instalação do nvidia::ml					 
+					 #Instalação do nvidia::ml
+					 #OBSERVAÇÃO: UTILIZADO SOMENTE EM COMPUTADORES QUE TEM O CHIP GRÁFICO DA NVIDIA
+					 #SERÁ APRESENTADO UMA MENSAGEM DE ERRO NO FINAL DA INSTALAÇÃO, USADO MAIS EM DESKTOP
 					 perl -MCPAN -e 'install nvidia::ml'
 					 echo
 					 
