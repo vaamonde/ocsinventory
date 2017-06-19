@@ -142,7 +142,7 @@ then
 						 SOMA=`expr $DATAFINAL - $DATAINICIAL`
 						 RESULTADO=`expr 10800 + $SOMA`
 						 TEMPO=`date -d @$RESULTADO +%H:%M:%S`
-					 echo -e "Tempo gasto para execução do Install.sh: $TEMPO"
+					 echo -e "Tempo gasto para execução do glpi.sh: $TEMPO"
 					 echo -e "Pressione <Enter> para reinicializar o servidor: `hostname`"
 					 read
 					 sleep 2
