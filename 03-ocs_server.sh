@@ -88,6 +88,12 @@ then
 					 #Habilitando o conf do OCS Inventory Server no Apache2
 					 a2enconf z-ocsinventory-server
 					 
+					 #Alterando as permissões do diretório /var/lib/ocsinventory-reports
+					 chmod -v 775 /var/lib/ocsinventory-reports/ &>> $LOG
+					 
+					 #Alterando o dono e grupo padrão do diretório /var/lib/ocsinventory-reports
+					 chown -v 775 /var/lib/ocsinventory-reports/ &>> $LOG
+					 
 					 #Reinicializando o Apache2
 					 sudo service apache2 restart
 					 
