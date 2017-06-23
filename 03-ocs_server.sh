@@ -36,6 +36,7 @@ then
 					 echo  ============================================================ >> $LOG
 					 
 					 echo -e "Download do OCS Inventory Server do Github, pressione <Enter> para continuar"
+					 echo -e "Após a instalação, acessar a url: http://ENDEREÇO_IP_DO_SERVIDOR/ocsreports e finalizar a instalação"
 					 read
 					 sleep 2
 					 echo -e "Aguarde, fazendo o download..."
@@ -126,6 +127,7 @@ then
 
 					 echo -e "Fim do ocs_server.sh em: `date`" >> $LOG
 					 echo -e "Instalação do OCS Inventory Server Feito com Sucesso!!!!!"
+					 echo -e "Após a reinicializar, acessar a url: http://ENDEREÇO_IP_DO_SERVIDOR/ocsreports e finalizar a instalação"
 					 echo
 					 # Script para calcular o tempo gasto para a execução do ocs_server.sh
 						 DATAFINAL=`date +%s`
