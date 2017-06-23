@@ -91,6 +91,7 @@ then
 					 #08: tag?> digite: server, pressione <Enter>
 					 #09: Do yo want to install the cron task in /etc/cron.d? <-- pressione <Enter>
 					 #10: Where do you want the agent to store its files? <-- pressione <Enter>
+					 #11: Do you want to create the? <-- pressione <Enter>
 					 #11: Should I remove the old linux_agent? <-- pressione <Enter>
 					 #12: Do you want to activate debug configuration option? <-- pressione <Enter>
 					 #13: Do you want to use OCS Inventory NG Unix Unified agent log file? <-- pressione <Enter>
@@ -131,6 +132,22 @@ then
 					 ocsinventory-agent
 					 echo -e "Agent tualizado feita com sucesso!!!"
 					 sleep 2
+					 
+					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Editando o arquivo do Agendamento do OCS Inventory Agent, pressione <Enter> para continuar"
+					 read
+					 
+					 #Atualizando para o novo arquivo de configuração
+					 cp -v conf/ocsinventory-agent-cron /etc/cron.d/ocsinventory-agent &>> $LOG
+					 echo -e "Atualização feita com sucesso!!!"
+					 sleep 2
+					 
+					 #Editando o arquivo de configuração
+					 vim /etc/cron.d/ocsinventory-agent
 					 
 					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
 					 read
