@@ -37,6 +37,7 @@ then
 					 echo  ============================================================ >> $LOG
 					 
 					 echo -e "Download do GLPI Help Desk do Github, pressione <Enter> para continuar"
+					 echo -e "Após a instalação, acessar a url: http://ENDEREÇO_IP_DO_SERVIDOR/glpi e finalizar a instalação"
 					 read
 					 sleep 2
 					 
@@ -136,6 +137,7 @@ then
 
 					 echo -e "Fim do glpi.sh em: `date`" >> $LOG
 					 echo -e "Instalação do GLPI Help Desk feito com Sucesso!!!!!"
+					 echo -e "Após a reinicialização, acessar a url: http://ENDEREÇO_IP_DO_SERVIDOR/glpi e finalizar a instalação"
 					 echo
 					 # Script para calcular o tempo gasto para a execução do glpi.sh
 						 DATAFINAL=`date +%s`
