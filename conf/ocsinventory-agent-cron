@@ -9,7 +9,8 @@
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 
+#Agendamento do OCS Inventory Agent todo os dias as 12:00hs
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/snap/bin
-0 20 * * * root /usr/local/bin/ocsinventory-agent --lazy > /dev/null 2>&1
+0 12 * * * root /usr/local/bin/ocsinventory-agent --lazy > /dev/null 2>&1
 
 #Obrigatório ter uma linha em branco no final para o agendamento funcionar corretamente.
