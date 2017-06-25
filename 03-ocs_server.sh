@@ -37,8 +37,11 @@ then
 					 
 					 echo  ============================================================ >> $LOG
 					 
-					 echo -e "Download do OCS Inventory Server do Github, pressione <Enter> para continuar"
 					 echo -e "Após a instalação, acessar a url: http://ENDEREÇO_IP_DO_SERVIDOR/ocsreports e finalizar a instalação"
+					 echo -e "Usuário padrão após a instalação: admin | Senha padrão: admin"
+					 echo
+					 
+					 echo -e "Download do OCS Inventory Server do Github, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 echo -e "Aguarde, fazendo o download..."
