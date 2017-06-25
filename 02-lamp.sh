@@ -259,7 +259,7 @@ then
 					 
 					 #Instalação do nvidia::ml
 					 #OBSERVAÇÃO: UTILIZADO SOMENTE EM COMPUTADORES QUE TEM O CHIP GRÁFICO DA NVIDIA
-					 #SERÁ APRESENTADO UMA MENSAGEM DE ERRO NO FINAL DA INSTALAÇÃO, USADO MAIS EM DESKTOP
+					 #SERÁ APRESENTADO UMA MENSAGEM DE ERRO NO FINAL DA INSTALAÇÃO, USADO MAIS EM DESKTOP E NOS CLIENTES DE INVENTÁRIO
 					 perl -MCPAN -e 'install nvidia::ml'
 					 echo
 					 
@@ -359,18 +359,6 @@ then
 					 #Mensagem: Continue anyways ? [y] <-- digite y pressione <Enter>
 					 perl -MCPAN -e 'install Module::Install'
 					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
-					 echo -e "Instalação das Dependências do APCU do GLPI via Pecl, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do apcu-bc
-					 #Mensagem:  ? [no] <-- pressione <Enter>
-					 pecl install apcu_bc-beta
 					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
