@@ -55,12 +55,6 @@ GLPIOCSVERSION="1.3.3/glpi-ocsinventoryng-1.3.3.tar.gz"
 GLPIOCSTAR="glpi-ocsinventoryng-1.3.3.tar.gz"
 GLPIOCSINSTALL="ocsinventoryng"
 #
-# Variáveis de download do GLPI Dashboard
-# Site: https://forge.glpi-project.org/projects/dashboard/files
-GLPIDASHBOARDVERSION="2185/GLPI-dashboard_plugin-0.8.4.tar.gz"
-GLPIDASHBOARDTAR="GLPI-dashboard_plugin-0.8.4.tar.gz"
-GLPIDASHBOARDINSTALL="dashboard"
-#
 # Variáveis de download do Netdata
 # Site: https://github.com/firehol/netdata
 NETDATAVERSION="netdata.git"
