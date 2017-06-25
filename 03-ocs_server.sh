@@ -30,9 +30,11 @@ then
 					 clear
 					 
 					 echo -e "Usuário é `whoami`, continuando a executar o ocs_server.sh"
+					 
 					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
 					 echo
+					 
 					 echo  ============================================================ >> $LOG
 					 
 					 echo -e "Download do OCS Inventory Server do Github, pressione <Enter> para continuar"
@@ -43,13 +45,20 @@ then
 					 
 					 #Fazendo o download do código fonte do OCS Inventory Server
 					 wget https://github.com/OCSInventory-NG/OCSInventory-ocsreports/releases/download/$OCSVERSION &>> $LOG
+					 echo -e "Download feito com sucesso!!!!"
+					 sleep 2
 					 
 					 #Descompactando o arquivos do OCS Inventory Server
 					 tar -zxvf $OCSTAR &>> $LOG
+					 echo -e "Arquivo descompactado com sucesso!!!!"
+					 sleep 2
 					 
 					 #Acessando a pasta do OCS Inventory Server
 					 cd $OCSINSTALL
+					 echo -e "Pasta acessada com sucesso!!!!"
+					 sleep 2
 					 
+					 echo
 					 echo -e "CUIDADO!!! com as opções que serão solicitadas no decorrer da instalação."
 					 echo -e "Download do OCS Inventory Server feito com Sucesso!!!, pressione <Enter> para instalar"
 					 echo
@@ -82,21 +91,33 @@ then
 					 
 					 #Atualizando as informações do Apache2 para o suporte ao OCS Inventory Server e Reports
 					 a2dissite 000-default
+					 echo -e "Apache 2 atualizado com sucesso!!!"
+					 sleep 2
 					 
 					 #Habilitando o conf do OCS Inventory Reports no Apache2
 					 a2enconf ocsinventory-reports
+					 echo -e "Virtual host do OCS Inventory Reports habilitado com sucesso!!!"
+					 sleep 2
 					 
 					 #Habilitando o conf do OCS Inventory Server no Apache2
 					 a2enconf z-ocsinventory-server
+					 echo -e "Virtual host do OCS Inventory Server habilitado com sucesso!!!"
+					 sleep 2
 					 
 					 #Alterando as permissões do diretório /var/lib/ocsinventory-reports
 					 chmod -v 775 /var/lib/ocsinventory-reports/ &>> $LOG
+					 echo -e "Permissões do OCS Inventory Reports alteradas com sucesso!!!"
+					 sleep 2
 					 
 					 #Alterando o dono e grupo padrão do diretório /var/lib/ocsinventory-reports
 					 chown -v 775 /var/lib/ocsinventory-reports/ &>> $LOG
+					 echo -e "Dono/Grupo do OCS Inventory Reports alteradas com sucesso!!!"
+					 sleep 2
 					 
 					 #Reinicializando o Apache2
 					 sudo service apache2 restart
+					 echo -e "Apache 2 reinicializado com sucesso!!!"
+					 sleep 2
 					 
 					 #Saindo do diretório do OCS Iventory Server
 					 cd ..
