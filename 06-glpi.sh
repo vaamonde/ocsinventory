@@ -101,6 +101,21 @@ then
 					 sleep 2
 					 clear
 					 
+					 echo -e "Instalação das Dependências do APCU do GLPI via Pecl, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do apcu-bc
+					 #Mensagem:  ? [no] <-- pressione <Enter>
+					 pecl install apcu_bc-beta
+					 
+					 #Habilitando o módulo do APCu no PHP
+					 phpenmod apcu
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
 					 echo -e "Removendo aplicativos desnecessários"
 					 
 					 #Limpando o diretório de cache do apt-get
