@@ -2,7 +2,7 @@
 
 Script de automatização da instalação do OCS Inventory Server, OCS Inventory Agent, GLPI Help Desk e do Netdata Monitor no GNU/Linux Ubuntu Server 16.04 LTS
 
-Curso completo: aulaead.com
+Curso completo: http://aulaead.com
 
 Procedimento para utilizar os scripts.
 
