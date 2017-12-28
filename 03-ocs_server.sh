@@ -108,12 +108,12 @@ then
 					 sleep 2
 					 
 					 #Alterando as permissões do diretório /var/lib/ocsinventory-reports
-					 chmod -v 775 /var/lib/ocsinventory-reports/ &>> $LOG
+					 chmod -Rv 775 /var/lib/ocsinventory-reports/ &>> $LOG
 					 echo -e "Permissões do OCS Inventory Reports alteradas com sucesso!!!"
 					 sleep 2
 					 
 					 #Alterando o dono e grupo padrão do diretório /var/lib/ocsinventory-reports
-					 chown -v 775 /var/lib/ocsinventory-reports/ &>> $LOG
+					 chown -Rv www-data.www-data /var/lib/ocsinventory-reports/ &>> $LOG
 					 echo -e "Dono/Grupo do OCS Inventory Reports alteradas com sucesso!!!"
 					 sleep 2
 					 
@@ -122,7 +122,7 @@ then
 					 echo -e "Apache 2 reinicializado com sucesso!!!"
 					 sleep 2
 					 
-					 #Saindo do diretório do OCS Iventory Server
+					 #Saindo do diretório do OCS Inventory Server
 					 cd ..
 					 
 					 echo
