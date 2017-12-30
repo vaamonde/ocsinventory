@@ -85,38 +85,46 @@ then
 					 #11. Where to put Communication server log directory [/var/log/ocsinventory-server]?: Deixe o padrão pressione <Enter>;
 					 #12. Where to put Communication server plugins configuration files [/etc/ocsinventory-server/plugins]?: Deixe o padrão pressione <Enter>;
 					 #13. Where to put Communication server plugins Perl module files [/etc/ocsinventory-server/perl]?: Deixe o padrão pressione <Enter>;
-					 #14. Do you allow Setup renaming Communication Server Apache configuration file to 'z-ocsinventory-server.conf' ([y]/n)?: y <-- digite y pressione <Enter>;
-					 #15. Do you wish to setup Administration Server (Web Administration Console) on this computer ([y]/n)?: y <-- digite y pressione <Enter>;
-					 #16. Do you wish to continue ([y]/n)?: y <-- digite y pressione <Enter>;
-					 #17. Where to copy Administration Server static files for PHP Web Console [/usr/share/ocsinventory-reports]?: Deixe o padrão pressione <Enter>;
-					 #18. Where to create writable/cache directories for deployment packages administration console logs, IPDiscover and SNMP [/var/lib/ocsinventory-reports]?: Deixe o padrão pressione <Enter>;
+					 #14. Do you  wish to setup Rest API server on this computer ([y]/n)?: y <-- digite y pressione <Enter>;
+					 #15. Where do you want the API code to be store [/usr/local/share/perl/5.22.1]?: Deixe o padrão pressione <Enter>;
+					 #16. Do you allow Setup renaming Communication Server Apache configuration file to 'z-ocsinventory-server.conf' ([y]/n)?: y <-- digite y pressione <Enter>;
+					 #17. Do you wish to setup Administration Server (Web Administration Console) on this computer ([y]/n)?: y <-- digite y pressione <Enter>;
+					 #18. Do you wish to continue ([y]/n)?: y <-- digite y pressione <Enter>;
+					 #19. Where to copy Administration Server static files for PHP Web Console [/usr/share/ocsinventory-reports]?: Deixe o padrão pressione <Enter>;
+					 #20. Where to create writable/cache directories for deployment packages administration console logs, IPDiscover and SNMP [/var/lib/ocsinventory-reports]?: Deixe o padrão pressione <Enter>;
 					 #APÓS A INSTALAÇÃO VIA NAVEGADOR, REMOVER O ARQUIVO install
 					 
+					 echo
 					 #Atualizando as informações do Apache2 para o suporte ao OCS Inventory Server e Reports
 					 a2dissite 000-default
 					 echo -e "Apache 2 atualizado com sucesso!!!"
 					 sleep 2
 					 
+					 echo
 					 #Habilitando o conf do OCS Inventory Reports no Apache2
 					 a2enconf ocsinventory-reports
 					 echo -e "Virtual host do OCS Inventory Reports habilitado com sucesso!!!"
 					 sleep 2
 					 
+					 echo
 					 #Habilitando o conf do OCS Inventory Server no Apache2
 					 a2enconf z-ocsinventory-server
 					 echo -e "Virtual host do OCS Inventory Server habilitado com sucesso!!!"
 					 sleep 2
 					 
+					 echo
 					 #Alterando as permissões do diretório /var/lib/ocsinventory-reports
 					 chmod -Rv 775 /var/lib/ocsinventory-reports/ &>> $LOG
 					 echo -e "Permissões do OCS Inventory Reports alteradas com sucesso!!!"
 					 sleep 2
 					 
+					 echo
 					 #Alterando o dono e grupo padrão do diretório /var/lib/ocsinventory-reports
 					 chown -Rv www-data.www-data /var/lib/ocsinventory-reports/ &>> $LOG
 					 echo -e "Dono/Grupo do OCS Inventory Reports alteradas com sucesso!!!"
 					 sleep 2
 					 
+					 echo
 					 #Reinicializando o Apache2
 					 sudo service apache2 restart
 					 echo -e "Apache 2 reinicializado com sucesso!!!"
