@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 19/06/2017
-# Versão: 0.11
+# Data de atualização: 30/12/2017
+# Versão: 0.12
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -105,12 +105,12 @@ then
 					 read
 					 
 					 #Instalação do SOAP::Lite
-					 #Mensagem: WARNING: Please tell me where I can find your apache src: q <-- digite q pressione <Enter>
 					 #Mensagem: Do you want to install 'xml_pp' (XML pretty printer)?: y <-- digite y pressione <Enter>
 					 #Mensagem: Do you want to install 'xml_grep' (XML grep - grep XML files using XML::Twig's subset of XPath)?: y <-- digite y pressione <Enter>
 					 #Mensagem: Do you want to install 'xml_split' (split big XML files)?: y <-- digite y pressione <Enter>
 					 #Mensagem: Do you want to install 'xml_merge' (merge back files created by xml_split)?: y <-- digite y pressione <Enter>
 					 #Mensagem: Do you want to install 'xml_spellcheck' (spellcheck XML files skipping tags)?: y <-- digite y pressione <Enter>
+					 #Mensagem: WARNING: Please tell me where I can find your apache src: q <-- digite q pressione <Enter>
 					 perl -MCPAN -e 'install SOAP::Lite'
 					 echo
 					 
