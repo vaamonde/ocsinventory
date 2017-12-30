@@ -18,6 +18,10 @@ Procedimento para utilizar os scripts.
 10: Siga as instruções que serão apresentadas na tela;<br><br>
 11: Após a reinicialização, utilize um navegador para finalizar a configuração do OCS Inventory Server, recomendo o Firefox acessando a URL: http://ENDEREÇO_IP_DO_SERVIDOR/ocsreports;<br><br>
 12: Finalize a instalação e criação da base de dados via navegador, utilizando o usuário: "root", senha: "123456", base de dados padrão do OCS Inventory: "ocsweb", servidor: "localhost", usuário de administração do OCS Reports padrão e: "admin" com senha: "admin";<br><br>
+MySQL Login:		root<br>
+MySQL Password:		123456<br>
+Name of Database:	ocsweb<br>
+MySQL Hostname:		localhost<br><br>
 13: Após a configuração do OSC Inventory Server, execute o arquivo: <b>04-pos_ocs_server.sh</b> utilizando o comando: <b>./04-pos_ocs_server.sh</b>;<br><br>
 14: Siga as instruções que serão apresentadas na tela;<br><br>
 15: Após a pós-configuração do OCS Inventory Server, instale o OCS Inventory Agent, execute o arquivo: <b>05-ocs_agent.sh</b> utilizando o comando: <b>./05-ocs_agent.sh</b>;<br><br>
