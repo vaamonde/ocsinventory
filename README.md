@@ -31,6 +31,10 @@ MySQL Hostname:		localhost<br><br>
 19: Após a configuração do OCS Inventory Agent, instale o GLPI Help Desk, execute o arquivo: <b>06-glpi.sh</b> utilizando o comando: <b>./06-glpi.sh</b>;<br><br>
 20: Após a reinicialização, utilize um navegador, recomendo o Firefox acessando a URL: http://ENDEREÇO_IP_DO_SERVIDOR/glpi;<br><br>
 21: Finalize a instalação e criação da base de dados do GLPI Help Desk via navegador;<br><br>
+SQL Server:		localhost<br>
+Usuário SQL:	root<br>
+Senha SQL:		123456<br>
+Database:		glpi<br><br>
 22: Configure o Plugin do OCS Inventory Server no GLPI Help Desk;<br><br>
 23: Após a configuração do Plugin do OCS Inventory Agent no GLPI Help Desk, instale o Netdata Monitor, execute o arquivo: <b>07-netdata.sh</b> utilizando o comando: <b>./07-netdata.sh</b>;<br><br>
 24: Após a reinicialização, verifique o desempenho do servidor acessando o Netdata, utilize um navegador, recomendo o Firefox acessando a URL: http://SEU_ENDEREÇO_IP:19999;<br><br>
