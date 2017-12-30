@@ -364,6 +364,43 @@ then
 					 read
 					 sleep 2
 					 clear
+					 
+					 echo -e "Instalação das Dependências do Mojolicious::Lite via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do Mojolicious::Lite
+					 perl -MCPAN -e 'install Mojolicious::Lite'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Instalação das Dependências do Switch via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do Switch
+					 perl -MCPAN -e 'install Switch'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Instalação das Dependências do Plack::Handler via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do Plack::Handler
+					 #Esse procedimento demora um pouco
+					 perl -MCPAN -e 'install Plack::Handler'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
 
 					 echo -e "Editando o arquivo do Apache2, pressione <Enter> para continuar"
 					 read
