@@ -1,0 +1,29 @@
+# Autor: Robson Vaamonde
+# Site: www.procedimentosemti.com.br
+# Facebook: facebook.com/ProcedimentosEmTI
+# Facebook: facebook.com/BoraParaPratica
+# YouTube: youtube.com/BoraParaPratica
+# Data de criação: 31/05/2016
+# Data de atualização: 31/12/2017
+# Versão: 0.4
+# Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
+# Kernel >= 4.4.x
+
+#Configuração do código das interfaces
+source /etc/network/interfaces.d/*
+
+#Configuração da interfaces de Loopback
+auto lo
+iface lo inet loopback
+
+# Configurações da interface de rede estática enp0s3
+auto enp0s3
+iface enp0s3 inet static
+address 172.16.10.11
+netmask 255.255.255.0
+network 172.16.10.0
+gateway 172.16.10.1
+broadcast 172.16.10.255
+dns-nameservers 172.16.10.10
+dns-search pti.intra
+dns-domain pti.intra

@@ -1,0 +1,90 @@
+# Autor: Robson Vaamonde
+# Site: www.procedimentosemti.com.br
+# Facebook: facebook.com/ProcedimentosEmTI
+# Facebook: facebook.com/BoraParaPratica
+# YouTube: youtube.com/BoraParaPratica
+# Data de criação: 31/05/2016
+# Data de atualização: 31/12/2017
+# Versão: 0.5
+# Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
+# Kernel >= 4.4.x
+
+# Porta de conexão padrão do SSH
+Port 22
+
+# Versão do protocolo de SSH
+Protocol 2
+
+# Tamanho da geração das chaves
+ServerKeyBits 1024
+
+# Configurações de Chaves Públicas e Privadas
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_dsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+KeyRegenerationInterval 3600
+
+# Ativar a separação de privilégios
+UsePrivilegeSeparation yes
+
+# Configuração dos Log's do SSH
+SyslogFacility AUTH
+LogLevel INFO
+
+# Negar o acesso ao SSH para o usuário ROOT
+PermitRootLogin no
+
+# Usuários ou grupos que tem permissão de acesso ao SSH
+AllowUsers vaamonde
+AllowGroups vaamonde
+
+# Usuários que não tem permissão de acesso ao SSH
+DenyUsers root
+DenyGroups root
+
+# Banner que será apresentado no momento do acesso ao SSH
+Banner /etc/issue.net
+
+# Tempo de inatividade em segundo segundos
+LoginGraceTime 120
+ClientAliveInterval 180
+ClientAliveCountMax 0
+
+# Tentativa máxima de conexão
+MaxAuthTries 3
+
+# Endereço IP do servidor que está liberado para permitir conexões via SSH
+ListenAddress 172.16.10.11
+
+# Não ler os arquivos ~/.rhosts e ~/.shosts
+IgnoreRhosts yes
+RhostsRSAAuthentication no
+HostbasedAuthentication no
+
+# Não permitir usuários com senhas vazias
+PermitEmptyPasswords no
+
+# Não permitir encaminhamento de portas
+AllowTcpForwarding no
+X11Forwarding no
+
+# Autenticação de chave pública
+PubkeyAuthentication yes
+
+# Especifica se a autenticação de senha é permitida. O padrão é yes.
+PasswordAuthentication no
+
+# Evitar o uso de diretórios residenciais inseguros e permissões de arquivos de chaves
+StrictModes yes
+
+# Configurações Default do SSH (Não alterar)
+RSAAuthentication yes
+ChallengeResponseAuthentication no
+X11DisplayOffset 10
+PrintMotd no
+PrintLastLog yes
+TCPKeepAlive yes
+AcceptEnv LANG LC_*
+Subsystem sftp /usr/lib/openssh/sftp-server
+UsePAM yes
