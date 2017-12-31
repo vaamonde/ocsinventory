@@ -46,6 +46,8 @@ then
 					 echo -e "Permissão alterada com sucesso!!!"
 					 sleep 2
 					 
+					 echo
+					 
 					 echo -e "Senha alterada com Sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -58,6 +60,8 @@ then
 					 mv -v /usr/share/ocsinventory-reports/ocsreports/install.php /usr/share/ocsinventory-reports/ocsreports/install.php.bkp &>> $LOG
 					 echo -e "Backup feito com sucesso!!!!"
 					 sleep 2
+					 
+					 echo
 					 
 					 echo -e "Arquivo removido com Sucesso!!!, pressione <Enter> para continuar"
 					 read
@@ -82,6 +86,30 @@ then
 					 
 					 #Editando o arquivo de configuração
 					 vim /etc/apache2/conf-available/z-ocsinventory-server.conf
+					 
+					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Atualizando os arquivos de configuração do OCS Inventory Reports"
+					 echo
+					 echo -e "Editando o arquivo do OCS Inventory Reports, pressione <Enter> para continuar"
+					 read
+					 
+					 #Arquivo de configuração do Servidor do OCS Inventory Reports responsável pelos relatórios e distribuição dos softwares
+					 #Fazendo o backup do arquivo de configuração original
+					 mv -v /etc/apache2/conf-available/ocsinventory-reports.conf /etc/apache2/conf-available/ocsinventory-reports.conf.bkp &>> $LOG
+					 echo -e "Backup feito com sucesso!!!"
+					 sleep 2
+					 
+					 #Atualizando para o novo arquivo de configuração
+					 cp -v conf/ocsinventory-reports.conf /etc/apache2/conf-available/ &>> $LOG
+					 echo -e "Atualização feita com sucesso!!!"
+					 sleep 2
+					 
+					 #Editando o arquivo de configuração
+					 vim /etc/apache2/conf-available/ocsinventory-reports.conf
 					 
 					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
 					 read
