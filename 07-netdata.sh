@@ -107,7 +107,7 @@ then
 					 
 					 echo -e "Fazendo o backup das configurações"
 					 #Fazendo o backup das configurações do arquivo do mysql.conf
-					 mv -v c /etc/netdata/python.d/mysql.conf.old &>> $LOG
+					 mv -v /etc/netdata/python.d/mysql.conf /etc/netdata/python.d/mysql.conf.old &>> $LOG
 					 echo -e "Backup feito com sucesso!!!
 					 
 					 echo
@@ -116,6 +116,15 @@ then
 					 #Fazendo a atualização do arquivo de configuração do MySQL
 					 cp -v conf/mysql.conf /etc/netdata/python.d/ &>> $LOG
 					 echo -e "Arquivo atualizado com sucesso!!!"
+					 
+					 echo
+					 
+					 echo -e "Alterando as permissões do arquivo Mysql.conf"
+					 #Alterando o dono/grupo do arquivo
+					 chown -v netdata.netdata /etc/netdata/python.d/mysql.conf &>> $LOG
+					 #Alterando as permissões de acesso ao arquivo
+					 chmod -v 660 /etc/netdata/python.d/mysql.conf &>> $LOG
+					 echo -e "Permissões alteradas com sucesso!!!"
 					 
 					 echo
 					 
