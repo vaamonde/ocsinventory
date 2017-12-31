@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 30/12/2017
-# Versão: 0.12
+# Data de atualização: 31/12/2017
+# Versão: 0.13
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -42,7 +42,7 @@ then
 					 export DEBIAN_FRONTEND=noninteractive
 					 
 					 #Atualizando as listas do apt-get
-					 apt-get update &>> $LOG
+					 apt-get update &>> $LOG 
 					 
 					 echo -e "Listas Atualizadas com Sucesso!!!, continuando com o script."
 					 echo
@@ -56,7 +56,7 @@ then
 					 echo "mysql-server-5.7 mysql-server/root_password_again password $PASSWORD" |  debconf-set-selections
 					 
 					 #Instalando o LAMP Server completo e todas as suas dependêncais do OCS Inventory Server, Agent, GLPI Help Desk e do Netdata
-					 apt-get -y install lamp-server^ apache2-dev mysql-server perl python make libmysqlclient-dev libapache2-mod-perl2 libapache2-mod-php snmp libio-compress-perl libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libsoap-lite-perl libnet-ip-perl php-mysql php7.0-dev php-mbstring php-soap php-dev php-apcu php-xmlrpc php7.0-zip php7.0-gd php7.0-mysql dmidecode libxml-simple-perl libcompress-raw-zlib-perl libnet-ip-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl libcrypt-ssleay-perl libnet-snmp-perl libproc-pid-file-perl libproc-daemon-perl net-tools pciutils smartmontools read-edid nmap libc6-dev php-pclzip gcc libarchive-zip-perl php7.0-json php7.0-mbstring php7.0-mysql php7.0-curl php7.0-gd php7.0-imap php7.0-ldap ipmitool nmap zlib1g-dev gcc autoconf autogen automake pkg-config uuid-dev libnet-cups-perl &>> $LOG
+					 apt-get -y install lamp-server^ apache2-dev mysql-server perl python make libmysqlclient-dev libapache2-mod-perl2 libapache2-mod-php snmp libio-compress-perl libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libsoap-lite-perl libnet-ip-perl php-mysql php7.0-dev php-mbstring php-soap php-dev php-apcu php-xmlrpc php7.0-zip php7.0-gd php7.0-mysql dmidecode libxml-simple-perl libcompress-raw-zlib-perl libnet-ip-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl libcrypt-ssleay-perl libnet-snmp-perl libproc-pid-file-perl libproc-daemon-perl net-tools pciutils smartmontools read-edid nmap libc6-dev php-pclzip gcc libarchive-zip-perl php7.0-json php7.0-mbstring php7.0-mysql php7.0-curl php7.0-gd php7.0-imap php7.0-ldap ipmitool nmap zlib1g-dev gcc autoconf autogen automake pkg-config uuid-dev libnet-cups-perl libphp-pclzip &>> $LOG
 					 
 					 echo -e "Instalação do LAMP Server feito com sucesso!!!, continuando com o script."
 					 echo
@@ -395,6 +395,47 @@ then
 					 #Instalação do Plack::Handler
 					 #Esse procedimento demora um pouco
 					 perl -MCPAN -e 'install Plack::Handler'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
+					 echo -e "Editando o arquivo do Apache2, pressione <Enter> para continuar"
+					 read
+					 
+					 echo -e "Instalação das Dependências do DBI via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do DBI
+					 perl -MCPAN -e 'install DBI'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Instalação das Dependências do Net::SSLeay via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do Net::SSLeay
+					 #Mensagem: These test, pressionar: <Enter>
+					 perl -MCPAN -e 'install Net::SSLeay'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Instalação das Dependências do Net::SSLeay via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do Net::SSLeay
+					 #Mensagem: These test, pressionar: <Enter>
+					 perl -MCPAN -e 'install Net::SSLeay'
 					 echo
 					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
