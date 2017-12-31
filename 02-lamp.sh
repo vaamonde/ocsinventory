@@ -430,12 +430,23 @@ then
 					 sleep 2
 					 clear
 					 
-					 echo -e "Instalação das Dependências do Net::SSLeay via CPAN, pressione <Enter> para continuar"
+					 echo -e "Instalação das Dependências do Bundle::LWP via CPAN, pressione <Enter> para continuar"
 					 read
 					 
-					 #Instalação do Net::SSLeay
-					 #Mensagem: These test, pressionar: <Enter>
-					 perl -MCPAN -e 'install Net::SSLeay'
+					 #Instalação do Bundle::LWP
+					 perl -MCPAN -e 'install Bundle::LWP'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Instalação das Dependências do LWP::UserAgent::Cached via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do LWP::UserAgent::Cached
+					 perl -MCPAN -e 'install LWP::UserAgent::Cached'
 					 echo
 					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
