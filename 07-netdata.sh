@@ -41,15 +41,19 @@ then
 					 sleep 2
 					 echo
 					 
+					 echo -e "Removendo o arquivo install do GLPI"
 					 #Removendo o diretório install do GLPI
 					 mv -v /var/www/html/glpi/install /var/www/html/glpi/install.bkp &>> $LOG
+					 echo -e "Arquivo removido com sucesso!!!"
 					 
+					 echo -e "Clonando o Netdata"
 					 #Clonando o site do GitHub do Netdata
 					 git clone https://github.com/firehol/$NETDATAVERSION --depth=1 &>> $LOG
 					 
 					 echo -e "Clonagem do software do Netdata feito com sucesso!!!"
 					 echo
 					 
+					 echo -e "Acessando o diretório do Netdata"
 					 #Acessando o diretório do Netdata
 					 cd $NETDATAINSTALL
 					 
