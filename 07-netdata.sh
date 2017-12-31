@@ -5,7 +5,7 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 19/06/2017
+# Data de atualização: 31/12/2017
 # Versão: 0.11
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
@@ -72,6 +72,63 @@ then
 					 
 					 echo
 					 echo -e "Instalação do Netdata feita com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Instalação das dependências do PIP para o monitoramento do MySQL via Netdata, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Atualizando o PIP"
+					 pip install --upgrade pip
+					 
+					 echo 
+					 
+					 echo -e "Instalando o MySQLCliente"
+					 pip install mysqlclient
+					 
+					 echo
+					 
+					 echo -e "Instalando o PyMySQL"
+					 pip install PyMySQL
+					 
+					 echo
+					 echo -e "Instalação das dependências do PIP feita com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Atualizando o arquivo de configuração do MySQL para acesso as informações via Netdata, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Fazendo o backup das configurações"
+					 #Fazendo o backup das configurações do arquivo do mysql.conf
+					 mv -v c /etc/netdata/python.d/mysql.conf.old &>> $LOG
+					 echo -e "Backup feito com sucesso!!!
+					 
+					 echo
+					 
+					 echo -e "Atualizando o arquivo de configuração"
+					 #Fazendo a atualização do arquivo de configuração do MySQL
+					 cp -v conf/mysql.conf /etc/netdata/python.d/ &>> $LOG
+					 echo -e "Arquivo atualizado com sucesso!!!"
+					 
+					 echo
+					 
+					 echo -e "Editando o arquivo de configuração do MySQL"
+					 sleep 2
+					 #Editando o arquivo de configuração do mysqlconf
+					 vim /etc/netdata/python.d/mysql.conf
+					 
+					 echo -e "Reinicializando o serviço do Netdata"
+					 #Reinicializando o serviços do Netdata
+					 sudo service netdata restart
+					 
+					 echo -e "Arquivo editado com sucesso!!!, pressione <Enter> para continuar."
 					 read
 					 sleep 2
 					 clear
