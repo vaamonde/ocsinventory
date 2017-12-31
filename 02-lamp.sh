@@ -15,7 +15,11 @@
 # Instalação do MySQL Server
 # Instalação do PhpMyAdmin
 # Instalação do PHP, Perl, Python
-# Instalação das Dependências via cpan
+# Instalação das Dependências via Perl CPAN
+#
+# Nesse script está sendo instalada todas as dependências do OCS Inventory Server, OCS Inventory Agent e do GLPI
+# Nas linhas do apt-get install todas as dependências já estão sendo instaladas
+# Nas linhas do perl -e -MCPAN está sendo instalada as dependências do OCS Server e Agent.
 #
 # Utilizar o comando: sudo -i para executar o script
 #
@@ -92,7 +96,8 @@ then
 					 read
 					 
 					 #Instalação do XML::Entities
-					 #Mensagem: Would you like to configure as much as possible automatically? Yes <-- digite Yes pressione <Enter>
+					 #Mensagem: Would you like to configure as much as possible automatically? [Yes] <-- Pressione <Enter>
+					 #Esse procedimento demora um pouco
 					 perl -MCPAN -e 'install XML::Entities'
 					 echo
 					 
@@ -105,12 +110,13 @@ then
 					 read
 					 
 					 #Instalação do SOAP::Lite
-					 #Mensagem: Do you want to install 'xml_pp' (XML pretty printer)?: y <-- digite y pressione <Enter>
-					 #Mensagem: Do you want to install 'xml_grep' (XML grep - grep XML files using XML::Twig's subset of XPath)?: y <-- digite y pressione <Enter>
-					 #Mensagem: Do you want to install 'xml_split' (split big XML files)?: y <-- digite y pressione <Enter>
-					 #Mensagem: Do you want to install 'xml_merge' (merge back files created by xml_split)?: y <-- digite y pressione <Enter>
-					 #Mensagem: Do you want to install 'xml_spellcheck' (spellcheck XML files skipping tags)?: y <-- digite y pressione <Enter>
-					 #Mensagem: WARNING: Please tell me where I can find your apache src: q <-- digite q pressione <Enter>
+					 #Mensagem: Do you want to install 'xml_pp' (XML pretty printer)?: [y] <-- Pressione <Enter>
+					 #Mensagem: Do you want to install 'xml_grep' (XML grep - grep XML files using XML::Twig's subset of XPath)?: [y] <-- Pressione <Enter>
+					 #Mensagem: Do you want to install 'xml_split' (split big XML files)?: [y] <-- Pressione <Enter>
+					 #Mensagem: Do you want to install 'xml_merge' (merge back files created by xml_split)?: [y] <-- Pressione <Enter>
+					 #Mensagem: Do you want to install 'xml_spellcheck' (spellcheck XML files skipping tags)?: [y] <-- Pressione <Enter>
+					 #Mensagem: WARNING: Please tell me where I can find your apache src: <-- digite q Pressione <Enter>
+					 #Esse procedimento demora um pouco, não se preocupe com a mensagem de erro no final, está associado ao Source do Apache
 					 perl -MCPAN -e 'install SOAP::Lite'
 					 echo
 					 
@@ -135,6 +141,7 @@ then
 					 read
 					 
 					 #Instalação do Bundle::Compress::Zlib
+					 #Não se preocupe com a mensagem de erro no final da instalação
 					 perl -MCPAN -e 'install install Bundle::Compress::Zlib'
 					 echo
 					 
@@ -158,7 +165,8 @@ then
 					 echo -e "Instalação das Dependências do Perl Apache::DBI via CPAN, pressione <Enter> para continuar"
 					 read
 					 
-					 #Instalação do Apache::DBI					 
+					 #Instalação do Apache::DBI
+					 #Dependência já resolvida no apt-get install
 					 perl -MCPAN -e 'install Apache::DBI'
 					 echo
 					 
@@ -170,7 +178,8 @@ then
 					 echo -e "Instalação das Dependências do Perl Net::IP via CPAN, pressione <Enter> para continuar"
 					 read
 					 
-					 #Instalação do Net::IP					 
+					 #Instalação do Net::IP
+					 #Dependência já resolvida no apt-get install
 					 perl -MCPAN -e 'install Net::IP'
 					 echo
 					 
@@ -194,8 +203,12 @@ then
 					 echo -e "Instalação das Dependências do Perl Apache2::SOAP via CPAN, pressione <Enter> para continuar"
 					 read
 					 
+					 echo -e "Criando o diretório do SOAP para o Apache
+					 
 					 #Criando o diretório do SOAP para o Apache
 					 mkdir -v /usr/include/apache2 &>> $LOG
+					 
+					 echo -e "Diretório criado com sucesso!!!!"
 					 
 					 #Instalação do Apache2::SOAP				 
 					 perl -MCPAN -e 'install Apache2::SOAP'
@@ -221,7 +234,8 @@ then
 					 echo -e "Instalação das Dependências do Perl Proc::Daemon via CPAN, pressione <Enter> para continuar"
 					 read
 					 
-					 #Instalação do Proc::Daemon					 
+					 #Instalação do Proc::Daemon
+					 #Dependência já resolvida no apt-get install
 					 perl -MCPAN -e 'install Proc::Daemon'
 					 echo
 					 
@@ -245,7 +259,8 @@ then
 					 echo -e "Instalação das Dependências do Perl Linux::Ethtool::Settings via CPAN, pressione <Enter> para continuar"
 					 read
 					 
-					 #Instalação do Linux::Ethtool::Settings					 
+					 #Instalação do Linux::Ethtool::Settings
+					 #Dependência já resolvida no apt-get install
 					 perl -MCPAN -e 'install Linux::Ethtool::Settings'
 					 echo
 					 
@@ -271,7 +286,8 @@ then
 					 echo -e "Instalação das Dependências do Perl Crypt::SSLeay via CPAN, pressione <Enter> para continuar"
 					 read
 					 
-					 #Instalação do Crypt::SSLeay					 
+					 #Instalação do Crypt::SSLeay
+					 #Dependência já resolvida no apt-get install
 					 perl -MCPAN -e 'install Crypt::SSLeay'
 					 echo
 					 
@@ -295,7 +311,8 @@ then
 					 echo -e "Instalação das Dependências do Perl Net::SNMP via CPAN, pressione <Enter> para continuar"
 					 read
 					 
-					 #Instalação do Net::SNMP					 
+					 #Instalação do Net::SNMP
+					 #Dependência já resolvida no apt-get install
 					 perl -MCPAN -e 'install Net::SNMP'
 					 echo
 					 
@@ -343,7 +360,8 @@ then
 					 echo -e "Instalação das Dependências do Nmap::Parser via CPAN, pressione <Enter> para continuar"
 					 read
 					 
-					 #Instalação do Nmap::Parser					 
+					 #Instalação do Nmap::Parser
+					 #Esse procedimento demora um pouco
 					 perl -MCPAN -e 'install Nmap::Parser'
 					 echo
 					 
@@ -356,7 +374,8 @@ then
 					 read
 					 
 					 #Instalação do Module::Install
-					 #Mensagem: Continue anyways ? [y] <-- digite y pressione <Enter>
+					 #Mensagem: Continue anyways ? [y] <-- Pressione <Enter>
+					 #Esse procedimento demora um pouco, nessa instalação tem algumas falhas de resolução de DNS do CPAN, mais funcionada depois
 					 perl -MCPAN -e 'install Module::Install'
 					 echo
 					 
@@ -401,9 +420,6 @@ then
 					 read
 					 sleep 2
 					 clear
-
-					 echo -e "Editando o arquivo do Apache2, pressione <Enter> para continuar"
-					 read
 					 
 					 echo -e "Instalação das Dependências do DBI via CPAN, pressione <Enter> para continuar"
 					 read
@@ -421,7 +437,7 @@ then
 					 read
 					 
 					 #Instalação do Net::SSLeay
-					 #Mensagem: These test, pressionar: <Enter>
+					 #Mensagem: These test *will* *fail* if you do not have network connectivity. [n] <-- Pressionar: <Enter>
 					 perl -MCPAN -e 'install Net::SSLeay'
 					 echo
 					 
@@ -446,6 +462,7 @@ then
 					 read
 					 
 					 #Instalação do LWP::UserAgent::Cached
+					 #Menssagem: Append this modules to installaation queue? [y] <-- Pressione <Enter>
 					 perl -MCPAN -e 'install LWP::UserAgent::Cached'
 					 echo
 					 
