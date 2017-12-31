@@ -5,7 +5,7 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 19/06/2017
+# Data de atualização: 31/12/2017
 # Versão: 0.11
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
@@ -114,7 +114,7 @@ then
 					 echo -e "Editando o arquivo do OCS Inventory Agent, pressione <Enter> para continuar"
 					 read
 					 
-					 #Arquivo de configuração do OCS Agent (Cliente)
+					 #Arquivo de configuração do OCS Inventory Agent (Cliente)
 					 #Fazendo o backup do arquivo de configuração original
 					 mv -v /etc/ocsinventory-agent/ocsinventory-agent.cfg /etc/ocsinventory-agent/ocsinventory-agent.cfg.bkp &>> $LOG
 					 echo -e "Backup feito com sucesso!!!"
@@ -130,10 +130,10 @@ then
 					 
 					 #Forçando a atualização do ocsinventory-agent
 					 ocsinventory-agent
-					 echo -e "Agent tualizado feita com sucesso!!!"
+					 echo -e "Agent atualizado com sucesso!!!"
 					 sleep 2
 					 
-					 echo -e "Arquivo editado com sucesso, pressione <Enter> para continuar"
+					 echo -e "Arquivo editado com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
