@@ -203,7 +203,7 @@ then
 					 echo -e "Instalação das Dependências do Perl Apache2::SOAP via CPAN, pressione <Enter> para continuar"
 					 read
 					 
-					 echo -e "Criando o diretório do SOAP para o Apache
+					 echo -e "Criando o diretório do SOAP para o Apache"
 					 
 					 #Criando o diretório do SOAP para o Apache
 					 mkdir -v /usr/include/apache2 &>> $LOG
