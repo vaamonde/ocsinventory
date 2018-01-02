@@ -107,9 +107,16 @@ then
 					 #Instalação do apcu-bc
 					 #Mensagem:  ? [no] <-- pressione <Enter>
 					 pecl install apcu_bc-beta
+					 echo -e "APCU instalado com sucesso!!!, continuando o script"
 					 
+					 echo
+					 
+					 echo -e "Habilitando o módulo no PHP"
 					 #Habilitando o módulo do APCu no PHP
 					 phpenmod apcu
+					 echo -e "Modulo habilitado com sucesso!!!, continuando o script"
+					 
+					 echo
 					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
 					 read
