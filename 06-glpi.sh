@@ -112,9 +112,21 @@ then
 					 echo
 					 
 					 echo -e "Habilitando o módulo no PHP"
-					 #Habilitando o módulo do APCu no PHP
+					 #Habilitando o módulo do APCU no PHP
 					 phpenmod apcu
 					 echo -e "Modulo habilitado com sucesso!!!, continuando o script"
+					 
+					 echo
+					 
+					 echo -e "Copiando o arquivo de configuração do GLPI para o Apache2"
+					 cp -v conf/glpi.conf /etc/apache2/conf-available/ &>> $LOG
+					 echo -e "Arquivo atualizado com sucesso!!!, continuado o script"
+					 
+					 echo
+					 
+					 echo -e "Habilitando o Conf do GLPI no Apache2"
+					 a2enconf glpi
+					 echo -e "Conf habilitado com sucesso!!!, continuando o script"
 					 
 					 echo
 					 
