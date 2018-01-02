@@ -86,6 +86,11 @@ then
 					 
 					 echo -e "Instalação do PhpMyAdmin Feito com Sucesso!!!"
 					 echo
+					 
+					 echo -e "Após a reinicialização, testar o servidor Apache2 na URL: http://`hostname`"
+					 echo -e "Após a reinicialização, testar o PhpMyAdmin na URL: http://`hostname`/phpmyadmin"
+					 echo
+					 
 					 echo -e "Pressione <Enter> para continuar com o script."
 					 read
 					 sleep 2
