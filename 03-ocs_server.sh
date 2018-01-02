@@ -37,7 +37,7 @@ then
 					 
 					 echo  ============================================================ >> $LOG
 					 
-					 echo -e "Após a instalação, acessar a url: http://ENDEREÇO_IP_DO_SERVIDOR/ocsreports e finalizar a instalação"
+					 echo -e "Após a instalação, acessar a url: http://`hostname`/ocsreports e finalizar a instalação"
 					 echo -e "Usuário padrão após a instalação: admin | Senha padrão: admin"
 					 echo
 					 
