@@ -37,7 +37,7 @@ then
 					 echo  ============================================================ >> $LOG
 					 
 					 echo -e "Download do GLPI Help Desk do Github, pressione <Enter> para continuar"
-					 echo -e "Após a instalação, acessar a url: http://ENDEREÇO_IP_DO_SERVIDOR/glpi e finalizar a instalação"
+					 echo -e "Após a instalação, acessar a url: http://`hostname`/glpi e finalizar a instalação"
 					 read
 					 sleep 2
 					 
