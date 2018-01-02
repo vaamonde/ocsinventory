@@ -108,7 +108,7 @@ then
 					 echo -e "Fazendo o backup das configurações"
 					 #Fazendo o backup das configurações do arquivo do mysql.conf
 					 mv -v /etc/netdata/python.d/mysql.conf /etc/netdata/python.d/mysql.conf.old &>> $LOG
-					 echo -e "Backup feito com sucesso!!!
+					 echo -e "Backup feito com sucesso!!!"
 					 
 					 echo
 					 
