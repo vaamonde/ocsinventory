@@ -39,7 +39,7 @@ then
 			if [ "$KERNEL" == "4.4" ]
 				then
 					 clear
-					 echo -e "Usuário é `whoami`, continuando a executar o 02-lamp.sh"
+					 echo -e "Usuário é `whoami`, continuando a executar o $LOGSCRIPT"
 					 echo
 					 echo  ============================================================ >> $LOG
 					 
