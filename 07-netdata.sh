@@ -145,7 +145,7 @@ then
 					 sleep 2
 					 clear
 					 
-					 echo -e "Fim do netdata.sh em: `date`" >> $LOG
+					 echo -e "Fim do $LOGSCRIPT em: `date`" >> $LOG
 					 echo -e "Instalação do Netdata feito com Sucesso!!!!!"
 					 echo
 					 # Script para calcular o tempo gasto para a execução do netdata.sh
