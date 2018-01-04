@@ -133,6 +133,10 @@ then
 					 echo -e "Apache 2 reinicializado com sucesso!!!"
 					 sleep 2
 					 
+					 #Fazendo o backup do arquivo de Log da Instalação do OCS Inventory
+					 cp -v *.log $VARLOGPATH/ &>> $LOG
+					 echo -e "Log de Instalação do OCS Inventory backup com sucesso!!!"
+					 
 					 #Saindo do diretório do OCS Inventory Server
 					 cd ..
 					 
