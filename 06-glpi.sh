@@ -157,7 +157,7 @@ then
 					 echo
 					 echo ============================================================ >> $LOG
 
-					 echo -e "Fim do glpi.sh em: `date`" >> $LOG
+					 echo -e "Fim do $LOGSCRIPT em: `date`" >> $LOG
 					 echo -e "Instalação do GLPI Help Desk feito com Sucesso!!!!!"
 					 echo -e "Após a reinicialização, acessar a url: http://ENDEREÇO_IP_DO_SERVIDOR/glpi e finalizar a instalação"
 					 echo
