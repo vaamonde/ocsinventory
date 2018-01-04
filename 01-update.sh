@@ -30,13 +30,14 @@ source 00-parametros.sh
 LOG=$VARLOGPATH/$LOGSCRIPT
 #
 
-if [ -e "$VARLOGPATH"]; then
+# Verificação da criação do Diretório de Log, usado somente no script de atualização
+if [ -e "$VARLOGPATH" ]; then
 	echo -e "Diretório: $VARLOGPATH já existe, continuando com o script"
 	sleep 3
 else
-	echo -e "Diretório: $VARLOGPATH não existe, criando o diretório"
+	echo -e "Diretório: $VARLOGPATH não existe, criando o diretório..."
 	mkdir $VARLOGPATH
-	echo -e "Diretório criado com sucesso!!!, continuando o script"
+	echo -e "Diretório criado com sucesso!!!, continuando com o script"
 	sleep 3
 fi
 
