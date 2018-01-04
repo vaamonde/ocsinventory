@@ -30,6 +30,17 @@ source 00-parametros.sh
 LOG=$VARLOGPATH/$LOGSCRIPT
 #
 
+if [ -e "$VARLOGPATH"]; then
+	echo -e "Diretório: $VARLOGPATH já existe, continuando com o script"
+	sleep 3
+else
+	echo -e "Diretório: $VARLOGPATH não existe, criando o diretório"
+	mkdir $VARLOGPATH
+	echo -e "Diretório criado com sucesso!!!, continuando o script"
+	sleep 3
+fi
+
+
 if [ "$USUARIO" == "0" ]
 then
 	if [ "$UBUNTU" == "16.04" ]
@@ -37,7 +48,7 @@ then
 			if [ "$KERNEL" == "4.4" ]
 				then
 					 clear
-					 echo -e "Usuário é `whoami`, continuando a executar o update.sh"
+					 echo -e "Usuário é `whoami`, continuando a executar o $LOGSCRIPT"
 					 echo
 					 echo -e "Atualização das Listas do Apt-Get"
 					 echo -e "Atualização dos Aplicativos Instalados"
