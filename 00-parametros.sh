@@ -84,5 +84,6 @@ FLUSH="FLUSH PRIVILEGES;"
 #
 
 # Variáveis de verificação do Chip Gráfico da NVIDIA
-NVIDIA=`lspci | grep -i GeForce | cut -d' ' -f4`
+#NVIDIA=`lspci | grep -i GeForce | cut -d' ' -f4`
+#NVIDIA=`lshw -class display | grep NVIDIA | cut -d':' -f2 | cut -d' ' -f2`
 #
