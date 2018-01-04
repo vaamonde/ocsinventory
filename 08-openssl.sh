@@ -35,7 +35,7 @@ then
 					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
 					 echo
-					 echo  ============================================================ >> $LOG
+					 echo  ============================================================ &>> $LOG
 					 
 					 echo -e "Geração das Chaves Privadas/Públicas e Criação do Certificado"
 					 echo -e "Pressione <Enter> gerar os Certificado"
@@ -44,6 +44,7 @@ then
 					 clear
 					 
 					 echo -e "Criando o Chave de Criptografia de 2048 bits, senha padrão: ocsinventory"
+					 echo 
 					 
 					 #Criando a chave de criptografia
 					 openssl genrsa -des3 -out ocs.key 2048
@@ -54,9 +55,13 @@ then
 					 clear
 					 
 					 echo -e "Alterando a Chave de Criptografia, senha padrão: ocsinventory"
+					 echo
 					 
+					 echo -e "Renomeando o arquivo ocs.key"
 					 #Renomeando o arquivo de chave
-					 mv -v ocs.key ocs-old.key
+					 mv -v ocs.key ocs-old.key &>> $LOG
+					 echo -e "Arquivo renomeado com sucesso!!!"
+					 echo
 
 					 #Alterando a chave de criptografia
 					 openssl rsa -in ocs-old.key -out ocs.key
@@ -67,7 +72,8 @@ then
 					 clear
 					 
 					 echo -e "Criando o arquivo CSR (Certificate Signing Request), nome FQDN: `hostname`"
-					 
+					 echo
+					 	
 					 #Criando o arquivo CSR
 					 openssl req -new -key ocs.key -out ocs.csr
 					 
@@ -86,13 +92,57 @@ then
 					 sleep 2
 					 clear
 					 
-					 echo -e "Atualizando os Diretórios do SSL e OCS Inventory com as novas Chaves"
+					 echo -e "Atualizando os Diretórios do SSL e OCS Inventory Agent com as novas Chaves"
 					 
-					 cp ocs.crt /etc/ssl/certs/
-					 cp ocs.key /etc/ssl/private/
-					 cp ocs.crt ocs.key /etc/ocsinventory-agent/
+					 echo -e "Copiando arquivo ocs.crt para SSL"
+					 cp -v ocs.crt /etc/ssl/certs/ &>> $LOG
+					 echo -e "Arquivo copiado com sucesso!!!"
+					 echo
+					 echo -e "Copiando o arquivo ocs.key para SSL"
+					 cp -v ocs.key /etc/ssl/private/ &>> $LOG
+					 echo -e "Arquivo copiado com sucesso!!!"
+					 echo
+					 echo -e "Copiando os arquivo ocs.crt e ocs.key para OCS Inventory Agent"
+					 cp -v ocs.crt ocs.key /etc/ocsinventory-agent/ &>> $LOG
+					 echo -e "Arquivo copiado com sucesso!!!"
+					 echo
 					 
-					 echo -e "Arquivo CSR alterado com sucesso!!!, pressione <Enter> para continuar"
+					 echo -e "Arquivos atualizados com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Editando o arquivo default-ssl.conf do Apache 2"
+					 
+					 echo -e "Fazendo o backup do arquivo default-ssl.conf"
+					 #Fazendo o backup do arquivo de configiração
+					 cp -v /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf.old &>> $LOG
+					 echo -e "Arquivo backupado com sucesso!!!"
+					 sleep 2
+					 echo
+					 
+					 echo -e "Atualizando o arquivo default-ssl.conf"
+					 #Atualizando o arquivo de configuração
+					 cp -v conf/default-ssl.conf /etc/apache2/sites-available/ &>> $LOG
+					 echo -e "Arquivo atualizado com sucesso!!!"
+					 sleep 2
+					 echo
+					 
+					 echo -e "Editando o arquivo default-ssl.conf"
+					 
+					 #Editando o arquivo de configuração
+					 vim /etc/apache2/sites-available/default-ssl.conf
+					 
+					 echo -e "Arquivo editado com sucesso!!!"
+					 sleep 2
+					 echo
+					 
+					 echo -e "Habilitando o Módulo de SSL e o Site Default-ssl"
+					 #Habilitando o módulo ssl no Apache2
+					 a2enmod ssl &>> $LOG
+					 #Habilitando o site ssl no Apache2
+					 a2ensite default-ssl &>> $LOG
+					 echo -e "Módulo e Site habilitado com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
