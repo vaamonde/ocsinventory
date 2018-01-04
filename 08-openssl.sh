@@ -37,110 +37,62 @@ then
 					 echo
 					 echo  ============================================================ >> $LOG
 					 
-					 echo -e "Instalação do sistema de monitoramente em tempo real Netdata"
-					 echo -e "Após a instalação acessar a URL http://`hostname`:19999"
-					 echo -e "Pressione <Enter> para instalar"
-					 read
-					 sleep 2
-					 echo
-					 
-					 echo -e "Removendo o arquivo install do GLPI"
-					 #Removendo o diretório install do GLPI
-					 mv -v /var/www/html/glpi/install /var/www/html/glpi/install.bkp &>> $LOG
-					 echo -e "Arquivo removido com sucesso!!!"
-					 
-					 echo -e "Clonando o Netdata"
-					 #Clonando o site do GitHub do Netdata
-					 git clone https://github.com/firehol/$NETDATAVERSION --depth=1 &>> $LOG
-					 
-					 echo -e "Clonagem do software do Netdata feito com sucesso!!!"
-					 echo
-					 
-					 echo -e "Acessando o diretório do Netdata"
-					 #Acessando o diretório do Netdata
-					 cd $NETDATAINSTALL
-					 
-					 #Compilando e instalando o Netdata
-					 echo -e "Pressione <Enter> para compilar o software do NetData"
-					 echo
-					 read
-					 
-					 #Executando o script de instalação do Netdata
-					 ./netdata-installer.sh
-					 
-					 #MENSAGENS QUE SERÃO SOLICITADAS NA INSTALAÇÃO DO NETDATA
-					 #Press ENTER to build and install netdata to your system? <-- pressione <Enter>
-					 #Saindo do diretório do Netdata
-					 cd ..
-					 
-					 echo
-					 echo -e "Instalação do Netdata feita com sucesso!!!, pressione <Enter> para continuar"
+					 echo -e "Geração das Chaves Privadas/Públicas e Criação do Certificado"
+					 echo -e "Pressione <Enter> gerar os Certificado"
 					 read
 					 sleep 2
 					 clear
 					 
-					 echo -e "Instalação das dependências do PIP para o monitoramento do MySQL via Netdata, pressione <Enter> para continuar"
+					 echo -e "Criando o Chave de Criptografia de 2048 bits, senha padrão: ocsinventory"
+					 
+					 #Criando a chave de criptografia
+					 openssl genrsa -des3 -out ocs.key 2048
+					 
+					 echo -e "Chave criada com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
 					 
-					 echo -e "Atualizando o PIP"
-					 pip install --upgrade pip
+					 echo -e "Alterando a Chave de Criptografia, senha padrão: ocsinventory"
 					 
-					 echo 
+					 #Renomeando o arquivo de chave
+					 mv -v ocs.key ocs-old.key
+
+					 #Alterando a chave de criptografia
+					 openssl rsa -in ocs-old.key -out ocs.key
 					 
-					 echo -e "Instalando o MySQLCliente"
-					 pip install mysqlclient
-					 
-					 echo
-					 
-					 echo -e "Instalando o PyMySQL"
-					 pip install PyMySQL
-					 
-					 echo
-					 echo -e "Instalação das dependências do PIP feita com sucesso!!!, pressione <Enter> para continuar"
+					 echo -e "Chave alterada com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
 					 
-					 echo -e "Atualizando o arquivo de configuração do MySQL para acesso as informações via Netdata, pressione <Enter> para continuar"
+					 echo -e "Criando o arquivo CSR (Certificate Signing Request), nome FQDN: `hostname`"
+					 
+					 #Criando o arquivo CSR
+					 openssl req -new -key ocs.key -out ocs.csr
+					 
+					 echo -e "Arquivo CSR criado com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
 					 
-					 echo -e "Fazendo o backup das configurações"
-					 #Fazendo o backup das configurações do arquivo do mysql.conf
-					 mv -v /etc/netdata/python.d/mysql.conf /etc/netdata/python.d/mysql.conf.old &>> $LOG
-					 echo -e "Backup feito com sucesso!!!"
+					 echo -e "Alterando o arquivo CSR (Certificate Signing Request), nome FQDN: `hostname`"
 					 
-					 echo
+					 #Alterando o arquivo CSR
+					 openssl x509 -req -days 3650 -in ocs.csr -signkey ocs.key -out ocs.crt
 					 
-					 echo -e "Atualizando o arquivo de configuração"
-					 #Fazendo a atualização do arquivo de configuração do MySQL
-					 cp -v conf/mysql.conf /etc/netdata/python.d/ &>> $LOG
-					 echo -e "Arquivo atualizado com sucesso!!!"
-					 
-					 echo
-					 
-					 echo -e "Alterando as permissões do arquivo Mysql.conf"
-					 #Alterando o dono/grupo do arquivo
-					 chown -v netdata.netdata /etc/netdata/python.d/mysql.conf &>> $LOG
-					 #Alterando as permissões de acesso ao arquivo
-					 chmod -v 660 /etc/netdata/python.d/mysql.conf &>> $LOG
-					 echo -e "Permissões alteradas com sucesso!!!"
-					 
-					 echo
-					 
-					 echo -e "Editando o arquivo de configuração do MySQL"
+					 echo -e "Arquivo CSR alterado com sucesso!!!, pressione <Enter> para continuar"
+					 read
 					 sleep 2
-					 #Editando o arquivo de configuração do mysqlconf
-					 vim /etc/netdata/python.d/mysql.conf
+					 clear
 					 
-					 echo -e "Reinicializando o serviço do Netdata"
-					 #Reinicializando o serviços do Netdata
-					 sudo service netdata restart
+					 echo -e "Atualizando os Diretórios do SSL e OCS Inventory com as novas Chaves"
 					 
-					 echo -e "Arquivo editado com sucesso!!!, pressione <Enter> para continuar."
+					 cp ocs.crt /etc/ssl/certs/
+					 cp ocs.key /etc/ssl/private/
+					 cp ocs.crt ocs.key /etc/ocsinventory-agent/
+					 
+					 echo -e "Arquivo CSR alterado com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
