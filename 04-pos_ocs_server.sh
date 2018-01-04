@@ -150,7 +150,7 @@ then
 
 					 echo ============================================================ >> $LOG
 
-					 echo -e "Fim do pos_ocs_server.sh em: `date`" >> $LOG
+					 echo -e "Fim do $LOGSCRIPT em: `date`" >> $LOG
 					 echo -e "Finalização da Pós-Instalação do OCS Inventory Server Feito com Sucesso!!!!!"
 					 echo
 					 # Script para calcular o tempo gasto para a execução do ocs_server.sh
