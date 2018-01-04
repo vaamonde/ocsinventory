@@ -160,7 +160,7 @@ then
 					 echo
 					 echo ============================================================ >> $LOG
 
-					 echo -e "Fim do ocs_server.sh em: `date`" >> $LOG
+					 echo -e "Fim do $LOGSCRIPT em: `date`" >> $LOG
 					 echo -e "Instalação do OCS Inventory Server Feito com Sucesso!!!!!"
 					 echo -e "Após a reinicializar, acessar a url: http://ENDEREÇO_IP_DO_SERVIDOR/ocsreports e finalizar a instalação"
 					 echo
