@@ -14,7 +14,7 @@
 #
 
 # Variável do caminho do Log dos Script utilizado nesse curso
-VARLOGPATH="/var/log/ocsinstall/"
+VARLOGPATH="/var/log/ocsinstall"
 #
 
 # Variável para criação do arquivo de Log dos Script
