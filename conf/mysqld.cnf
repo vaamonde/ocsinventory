@@ -9,19 +9,18 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 31/12/2017
-# Versão: 0.6
+# Data de atualização: 04/01/2018
+# Versão: 0.7
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 
 # Configurações Globais
-
 [mysqld_safe]
 socket		= /var/run/mysqld/mysqld.sock
 nice		= 0
 
-[mysqld]
 #Configuração padrão
+[mysqld]
 user		= mysql
 pid-file	= /var/run/mysqld/mysqld.pid
 socket		= /var/run/mysqld/mysqld.sock
@@ -38,7 +37,7 @@ skip-innodb
 
 #Configurações de desempenho do MySQL
 key_buffer_size		= 256M
-max_allowed_packet	= 16M
+max_allowed_packet	= 32M
 thread_stack		= 192K
 thread_cache_size       = 8
 myisam-recover-options  = BACKUP
