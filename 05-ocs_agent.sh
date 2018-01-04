@@ -157,7 +157,7 @@ then
 					 sleep 2
 					 clear
 					 
-					 echo -e "Fim do ocs_agent.sh em: `date`" >> $LOG
+					 echo -e "Fim do $LOGSCRIPT em: `date`" >> $LOG
 					 echo -e "Instalação do OCS Inventory Agent Feito com Sucesso!!!!!"
 					 echo
 					 # Script para calcular o tempo gasto para a execução do ocs_agent.sh
