@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 02/01/2018
-# Versão: 0.14
+# Data de atualização: 04/01/2018
+# Versão: 0.15
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -23,11 +23,14 @@
 #
 # Utilizar o comando: sudo -i para executar o script
 #
-# Caminho para o Log do lamp.sh
-LOG="/var/log/lamp.log"
-#
-#Arquivo de configuração de parâmetros
+
+# Arquivo de configuração de parâmetros
 source 00-parametros.sh
+#
+
+# Caminho para o Log do script
+LOG=$VARLOGPATH/$LOGSCRIPT
+#h
 
 if [ "$USUARIO" == "0" ]
 then
