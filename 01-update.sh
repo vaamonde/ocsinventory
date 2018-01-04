@@ -116,7 +116,7 @@ then
 					 echo
 					 echo ============================================================ >> $LOG
 					 echo >> $LOG
-					 echo -e "Fim do Update.sh em: `date`" >> $LOG
+					 echo -e "Fim do $LOGSCRIPT em: `date`" >> $LOG
 
 					 echo
 					 echo -e "Atualização das Listas do Apt-Get, Atualização dos Aplicativos e Atualização do Kernel Feito com Sucesso!!!!!"
