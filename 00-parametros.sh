@@ -82,3 +82,7 @@ NETDATAINSTALL="netdata"
 SETOCSPWD="SET PASSWORD FOR 'ocs'@'localhost' = PASSWORD('123456');"
 FLUSH="FLUSH PRIVILEGES;"
 #
+
+# Variáveis de verificação do Chip Gráfico da NVIDIA
+NVIDIA=`lspci | grep -i GeForce | cut -d' ' -f4`
+#
