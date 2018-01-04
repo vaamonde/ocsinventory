@@ -280,16 +280,24 @@ then
 					 echo -e "Instalação das Dependências do Perl nvidia::ml via CPAN, pressione <Enter> para continuar"
 					 read
 					 
-					 #Instalação do nvidia::ml
-					 #OBSERVAÇÃO: UTILIZADO SOMENTE EM COMPUTADORES QUE TEM O CHIP GRÁFICO DA NVIDIA
-					 #SERÁ APRESENTADO UMA MENSAGEM DE ERRO NO FINAL DA INSTALAÇÃO, USADO MAIS EM DESKTOP E NOS CLIENTES DE INVENTÁRIO
-					 perl -MCPAN -e 'install nvidia::ml'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
+					 #Validando a existencia do Chip Gráfico da NVIDIA
+					 if [ "$NVIDIA" == "NVIDIA" ]; then
+					 	echo -e "Você tem o Chip Gráfico da NVIDIA, instalando o Módulo Perl, pressione <Enter> para continuar"
+							read
+					 		
+							#Instalação do nvidia::ml
+					 		perl -MCPAN -e 'install nvidia::ml'
+							
+							echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 		read
+					 		sleep 2
+					 		clear
+					 else
+					 	echo -e "Você não tem o Chip Gráfico da NIVIDIA, pressione <Enter> para continuar"
+							read
+					 		sleep 2
+					 		clear
+					 fi
 
 					 echo -e "Instalação das Dependências do Perl Crypt::SSLeay via CPAN, pressione <Enter> para continuar"
 					 read
