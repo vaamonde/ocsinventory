@@ -580,7 +580,7 @@ then
 					 echo
 					 echo ============================================================ >> $LOG
 
-					 echo -e "Fim do lamp.sh em: `date`" >> $LOG
+					 echo -e "Fim do $LOGSCRIPT em: `date`" >> $LOG
 					 echo -e "Instalação do LAMP Server Feito com Sucesso!!!!!"
 					 echo
 					 # Script para calcular o tempo gasto para a execução do lamp.sh
