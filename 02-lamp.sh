@@ -5,7 +5,7 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 04/01/2018
+# Data de atualização: 05/01/2018
 # Versão: 0.15
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
@@ -492,6 +492,66 @@ then
 					 
 					 #Instalação do Sys::Syslog
 					 perl -MCPAN -e 'install Sys::Syslog'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Instalação das Dependências do Crypt::DES via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do Crypt::DES
+					 perl -MCPAN -e 'install Crypt::DES'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Instalação das Dependências do Digest::HMAC via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do Digest::HMAC
+					 perl -MCPAN -e 'install Digest::HMAC'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Instalação das Dependências do Mac::SysProfile via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do Mac::SysProfile
+					 perl -MCPAN -e 'install Mac::SysProfile'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Instalação das Dependências do Data::UUID via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do Data::UUID
+					 perl -MCPAN -e 'install Data::UUID'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Instalação das Dependências do Parse::EDID via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do Parse::EDID
+					 perl -MCPAN -e 'install Parse::EDID'
 					 echo
 					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
