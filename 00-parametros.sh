@@ -6,7 +6,7 @@
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 17/06/2017
 # Data de atualização: 05/01/2018
-# Versão: 0.4
+# Versão: 0.5
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -72,11 +72,18 @@ GLPIOCSTAR="glpi-ocsinventoryng-1.4.2.tar.gz"
 GLPIOCSINSTALL="ocsinventoryng"
 #
 
-# Variáveis de download do Plugin do Fusion Inventory do GLPI
+# Variáveis de download do FusionInventory Server para GLPI
 # Site: https://github.com/fusioninventory/fusioninventory-for-glpi/releases
-GLPIFSVERSION="glpi9.2%2B1.0/glpi-fusioninventory-9.2.1.0.tar.bz2"
-GLPIFSTAR="glpi-fusioninventory-9.2.1.0.tar.bz2"
-GLPIFSINSTALL="fusioninventory"
+GLPIFISVERSION="glpi9.2%2B1.0/glpi-fusioninventory-9.2.1.0.tar.bz2"
+GLPIFISTAR="glpi-fusioninventory-9.2.1.0.tar.bz2"
+GLPIFISINSTALL="fusioninventory"
+#
+
+# Variáveis de download do FusionInventory Agent
+# Site: https://github.com/fusioninventory/fusioninventory-agent/releases/tag/2.4
+GLPIFIAVERSION="2.4/FusionInventory-Agent-2.4.tar.gz"
+GLPIFIATAR="FusionInventory-Agent-2.4.tar.gz"
+GLPIFIAINSTALL="FusionInventory-Agent-2.4"
 #
 
 # Variáveis de download do Netdata
