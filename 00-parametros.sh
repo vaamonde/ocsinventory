@@ -10,7 +10,7 @@
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
-# Parâmetros (variáveis de ambiente) utilizados nos scripts de instalação do OCS Inventory, GLPI e Netdata
+# Parâmetros (variáveis de ambiente) utilizados nos scripts de instalação do OCS Inventory, GLPI, FusionInventory e Netdata
 #
 
 # Variável do caminho do Log dos Script utilizado nesse curso
