@@ -160,12 +160,18 @@ then
 					 echo -e "Instalação das Dependências do Perl Apache2::SOAP via CPAN, pressione <Enter> para continuar"
 					 read
 					 
-					 echo -e "Criando o diretório do SOAP para o Apache"
-					 
-					 #Criando o diretório do SOAP para o Apache
-					 mkdir -v /usr/include/apache2 &>> $LOG
-					 
-					 echo -e "Diretório criado com sucesso!!!!"
+					 #Validando a existencia do diretório do Apache2
+					 if [ -d /usr/include/apache2 ]; then
+					 	echo -e "Diretório /usr/include/apache2 já existe, continuando com o script"
+					 else
+					 	echo -e "Diretório /usr/include/apache2 não existe, criando o diretório"
+					 	
+							#Criando o diretório do SOAP para o Apache2
+					 		mkdir -v /usr/include/apache2 &>> $LOG
+					 	
+						echo -e "Diretório criado com sucesso!!!, continuando o script"
+						echo
+					 fi
 					 
 					 #Instalação do Apache2::SOAP				 
 					 perl -MCPAN -e 'install Apache2::SOAP'
