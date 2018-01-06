@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 05/01/2018
-# Versão: 0.15
+# Data de atualização: 06/01/2018
+# Versão: 0.16
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -17,7 +17,7 @@
 # Instalação do PHP, Perl, Python
 # Instalação das Dependências via Perl CPAN
 #
-# Nesse script está sendo instalada todas as dependências do OCS Inventory Server, OCS Inventory Agent, GLPI e do Netdata
+# Nesse script está sendo instalada todas as dependências do OCS Inventory Server, OCS Inventory Agent, Fusion Iventory, GLPI e do Netdata
 # Nas linhas do apt-get install todas as dependências já estão sendo instaladas
 # Nas linhas do perl -e -MCPAN está sendo instalada as dependências do OCS Server e Agent.
 #
@@ -63,7 +63,7 @@ then
 					 echo "mysql-server-5.7 mysql-server/root_password_again password $PASSWORD" |  debconf-set-selections
 					 
 					 #Instalando o LAMP Server completo e todas as suas dependêncais do OCS Inventory Server, Agent, GLPI Help Desk e do Netdata
-					 apt-get -y install lamp-server^ apache2-dev mysql-server perl python make libmysqlclient-dev libapache2-mod-perl2 libapache2-mod-php snmp-mibs-downloader php7.0-snmp libnet-netmask-perl libio-compress-perl libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libsoap-lite-perl libnet-ip-perl php-mysql php7.0-dev php-mbstring php-soap php-dev php-apcu php-xmlrpc php7.0-zip php7.0-gd php7.0-mysql dmidecode libxml-simple-perl libcompress-raw-zlib-perl libnet-ip-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl libcrypt-ssleay-perl libnet-snmp-perl libproc-pid-file-perl libproc-daemon-perl net-tools pciutils smartmontools read-edid nmap libc6-dev php-pclzip gcc libarchive-zip-perl php7.0-json php7.0-mbstring php7.0-mysql php7.0-curl php7.0-gd php7.0-imap php7.0-ldap ipmitool nmap zlib1g-dev gcc autoconf autogen automake pkg-config uuid-dev libnet-cups-perl libphp-pclzip python-dev python3-dev libmysqlclient-dev python-pip samba samba-common samba-testsuite snmp unzip &>> $LOG
+					 apt-get -y lamp-server^ apache2-dev mysql-server perl python make libmysqlclient-dev libapache2-mod-perl2 libapache2-mod-php snmp-mibs-downloader php7.0-snmp libnet-netmask-perl libio-compress-perl libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libsoap-lite-perl libnet-ip-perl php-mysql php7.0-dev php-mbstring php-soap php-dev php-apcu php-xmlrpc php7.0-zip php7.0-gd php7.0-mysql dmidecode libcompress-raw-zlib-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl libcrypt-ssleay-perl libnet-snmp-perl libproc-pid-file-perl libproc-daemon-perl net-tools pciutils smartmontools read-edid nmap libc6-dev php-pclzip gcc libarchive-zip-perl php7.0-json php7.0-mbstring php7.0-curl php7.0-imap php7.0-ldap ipmitool zlib1g-dev autoconf autogen automake pkg-config uuid-dev libnet-cups-perl libphp-pclzip python-dev python3-dev python-pip samba samba-common samba-testsuite snmp unzip hwdata perl-modules libmodule-build-perl libmodule-install-perl libfile-which-perl libfile-copy-recursive-perl libuniversal-require-perl libtest-http-server-simple-perl libhttp-server-simple-authen-perl libhttp-proxy-perl libio-capture-perl libipc-run-perl libnet-telnet-cisco-perl libtest-compile-perl libtest-deep-perl libtest-exception-perl libtest-mockmodule-perl libtest-mockobject-perl libtest-nowarnings-perl libxml-treepp-perl libparallel-forkmanager-perl libparse-edid-perl libdigest-sha-perl libtext-template-perl libsocket-getaddrinfo-perl libcrypt-des-perl libnet-nbname-perl libyaml-perl libyaml-shell-perl libyaml-libyaml-perl libdata-structure-util-perl liblwp-useragent-determined-perl libio-socket-ssl-perl libdatetime-perl libthread-queue-any-perl libnet-write-perl libarchive-extract-perl libjson-pp-perl liburi-escape-xs-perl liblwp-protocol-https-perl libnet-ping-external-perl libnmap-parser-perl libmojolicious-perl libswitch-perl libplack-perl liblwp-useragent-determined-perl libsys-syslog-perl libdigest-hmac-perl libdata-uuid-perl &>> $LOG
 					 
 					 echo -e "Instalação do LAMP Server feito com sucesso!!!, continuando com o script."
 					 echo
