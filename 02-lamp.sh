@@ -133,74 +133,23 @@ then
 					 sleep 2
 					 clear
 
-					 echo -e "Instalação das Dependências do Perl XML::Simple via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do XML::Simple
-					 perl -MCPAN -e 'install XML::Simple'
-					 
-					 echo
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-
-					 echo -e "Instalação das Dependências do Perl Bundle::Compress::Zlib via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Bundle::Compress::Zlib
-					 #Não se preocupe com a mensagem de erro no final da instalação
-					 perl -MCPAN -e 'install install Bundle::Compress::Zlib'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-
-					 echo -e "Instalação das Dependências do Perl DBD::Mysql via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do DBD::mysql					 
-					 perl -MCPAN -e 'install DBD::mysql'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-
-					 echo -e "Instalação das Dependências do Perl Apache::DBI via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Apache::DBI
-					 #Dependência já resolvida no apt-get install
-					 perl -MCPAN -e 'install Apache::DBI'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-
-					 echo -e "Instalação das Dependências do Perl Net::IP via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Net::IP
-					 #Dependência já resolvida no apt-get install
-					 perl -MCPAN -e 'install Net::IP'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-
 					 echo -e "Instalação das Dependências do Perl Linux::Ethtool via CPAN, pressione <Enter> para continuar"
 					 read
 					 
-					 #Instalação do Linux::Ethtool					 
+					 #Instalação do Linux::Ethtool
 					 perl -MCPAN -e 'install Linux::Ethtool'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
+					 echo -e "Instalação das Dependências do Perl Linux::Ethtool::Settings via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do Linux::Ethtool::Settings
+					 perl -MCPAN -e 'install Linux::Ethtool::Settings'
 					 echo
 					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
@@ -220,56 +169,6 @@ then
 					 
 					 #Instalação do Apache2::SOAP				 
 					 perl -MCPAN -e 'install Apache2::SOAP'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-
-					 echo -e "Instalação das Dependências do Perl Digest::MD5 via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Digest::MD5					 
-					 perl -MCPAN -e 'install Digest::MD5'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-
-					 echo -e "Instalação das Dependências do Perl Proc::Daemon via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Proc::Daemon
-					 #Dependência já resolvida no apt-get install
-					 perl -MCPAN -e 'install Proc::Daemon'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-
-					 echo -e "Instalação das Dependências do Perl Proc::PID::File via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Proc::PID::File					 
-					 perl -MCPAN -e 'install Proc::PID::File'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-
-					 echo -e "Instalação das Dependências do Perl Linux::Ethtool::Settings via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Linux::Ethtool::Settings
-					 #Dependência já resolvida no apt-get install
-					 perl -MCPAN -e 'install Linux::Ethtool::Settings'
 					 echo
 					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
@@ -299,68 +198,6 @@ then
 					 		clear
 					 fi
 
-					 echo -e "Instalação das Dependências do Perl Crypt::SSLeay via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Crypt::SSLeay
-					 #Dependência já resolvida no apt-get install
-					 perl -MCPAN -e 'install Crypt::SSLeay'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-
-					 echo -e "Instalação das Dependências do Perl LWP::Protocol::https via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do LWP::Protocol::https					 
-					 perl -MCPAN -e 'install LWP::Protocol::https'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-
-					 echo -e "Instalação das Dependências do Perl Net::SNMP via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Net::SNMP
-					 #Dependência já resolvida no apt-get install
-					 perl -MCPAN -e 'install Net::SNMP'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
-					 echo -e "Instalação das Dependências do Perl Net::NBName via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Net::NBName					 
-					 perl -MCPAN -e 'install Net::NBName'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-
-					 echo -e "Instalação das Dependências do Perl Net::Netmask via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Net::Netmask					 
-					 perl -MCPAN -e 'install Net::Netmask'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-
 					 echo -e "Instalação das Dependências do Perl Net::Ping via CPAN, pressione <Enter> para continuar"
 					 read
 					 
@@ -372,34 +209,7 @@ then
 					 read
 					 sleep 2
 					 clear
-
-					 echo -e "Instalação das Dependências do Nmap::Parser via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Nmap::Parser
-					 #Esse procedimento demora um pouco
-					 perl -MCPAN -e 'install Nmap::Parser'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-
-					 echo -e "Instalação das Dependências do Module::Install via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Module::Install
-					 #Mensagem: Continue anyways ? [y] <-- Pressione <Enter>
-					 #Esse procedimento demora um pouco, nessa instalação tem algumas falhas de resolução de DNS do CPAN, mais funcionada depois
-					 perl -MCPAN -e 'install Module::Install'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
+			 
 					 echo -e "Instalação das Dependências do Mojolicious::Lite via CPAN, pressione <Enter> para continuar"
 					 read
 					 
@@ -411,19 +221,7 @@ then
 					 read
 					 sleep 2
 					 clear
-					 
-					 echo -e "Instalação das Dependências do Switch via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Switch
-					 perl -MCPAN -e 'install Switch'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
+					 					 
 					 echo -e "Instalação das Dependências do Plack::Handler via CPAN, pressione <Enter> para continuar"
 					 read
 					 
@@ -436,44 +234,7 @@ then
 					 read
 					 sleep 2
 					 clear
-					 
-					 echo -e "Instalação das Dependências do DBI via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do DBI
-					 perl -MCPAN -e 'install DBI'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
-					 echo -e "Instalação das Dependências do Net::SSLeay via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Net::SSLeay
-					 #Mensagem: These test *will* *fail* if you do not have network connectivity. [n] <-- Pressionar: <Enter>
-					 perl -MCPAN -e 'install Net::SSLeay'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
-					 echo -e "Instalação das Dependências do Bundle::LWP via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Bundle::LWP
-					 perl -MCPAN -e 'install Bundle::LWP'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
+					 					 
 					 echo -e "Instalação das Dependências do LWP::UserAgent::Cached via CPAN, pressione <Enter> para continuar"
 					 read
 					 
@@ -486,43 +247,7 @@ then
 					 read
 					 sleep 2
 					 clear
-					 
-					 echo -e "Instalação das Dependências do Sys::Syslog via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Sys::Syslog
-					 perl -MCPAN -e 'install Sys::Syslog'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
-					 echo -e "Instalação das Dependências do Crypt::DES via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Crypt::DES
-					 perl -MCPAN -e 'install Crypt::DES'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
-					 echo -e "Instalação das Dependências do Digest::HMAC via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Digest::HMAC
-					 perl -MCPAN -e 'install Digest::HMAC'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
+					 					 
 					 echo -e "Instalação das Dependências do Mac::SysProfile via CPAN, pressione <Enter> para continuar"
 					 read
 					 
@@ -535,29 +260,7 @@ then
 					 sleep 2
 					 clear
 					 
-					 echo -e "Instalação das Dependências do Data::UUID via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Data::UUID
-					 perl -MCPAN -e 'install Data::UUID'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
-					 echo -e "Instalação das Dependências do Parse::EDID via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Parse::EDID
-					 perl -MCPAN -e 'install Parse::EDID'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
+					 echo ============================================================ >> $LOG
 
 					 echo -e "Editando o arquivo do Apache2, pressione <Enter> para continuar"
 					 read
