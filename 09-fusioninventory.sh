@@ -35,24 +35,71 @@ then
 					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
 					 echo
-					 echo  ============================================================ >> $LOG
+					 echo  ============================================================ &>> $LOG
 					 
-					 echo -e "Instalação do sistema de Inventario de Rede Fusion Inventory"
+					 echo -e "Instalação do sistema de Inventário de Rede Fusion Inventory"
 					 echo -e "Pressione <Enter> para instalar"
 					 read
 					 sleep 2
 					 echo
 					 
-
+					 echo -e "Fazendo o download do Fusion Inventory Server e Agent integrado com o GLPI"
 					 
-					 echo -e "Arquivo editado com sucesso!!!, pressione <Enter> para continuar."
+					 #Download do Fusion Inventory Server, Pluguin do GLPI Help Desk
+					 wget https://github.com/fusioninventory/fusioninventory-for-glpi/releases/download/$GLPIFISVERSION &>> $LOG
+					 
+					 #Download do Fusion Inventory Agent, integração com GLPI ou OCS Inventory
+					 wget https://github.com/fusioninventory/fusioninventory-agent/releases/download/$GLPIFIAVERSION &>> $LOG
+					 
+					 echo -e "Download Feito com sucesso!!!, continuando o script"
+					 echo
+					 
+					 echo -e "Descompactando o Fusion Inventory Server e Agent"
+					 
+					 #Descompactando o Fusion Inventory Server
+					 tar -jxvf $GLPIFISTAR &>> $LOG
+					 
+					 #Descompactando o Fusion Inventory Agent
+					 tar -zxvf $GLPIFIATAR &>> $LOG
+					 
+					 echo -e "Arquivos descompactados com sucesso!!!, continuando o script"
+					 echo
+					 
+					 echo -e "Movendo o diretório do Fusion Inventory Server para o GLPI"
+					 
+					 #Movendo o diretório do Fusion Inventory Server para o Diretório de Pluguin do GLPI
+					 mv -v $GLPIFISINSTALL /var/www/html/glpi/pluguin/ &>> $LOG
+					 
+					 echo -e "Diretório movido com sucesso!!!, continuando o script"
+					 echo
+					 
+					 echo -e "Instalando o Fusion Inventory Agent, pressione <Enter> para continuar."
 					 read
 					 sleep 2
 					 clear
 					 
-           echo  ============================================================ >> $LOG
+					 #Acessando o diretório do Fusion Invetory Agent
+					 cd $GLPIFIAINSTALL
+					 
+					 echo -e "Configurando o Fusion Inventory Agent"
+					 
+					 #Configurando as opções do Fusion Inventory Agent e checando as dependências"
+					 perl -I. Makefile.PL
+					 
+					 #Compilando o Fusion Inventory Agent
+					 make
+					 
+					 #Instalando o Fusion Inventory Agent
+					 make install
+					 
+					 echo -e "Fusion Inventory Agent instalado com sucesso!!!, pressione <Enter> para continuar."
+					 read
+					 sleep 2
+					 clear
+					 
+           				 echo  ============================================================ >> $LOG
                      
-					 echo -e "Fim do $LOGSCRIPT em: `date`" >> $LOG
+					 echo -e "Fim do $LOGSCRIPT em: `date`" &>> $LOG
 					 echo -e "Instalação do Netdata feito com Sucesso!!!!!"
 					 echo
 					 # Script para calcular o tempo gasto para a execução do netdata.sh
