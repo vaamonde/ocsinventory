@@ -6,7 +6,7 @@
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 07/01/2018
 # Data de atualização: 07/01/2018
-# Versão: 0.12
+# Versão: 0.1
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
