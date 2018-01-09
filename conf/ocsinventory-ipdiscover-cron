@@ -9,7 +9,7 @@
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
-# Agendamento das atualização do IPDiscover e SNMP, a cada 5 minuto, todos os dias
+# Agendamento das atualização do IPDiscover e SNMP, a cada 5 minutos, todos os dias
 */5 * * * * root /bin/echo > /var/log/ocsinventory-agent/ipdiscover.log && /usr/local/bin/ocsinventory-agent --debug &> /var/log/ocsinventory-agent/ipdiscover.log
 
 #Fim do agendamento, obrigatório ter uma linha no final para a execução correta.
