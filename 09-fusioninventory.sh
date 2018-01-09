@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 07/01/2018
-# Data de atualização: 07/01/2018
-# Versão: 0.1
+# Data de atualização: 09/01/2018
+# Versão: 0.2
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -111,7 +111,7 @@ then
            				 echo  ============================================================ >> $LOG
                      
 					 echo -e "Fim do $LOGSCRIPT em: `date`" &>> $LOG
-					 echo -e "Instalação do Netdata feito com Sucesso!!!!!"
+					 echo -e "Instalação do Fusion Inventory Server e Agent feito com Sucesso!!!!!"
 					 echo
 					 # Script para calcular o tempo gasto para a execução do netdata.sh
 						 DATAFINAL=`date +%s`
