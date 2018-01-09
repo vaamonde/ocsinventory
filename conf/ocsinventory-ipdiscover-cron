@@ -10,6 +10,6 @@
 # Kernel >= 4.4.x
 #
 # Agendamento das atualização do IPDiscover e SNMP, a cada 5 minuto, todos os dias
-*/5 * * * * root /usr/local/bin/ocsinventory-agent --debug &> /var/log/ocsinventory-agent/ipdiscover.log
+*/5 * * * * root /bin/echo > /var/log/ocsinventory-agent/ipdiscover.log && /usr/local/bin/ocsinventory-agent --debug &> /var/log/ocsinventory-agent/ipdiscover.log
 
 #Fim do agendamento, obrigatório ter uma linha no final para a execução correta.
