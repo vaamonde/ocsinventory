@@ -48,6 +48,7 @@ then
 					 
 					 #Criando a chave de criptografia
 					 openssl genrsa -des3 -out ocs.key 2048
+					 echo
 					 
 					 echo -e "Chave criada com sucesso!!!, pressione <Enter> para continuar"
 					 read
@@ -67,6 +68,7 @@ then
 
 					 #Alterando a chave de criptografia
 					 openssl rsa -in ocs-old.key -out ocs.key
+					 echo
 					 
 					 echo -e "Chave alterada com sucesso!!!, pressione <Enter> para continuar"
 					 read
@@ -76,8 +78,18 @@ then
 					 echo -e "Criando o arquivo CSR (Certificate Signing Request), nome FQDN: `hostname`"
 					 echo
 					 	
-					 #Criando o arquivo CSR
+					 #Criando o arquivo CSR,mensagens abaixo que serão solicitadas
+					 #Country Name (2 letter code): BR <-- pressione <Enter>
+					 #State or Province Name (full name): Brasil <-- pressione <Enter>
+					 #Locality Name (eg, city): Sao Paulo <-- pressione <Enter>
+					 #Organization Name (eg, company): Bora para Pratica <-- pressione <Enter>
+					 #Organization Unit Name (eg, section): Procedimentos em TI <-- pressione <Enter>
+					 #Common Name (eg, serveer FQDN or YOUR name): ocs.pti.intra <-- pressione <Enter>
+					 #Email Address: pti@pti.intra <-- pressione <Enter>
+					 #A challenge password: <-- pressione <Enter>
+					 #A optional company name: <-- pressione <Enter>
 					 openssl req -new -key ocs.key -out ocs.csr
+					 echo
 					 
 					 echo -e "Arquivo CSR criado com sucesso!!!, pressione <Enter> para continuar"
 					 read
@@ -88,6 +100,7 @@ then
 					 
 					 #Alterando o arquivo CSR
 					 openssl x509 -req -days 3650 -in ocs.csr -signkey ocs.key -out ocs.crt
+					 echo
 					 
 					 echo -e "Arquivo CSR alterado com sucesso!!!, pressione <Enter> para continuar"
 					 read
@@ -167,8 +180,34 @@ then
 					 sleep 2
 					 clear
 					 
+					 echo -e "Editando o arquivo do OCS Inventory Agent para suportar SSL"
+					 
+					 #Habilitando o módulo ssl no Apache2
+					 vim /etc/ocsinventory-agent/ocsinventory-agent.cfg
+					 echo
+					 
+					 echo -e "Arquivo editado com sucesso!!!, continuando o script"
+					 sleep 3
+					 
+					 echo -e "Fazendo o inventário novamente, aguarde..."
+					 
+					 #Limpando o arquivo de Log
+					 echo > /var/log/ocsinventory-agent/activity.log
+					 
+					 #Fazendo o inventário
+					 ocsinventory-agent --debug
+					 
+					 #Verificando o arquivo de Log
+					 less /var/log/ocsinventory-agent/activity.log
+					 echo
+					 
+					 echo -e "Inventário feito sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
 					 echo -e "Fim do $LOGSCRIPT em: `date`" >> $LOG
-					 echo -e "Instalação do Netdata feito com Sucesso!!!!!"
+					 echo -e "Instalação do Certificado SSL feito com Sucesso!!!!!"
 					 echo
 					 # Script para calcular o tempo gasto para a execução do netdata.sh
 						 DATAFINAL=`date +%s`
