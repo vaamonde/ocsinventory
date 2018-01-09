@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 04/01/2018
-# Versão: 0.12
+# Data de atualização: 09/01/2018
+# Versão: 0.13
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -166,7 +166,7 @@ then
 
 					 echo -e "Fim do $LOGSCRIPT em: `date`" >> $LOG
 					 echo -e "Instalação do OCS Inventory Server Feito com Sucesso!!!!!"
-					 echo -e "Após a reinicializar, acessar a url: http://ENDEREÇO_IP_DO_SERVIDOR/ocsreports e finalizar a instalação"
+					 echo -e "Após a reinicializar, acessar a url: http://`hostname`/ocsreports e finalizar a instalação"
 					 echo
 					 # Script para calcular o tempo gasto para a execução do ocs_server.sh
 						 DATAFINAL=`date +%s`
