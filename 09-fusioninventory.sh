@@ -68,7 +68,7 @@ then
 					 echo -e "Movendo o diretório do Fusion Inventory Server para o GLPI"
 					 
 					 #Movendo o diretório do Fusion Inventory Server para o Diretório de Pluguin do GLPI
-					 mv -v $GLPIFISINSTALL /var/www/html/glpi/pluguin/ &>> $LOG
+					 mv -v $GLPIFISINSTALL /var/www/html/glpi/plugins/ &>> $LOG
 					 
 					 echo -e "Diretório movido com sucesso!!!, continuando o script"
 					 echo
