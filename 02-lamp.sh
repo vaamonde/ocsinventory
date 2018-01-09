@@ -123,7 +123,6 @@ then
 					 
 					 #Instalação do XML::Entities
 					 #Mensagem: Would you like to configure as much as possible automatically? [Yes] <-- Pressione <Enter>
-					 #Esse procedimento demora um pouco
 					 perl -MCPAN -e 'install XML::Entities'
 					 echo
 					 
@@ -151,18 +150,6 @@ then
 					 
 					 #Instalação do Linux::Ethtool
 					 perl -MCPAN -e 'install Linux::Ethtool'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-
-					 echo -e "Instalação das Dependências do Perl Linux::Ethtool::Settings via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Linux::Ethtool::Settings
-					 perl -MCPAN -e 'install Linux::Ethtool::Settings'
 					 echo
 					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
@@ -222,31 +209,6 @@ then
 					 
 					 #Instalação do Net::Ping					 
 					 perl -MCPAN -e 'install Net::Ping'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-			 
-					 echo -e "Instalação das Dependências do Mojolicious::Lite via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Mojolicious::Lite
-					 perl -MCPAN -e 'install Mojolicious::Lite'
-					 echo
-					 
-					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 					 
-					 echo -e "Instalação das Dependências do Plack::Handler via CPAN, pressione <Enter> para continuar"
-					 read
-					 
-					 #Instalação do Plack::Handler
-					 #Esse procedimento demora um pouco
-					 perl -MCPAN -e 'install Plack::Handler'
 					 echo
 					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
