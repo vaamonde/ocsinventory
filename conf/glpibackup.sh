@@ -24,7 +24,7 @@ if [ -d $PATH ]; then
 	echo -e "Diretório de Log existe, continuando o backup..." &>> $LOG
 else
 	echo -e "Diretório de Log não existe, criando o diretório." &>> $LOG
-	mkdir -p $PATH
+	mkdir -pv $PATH
 	echo -e "Direttório criado sucesso!!!!, continuando o backup..." &>> $LOG
 fi
 
