@@ -82,16 +82,27 @@ then
 					 cd $GLPIFIAINSTALL
 					 
 					 echo -e "Configurando o Fusion Inventory Agent"
+					 echo
 					 
 					 #Configurando as opções do Fusion Inventory Agent e checando as dependências"
-					 perl -I. Makefile.PL
+					 perl -I. Makefile.PL &>> $LOG
+					 echo
+					 echo -e "Fusion Inventory configurado com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 3
+					 clear
 					 
 					 #Compilando o Fusion Inventory Agent
-					 make
+					 make &>> $LOG
+					 echo
+					 echo -e "Fusion Inventory compilado com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 3
+					 clear
 					 
 					 #Instalando o Fusion Inventory Agent
-					 make install
-					 
+					 make install &>> $LOG
+					 echo
 					 echo -e "Fusion Inventory Agent instalado com sucesso!!!, pressione <Enter> para continuar."
 					 read
 					 sleep 2
