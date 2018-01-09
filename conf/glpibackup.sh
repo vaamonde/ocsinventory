@@ -33,7 +33,7 @@ mysqldump --add-drop-table --complete-insert --extended-insert --quote-names --h
 echo -e "Backup feito com sucesso!!!, continuando o backup..." &>> $LOG
 
 echo -e "Compactando o Backup da Base de Dados: $DB" &>> $LOG
-tar -zcvf $PATH/ocsweb-$DATA.tar.gz $PATH/ocsweb-$DATA.sql &>> $LOG
+tar -zcvf $PATH/glpi-$DATA.tar.gz $PATH/glpi-$DATA.sql &>> $LOG
 echo -e "Compactação feita com sucesso!!!, continuando o backup..." &>> $LOG
 
 echo -e "Removendo o arquivo SQL da Base Dados: $DB" &>> $LOG
