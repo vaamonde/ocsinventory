@@ -40,4 +40,4 @@ echo -e "Removendo o arquivo SQL da Base Dados: $DB" &>> $LOG
 rm -v $PATH/*.sql &>> $LOG
 echo -e "Arquivo removido com sucesso!!!, continuando o backup..." &>> $LOG
 
-echo -e "Backup do $DB finalizado com sucesso!!!"
+echo -e "Backup do $DB finalizado com sucesso!!!" &>> $LOG
