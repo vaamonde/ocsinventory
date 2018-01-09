@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 04/01/2018
-# Data de atualização: 04/01/2018
-# Versão: 0.1
+# Data de atualização: 09/01/2018
+# Versão: 0.2
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -58,8 +58,10 @@ then
 					 echo
 					 
 					 echo -e "Renomeando o arquivo ocs.key"
+					 
 					 #Renomeando o arquivo de chave
 					 mv -v ocs.key ocs-old.key &>> $LOG
+					 
 					 echo -e "Arquivo renomeado com sucesso!!!"
 					 echo
 
@@ -95,15 +97,26 @@ then
 					 echo -e "Atualizando os Diretórios do SSL e OCS Inventory Agent com as novas Chaves"
 					 
 					 echo -e "Copiando arquivo ocs.crt para SSL"
+					 
+					 #Fazendo a cópia do arquivo ocs.crt
 					 cp -v ocs.crt /etc/ssl/certs/ &>> $LOG
+					 
 					 echo -e "Arquivo copiado com sucesso!!!"
 					 echo
+					 
 					 echo -e "Copiando o arquivo ocs.key para SSL"
+					 
+					 #Fazendo a cópia do arquivo key
 					 cp -v ocs.key /etc/ssl/private/ &>> $LOG
+					 
 					 echo -e "Arquivo copiado com sucesso!!!"
 					 echo
+					 
 					 echo -e "Copiando os arquivo ocs.crt e ocs.key para OCS Inventory Agent"
+					 
+					 #Fazendo a cópia dos arquivo crt e key
 					 cp -v ocs.crt ocs.key /etc/ocsinventory-agent/ &>> $LOG
+					 
 					 echo -e "Arquivo copiado com sucesso!!!"
 					 echo
 					 
@@ -115,15 +128,19 @@ then
 					 echo -e "Editando o arquivo default-ssl.conf do Apache 2"
 					 
 					 echo -e "Fazendo o backup do arquivo default-ssl.conf"
-					 #Fazendo o backup do arquivo de configiração
-					 cp -v /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf.old &>> $LOG
+					 
+					 #Fazendo o backup do arquivo de configuração original
+					 mv -v /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf.old &>> $LOG
+					 
 					 echo -e "Arquivo backupado com sucesso!!!"
 					 sleep 2
 					 echo
 					 
 					 echo -e "Atualizando o arquivo default-ssl.conf"
+					 
 					 #Atualizando o arquivo de configuração
 					 cp -v conf/default-ssl.conf /etc/apache2/sites-available/ &>> $LOG
+					 
 					 echo -e "Arquivo atualizado com sucesso!!!"
 					 sleep 2
 					 echo
@@ -138,10 +155,13 @@ then
 					 echo
 					 
 					 echo -e "Habilitando o Módulo de SSL e o Site Default-ssl"
+					 
 					 #Habilitando o módulo ssl no Apache2
 					 a2enmod ssl &>> $LOG
+					 
 					 #Habilitando o site ssl no Apache2
 					 a2ensite default-ssl &>> $LOG
+					 
 					 echo -e "Módulo e Site habilitado com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
