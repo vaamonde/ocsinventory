@@ -5,7 +5,7 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 04/01/2017
+# Data de atualização: 09/01/2017
 # Versão: 0.12
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
@@ -159,7 +159,7 @@ then
 
 					 echo -e "Fim do $LOGSCRIPT em: `date`" >> $LOG
 					 echo -e "Instalação do GLPI Help Desk feito com Sucesso!!!!!"
-					 echo -e "Após a reinicialização, acessar a url: http://ENDEREÇO_IP_DO_SERVIDOR/glpi e finalizar a instalação"
+					 echo -e "Após a reinicialização, acessar a url: http://`hostname`/glpi e finalizar a instalação"
 					 echo
 					 # Script para calcular o tempo gasto para a execução do glpi.sh
 						 DATAFINAL=`date +%s`
