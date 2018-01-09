@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 06/01/2018
-# Versão: 0.16
+# Data de atualização: 09/01/2018
+# Versão: 0.17
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -63,9 +63,27 @@ then
 					 echo "mysql-server-5.7 mysql-server/root_password_again password $PASSWORD" |  debconf-set-selections
 					 
 					 #Instalando o LAMP Server completo e todas as suas dependêncais do OCS Inventory Server, Agent, GLPI Help Desk e do Netdata
-					 apt-get -y install lamp-server^ apache2-dev perl python make libmysqlclient-dev libapache2-mod-perl2 libapache2-mod-php snmp-mibs-downloader php7.0-snmp libnet-netmask-perl libio-compress-perl libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libsoap-lite-perl libnet-ip-perl php-mysql php7.0-dev php-mbstring php-soap php-dev php-apcu php-xmlrpc php7.0-zip php7.0-gd php7.0-mysql dmidecode libcompress-raw-zlib-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl libcrypt-ssleay-perl libnet-snmp-perl libproc-pid-file-perl libproc-daemon-perl net-tools pciutils smartmontools read-edid nmap libc6-dev php-pclzip gcc libarchive-zip-perl php7.0-json php7.0-mbstring php7.0-curl php7.0-imap php7.0-ldap ipmitool zlib1g-dev autoconf autogen automake pkg-config uuid-dev libnet-cups-perl libphp-pclzip python-dev python3-dev python-pip samba samba-common samba-testsuite snmp unzip hwdata perl-modules libmodule-build-perl libmodule-install-perl libfile-which-perl libfile-copy-recursive-perl libuniversal-require-perl libtest-http-server-simple-perl libhttp-server-simple-authen-perl libhttp-proxy-perl libio-capture-perl libipc-run-perl libnet-telnet-cisco-perl libtest-compile-perl libtest-deep-perl libtest-exception-perl libtest-mockmodule-perl libtest-mockobject-perl libtest-nowarnings-perl libxml-treepp-perl libparallel-forkmanager-perl libparse-edid-perl libdigest-sha-perl libtext-template-perl libsocket-getaddrinfo-perl libcrypt-des-perl libnet-nbname-perl libyaml-perl libyaml-shell-perl libyaml-libyaml-perl libdata-structure-util-perl liblwp-useragent-determined-perl libio-socket-ssl-perl libdatetime-perl libthread-queue-any-perl libnet-write-perl libarchive-extract-perl libjson-pp-perl liburi-escape-xs-perl liblwp-protocol-https-perl libnet-ping-external-perl libnmap-parser-perl libmojolicious-perl libswitch-perl libplack-perl liblwp-useragent-determined-perl libsys-syslog-perl libdigest-hmac-perl libdata-uuid-perl &>> $LOG
+					 apt-get -y install lamp-server^ gcc make autoconf autogen automake pkg-config uuid-dev net-tools pciutils smartmontools read-edid nmap ipmitool dmidecode samba samba-common samba-testsuite snmp snmp-mibs-downloader unzip hwdata perl perl-modules python python-dev python3-dev python-pip apache2-dev &>> $LOG
 					 
 					 echo -e "Instalação do LAMP Server feito com sucesso!!!, continuando com o script."
+					 echo
+					 echo  ============================================================ >> $LOG
+					 
+					 echo -e "Instalando as Dependências do PHP, aguarde..."
+					 					 
+					 #Instalando as dependências do PHP7 para dá suporte a recursos extras
+					 apt-get -y install php7.0-snmp php-mysql php7.0-dev php-mbstring php-soap php-dev php-apcu php-xmlrpc php7.0-zip php7.0-gd php7.0-mysql php-pclzip php7.0-json php7.0-mbstring php7.0-curl php7.0-imap php7.0-ldap zlib1g-dev php-mbstring php-gettext &>> $LOG
+					 
+					 echo -e "Instalação das Dependências do PHP7 feito com sucesso!!!, continuando com o script."
+					 echo
+					 echo  ============================================================ >> $LOG
+					 
+					 echo -e "Instalando as Dependências do Perl, aguarde..."
+					 					 
+					 #Instalando as dependências do Perl e GCC para dá suporte a recursos extras
+					 apt-get -y install libc6-dev libcompress-raw-zlib-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl libcrypt-ssleay-perl libnet-snmp-perl libproc-pid-file-perl libproc-daemon-perl libarchive-zip-perl libnet-cups-perl libphp-pclzip libmysqlclient-dev libapache2-mod-perl2 libapache2-mod-php libnet-netmask-perl libio-compress-perl libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libsoap-lite-perl libnet-ip-perl libmodule-build-perl libmodule-install-perl libfile-which-perl libfile-copy-recursive-perl libuniversal-require-perl libtest-http-server-simple-perl libhttp-server-simple-authen-perl  libhttp-proxy-perl libio-capture-perl libipc-run-perl libnet-telnet-cisco-perl libtest-compile-perl libtest-deep-perl libtest-exception-perl libtest-mockmodule-perl libtest-mockobject-perl libtest-nowarnings-perl libxml-treepp-perl libparallel-forkmanager-perl libparse-edid-perl libdigest-sha-perl libtext-template-perl libsocket-getaddrinfo-perl libcrypt-des-perl libnet-nbname-perl libyaml-perl libyaml-shell-perl libyaml-libyaml-perl libdata-structure-util-perl liblwp-useragent-determined-perl libio-socket-ssl-perl libdatetime-perl libthread-queue-any-perl libnet-write-perl libarchive-extract-perl libjson-pp-perl liburi-escape-xs-perl liblwp-protocol-https-perl libnet-ping-external-perl libnmap-parser-perl libmojolicious-perl libswitch-perl libplack-perl liblwp-useragent-determined-perl libsys-syslog-perl libdigest-hmac-perl libossp-uuid-perl &>> $LOG
+					 
+					 echo -e "Instalação das Dependências do Perl feito com sucesso!!!, continuando com o script."
 					 echo
 					 echo  ============================================================ >> $LOG
 
@@ -81,7 +99,7 @@ then
 					 echo "phpmyadmin phpmyadmin/mysql/app-pass password $APP_PASS" |  debconf-set-selections
 					 
 					 #Instalando o PhpMyAdmin
-					 apt-get -y install phpmyadmin php-mbstring php-gettext &>> $LOG
+					 apt-get -y install phpmyadmin &>> $LOG
 					 
 					 #Atualizando as dependências do PhpMyAdmin, ativando os recursos dos módulos do PHP no Apache2
 					 phpenmod mcrypt
@@ -118,11 +136,6 @@ then
 					 read
 					 
 					 #Instalação do SOAP::Lite
-					 #Mensagem: Do you want to install 'xml_pp' (XML pretty printer)?: [y] <-- Pressione <Enter>
-					 #Mensagem: Do you want to install 'xml_grep' (XML grep - grep XML files using XML::Twig's subset of XPath)?: [y] <-- Pressione <Enter>
-					 #Mensagem: Do you want to install 'xml_split' (split big XML files)?: [y] <-- Pressione <Enter>
-					 #Mensagem: Do you want to install 'xml_merge' (merge back files created by xml_split)?: [y] <-- Pressione <Enter>
-					 #Mensagem: Do you want to install 'xml_spellcheck' (spellcheck XML files skipping tags)?: [y] <-- Pressione <Enter>
 					 #Mensagem: WARNING: Please tell me where I can find your apache src: <-- digite q Pressione <Enter>
 					 #Esse procedimento demora um pouco, não se preocupe com a mensagem de erro no final, está associado ao Source do Apache
 					 perl -MCPAN -e 'install SOAP::Lite'
