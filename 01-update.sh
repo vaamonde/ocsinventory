@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 04/01/2018
-# Versão: 0.12
+# Data de atualização: 21/01/2018
+# Versão: 0.13
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -54,7 +54,7 @@ then
 					 echo -e "Atualização das Listas do Apt-Get"
 					 echo -e "Atualização dos Aplicativos Instalados"
 					 echo -e "Atualização da Distribuição Ubuntu Server (Kernel)"
-					 echo -e "Remoção de aplicativas desnecessários"
+					 echo -e "Remoção dos aplicativos desnecessários"
 					 echo -e "Limpando o repositório Local do Apt-Get (Cache)"
 					 echo
 					 echo -e "Após o término o Servidor será reinicializado"
@@ -88,6 +88,7 @@ then
 					 #Fazendo a atualização da distribuição e do Kernel
 					 apt-get -o Dpkg::Options::="--force-confold" dist-upgrade -q -y --force-yes &>> $LOG
 					 
+					 echo
 					 echo -e "Kernel atualizado, versões instaladas."
 					 #Listando os pacotes instalados, filtrando por palavras, cortando por colunas.
 					 dpkg --list | grep linux-image-4.4 | cut -d' ' -f 3
@@ -102,7 +103,7 @@ then
 					 apt-get -y autoremove &>> $LOG
 					 apt-get -y autoclean &>> $LOG
 					 
-					 echo -e "Remoção concluida com Sucesso!!!, continuando com o script"
+					 echo -e "Remoção concluída com sucesso!!!, continuando com o script"
 					 echo
 					 echo ============================================================ >> $LOG
 					 echo >> $LOG
