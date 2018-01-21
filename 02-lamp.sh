@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 09/01/2018
-# Versão: 0.17
+# Data de atualização: 21/01/2018
+# Versão: 0.18
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -43,7 +43,7 @@ then
 					 echo
 					 echo  ============================================================ >> $LOG
 					 
-					 echo -e "Atualizando as Listas do Apt-Get, aguarde..."
+					 echo -e "Atualizando as listas do Apt-Get, aguarde..."
 					 
 					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
@@ -51,7 +51,7 @@ then
 					 #Atualizando as listas do apt-get
 					 apt-get update &>> $LOG 
 					 
-					 echo -e "Listas Atualizadas com Sucesso!!!, continuando com o script."
+					 echo -e "Listas atualizadas com sucesso!!!, continuando com o script."
 					 echo
 					 echo  ============================================================ >> $LOG
 
@@ -69,21 +69,21 @@ then
 					 echo
 					 echo  ============================================================ >> $LOG
 					 
-					 echo -e "Instalando as Dependências do PHP, aguarde..."
+					 echo -e "Instalando as dependências do PHP7, aguarde..."
 					 					 
 					 #Instalando as dependências do PHP7 para dá suporte a recursos extras
 					 apt-get -y install php7.0-snmp php-mysql php7.0-dev php-mbstring php-soap php-dev php-apcu php-xmlrpc php7.0-zip php7.0-gd php7.0-mysql php-pclzip php7.0-json php7.0-mbstring php7.0-curl php7.0-imap php7.0-ldap zlib1g-dev php-mbstring php-gettext &>> $LOG
 					 
-					 echo -e "Instalação das Dependências do PHP7 feito com sucesso!!!, continuando com o script."
+					 echo -e "Instalação das dependências do PHP7 feito com sucesso!!!, continuando com o script."
 					 echo
 					 echo  ============================================================ >> $LOG
 					 
-					 echo -e "Instalando as Dependências do Perl, aguarde..."
+					 echo -e "Instalando as dependências do Perl, aguarde..."
 					 					 
 					 #Instalando as dependências do Perl e GCC para dá suporte a recursos extras
 					 apt-get -y install libc6-dev libcompress-raw-zlib-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl libcrypt-ssleay-perl libnet-snmp-perl libproc-pid-file-perl libproc-daemon-perl libarchive-zip-perl libnet-cups-perl libphp-pclzip libmysqlclient-dev libapache2-mod-perl2 libapache2-mod-php libnet-netmask-perl libio-compress-perl libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libsoap-lite-perl libnet-ip-perl libmodule-build-perl libmodule-install-perl libfile-which-perl libfile-copy-recursive-perl libuniversal-require-perl libtest-http-server-simple-perl libhttp-server-simple-authen-perl  libhttp-proxy-perl libio-capture-perl libipc-run-perl libnet-telnet-cisco-perl libtest-compile-perl libtest-deep-perl libtest-exception-perl libtest-mockmodule-perl libtest-mockobject-perl libtest-nowarnings-perl libxml-treepp-perl libparallel-forkmanager-perl libparse-edid-perl libdigest-sha-perl libtext-template-perl libsocket-getaddrinfo-perl libcrypt-des-perl libnet-nbname-perl libyaml-perl libyaml-shell-perl libyaml-libyaml-perl libdata-structure-util-perl liblwp-useragent-determined-perl libio-socket-ssl-perl libdatetime-perl libthread-queue-any-perl libnet-write-perl libarchive-extract-perl libjson-pp-perl liburi-escape-xs-perl liblwp-protocol-https-perl libnet-ping-external-perl libnmap-parser-perl libmojolicious-perl libswitch-perl libplack-perl liblwp-useragent-determined-perl libsys-syslog-perl libdigest-hmac-perl libossp-uuid-perl &>> $LOG
 					 
-					 echo -e "Instalação das Dependências do Perl feito com sucesso!!!, continuando com o script."
+					 echo -e "Instalação das dependências do Perl feito com sucesso!!!, continuando com o script."
 					 echo
 					 echo  ============================================================ >> $LOG
 
@@ -105,10 +105,11 @@ then
 					 phpenmod mcrypt
 					 phpenmod mbstring
 					 
-					 echo -e "Instalação do PhpMyAdmin Feito com Sucesso!!!"
+					 echo -e "Instalação do PhpMyAdmin feito com sucesso!!!"
 					 echo
 					 
 					 echo -e "Após a reinicialização, testar o servidor Apache2 na URL: http://`hostname`"
+					 echo -e "Após a reinicialização, testar o PHP na URL: http://`hostname`/phpinfo.php"
 					 echo -e "Após a reinicialização, testar o PhpMyAdmin na URL: http://`hostname`/phpmyadmin"
 					 echo
 					 
@@ -118,7 +119,7 @@ then
 					 clear
 					 echo ============================================================ >> $LOG
 
-					 echo -e "Instalação das Dependências do Perl XML::Entities via CPAN, pressione <Enter> para continuar"
+					 echo -e "Instalação das dependências do Perl XML::Entities via CPAN, pressione <Enter> para continuar"
 					 read
 					 
 					 #Instalação do XML::Entities
@@ -131,7 +132,7 @@ then
 					 sleep 2
 					 clear
 					 
-					 echo -e "Instalação das Dependências do Perl SOAP::Lite via CPAN, pressione <Enter> para continuar"
+					 echo -e "Instalação das dependências do Perl SOAP::Lite via CPAN, pressione <Enter> para continuar"
 					 read
 					 
 					 #Instalação do SOAP::Lite
@@ -145,7 +146,7 @@ then
 					 sleep 2
 					 clear
 
-					 echo -e "Instalação das Dependências do Perl Linux::Ethtool via CPAN, pressione <Enter> para continuar"
+					 echo -e "Instalação das dependências do Perl Linux::Ethtool via CPAN, pressione <Enter> para continuar"
 					 read
 					 
 					 #Instalação do Linux::Ethtool
@@ -157,7 +158,7 @@ then
 					 sleep 2
 					 clear
 
-					 echo -e "Instalação das Dependências do Perl Apache2::SOAP via CPAN, pressione <Enter> para continuar"
+					 echo -e "Instalação das dependências do Perl Apache2::SOAP via CPAN, pressione <Enter> para continuar"
 					 read
 					 
 					 #Validando a existencia do diretório do Apache2
@@ -182,7 +183,7 @@ then
 					 sleep 2
 					 clear
 
-					 echo -e "Instalação das Dependências do Perl nvidia::ml via CPAN, pressione <Enter> para continuar"
+					 echo -e "Instalação das dependências do Perl nvidia::ml via CPAN, pressione <Enter> para continuar"
 					 read
 					 
 					 #Validando a existencia do Chip Gráfico da NVIDIA
@@ -198,13 +199,13 @@ then
 					 		sleep 2
 					 		clear
 					 else
-					 	echo -e "Você não tem o Chip Gráfico da NIVIDIA, pressione <Enter> para continuar"
+					 	echo -e "Você não tem o Chip Gráfico da NVIDIA, pressione <Enter> para continuar"
 							read
 					 		sleep 2
 					 		clear
 					 fi
 
-					 echo -e "Instalação das Dependências do Perl Net::Ping via CPAN, pressione <Enter> para continuar"
+					 echo -e "Instalação das dependências do Perl Net::Ping via CPAN, pressione <Enter> para continuar"
 					 read
 					 
 					 #Instalação do Net::Ping					 
@@ -216,7 +217,7 @@ then
 					 sleep 2
 					 clear
 					 					 
-					 echo -e "Instalação das Dependências do LWP::UserAgent::Cached via CPAN, pressione <Enter> para continuar"
+					 echo -e "Instalação das dependências do LWP::UserAgent::Cached via CPAN, pressione <Enter> para continuar"
 					 read
 					 
 					 #Instalação do LWP::UserAgent::Cached
@@ -229,7 +230,7 @@ then
 					 sleep 2
 					 clear
 					 					 
-					 echo -e "Instalação das Dependências do Mac::SysProfile via CPAN, pressione <Enter> para continuar"
+					 echo -e "Instalação das dependências do Mac::SysProfile via CPAN, pressione <Enter> para continuar"
 					 read
 					 
 					 #Instalação do Mac::SysProfile
@@ -264,7 +265,8 @@ then
 					 echo -e "Servidor reinicializado com sucesso!!!"
 					 sleep 2
 					 
-					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
+					 echo
+					 echo -e "Arquivo editado com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
@@ -292,7 +294,8 @@ then
 					 echo -e "Servidor reinicializado com sucesso!!!"
 					 sleep 2
 					 
-					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
+					 echo
+					 echo -e "Arquivo editado com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
@@ -320,10 +323,16 @@ then
 					 echo -e "Servidor reinicializado com sucesso!!!"
 					 sleep 2
 					 
-					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
+					 echo
+					 echo -e "Arquivo editado com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
+					 
+					 echo -e "Criando o arquivo de verificação do PHP, aguarde..."
+					 cp -v conf/phpinfo.php /var/www/html &>> $LOG
+					 echo -e "Arquivo criado com sucesso!!!, continuando o script"
+					 echo
 
 					 echo -e "Removendo aplicativos desnecessários, aguarde..."
 					 
