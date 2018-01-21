@@ -61,7 +61,7 @@ then
 					 echo
 					 echo  ============================================================ >> $LOG
 					 
-					 echo -e "Atualizando as Listas do Apt-Get, aguarde..."
+					 echo -e "Atualizando as listas do Apt-Get, aguarde..."
 					 
 					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
 					 export DEBIAN_FRONTEND=noninteractive
@@ -69,7 +69,7 @@ then
 					 #Atualizando as listas do apt-get
 					 apt-get update &>> $LOG
 					 
-					 echo -e "Listas Atualizadas com Sucesso!!!, continuando com o script"
+					 echo -e "Listas atualizadas com sucesso!!!, continuando com o script"
 					 echo
 					 echo  ============================================================ >> $LOG
 
@@ -78,56 +78,56 @@ then
 					 #Fazendo a atualização de todos os pacotes instalados no servidor
 					 apt-get -o Dpkg::Options::="--force-confold" upgrade -q -y --force-yes &>> $LOG
 					 
-					 echo -e "Pacotes atualizados com Sucesso!!!, continuando com o script"
+					 echo -e "Pacotes atualizados com sucesso!!!, continuando com o script"
 					 echo
 					 echo  ============================================================ >> $LOG
 
-					 echo -e "Atualizando a distribuição é o Kernel instalado, aguarde..."
+					 echo -e "Atualizando a distribuição é o Kernel, aguarde..."
 					 echo -e "Kernel atual: `uname -r`"
 					 
 					 #Fazendo a atualização da distribuição e do Kernel
 					 apt-get -o Dpkg::Options::="--force-confold" dist-upgrade -q -y --force-yes &>> $LOG
 					 
 					 echo
-					 echo -e "Kernel atualizado, versões instaladas."
+					 echo -e "Distribuição e Kernel atualizado, versões instaladas."
 					 #Listando os pacotes instalados, filtrando por palavras, cortando por colunas.
 					 dpkg --list | grep linux-image-4.4 | cut -d' ' -f 3
 					 
-					 echo -e "Distribuição atualizada com Sucesso!!!, continuando com o script"
+					 echo -e "Distribuição e Kernel atualizada com sucesso!!!, continuando com o script"
 					 echo
 					 echo ============================================================ >> $LOG
 
-					 echo -e "Remoção dos aplicativos desncessários, aguarde..."
+					 echo -e "Remoção dos aplicativos desnecessários, aguarde..."
 					 
 					 #Fazendo a autoremoção de aplicativas instalados
 					 apt-get -y autoremove &>> $LOG
 					 apt-get -y autoclean &>> $LOG
 					 
-					 echo -e "Remoção concluída com sucesso!!!, continuando com o script"
+					 echo -e "Remoção dos aplicativos concluída com sucesso!!!, continuando com o script"
 					 echo
 					 echo ============================================================ >> $LOG
 					 echo >> $LOG
 					 
-					 echo -e "Limpando o Cache do Apt-Get, aguarde..."
+					 echo -e "Limpando o cache do Apt-Get, aguarde..."
 					 
 					 #Limpando o diretório de cache do apt-get
 					 apt-get clean &>> $LOG
 					 
-					 echo -e "Cache Limpo com Sucesso!!!"
+					 echo -e "Cache limpo com sucesso!!!, continuando com o script"
 					 echo
 					 echo ============================================================ >> $LOG
 					 echo >> $LOG
 					 echo -e "Fim do $LOGSCRIPT em: `date`" >> $LOG
 
 					 echo
-					 echo -e "Atualização das Listas do Apt-Get, Atualização dos Aplicativos e Atualização do Kernel Feito com Sucesso!!!!!"
+					 echo -e "Atualização das Listas, Atualização dos Aplicativos e Atualização do Kernel feito com sucesso!!!!!"
 					 echo
-					 # Script para calcular o tempo gasto para a execução do script-00.sh
+					 # Script para calcular o tempo gasto para a execução
 						 DATAFINAL=`date +%s`
 						 SOMA=`expr $DATAFINAL - $DATAINICIAL`
 						 RESULTADO=`expr 10800 + $SOMA`
 						 TEMPO=`date -d @$RESULTADO +%H:%M:%S`
-					 echo -e "Tempo gasto para execução do update.sh: $TEMPO"
+					 echo -e "Tempo gasto para execução do 01-update.sh: $TEMPO"
 					 echo -e "Pressione <Enter> para reinicializar o servidor: `hostname`"
 					 read
 					 sleep 2
