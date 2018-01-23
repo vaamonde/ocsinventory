@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 04/01/2018
-# Data de atualização: 09/01/2018
-# Versão: 0.2
+# Data de atualização: 21/01/2018
+# Versão: 0.3
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -175,6 +175,9 @@ then
 					 #Habilitando o site ssl no Apache2
 					 a2ensite default-ssl &>> $LOG
 					 
+					 #Reinicializando o servidor Apache2
+					 sudo service apache2 restart
+					 
 					 echo -e "Módulo e Site habilitado com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
@@ -214,7 +217,7 @@ then
 						 SOMA=`expr $DATAFINAL - $DATAINICIAL`
 						 RESULTADO=`expr 10800 + $SOMA`
 						 TEMPO=`date -d @$RESULTADO +%H:%M:%S`
-					 echo -e "Tempo gasto para execução do netdata.sh: $TEMPO"
+					 echo -e "Tempo gasto para execução do openssl.sh: $TEMPO"
 					 echo -e "Pressione <Enter> para reinicializar o servidor: `hostname`"
 					 read
 					 sleep 2
