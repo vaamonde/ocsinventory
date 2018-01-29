@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 09/01/2017
-# Versão: 0.12
+# Data de atualização: 29/01/2017
+# Versão: 0.13
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -130,7 +130,11 @@ then
 					 echo -e "Habilitando o Conf do GLPI no Apache2"
 					 a2enconf glpi
 					 echo -e "Conf habilitado com sucesso!!!, continuando o script"
+					 echo
 					 
+					 echo -e "Habilitando o Agendamento de Atualizações do GLPI"
+					 cp -v conf/glpi.cron /etc/cron.d/ &>> $LOG
+					 echo -e "Agendamento habilitado com sucesso!!!, continuando o script"
 					 echo
 					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
