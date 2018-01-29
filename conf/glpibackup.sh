@@ -14,7 +14,7 @@
 HOST="localhost"
 USER="root"
 PWD="123456"
-DB="ocsweb"
+DB="glpi"
 PATH_1="/backup/glpi"
 DATA=`date +%d_%m_%Y-%H_%M`
 LOG="$PATH_1/backup.log"
