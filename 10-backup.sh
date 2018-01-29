@@ -46,18 +46,22 @@ then
 					 echo -e "Copiando o script de Backup do OCS Inventory Server, aguarde..."
 					 cp -v conf/ocsbackup.sh /usr/sbin/ &>> $LOG
 					 echo -e "Arquivo copiado com sucesso!!!, continuando o script"
+					 echo
 					 
 					 echo -e "Copiando o script de Backup do GLPI, aguarde..."
 					 cp -v conf/glpibackup.sh /usr/sbin/ &>> $LOG
 					 echo -e "Arquivo copiado com sucesso!!!, continuando o script"
+					 echo
 					 
 					 echo -e "Alterando as permissões dos arquivos, aguarde..."
 					 chmod +x /usr/sbin/ocsbackup.sh /usr/sbin/glpibackup.sh &>> $LOG
 					 echo -e "Permissões alteradas com sucesso!!!, continuando o script"
+					 echo
 					 
 					 echo -e "Copiando o agendamento de Backup do OCS Inventory Server, aguarde..."
 					 cp -v conf/ocsinventory-backup-cron /etc/cron.d/ &>> $LOG
 					 echo -e "Arquivo de agendamento copiado com sucesso!!!!, continuando o script"
+					 echo
 					 
 					 echo -e "Copiando o agendamento de Backup do GLPI, aguarde..."
 					 cp -v conf/glpi-backup-cron /etc/cron.d/ &>> $LOG
@@ -77,8 +81,11 @@ then
 					 echo
 					 
 					 echo -e "Executando o Backup da Base de Dados do OCS Inventory, aguarde..."
+					 echo
 					 ocsbackup.sh
+					 echo
 					 ls -lh /backup/ocsinventory
+					 echo
 					 echo -e "Base de Dados do OCS Inventory Backupeada com sucesso!!!, continuando o script"
 					 read
 					 sleep 3
@@ -92,8 +99,11 @@ then
 					 echo
 					 
 					 echo -e "Executando o Backup da Base de Dados do GLPI, aguarde..."
+					 echo
 					 glpibackup.sh
+					 echo
 					 ls /backup/glpi
+					 echo
 					 echo -e "Base de Dados do GLPI Backupeada com sucesso!!!, continuando o script"
 					 read
 					 sleep 3
