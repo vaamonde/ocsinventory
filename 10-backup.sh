@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 09/01/2018
-# Data de atualização: 09/01/2018
-# Versão: 0.1
+# Data de atualização: 29/01/2018
+# Versão: 0.2
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -43,7 +43,61 @@ then
 					 sleep 2
 					 echo
 					 
-
+					 echo -e "Copiando o script de Backup do OCS Inventory Server, aguarde..."
+					 cp -v conf/ocsbackup.sh /usr/sbin/ &>> $LOG
+					 echo -e "Arquivo copiado com sucesso!!!, continuando o script"
+					 
+					 echo -e "Copiando o script de Backup do GLPI, aguarde..."
+					 cp -v conf/glpibackup.sh /usr/sbin/ &>> $LOG
+					 echo -e "Arquivo copiado com sucesso!!!, continuando o script"
+					 
+					 echo -e "Alterando as permissões dos arquivos, aguarde..."
+					 chmod +x /usr/sbin/ocsbackup.sh /usr/sbin/glpibackup.sh &>> $LOG
+					 echo -e "Permissões alteradas com sucesso!!!, continuando o script"
+					 
+					 echo -e "Copiando o agendamento de Backup do OCS Inventory Server, aguarde..."
+					 cp -v conf/ocsinventory-backup-cron /etc/cron.d/ &>> $LOG
+					 echo -e "Arquivo de agendamento copiado com sucesso!!!!, continuando o script"
+					 
+					 echo -e "Copiando o agendamento de Backup do GLPI, aguarde..."
+					 cp -v conf/glpi-backup-cron /etc/cron.d/ &>> $LOG
+					 echo -e "Arquivo de agendamento copiado com sucesso!!!!, continuando o script"
+					 echo
+					 
+					 echo -e "Arquivos copiados com sucesso!!!, pressione <Enter> para continuar com o script"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Editando o arquivo de Backup do OCS Inventory Server, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 vim /usr/sbin/ocsbackup.sh
+					 echo -e "Arquivo editado com sucesso!!!, continuando o script"
+					 echo
+					 
+					 echo -e "Executando o Backup da Base de Dados do OCS Inventory, aguarde..."
+					 ocsbackup.sh
+					 ls -lh /backup/ocsinventory
+					 echo -e "Base de Dados do OCS Inventory Backupeada com sucesso!!!, continuando o script"
+					 read
+					 sleep 3
+					 clear
+					 
+					 echo -e "Editando o arquivo de Backup do GLPI, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 vim /usr/sbin/glpibackup.sh
+					 echo -e "Arquivo editado com sucesso!!!, continuando o script"
+					 echo
+					 
+					 echo -e "Executando o Backup da Base de Dados do GLPI, aguarde..."
+					 glpibackup.sh
+					 ls /backup/glpi
+					 echo -e "Base de Dados do GLPI Backupeada com sucesso!!!, continuando o script"
+					 read
+					 sleep 3
+					 clear
 					 
            				 echo  ============================================================ >> $LOG
                      
