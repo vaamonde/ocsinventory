@@ -28,6 +28,9 @@ else
 	echo -e "Direttório criado sucesso!!!!, continuando o backup..." &>> $LOG
 fi
 
+#Reinicializando o serviço do MySQL
+sudo service mysql restart
+
 echo -e "Backup da Base de Dados: $DB" &>> $LOG
 mysqldump --add-drop-table --complete-insert --extended-insert --quote-names --host=$HOST --user=$USER --password=$PWD --databases $DB > $PATH/ocsweb-$DATA.sql
 echo -e "Backup feito com sucesso!!!, continuando o backup..." &>> $LOG
