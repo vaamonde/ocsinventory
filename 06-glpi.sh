@@ -133,7 +133,7 @@ then
 					 echo
 					 
 					 echo -e "Habilitando o Agendamento de Atualizações do GLPI"
-					 cp -v conf/glpi.cron /etc/cron.d/ &>> $LOG
+					 cp -v conf/glpi-cron /etc/cron.d/ &>> $LOG
 					 echo -e "Agendamento habilitado com sucesso!!!, continuando o script"
 					 echo
 					 
