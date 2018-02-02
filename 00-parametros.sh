@@ -5,7 +5,7 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 17/06/2017
-# Data de atualização: 05/01/2018
+# Data de atualização: 02/01/2018
 # Versão: 0.5
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
@@ -100,3 +100,11 @@ FLUSH="FLUSH PRIVILEGES;"
 # Variáveis de verificação do Chip Gráfico da NVIDIA
 NVIDIA=`lshw -class display | grep NVIDIA | cut -d':' -f2 | cut -d' ' -f2`
 #
+
+# Variáveis de download do OCS Inventory Agent Microsoft, MacOS e Ferramentas de Deploy
+# Site: https://www.ocsinventory-ng.org/en/
+OCSAGENTWIN10="https://github.com/OCSInventory-NG/WindowsAgent/releases/download/2.3.1.1/OCSNG-Windows-Agent-2.3.1.1.zip"
+OCSAGENTWINXP="https://github.com/OCSInventory-NG/WindowsAgent/releases/download/2.1.1.1/OCSNG-Windows-Agent-2.1.1.zip"
+OCSAGENTMAC="https://github.com/OCSInventory-NG/UnixAgent/releases/download/2.3.1-MAC/Ocsinventory_Agent_MacOSX-2.3.1.pkg.zip"
+OCSAGENTTOOLS="https://github.com/OCSInventory-NG/Packager-for-Windows/releases/download/2.3/OCSNG-Windows-Packager-2.3.zip"
+OCSAGENTDEPLOY="https://github.com/OCSInventory-NG/Agent-Deployment-Tool/releases/download/2.3/OCSNG-Agent-Deploy-Tool-2.3.zip"
