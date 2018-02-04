@@ -37,17 +37,42 @@ then
 					 echo
 					 echo  ============================================================ &>> $LOG
 					 
-					 echo -e "Configuração do Agendamento do Backup do OCS Inventory e do GLPI"
-					 echo -e "Pressione <Enter> para instalar"
+					 echo -e "Download dos Agentes do OCS Inventory"
+					 echo -e "Pressione <Enter> para começar o Download"
 					 read
 					 sleep 2
 					 echo
 					 
+					 
+					 
+					 echo -e "Download dos arquivos, aguarde..."
+					 wget $OCSAGENTWIN10 -O /var/lib/ocsinventory-reports/download/OCSAgentWin10.zip &>> $LOG
+					 wget $OCSAGENTWINXP -O /var/lib/ocsinventory-reports/download/OCSAgentWinXP.zip &>> $LOG
+					 wget $OCSAGENTMAC -O /var/lib/ocsinventory-reports/download/OCSAgentMAC.zip &>> $LOG
+					 wget $OCSAGENTTOOLS -O /var/lib/ocsinventory-reports/download/OCSAgentTools.zip &>> $LOG
+					 wget $OCSAGENTDEPLOY -O /var/lib/ocsinventory-reports/download/OCSAgentDeploy.zip &>> $LOG
+					 echo -e "Download dos arquivos concluído com sucesso!!!, continuando o script"
+					 echo
+					 
+					 echo -e "Descompactando todos os arquivos Zipados, aguarde..."
+					 for i in $(ls *.zip);do unzip $i; done &>> $LOG
+					 echo -e "Arquivos descompactados com sucesso!!!, continuando o script"
+					 echo
+					 sleep 2
+					 
+					 echo -e "Listando o contéudo do diretório"
+					 echo
+					 ls /var/lib/ocsinventory-reports/download/
+					 echo
+					 echo -e "Arquivos listados com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
 				 
            				 echo  ============================================================ >> $LOG
                      
 					 echo -e "Fim do $LOGSCRIPT em: `date`" &>> $LOG
-					 echo -e "Finalização do Agendamento feito com Sucesso!!!!!"
+					 echo -e "Finalização do Download dos Agentes feito com Sucesso!!!!!"
 					 echo
 					 # Script para calcular o tempo gasto para a execução do agents.sh
 						 DATAFINAL=`date +%s`
