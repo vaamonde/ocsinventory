@@ -61,7 +61,9 @@ then
 					 echo
 					 
 					 echo -e "Descompactando todos os arquivos Zipados, aguarde..."
-					 for i in $(ls /var/lib/ocsinventory-reports/download/*.zip);do unzip $i; done &>> $LOG
+					 cd /var/lib/ocsinventory-reports/download/
+					 for i in $(ls *.zip);do unzip $i; done &>> $LOG
+					 cd - &>> $LOG
 					 echo -e "Arquivos descompactados com sucesso!!!, continuando o script"
 					 echo
 					 sleep 2
