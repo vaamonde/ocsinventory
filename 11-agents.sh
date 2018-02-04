@@ -43,7 +43,18 @@ then
 					 sleep 2
 					 echo
 					 
-					 
+					 #Verificando se existe arquivos no diretório /var/lib/ocsinventory-reports/download/
+					 if [ -f /var/lib/ocsinventory-reports/download/*.zip ]; then
+					 	echo -e "Arquivos zipados existentes, fazendo a limpeza do diretório"
+						cd /var/lib/ocsinventory-reports/download/
+						rm -Rf * &>> $LOG
+						cd -
+						echo -e "Diretório limpo com sucesso!!!, continuando o script"
+						sleep 2
+					 else
+					 	echo -e "Diretório vazio, continuando com script..."
+						sleep 2
+					 fi
 					 
 					 echo -e "Download dos arquivos, aguarde..."
 					 wget $OCSAGENTWIN10 -O /var/lib/ocsinventory-reports/download/OCSAgentWin10.zip &>> $LOG
