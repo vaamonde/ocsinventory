@@ -53,6 +53,7 @@ then
 						sleep 2
 					 else
 					 	echo -e "Diretório vazio, continuando com script..."
+						echo
 						sleep 2
 					 fi
 					 
@@ -66,10 +67,15 @@ then
 					 echo
 					 
 					 echo -e "Descompactando todos os arquivos Zipados, aguarde..."
-					 for i in $(ls *.zip);do unzip $i; done &>> $LOG
+					 for i in $(ls /var/lib/ocsinventory-reports/download/*.zip);do unzip $i; done &>> $LOG
 					 echo -e "Arquivos descompactados com sucesso!!!, continuando o script"
 					 echo
 					 sleep 2
+					 
+					 echo -e "Copiando o Certificado do OCS Inventory, aguarde..."
+					 cp -v ocs.crt /var/lib/ocsinventory-reports/download/ &>> $LOG
+					 echo -e "Certificado copiado com sucesso!!!, continuando o script"
+					 echo
 					 
 					 echo -e "Listando o contéudo do diretório"
 					 echo
