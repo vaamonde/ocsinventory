@@ -46,7 +46,7 @@ then
 				 	 echo -e "Limpando o diretório /var/lib/ocsinventory-reports/download/"
 					 cd /var/lib/ocsinventory-reports/download/
 					 	rm -Rfv * &>> $LOG
-					 cd -
+					 cd - &>> $LOG
 					 echo -e "Diretório limpo com sucesso!!!, continuando o script"
 					 echo
 					 sleep 2
