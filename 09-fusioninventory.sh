@@ -113,7 +113,7 @@ then
 					 echo -e "Fim do $LOGSCRIPT em: `date`" &>> $LOG
 					 echo -e "Instalação do Fusion Inventory Server e Agent feito com Sucesso!!!!!"
 					 echo
-					 # Script para calcular o tempo gasto para a execução do netdata.sh
+					 # Script para calcular o tempo gasto para a execução do fusioninventory.sh
 						 DATAFINAL=`date +%s`
 						 SOMA=`expr $DATAFINAL - $DATAINICIAL`
 						 RESULTADO=`expr 10800 + $SOMA`
