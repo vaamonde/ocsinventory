@@ -75,6 +75,7 @@ then
 					 
 					 echo -e "Copiando o Arquivo de Configuração do OCS Inventory Agent, aguarde..."
 					 cp -v /etc/ocsinventory-agent/ocsinventory-agent.cfg /var/lib/ocsinventory-reports/download/ &>> $LOG
+					 cp -v conf/ocsinventory.ini /var/lib/ocsinventory-reports/download/ &>> $LOG
 					 echo -e "Arquivo de Configuração copiado com sucesso!!!, continuando o script"
 					 echo
 					 
