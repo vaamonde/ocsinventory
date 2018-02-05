@@ -29,7 +29,7 @@ OCS-NG-Windows-Agent-Setup.exe /server=https://ocs.pti.intra/ocsinventory /ssl=1
 echo ==============================================================
 
 echo Copiando o Arquivo de Certificado SSL
-copy ocs.crt "c:\ProgamData\OCS Inventory NG\Agent"
+copy copy ocs.crt "c:\ProgramData\OCS Inventory NG\Agent"
 echo ==============================================================
 
 echo Executando o OCS SysTray
