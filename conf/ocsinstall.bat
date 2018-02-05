@@ -20,10 +20,12 @@ rem /ssl=1 - Habilitar o SSL
 rem /ca="ocs.crt" - Caminho e nome do arquivo de Certificado
 rem /tag="Desktop" - Nome da TAG
 rem /debug=1 - Habilitar o Modo de Debug (Detalhado)
-rem /force - Força a atualização do inventario
+rem /s - Instalação em modo silencioso
+rem /nosplash - Não mostrar a tela de Splash do OCS Inventory
+rem 
 
 echo Iniciando do processo de Instalacao do OCS Inventory Agent
-OCS-NG-Windows-Agent-Setup.exe /server=https://ocs.pti.intra/ocsinventory /ssl=1 /ca="ocs.crt" /tag="Desktop" /debug=1
+OCS-NG-Windows-Agent-Setup.exe /server=https://ocs.pti.intra/ocsinventory /ssl=1 /ca="ocs.crt" /tag="Desktop" /debug=1 /s /nosplash
 echo
 
 echo Copiando o Arquivo de Certificado SSL
