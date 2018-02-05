@@ -28,7 +28,7 @@ apt-get dist-upgrade
 # Instalando o OCS Inventory Agent e suas Dependências.
 apt-get install ocsinventory-agent libnet-ssleay-perl libcrypt-ssleay-perl
 
-# Copiando os arquivos do Servidor OCS Inventory
+# Fazendo o download dos arquivos do Servidor OCS Inventory
 wget http://ocs.pti.intra/download/ocs.crt
 wget http://ocs.pti.intra/download/ocsinventory-agent.cfg
 
@@ -36,7 +36,7 @@ wget http://ocs.pti.intra/download/ocsinventory-agent.cfg
 cp -v ocs.crt /usr/local/share/ca-certificates/ocs.crt
 cp -v ocs.crt /etc/ocsinventory/ocs.crt
 
-# Atualizando os certififcados raiz do Desktop
+# Atualizando o Certififcado Raiz do Desktop
 update-ca-certificates
 
 # Testando se o Certificado está funcionando com o wget
@@ -46,7 +46,7 @@ read
 # Atualizando o arquivo de configuração do OCS Inventory Agent
 cp -v ocsinventory-agent.cfg /etc/ocsinventory/ocsinventory-agent.cfg
 
-# Editando o arquivo de configuração do OCS Inventory
+# Editando o arquivo de configuração do OCS Inventory Agent
 vim /etc/ocsinventory/ocsinventory-agent.cfg
 
 # Criando o Diretório de Log OCS Inventory Agent
@@ -59,5 +59,5 @@ touch /var/log/ocsinventory-agent/activity.log
 echo > /var/log/ocsinventory-agent/activity.log
 ocsinventory-agent --debug -i
 
-# Verificando o Arquivo de Log
+# Verificando o conteúdo do Arquivo de Log do OCS Inventory Agent
 less /var/log/ocsinventory-agent/activity.log
