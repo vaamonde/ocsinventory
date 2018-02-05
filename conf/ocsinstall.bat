@@ -12,7 +12,7 @@ cls
 echo Script de Instalacao do OCS Inventory Agent
 echo Utilizacao do agent de forma automatizada
 echo Data/hora de inicio do processo de instalacao: %date% - %time%
-echo
+echo ==============================================================
 
 rem Parametros de utilização do OCS Inventory Agent
 rem /server=https://ocs.pti.intra/ocsinventory - Caminho do Servidor OCS Inventory
@@ -26,11 +26,15 @@ rem
 
 echo Iniciando do processo de Instalacao do OCS Inventory Agent
 OCS-NG-Windows-Agent-Setup.exe /server=https://ocs.pti.intra/ocsinventory /ssl=1 /ca="ocs.crt" /tag="Desktop" /debug=1 /s /nosplash
-echo
+echo ==============================================================
 
 echo Copiando o Arquivo de Certificado SSL
 copy ocs.crt "c:\ProgamData\OCS Inventory NG\Agent"
-echo
+echo ==============================================================
+
+echo Executando o OCS SysTray
+"C:\Program Files (x86)\OCS Inventory Agent\OcsSystray.exe"
+echo ==============================================================
 
 echo Fim do processo de Instalacao do OCS Inventory Agent:
 echo Data: %date% - hora: %time%
