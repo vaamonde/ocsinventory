@@ -7,14 +7,11 @@
 # Data de criação: 05/02/2018
 # Data de atualização: 05/02/2018
 # Versão: 0.1
-# Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
-# Kernel >= 4.4.x
-#
 
-# Procedimentos para instalação do Agent do OCS Inventory na Plataforma GNU/Linux
+# Procedimentos para instalação do Agente do OCS Inventory na Plataforma GNU/Linux
 # Script de instalação para distribuição derivadas do Debian (Ubuntu e Linux Mint)
 # Adaptar o script para a sua necessidade, para distribuições baseadas no Red Hat
-# Utilizar o comando yum
+# Utilizar o comando yum, verificar os diretórios também e sua localização.
 
 # Atualizar as listas do apt-get
 apt-get update
