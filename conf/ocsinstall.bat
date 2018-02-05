@@ -9,9 +9,10 @@ rem Data de atualização: 05/01/2018
 rem Versão: 0.1
 cls
 
-echo Script de Instalação do OCS Inventory Agent
-echo Utilização do agent de forma automatizada
-echo Data/hora de inicio do processo de instalação: %date% - %time%
+echo Script de Instalacao do OCS Inventory Agent
+echo Utilizacao do agent de forma automatizada
+echo Data/hora de inicio do processo de instalacao: %date% - %time%
+echo
 
 rem Parametros de utilização do OCS Inventory Agent
 rem /server=https://ocs.pti.intra/ocsinventory - Caminho do Servidor OCS Inventory
@@ -21,12 +22,14 @@ rem /tag="Desktop" - Nome da TAG
 rem /debug=1 - Habilitar o Modo de Debug (Detalhado)
 rem /force - Força a atualização do inventario
 
-echo Iniciando do processo de Instalação do OCS Inventory Agent
+echo Iniciando do processo de Instalacao do OCS Inventory Agent
 OCS-NG-Windows-Agent-Setup.exe /server=https://ocs.pti.intra/ocsinventory /ssl=1 /ca="ocs.crt" /tag="Desktop" /debug=1
+echo
 
 echo Copiando o Arquivo de Certificado SSL
 copy ocs.crt "c:\ProgamData\OCS Inventory NG\Agent"
+echo
 
-echo Fim do processo de Instalação do OCS Inventory Agent:
+echo Fim do processo de Instalacao do OCS Inventory Agent:
 echo Data: %date% - hora: %time%
 pause
