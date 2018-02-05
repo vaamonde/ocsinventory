@@ -33,7 +33,7 @@ copy ocs.crt "c:\ProgramData\OCS Inventory NG\Agent"
 echo ==============================================================
 
 echo Executando o OCS SysTray
-"C:\Program Files (x86)\OCS Inventory Agent\OcsSystray.exe"
+start "C:\Program Files (x86)\OCS Inventory Agent\OcsSystray.exe"
 echo ==============================================================
 
 echo Fim do processo de Instalacao do OCS Inventory Agent:
