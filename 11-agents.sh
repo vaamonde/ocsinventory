@@ -6,7 +6,7 @@
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 04/02/2018
 # Data de atualização: 05/02/2018
-# Versão: 0.2
+# Versão: 0.3
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -76,6 +76,7 @@ then
 					 echo -e "Copiando o Arquivo de Configuração do OCS Inventory Agent, aguarde..."
 					 cp -v /etc/ocsinventory-agent/ocsinventory-agent.cfg /var/lib/ocsinventory-reports/download/ &>> $LOG
 					 cp -v conf/ocsinventory.ini /var/lib/ocsinventory-reports/download/ &>> $LOG
+					 cp -v conf/ocsinstall.bat /var/lib/ocsinventory-reports/download/ &>> $LOG
 					 echo -e "Arquivo de Configuração copiado com sucesso!!!, continuando o script"
 					 echo
 					 
