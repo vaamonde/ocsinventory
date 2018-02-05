@@ -62,7 +62,7 @@ then
 					 
 					 echo -e "Descompactando todos os arquivos Zipados, aguarde..."
 					 cd /var/lib/ocsinventory-reports/download/
-					 for i in $(ls *.zip);do unzip $i; done &>> $LOG
+					 	for i in $(ls *.zip);do unzip $i; done &>> $LOG
 					 cd - &>> $LOG
 					 echo -e "Arquivos descompactados com sucesso!!!, continuando o script"
 					 echo
@@ -71,6 +71,11 @@ then
 					 echo -e "Copiando o Certificado do OCS Inventory, aguarde..."
 					 cp -v ocs.crt /var/lib/ocsinventory-reports/download/ &>> $LOG
 					 echo -e "Certificado copiado com sucesso!!!, continuando o script"
+					 echo
+					 
+					 echo -e "Copiando o Arquivo de Configuração do OCS Inventory Agent, aguarde..."
+					 cp -v /etc/ocsinventory-agent/ocsinventory-agent.cfg /var/lib/ocsinventory-reports/download/ &>> $LOG
+					 echo -e "Arquivo de Configuração copiado com sucesso!!!, continuando o script"
 					 echo
 					 
 					 echo -e "Listando o contéudo do diretório"
