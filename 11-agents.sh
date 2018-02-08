@@ -57,6 +57,7 @@ then
 					 wget $OCSAGENTMAC -O /var/lib/ocsinventory-reports/download/OCSAgentMAC.zip &>> $LOG
 					 wget $OCSAGENTTOOLS -O /var/lib/ocsinventory-reports/download/OCSAgentTools.zip &>> $LOG
 					 wget $OCSAGENTDEPLOY -O /var/lib/ocsinventory-reports/download/OCSAgentDeploy.zip &>> $LOG
+					 wget $OCSAGENTANDROID -O /var/lib/ocsinventory-reports/download/OCSAgentAndroid.apk &>> $LOG
 					 echo -e "Download dos arquivos concluído com sucesso!!!, continuando o script"
 					 echo
 					 
