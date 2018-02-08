@@ -106,5 +106,6 @@ NVIDIA=`lshw -class display | grep NVIDIA | cut -d':' -f2 | cut -d' ' -f2`
 OCSAGENTWIN10="https://github.com/OCSInventory-NG/WindowsAgent/releases/download/2.3.1.1/OCSNG-Windows-Agent-2.3.1.1.zip"
 OCSAGENTWINXP="https://github.com/OCSInventory-NG/WindowsAgent/releases/download/2.1.1.1/OCSNG-Windows-Agent-2.1.1.zip"
 OCSAGENTMAC="https://github.com/OCSInventory-NG/UnixAgent/releases/download/2.3.1-MAC/Ocsinventory_Agent_MacOSX-2.3.1.pkg.zip"
+OCSAGENTANDROID="https://github.com/OCSInventory-NG/AndroidAgent/releases/download/2.3.1/OCSNG-Android-Agent-2.3.1.apk"
 OCSAGENTTOOLS="https://github.com/OCSInventory-NG/Packager-for-Windows/releases/download/2.3/OCSNG-Windows-Packager-2.3.zip"
 OCSAGENTDEPLOY="https://github.com/OCSInventory-NG/Agent-Deployment-Tool/releases/download/2.3/OCSNG-Agent-Deploy-Tool-2.3.zip"
