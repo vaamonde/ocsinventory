@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 04/02/2018
-# Data de atualização: 08/02/2018
-# Versão: 0.5
+# Data de atualização: 09/02/2018
+# Versão: 0.6
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -79,7 +79,7 @@ then
 					 cp -v conf/ocsinventory.ini /var/lib/ocsinventory-reports/download/ &>> $LOG
 					 cp -v conf/ocsinstall.bat /var/lib/ocsinventory-reports/download/ &>> $LOG
 					 cp -v conf/linuxinstall.sh /var/lib/ocsinventory-reports/download/ &>> $LOG
-					 #cp -v conf/ucsinstall.sh /var/lib/ocsinventory-reports/download/ &>> $LOG
+					 cp -v conf/ucsinstall.sh /var/lib/ocsinventory-reports/download/ &>> $LOG
 					 #cp -v conf/pfsenseinstall.sh /var/lib/ocsinventory-reports/download/ &>> $LOG
 					 echo -e "Arquivo de Configuração copiado com sucesso!!!, continuando o script"
 					 echo
