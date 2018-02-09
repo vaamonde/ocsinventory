@@ -12,30 +12,30 @@
 # Script de instalação para distribuição derivadas do Debian (Ubuntu e Linux Mint)
 # Script adaptado para a instalação no UCS Univention Corporate Server
 
-echo -e "Atualizando as Listas do Apt-Get, aguarde..."
-# Atualizar as listas do apt-get
-apt-get update
+echo -e "Ativando os Repositórios não mantidos pelo UCS, aguarde..."
+# Ativando os Repositórios não mantidos do UCS Univention
+ucr set repository/online/unmaintained='yes'
 echo -e "Pressione <Enter> para continuar..."
 read
 clear
 
-echo -e "Atualizando os Software instalados, aguarde..."
-# Atualizar o sistema
-apt-get upgrade
+echo -e "Verificando se source.list foi criado com sucesso, aguarde..."
+# Verificando o source.list se foi criado com sucesso.
+less /etc/apt/sources.list.d/15_ucs-online-version.list
 echo -e "Pressione <Enter> para continuar..."
 read
 clear
 
-echo -e "Atualizando a Distribuição Kernel, aguarde..."
+echo -e "Atualizando o UCS Univention, aguarde..."
 # Atualizar a distribuição
-apt-get dist-upgrade
+univention-upgrade
 echo -e "Pressione <Enter> para continuar..."
 read
 clear
 
 echo -e "Instalando o OCS Inventory Agent e suas Dependências, aguarde..."
-# Instalando o OCS Inventory Agent e suas Dependências.
-apt-get install ocsinventory-agent libnet-ssleay-perl libcrypt-ssleay-perl vim git
+# Instalando o OCSyInventory Agent e suas Dependências.
+univention-install ocsinventory-agent libnet-ssleay-perl libcrypt-ssleay-perl vim git
 echo -e "Pressione <Enter> para continuar..."
 read
 clear
