@@ -13,6 +13,9 @@
 # Informações dos pacotes: http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/
 # Recomendado fazer a instalação de 5 em 5, verificar sempre as versões dos software
 
+#Instalar primeiro o comando wget: pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/wget-1.19.4.txz
+#Depois baixar o script: ./usr/local/bin/wget http://172.16.10.11/download/pfsenseinstall.sh
+
 echo -e "Primeira etapa de instalação, aguarde..."
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-URI-1.73.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Net-SSLeay-1.84.txz
@@ -107,7 +110,6 @@ echo -e "Décima Primeira etapa de instalação, aguarde..."
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/pciutils-3.5.6.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Net-IP-1.26_1.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-PPerl-0.25_4.txz
-pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/wget-1.19.4.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/atk-2.24.0.txz
 echo -e "Instalação feita com sucesso!!!, continuando o script em 5 segundos..."
 sleep 5
