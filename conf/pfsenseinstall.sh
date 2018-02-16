@@ -28,34 +28,34 @@ sleep 5
 echo -e "Segunda etapa de instalação, aguarde..."
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-IO-Socket-SSL-2.051.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Net-HTTP-6.17.txz
+pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Authen-NTLM-1.09_1.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-libwww-6.31.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Encode-Locale-1.05.txz
-pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-IO-HTML-1.001_1.txz
 echo -e "Instalação feita com sucesso!!!, continuando o script em 5 segundos..."
 sleep 5
 
 echo -e "Terceira etapa de instalação, aguarde..."
+pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-IO-HTML-1.001_1.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-HTTP-Date-6.02_1.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-LWP-MediaTypes-6.02_1.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-HTTP-Message-6.14.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-HTTP-Daemon-6.01_1.txz
-pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-HTTP-Negotiate-6.01_1.txz
 echo -e "Instalação feita com sucesso!!!, continuando o script em 5 segundos..."
 sleep 5
 
 echo -e "Quarta etapa de instalação, aguarde..."
+pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-HTTP-Negotiate-6.01_1.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-WWW-RobotRules-6.02_1.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-HTTP-Cookies-6.04.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-HTML-Tagset-3.20_1.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-HTML-Parser-3.72.txz
-pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Try-Tiny-0.28.txz
 echo -e "Instalação feita com sucesso!!!, continuando o script em 5 segundos..."
 sleep 5
 
 echo -e "Quinta etapa de instalação, aguarde..."
+pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Try-Tiny-0.28.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-File-Listing-6.04_1.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Digest-HMAC-1.03_1.txz
-pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Authen-NTLM-1.09_1.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-libwww-6.31.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-LWP-Protocol-https-6.07_1.txz
 echo -e "Instalação feita com sucesso!!!, continuando o script em 5 segundos..."
@@ -92,8 +92,8 @@ echo -e "Nona etapa de instalação, aguarde..."
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Tie-IxHash-1.23_1.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Text-Iconv-1.7_3.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-HTML-Tree-5.07.txz
-pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-XML-XPath-1.42.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Scalar-List-Utils-1.48,1.txz
+pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-XML-XPath-1.42.txz
 echo -e "Instalação feita com sucesso!!!, continuando o script em 5 segundos..."
 sleep 5
 
