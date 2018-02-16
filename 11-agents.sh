@@ -80,7 +80,7 @@ then
 					 cp -v conf/ocsinstall.bat /var/lib/ocsinventory-reports/download/ &>> $LOG
 					 cp -v conf/linuxinstall.sh /var/lib/ocsinventory-reports/download/ &>> $LOG
 					 cp -v conf/ucsinstall.sh /var/lib/ocsinventory-reports/download/ &>> $LOG
-					 #cp -v conf/pfsenseinstall.sh /var/lib/ocsinventory-reports/download/ &>> $LOG
+					 cp -v conf/pfsenseinstall.sh /var/lib/ocsinventory-reports/download/ &>> $LOG
 					 echo -e "Arquivo de Configuração copiado com sucesso!!!, continuando o script"
 					 echo
 					 
