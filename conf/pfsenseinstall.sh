@@ -28,6 +28,7 @@ sleep 5
 echo -e "Segunda etapa de instalação, aguarde..."
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-IO-Socket-SSL-2.051.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Net-HTTP-6.17.txz
+pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Digest-HMAC-1.03_1.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Authen-NTLM-1.09_1.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-libwww-6.31.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Encode-Locale-1.05.txz
@@ -55,7 +56,6 @@ sleep 5
 echo -e "Quinta etapa de instalação, aguarde..."
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Try-Tiny-0.28.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-File-Listing-6.04_1.txz
-pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Digest-HMAC-1.03_1.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-libwww-6.31.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-LWP-Protocol-https-6.07_1.txz
 echo -e "Instalação feita com sucesso!!!, continuando o script em 5 segundos..."
