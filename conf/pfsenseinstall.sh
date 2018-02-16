@@ -30,7 +30,6 @@ pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-IO-Socket-SSL-2.0
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Net-HTTP-6.17.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Digest-HMAC-1.03_1.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Authen-NTLM-1.09_1.txz
-pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-libwww-6.31.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Encode-Locale-1.05.txz
 echo -e "Instalação feita com sucesso!!!, continuando o script em 5 segundos..."
 sleep 5
@@ -111,6 +110,7 @@ pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/pciutils-3.5.6.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-Net-IP-1.26_1.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-PPerl-0.25_4.txz
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/atk-2.24.0.txz
+pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-libwww-6.31.txz
 echo -e "Instalação feita com sucesso!!!, continuando o script em 5 segundos..."
 sleep 5
 
