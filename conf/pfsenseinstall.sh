@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Autor: Robson Vaamonde
 # Site: www.procedimentosemti.com.br
 # Facebook: facebook.com/ProcedimentosEmTI
@@ -129,7 +129,7 @@ sleep 5
 
 
 echo -e "Finalização da instalação do OCS Inventory Agent no pfSense"
-./usr/local/lib/perl5/site_perl/Ocsinventory/Unix/postinst.pl
+perl5 /usr/local/lib/perl5/site_perl/Ocsinventory/Unix/postinst.pl
 echo -e "Instalação feita com sucesso!!!, continuando o script em 5 segundos..."
 sleep 5
 
