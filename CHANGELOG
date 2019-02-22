@@ -4,12 +4,16 @@ Facebook: facebook.com/ProcedimentosEmTI
 Facebook: facebook.com/BoraParaPratica
 YouTube: youtube.com/BoraParaPratica
 Data de criação: 11/12/2018
-Data de atualização: 11/12/2018
-Versão: 0.1
+Data de atualização: 22/02/2019
+Versão: 0.2
 Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 Testado e homologado para a versão do Ubuntu Server 16.04.5 LTS x64
 Kernel >= 4.4.x
 
-11/12/2018 - Versões do OCS Inventory: Server 2.5 | Client 2.4.2. Robson Vaamonde
+==================================== ATUALIZAÇÕES DO OCS INVENTORY ===========================================
 
-11/12/2018 - Criação do arquivo CHANGELOG, começando a atualizar todos os scripts do curso para a nova versão do OCS Inventory. Robson Vaamonde
+22/02/2019 - Robson Vaamonde - Analise das versões 2.5 e 2.6 do Servidor e Cliente.
+
+11/12/2018 - Robson Vaamonde - Versões do OCS Inventory: Server 2.5 | Client 2.4.2. 
+
+11/12/2018 - Robson Vaamonde - Criação do arquivo CHANGELOG, começando a atualizar todos os scripts do curso para a nova versão do OCS Inventory.
