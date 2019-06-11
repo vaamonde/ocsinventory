@@ -5,28 +5,28 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 21/01/2018
-# Versão: 0.13
-# Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
-# Kernel >= 4.4.x
+# Data de atualização: 11/06/2018
+# Versão: 0.14
+# Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
+# Kernel >= 4.x.x
 #
-# Instalação dos pacotes principais para a primeira etapa, indicado para a distribuição GNU/Linux Ubuntu Server 16.04 LTS x64
+# Instalação dos pacotes principais para a primeira etapa, indicado para a distribuição GNU/Linux Ubuntu Server 16.04.x LTS x64
 #
 # Atualização das listas do Apt-Get
 # Atualização dos Aplicativos Instalados
 # Atualização da Distribuição Ubuntu Server (Kernel)
 # Auto-Limpeza do Apt-Get
-# Limpando o repositório Local do Apt-Get
-# Reiniciando o Servidor
+# Limpeza do repositório Local do Apt-Get
+# Reinicialização do Servidor
 #
 # Utilizar o comando: sudo -i para executar o script
 #
 
-# Arquivo de configuração de parâmetros
+# Arquivo de configuração dos parâmetros
 source 00-parametros.sh
 #
 
-# Caminho para o Log do script
+# Caminho do arquivo para o Log do script
 LOG=$VARLOGPATH/$LOGSCRIPT
 #
 
@@ -89,11 +89,11 @@ then
 					 apt-get -o Dpkg::Options::="--force-confold" dist-upgrade -q -y --force-yes &>> $LOG
 					 
 					 echo
-					 echo -e "Distribuição e Kernel atualizado, versões instaladas."
+					 echo -e "Distribuição e Kernel atualizados, versões instaladas."
 					 #Listando os pacotes instalados, filtrando por palavras, cortando por colunas.
 					 dpkg --list | grep linux-image-4.4 | cut -d' ' -f 3
 					 
-					 echo -e "Distribuição e Kernel atualizada com sucesso!!!, continuando com o script"
+					 echo -e "Distribuição e Kernel atualizadas com sucesso!!!, continuando com o script"
 					 echo
 					 echo ============================================================ >> $LOG
 
