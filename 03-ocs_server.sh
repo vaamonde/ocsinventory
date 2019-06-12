@@ -99,19 +99,19 @@ then
 					 
 					 echo
 					 #Atualizando as informações do Apache2 para o suporte ao OCS Inventory Server e Reports
-					 a2dissite 000-default
+					 a2dissite 000-default &>> $LOG
 					 echo -e "Apache 2 atualizado com sucesso!!!"
 					 sleep 2
 					 
 					 echo
 					 #Habilitando o conf do OCS Inventory Reports no Apache2
-					 a2enconf ocsinventory-reports
+					 a2enconf ocsinventory-reports &>> $LOG
 					 echo -e "Virtual host do OCS Inventory Reports habilitado com sucesso!!!"
 					 sleep 2
 					 
 					 echo
 					 #Habilitando o conf do OCS Inventory Server no Apache2
-					 a2enconf z-ocsinventory-server
+					 a2enconf z-ocsinventory-server &>> $LOG
 					 echo -e "Virtual host do OCS Inventory Server habilitado com sucesso!!!"
 					 sleep 2
 					 
