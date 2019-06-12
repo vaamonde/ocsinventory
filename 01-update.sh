@@ -8,7 +8,7 @@
 # Data de atualização: 11/06/2018
 # Versão: 0.14
 # Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
-# Kernel >= 4.x.x
+# Kernel >= 4.4.x
 #
 # Instalação dos pacotes principais para a primeira etapa, indicado para a distribuição GNU/Linux Ubuntu Server 16.04.x LTS x64
 #
