@@ -12,6 +12,7 @@ Testado e homologado para a versão do Ubuntu Server 16.04.6 LTS x64
 Kernel >= 4.4.x
 
 ==================================== ATUALIZAÇÕES DO OCS INVENTORY ===========================================
+12/06/2019 - Robson Vaamonde - Atualizaçao do arquivo 04-pos_ocs_server.sh, acréscimo da configuração do zz-ocsinventory-restapi.conf.
 
 11/06/2019 - Robson Vaamonde - Análise da versão 16.04.6 LTS do Ubuntu Server, executando teste de validação;
 11/06/2019 - Robson Vaamonde - Disponibilização do curso On-Line no canal do YouTUBE do Bora para Prática;
