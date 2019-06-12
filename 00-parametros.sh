@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 17/06/2017
-# Data de atualização: 08/02/2018
-# Versão: 0.6
+# Data de atualização: 11/06/2019
+# Versão: 0.7
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -46,13 +46,17 @@ ADMINUSER="root"
 
 # Variáveis de download do OCS Inventory Server e Reports
 # Site: https://www.ocsinventory-ng.org/en/
-OCSVERSION="2.4/OCSNG_UNIX_SERVER_2.4.tar.gz"
-OCSTAR="OCSNG_UNIX_SERVER_2.4.tar.gz"
-OCSINSTALL="OCSNG_UNIX_SERVER_2.4"
+# Versão antiga utilizada no vídeo: 2.4/OCSNG_UNIX_SERVER_2.4.tar.gz
+# Versão atualizada para 2.6 no dia 11/06/2019 - verificar arquivo CHANGELOG
+OCSVERSION="2.6/OCSNG_UNIX_SERVER_2.6.tar.gz"
+OCSTAR="OCSNG_UNIX_SERVER_2.6.tar.gz"
+OCSINSTALL="OCSNG_UNIX_SERVER_2.6"
 #
 
 # Variáveis de download do OCS Inventory Agent
 # Site: https://www.ocsinventory-ng.org/en/
+# Versão antiga utilizada no vídeo: 2.3/Ocsinventory-Unix-Agent-2.3.tar.gz
+# Versão atualizada para 2.4.2 no dia 11/06/2019 - verificar arquivo CHANGELOG
 OCSAGENTVERSION="2.3/Ocsinventory-Unix-Agent-2.3.tar.gz"
 OCSAGENTTAR="Ocsinventory-Unix-Agent-2.3.tar.gz"
 OCSAGENTINSTALL="Ocsinventory-Unix-Agent-2.3"
