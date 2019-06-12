@@ -5,10 +5,10 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 21/01/2018
-# Versão: 0.18
-# Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
-# Kernel >= 4.4.x
+# Data de atualização: 11/06/2019
+# Versão: 0.19
+# Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
+# Kernel >= 4.x.x
 #
 # Instalação do LAMP Server
 # Instalação do Apache2
@@ -17,18 +17,19 @@
 # Instalação do PHP, Perl, Python
 # Instalação das Dependências via Perl CPAN
 #
-# Nesse script está sendo instalada todas as dependências do OCS Inventory Server, OCS Inventory Agent, Fusion Iventory, GLPI e do Netdata
-# Nas linhas do apt-get install todas as dependências já estão sendo instaladas
+# Nesse script está sendo instalado todas as dependências do OCS Inventory Server, OCS Inventory Agent, Fusion Iventory, 
+# GLPI e do Netdata;
+# Nas linhas do apt-get install todas as dependências já estão sendo instaladas;
 # Nas linhas do perl -e -MCPAN está sendo instalada as dependências do OCS Server e Agent.
 #
 # Utilizar o comando: sudo -i para executar o script
 #
 
-# Arquivo de configuração de parâmetros
+# Arquivo de configuração dos parâmetros
 source 00-parametros.sh
 #
 
-# Caminho para o Log do script
+# Caminho para arquivo do Log do script
 LOG=$VARLOGPATH/$LOGSCRIPT
 #h
 
@@ -63,7 +64,9 @@ then
 					 echo "mysql-server-5.7 mysql-server/root_password_again password $PASSWORD" |  debconf-set-selections
 					 
 					 #Instalando o LAMP Server completo e todas as suas dependêncais do OCS Inventory Server, Agent, GLPI Help Desk e do Netdata
-					 apt-get -y install lamp-server^ gcc make autoconf autogen automake pkg-config uuid-dev net-tools pciutils smartmontools read-edid nmap ipmitool dmidecode samba samba-common samba-testsuite snmp snmp-mibs-downloader unzip hwdata perl perl-modules python python-dev python3-dev python-pip apache2-dev &>> $LOG
+					 apt-get -y install lamp-server^ gcc make autoconf autogen automake pkg-config uuid-dev net-tools pciutils smartmontools \
+					 read-edid nmap ipmitool dmidecode samba samba-common samba-testsuite snmp snmp-mibs-downloader unzip hwdata perl \
+					 perl-modules python python-dev python3-dev python-pip apache2-dev &>> $LOG
 					 
 					 echo -e "Instalação do LAMP Server feito com sucesso!!!, continuando com o script."
 					 echo
@@ -72,7 +75,9 @@ then
 					 echo -e "Instalando as dependências do PHP7, aguarde..."
 					 					 
 					 #Instalando as dependências do PHP7 para dá suporte a recursos extras
-					 apt-get -y install php7.0-snmp php-mysql php7.0-dev php-mbstring php-soap php-dev php-apcu php-xmlrpc php7.0-zip php7.0-gd php7.0-mysql php-pclzip php7.0-json php7.0-mbstring php7.0-curl php7.0-imap php7.0-ldap zlib1g-dev php-mbstring php-gettext &>> $LOG
+					 apt-get -y install php7.0-snmp php-mysql php7.0-dev php-mbstring php-soap php-dev php-apcu php-xmlrpc php7.0-zip \
+					 php7.0-gd php7.0-mysql php-pclzip php7.0-json php7.0-mbstring php7.0-curl php7.0-imap php7.0-ldap zlib1g-dev \
+					 php-mbstring php-gettext &>> $LOG
 					 
 					 echo -e "Instalação das dependências do PHP7 feito com sucesso!!!, continuando com o script."
 					 echo
@@ -80,8 +85,22 @@ then
 					 
 					 echo -e "Instalando as dependências do Perl, aguarde..."
 					 					 
-					 #Instalando as dependências do Perl e GCC para dá suporte a recursos extras
-					 apt-get -y install libc6-dev libcompress-raw-zlib-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl libcrypt-ssleay-perl libnet-snmp-perl libproc-pid-file-perl libproc-daemon-perl libarchive-zip-perl libnet-cups-perl libphp-pclzip libmysqlclient-dev libapache2-mod-perl2 libapache2-mod-php libnet-netmask-perl libio-compress-perl libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libsoap-lite-perl libnet-ip-perl libmodule-build-perl libmodule-install-perl libfile-which-perl libfile-copy-recursive-perl libuniversal-require-perl libtest-http-server-simple-perl libhttp-server-simple-authen-perl  libhttp-proxy-perl libio-capture-perl libipc-run-perl libnet-telnet-cisco-perl libtest-compile-perl libtest-deep-perl libtest-exception-perl libtest-mockmodule-perl libtest-mockobject-perl libtest-nowarnings-perl libxml-treepp-perl libparallel-forkmanager-perl libparse-edid-perl libdigest-sha-perl libtext-template-perl libsocket-getaddrinfo-perl libcrypt-des-perl libnet-nbname-perl libyaml-perl libyaml-shell-perl libyaml-libyaml-perl libdata-structure-util-perl liblwp-useragent-determined-perl libio-socket-ssl-perl libdatetime-perl libthread-queue-any-perl libnet-write-perl libarchive-extract-perl libjson-pp-perl liburi-escape-xs-perl liblwp-protocol-https-perl libnet-ping-external-perl libnmap-parser-perl libmojolicious-perl libswitch-perl libplack-perl liblwp-useragent-determined-perl libsys-syslog-perl libdigest-hmac-perl libossp-uuid-perl &>> $LOG
+					 #Instalando as dependências do Perl e GCC para dá suporte aos recursos extras do OCS Inventory e GLPI
+					 apt-get -y install libc6-dev libcompress-raw-zlib-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl \
+					 libcrypt-ssleay-perl libnet-snmp-perl libproc-pid-file-perl libproc-daemon-perl libarchive-zip-perl \
+					 libnet-cups-perl libphp-pclzip libmysqlclient-dev libapache2-mod-perl2 libapache2-mod-php libnet-netmask-perl \
+					 libio-compress-perl libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libsoap-lite-perl \
+					 libnet-ip-perl libmodule-build-perl libmodule-install-perl libfile-which-perl libfile-copy-recursive-perl \
+					 libuniversal-require-perl libtest-http-server-simple-perl libhttp-server-simple-authen-perl libhttp-proxy-perl \
+					 libio-capture-perl libipc-run-perl libnet-telnet-cisco-perl libtest-compile-perl libtest-deep-perl \
+					 libtest-exception-perl libtest-mockmodule-perl libtest-mockobject-perl libtest-nowarnings-perl \
+					 libxml-treepp-perl libparallel-forkmanager-perl libparse-edid-perl libdigest-sha-perl libtext-template-perl \
+					 libsocket-getaddrinfo-perl libcrypt-des-perl libnet-nbname-perl libyaml-perl libyaml-shell-perl \
+					 libyaml-libyaml-perl libdata-structure-util-perl liblwp-useragent-determined-perl libio-socket-ssl-perl \
+					 libdatetime-perl libthread-queue-any-perl libnet-write-perl libarchive-extract-perl libjson-pp-perl \
+					 liburi-escape-xs-perl liblwp-protocol-https-perl libnet-ping-external-perl libnmap-parser-perl \
+					 libmojolicious-perl libswitch-perl libplack-perl liblwp-useragent-determined-perl libsys-syslog-perl \
+					 libdigest-hmac-perl libossp-uuid-perl &>> $LOG
 					 
 					 echo -e "Instalação das dependências do Perl feito com sucesso!!!, continuando com o script."
 					 echo
@@ -137,7 +156,8 @@ then
 					 
 					 #Instalação do SOAP::Lite
 					 #Mensagem: WARNING: Please tell me where I can find your apache src: <-- digite q Pressione <Enter>
-					 #Esse procedimento demora um pouco, não se preocupe com a mensagem de erro no final, está associado ao Source do Apache
+					 #Esse procedimento demora um pouco, não se preocupe com a mensagem de erro no final, está associado ao Source 
+					 #do Apache
 					 perl -MCPAN -e 'install SOAP::Lite'
 					 echo
 					 
@@ -161,7 +181,7 @@ then
 					 echo -e "Instalação das dependências do Perl Apache2::SOAP via CPAN, pressione <Enter> para continuar"
 					 read
 					 
-					 #Validando a existencia do diretório do Apache2
+					 #Validando a existência do diretório do Apache2
 					 if [ -d /usr/include/apache2 ]; then
 					 	echo -e "Diretório /usr/include/apache2 já existe, continuando com o script"
 					 else
@@ -275,7 +295,7 @@ then
 					 read
 					 
 					 #Arquivo de configuração do Banco de Dados do MySQL Server
-					 #Permitir acesso aremoto ao MySQL comentando a linha: bind-address
+					 #Permitir acesso remoto ao MySQL comentando a linha: bind-address
 					 #Fazendo o backup do arquivo de configuração original
 					 mv -v /etc/mysql/mysql.conf.d/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf.bkp &>> $LOG
 					 echo -e "Backup feito com sucesso!!!"
@@ -340,7 +360,7 @@ then
 					 apt-get autoremove &>> $LOG
 					 apt-get autoclean &>> $LOG
 					 
-					 echo -e "Aplicativos removidos com Sucesso!!!, continuando com o script"
+					 echo -e "Aplicativos removidos com sucesso!!!, continuando com o script"
 					 echo
 					 echo ============================================================ >> $LOG
 
