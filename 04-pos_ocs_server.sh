@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 18/06/2017
-# Data de atualização: 04/01/2018
-# Versão: 0.2
+# Data de atualização: 12/06/2019
+# Versão: 0.3
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -66,14 +66,14 @@ then
 					 
 					 echo
 					 
-					 echo -e "Arquivo removido com Sucesso!!!, pressione <Enter> para continuar"
+					 echo -e "Arquivo removido com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
 
 					 echo -e "Atualizando os arquivos de configuração do OCS Inventory Server"
 					 echo
-					 echo -e "Editando o arquivo do OCS Inventory Server, pressione <Enter> para continuar"
+					 echo -e "Editando o arquivo do OCS Inventory Server z-ocsinventory-server.conf, pressione <Enter> para continuar"
 					 read
 					 
 					 #Arquivo de configuração do Servidor do OCS Inventory que vai receber as atualização do Clientes
@@ -90,14 +90,36 @@ then
 					 #Editando o arquivo de configuração
 					 vim /etc/apache2/conf-available/z-ocsinventory-server.conf
 					 
-					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
+					 echo -e "Arquivo editado com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
+
+					 #echo -e "Editando o arquivo do OCS Inventory Api zz-ocsinventory-restapi.conf, pressione <Enter> para continuar"
+					 #read
+					 
+					 #Arquivo de configuração do Servidor do OCS Inventory que vai receber as atualização do Clientes
+					 #Fazendo o backup do arquivo de configuração original
+					 #mv -v /etc/apache2/conf-available/zz-ocsinventory-server.conf /etc/apache2/conf-available/z-ocsinventory-server.conf.bkp &>> $LOG
+					 #echo -e "Backup feito com sucesso!!!"
+					 #sleep 2
+					 
+					 #Atualizando para o novo arquivo de configuração
+					 #cp -v conf/z-ocsinventory-server.conf /etc/apache2/conf-available/ &>> $LOG
+					 #echo -e "Atualização feita com sucesso!!!"
+					 #sleep 2
+					 
+					 #Editando o arquivo de configuração
+					 #vim /etc/apache2/conf-available/z-ocsinventory-server.conf
+					 
+					 #echo -e "Arquivo editado com sucesso!!!, pressione <Enter> para continuar"
+					 #read
+					 #sleep 2
+					 #clear
 					 
 					 echo -e "Atualizando os arquivos de configuração do OCS Inventory Reports"
 					 echo
-					 echo -e "Editando o arquivo do OCS Inventory Reports, pressione <Enter> para continuar"
+					 echo -e "Editando o arquivo do OCS Inventory Reports ocsinventory-reports.conf, pressione <Enter> para continuar"
 					 read
 					 
 					 #Arquivo de configuração do Servidor do OCS Inventory Reports responsável pelos relatórios e distribuição dos softwares
@@ -114,12 +136,12 @@ then
 					 #Editando o arquivo de configuração
 					 vim /etc/apache2/conf-available/ocsinventory-reports.conf
 					 
-					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
+					 echo -e "Arquivo editado com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
 					 
-					 echo -e "Editando o arquivo do OCS Inventory Server DBConfig, pressione <Enter> para continuar"
+					 echo -e "Editando o arquivo do OCS Inventory Server DBConfig dbconfig.inc.php, pressione <Enter> para continuar"
 					 read
 					 
 					 #Arquivo de configuração para conexão com o Banco de Dados do MySQL
@@ -143,7 +165,7 @@ then
 					 echo -e "Apache2 reinicializado com sucesso!!!"
 					 sleep 2
 					 
-					 echo -e "Arquivo editado com Sucesso!!!, pressione <Enter> para continuar"
+					 echo -e "Arquivo editado com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
