@@ -17,6 +17,10 @@ Kernel >= 4.4.x
 11/06/2019 - Robson Vaamonde - Disponibilização do curso On-Line no canal do YouTUBE do Bora para Prática;
 11/06/2019 - Robson Vaamonde - Auditoria de todos os scripts, melhoria nas versão;
 11/06/2019 - Robson Vaamonde - Atualização de software e versões do OCS Inventory, GLPI e FusionInventory;
+11/06/2019 - Robson Vaamonde - Atualização dos arquivos: 00-parametros.sh, 01-update.sh, 02-lamp.sh e ocs_server.sh
+11/06/2019 - Robson Vaamonde - Atualização da versão do OCS Server de 2.4 para 2.6
+11/06/2019 - Robson Vaamonde - Atualização dos arquivos de configuração: z-ocsinventory-server.conf, ocsinventory-reports.conf
+ocsreports/dbconfig.inc.php e o novo arquivo zz-ocsinventory-restapi.con
 
 22/02/2019 - Robson Vaamonde - Análise das versões 2.5 e 2.6 do Servidor e Cliente.
 
