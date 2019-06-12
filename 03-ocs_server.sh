@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 09/01/2018
-# Versão: 0.13
+# Data de atualização: 11/06/2019
+# Versão: 0.14
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -47,7 +47,7 @@ then
 					 echo -e "Download do OCS Inventory Server do Github, pressione <Enter> para continuar"
 					 read
 					 sleep 2
-					 echo -e "Aguarde, fazendo o download..."
+					 echo -e "Aguarde, fazendo o download do OCS Inventory..."
 					 
 					 #Fazendo o download do código fonte do OCS Inventory Server
 					 wget https://github.com/OCSInventory-NG/OCSInventory-ocsreports/releases/download/$OCSVERSION &>> $LOG
@@ -135,13 +135,13 @@ then
 					 
 					 #Fazendo o backup do arquivo de Log da Instalação do OCS Inventory
 					 cp -v *.log $VARLOGPATH/ &>> $LOG
-					 echo -e "Log de Instalação do OCS Inventory backup com sucesso!!!"
+					 echo -e "Backup do Log de Instalação do OCS Inventory feito com sucesso!!!"
 					 
 					 #Saindo do diretório do OCS Inventory Server
 					 cd ..
 					 
 					 echo
-					 echo -e "Instalação do OCS Inventory Server e Reports Service feito com Sucesso!!!, pressione <Enter> para continuar"
+					 echo -e "Instalação do OCS Inventory Server e Reports Service feito com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
@@ -151,7 +151,7 @@ then
 					 #Removendo arquivos que não são mais utilizados
 					 apt-get autoremove &>> $LOG
 					 
-					 echo -e "Aplicativos removidos com Sucesso!!!, continuando com o script!!!"
+					 echo -e "Aplicativos removidos com sucesso!!!, continuando com o script!!!"
 					 echo
 					 echo ============================================================ >> $LOG
 
@@ -166,7 +166,7 @@ then
 
 					 echo -e "Fim do $LOGSCRIPT em: `date`" >> $LOG
 					 echo -e "Instalação do OCS Inventory Server Feito com Sucesso!!!!!"
-					 echo -e "Após a reinicializar, acessar a url: http://`hostname`/ocsreports e finalizar a instalação"
+					 echo -e "Após a reinicialização, acessar a URL: http://`hostname`/ocsreports para finalizar a instalação"
 					 echo
 					 # Script para calcular o tempo gasto para a execução do ocs_server.sh
 						 DATAFINAL=`date +%s`
