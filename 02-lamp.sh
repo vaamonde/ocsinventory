@@ -8,7 +8,7 @@
 # Data de atualização: 11/06/2019
 # Versão: 0.19
 # Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
-# Kernel >= 4.x.x
+# Kernel >= 4.4.x
 #
 # Instalação do LAMP Server
 # Instalação do Apache2
