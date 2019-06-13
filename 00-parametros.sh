@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 17/06/2017
-# Data de atualização: 11/06/2019
-# Versão: 0.7
+# Data de atualização: 13/06/2019
+# Versão: 0.8
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -56,14 +56,16 @@ OCSINSTALL="OCSNG_UNIX_SERVER_2.6"
 # Variáveis de download do OCS Inventory Agent
 # Site: https://www.ocsinventory-ng.org/en/
 # Versão antiga utilizada no vídeo: 2.3/Ocsinventory-Unix-Agent-2.3.tar.gz
-# Versão atualizada para 2.4.2 no dia 11/06/2019 - verificar arquivo CHANGELOG
-OCSAGENTVERSION="2.3/Ocsinventory-Unix-Agent-2.3.tar.gz"
-OCSAGENTTAR="Ocsinventory-Unix-Agent-2.3.tar.gz"
-OCSAGENTINSTALL="Ocsinventory-Unix-Agent-2.3"
+# Versão atualizada para 2.4.2 no dia 13/06/2019 - verificar arquivo CHANGELOG
+OCSAGENTVERSION="v2.4.2/Ocsinventory-Unix-Agent-2.4.2.tar.gz"
+OCSAGENTTAR="Ocsinventory-Unix-Agent-2.4.2.tar.gz"
+OCSAGENTINSTALL="Ocsinventory-Unix-Agent-2.4.2"
 #
 
 # Variáveis de download do GLPI Help Desk
 # Site: http://glpi-project.org/spip.php?article41
+# Versão antiga utilizada no vídeo: 9.2.1/glpi-9.2.1.tgz
+# Versão atualizada para 9.4.2 no dia 13/06/2019 - verificar arquivo CHANGELOG
 GLPIVERSION="9.2.1/glpi-9.2.1.tgz"
 GLPITAR="glpi-9.2.1.tgz"
 GLPIINSTALL="glpi"
