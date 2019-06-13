@@ -10,7 +10,7 @@
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
-#Pós instalação do OCS Inventory Server
+# Pós-instalação do OCS Inventory Server
 #
 # Utilizar o comando: sudo -i para executar o script
 #
