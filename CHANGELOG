@@ -13,14 +13,15 @@ Kernel >= 4.4.x
 
 ==================================== ATUALIZAÇÕES DO OCS INVENTORY ===========================================
 
-14/06/2019 - Robson Vaamonde - Criação do arquivo req.conf para gerar certificado SSL com Multiplos Domínios FQDN
+14/06/2019 - Robson Vaamonde - Atualização do arquivo 10-backup.sh adicionado a cofiguração do IPDiscovery no agendamento do Cron.
+14/06/2019 - Robson Vaamonde - Criação do arquivo req.conf para gerar certificados SSL com Múltiplos Domínios FQDN.
 14/06/2019 - Robosn Vaamonde - Atualização do arquivo 02-lamp.sh adicionado as dependências do Netdata mysql-client e python-pymsql.
 14/06/2019 - Robson Vaamonde - Atualização do arquivo 07-netdata.sh remoção da instalação do pip e seus dependêncais.
 
-13/06/2019 - Robson Vaamonde - Atualização do arquivo 02-lamp.sh com a nova dependência do GLPI php-cas
-13/06/2019 - Robson Vaamonde - Atualização da versão do GLPI para 9.4.2 e Pluguin do OCS Inventory para 1.6.0
-13/06/2019 - Robson Vaamonde - Atualização do arquivo 02-lamp.sh acréscimo da nova dependência do Perl perl -MCPAN -e 'install Mojolicious::Lite'
-13/06/2019 - Robson Vaamonde - Atualização da versão do Agent do OCS Inventory para 2.4.2
+13/06/2019 - Robson Vaamonde - Atualização do arquivo 02-lamp.sh com a nova dependência do GLPI php-cas.
+13/06/2019 - Robson Vaamonde - Atualização da versão do GLPI para 9.4.2 e Pluguin do OCS Inventory para 1.6.0.
+13/06/2019 - Robson Vaamonde - Atualização do arquivo 02-lamp.sh acréscimo da nova dependência do Perl perl -MCPAN -e 'install Mojolicious::Lite'.
+13/06/2019 - Robson Vaamonde - Atualização da versão do Agent do OCS Inventory para 2.4.2.
 13/06/2019 - Robson Vaamonde - Atualização dos arquivos de configuração: ocsinventory-reports.conf, z-ocsinventory-server.conf e zz-ocsinventory-restapi.conf.
 
 12/06/2019 - Robson Vaamonde - Atualização do arquivo 04-pos_ocs_server.sh, acréscimo da configuração do zz-ocsinventory-restapi.conf.
