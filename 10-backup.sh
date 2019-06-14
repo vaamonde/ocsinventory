@@ -109,6 +109,24 @@ then
 					 sleep 3
 					 clear
 					 
+					 echo -e "Configuração do Agendamento do IPDiscovery do OCS Inventory"
+					 echo -e "Pressione <Enter> para configurar"
+					 read
+					 sleep 2
+					 echo
+					 
+					 echo -e "Copiando o script de agendamento OCS Inventory, aguarde..."
+					 cp -v conf/ocsinventory-ipdiscover-cron /etc/cron.d/ &>> $LOG
+					 echo -e "Arquivo de agendamento copiado com sucesso!!!!, continuando o script"
+					 echo
+					 
+					 echo -e "Editando o arquivo de IPDiscovery do OCS Inventory, pressione <Enter> para continuar"     
+					 read
+					 sleep 2
+					 vim /etc/cron.d/ocsinventory-ipdiscover-cron
+					 echo -e "Arquivo editado com sucesso!!!, continuando o script"
+					 echo
+					 
            				 echo  ============================================================ >> $LOG
                      
 					 echo -e "Fim do $LOGSCRIPT em: `date`" &>> $LOG
