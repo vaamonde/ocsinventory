@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 04/01/2018
-# Versão: 0.12
+# Data de atualização: 14/06/2019
+# Versão: 0.13
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -75,30 +75,6 @@ then
 					 
 					 echo
 					 echo -e "Instalação do Netdata feita com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
-					 echo -e "Instalação das dependências do PIP para o monitoramento do MySQL via Netdata, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
-					 echo -e "Atualizando o PIP"
-					 pip install --upgrade pip
-					 
-					 echo 
-					 
-					 echo -e "Instalando o MySQLCliente"
-					 pip install mysqlclient
-					 
-					 echo
-					 
-					 echo -e "Instalando o PyMySQL"
-					 pip install PyMySQL
-					 
-					 echo
-					 echo -e "Instalação das dependências do PIP feita com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 2
 					 clear
