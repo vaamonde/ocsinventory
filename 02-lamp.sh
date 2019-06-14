@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 11/06/2019
-# Versão: 0.19
+# Data de atualização: 13/06/2019
+# Versão: 0.20
 # Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
 # Kernel >= 4.4.x
 #
@@ -255,6 +255,18 @@ then
 					 
 					 #Instalação do Mac::SysProfile
 					 perl -MCPAN -e 'install Mac::SysProfile'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Instalação das dependências do Mojolicious::Lite via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do Mojolicious::Lite
+					 perl -MCPAN -e 'install Mojolicious::Lite'
 					 echo
 					 
 					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
