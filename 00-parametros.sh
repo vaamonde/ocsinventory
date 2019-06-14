@@ -74,7 +74,7 @@ GLPIINSTALL="glpi"
 # Variáveis de download do Plugin do OCS Inventory do GLPI
 # Site: https://github.com/pluginsGLPI/ocsinventoryng/releases
 # Versão antiga utilizada no vídeo: 1.4.2/glpi-ocsinventoryng-1.4.2.tar.gz
-# Versão atualizada para 1.6.0 no dia 13/06/2019 - verificar arquivo CHANGELO
+# Versão atualizada para 1.6.0 no dia 13/06/2019 - verificar arquivo CHANGELOG
 GLPIOCSVERSION="1.6.0/glpi-ocsinventoryng-1.6.0.tar.gz"
 GLPIOCSTAR="glpi-ocsinventoryng-1.6.0.tar.gz"
 GLPIOCSINSTALL="ocsinventoryng"
@@ -111,9 +111,12 @@ NVIDIA=`lshw -class display | grep NVIDIA | cut -d':' -f2 | cut -d' ' -f2`
 
 # Variáveis de download do OCS Inventory Agent Microsoft, MacOS, Android e Ferramentas de Deploy
 # Site: https://www.ocsinventory-ng.org/en/
-OCSAGENTWIN10="https://github.com/OCSInventory-NG/WindowsAgent/releases/download/2.3.1.1/OCSNG-Windows-Agent-2.3.1.1.zip"
+# Versões antigas utilizada no vídeo: Win10-2.3.1.1, WinXP-2.1.1, Mac-2.3.1, Android-2.3.1, Tools-2.3 e Deploy-2.3
+# Versões novas atualizadas no dia 14/06/2019 - verificar arquivo CHANGELOG
+OCSAGENTWIN10="https://github.com/OCSInventory-NG/WindowsAgent/releases/download/2.4.0.0/OCSNG-Windows-Agent-2.4.0.0.zip"
 OCSAGENTWINXP="https://github.com/OCSInventory-NG/WindowsAgent/releases/download/2.1.1.1/OCSNG-Windows-Agent-2.1.1.zip"
-OCSAGENTMAC="https://github.com/OCSInventory-NG/UnixAgent/releases/download/2.3.1-MAC/Ocsinventory_Agent_MacOSX-2.3.1.pkg.zip"
+OCSAGENTMAC="https://github.com/OCSInventory-NG/UnixAgent/releases/download/v2.4.2/Ocsinventory_Agent_MacOSX-2.4.2.pkg.zip"
 OCSAGENTANDROID="https://github.com/OCSInventory-NG/AndroidAgent/releases/download/2.3.1/OCSNG-Android-Agent-2.3.1.apk"
 OCSAGENTTOOLS="https://github.com/OCSInventory-NG/Packager-for-Windows/releases/download/2.3/OCSNG-Windows-Packager-2.3.zip"
 OCSAGENTDEPLOY="https://github.com/OCSInventory-NG/Agent-Deployment-Tool/releases/download/2.3/OCSNG-Agent-Deploy-Tool-2.3.zip"
+OCSUNIXPACHAGER="https://github.com/OCSInventory-NG/Packager-for-Unix/releases/download/1.0/OCSNG-Unix-Packager-1.0.zip"
