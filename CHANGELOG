@@ -4,8 +4,8 @@ Facebook: facebook.com/ProcedimentosEmTI
 Facebook: facebook.com/BoraParaPratica
 YouTube: youtube.com/BoraParaPratica
 Data de criação: 11/12/2018
-Data de atualização: 13/06/2019
-Versão: 0.5
+Data de atualização: 14/06/2019
+Versão: 0.6
 Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 Testado e homologado para a versão do Ubuntu Server 16.04.5 LTS x64
 Testado e homologado para a versão do Ubuntu Server 16.04.6 LTS x64
@@ -13,17 +13,20 @@ Kernel >= 4.4.x
 
 ==================================== ATUALIZAÇÕES DO OCS INVENTORY ===========================================
 
+14/06/2019 - Robosn Vaamonde - Atualização do arquivo 02-lamp.sh adicionado as dependências do Netdata mysql-client e python-pymsql.
+14/06/2019 - Robson Vaamonde - Atualização do arquivo 06-glpi.sh remoção da instalação do pip e seus dependêncais.
+
 13/06/2019 - Robson Vaamonde - Atualização do arquivo 02-lamp.sh com a nova dependência do GLPI php-cas
 13/06/2019 - Robson Vaamonde - Atualização da versão do GLPI para 9.4.2 e Pluguin do OCS Inventory para 1.6.0
-13/06/2019 - Robson Vaamonde - Atualização do arquivo 02-lamp.sh acréscimo da nova dependêncai do Perl perl -MCPAN -e 'install Mojolicious::Lite'
+13/06/2019 - Robson Vaamonde - Atualização do arquivo 02-lamp.sh acréscimo da nova dependência do Perl perl -MCPAN -e 'install Mojolicious::Lite'
 13/06/2019 - Robson Vaamonde - Atualização da versão do Agent do OCS Inventory para 2.4.2
 13/06/2019 - Robson Vaamonde - Atualização dos arquivos de configuração: ocsinventory-reports.conf, z-ocsinventory-server.conf e zz-ocsinventory-restapi.conf.
 
-12/06/2019 - Robson Vaamonde - Atualizaçao do arquivo 04-pos_ocs_server.sh, acréscimo da configuração do zz-ocsinventory-restapi.conf.
+12/06/2019 - Robson Vaamonde - Atualização do arquivo 04-pos_ocs_server.sh, acréscimo da configuração do zz-ocsinventory-restapi.conf.
 
 11/06/2019 - Robson Vaamonde - Análise da versão 16.04.6 LTS do Ubuntu Server, executando teste de validação;
 11/06/2019 - Robson Vaamonde - Disponibilização do curso On-Line no canal do YouTUBE do Bora para Prática;
-11/06/2019 - Robson Vaamonde - Auditoria de todos os scripts, melhoria nas versão;
+11/06/2019 - Robson Vaamonde - Auditoria de todos os scripts, melhoria nas versões;
 11/06/2019 - Robson Vaamonde - Atualização de software e versões do OCS Inventory, GLPI e FusionInventory;
 11/06/2019 - Robson Vaamonde - Atualização dos arquivos: 00-parametros.sh, 01-update.sh, 02-lamp.sh e 03-ocs_server.sh;
 11/06/2019 - Robson Vaamonde - Atualização da versão do OCS Server de 2.4 para 2.6;
