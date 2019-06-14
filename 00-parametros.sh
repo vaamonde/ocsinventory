@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 17/06/2017
-# Data de atualização: 13/06/2019
-# Versão: 0.8
+# Data de atualização: 14/06/2019
+# Versão: 0.9
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -82,16 +82,20 @@ GLPIOCSINSTALL="ocsinventoryng"
 
 # Variáveis de download do FusionInventory Server para GLPI
 # Site: https://github.com/fusioninventory/fusioninventory-for-glpi/releases
-GLPIFISVERSION="glpi9.2%2B1.0/glpi-fusioninventory-9.2.1.0.tar.bz2"
-GLPIFISTAR="glpi-fusioninventory-9.2.1.0.tar.bz2"
+# Versão antiga utilizada no vídeo: glpi9.2%2B1.0/glpi-fusioninventory-9.2.1.0.tar.bz2
+# Versão atualizada para 9.4+1.1 no dia 14/06/2019 - verificar arquivo CHANGELOG
+GLPIFISVERSION="glpi9.4%2B1.1/fusioninventory-9.4+1.1.tar.bz2"
+GLPIFISTAR="fusioninventory-9.4+1.1.tar.bz2"
 GLPIFISINSTALL="fusioninventory"
 #
 
 # Variáveis de download do FusionInventory Agent
-# Site: https://github.com/fusioninventory/fusioninventory-agent/releases/tag/2.4
-GLPIFIAVERSION="2.4/FusionInventory-Agent-2.4.tar.gz"
-GLPIFIATAR="FusionInventory-Agent-2.4.tar.gz"
-GLPIFIAINSTALL="FusionInventory-Agent-2.4"
+# Site: https://github.com/fusioninventory/fusioninventory-agent/releases/
+# Versão antiga utilizada no vídeo: 2.4/FusionInventory-Agent-2.4.tar.gz
+# Versão atualizada para 2.5 no dia 14/06/2019 - verificar arquivo CHANGELOG
+GLPIFIAVERSION="2.5/FusionInventory-Agent-2.5.tar.gz"
+GLPIFIATAR="FFusionInventory-Agent-2.5.tar.gz"
+GLPIFIAINSTALL="FusionInventory-Agent-2.5"
 #
 
 # Variáveis de download do Netdata
