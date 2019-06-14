@@ -66,15 +66,17 @@ OCSAGENTINSTALL="Ocsinventory-Unix-Agent-2.4.2"
 # Site: http://glpi-project.org/spip.php?article41
 # Versão antiga utilizada no vídeo: 9.2.1/glpi-9.2.1.tgz
 # Versão atualizada para 9.4.2 no dia 13/06/2019 - verificar arquivo CHANGELOG
-GLPIVERSION="9.2.1/glpi-9.2.1.tgz"
-GLPITAR="glpi-9.2.1.tgz"
+GLPIVERSION="9.4.2/glpi-9.4.2.tgz"
+GLPITAR="glpi-9.4.2.tgz"
 GLPIINSTALL="glpi"
 #
 
 # Variáveis de download do Plugin do OCS Inventory do GLPI
 # Site: https://github.com/pluginsGLPI/ocsinventoryng/releases
-GLPIOCSVERSION="1.4.2/glpi-ocsinventoryng-1.4.2.tar.gz"
-GLPIOCSTAR="glpi-ocsinventoryng-1.4.2.tar.gz"
+# Versão antiga utilizada no vídeo: 1.4.2/glpi-ocsinventoryng-1.4.2.tar.gz
+# Versão atualizada para 1.6.0 no dia 13/06/2019 - verificar arquivo CHANGELO
+GLPIOCSVERSION="1.6.0/glpi-ocsinventoryng-1.6.0.tar.gz"
+GLPIOCSTAR="glpi-ocsinventoryng-1.6.0.tar.gz"
 GLPIOCSINSTALL="ocsinventoryng"
 #
 
@@ -107,7 +109,7 @@ FLUSH="FLUSH PRIVILEGES;"
 NVIDIA=`lshw -class display | grep NVIDIA | cut -d':' -f2 | cut -d' ' -f2`
 #
 
-# Variáveis de download do OCS Inventory Agent Microsoft, MacOS e Ferramentas de Deploy
+# Variáveis de download do OCS Inventory Agent Microsoft, MacOS, Android e Ferramentas de Deploy
 # Site: https://www.ocsinventory-ng.org/en/
 OCSAGENTWIN10="https://github.com/OCSInventory-NG/WindowsAgent/releases/download/2.3.1.1/OCSNG-Windows-Agent-2.3.1.1.zip"
 OCSAGENTWINXP="https://github.com/OCSInventory-NG/WindowsAgent/releases/download/2.1.1.1/OCSNG-Windows-Agent-2.1.1.zip"
