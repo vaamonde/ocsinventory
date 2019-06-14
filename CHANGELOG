@@ -13,6 +13,8 @@ Kernel >= 4.4.x
 
 ==================================== ATUALIZAÇÕES DO OCS INVENTORY ===========================================
 
+14/06/2019 - Robson Vaamonde - Atualização do arquivo 11- acréscimo da opção de download do Pacote de Unix.
+14/06/2019 - Robson Vaamonde - Atualização do arquivo 00-parametros.sh com as novas versões dos Agents para Instalação no Windows, MAc, Android e Ferramentas
 14/06/2019 - Robson Vaamonde - Atualização do arquivo 10-backup.sh adicionado a cofiguração do IPDiscovery no agendamento do Cron.
 14/06/2019 - Robson Vaamonde - Criação do arquivo req.conf para gerar certificados SSL com Múltiplos Domínios FQDN.
 14/06/2019 - Robosn Vaamonde - Atualização do arquivo 02-lamp.sh adicionado as dependências do Netdata mysql-client e python-pymsql.
