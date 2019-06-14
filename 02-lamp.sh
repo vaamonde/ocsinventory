@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 13/06/2019
-# Versão: 0.20
+# Data de atualização: 14/06/2019
+# Versão: 0.21
 # Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
 # Kernel >= 4.4.x
 #
@@ -66,7 +66,7 @@ then
 					 #Instalando o LAMP Server completo e todas as suas dependêncais do OCS Inventory Server, Agent, GLPI Help Desk e do Netdata
 					 apt-get -y install lamp-server^ gcc make autoconf autogen automake pkg-config uuid-dev net-tools pciutils smartmontools \
 					 read-edid nmap ipmitool dmidecode samba samba-common samba-testsuite snmp snmp-mibs-downloader unzip hwdata perl \
-					 perl-modules python python-dev python3-dev python-pip apache2-dev &>> $LOG
+					 perl-modules python python-dev python3-dev python-pip apache2-dev mysql-client python-pymsql &>> $LOG
 					 
 					 echo -e "Instalação do LAMP Server feito com sucesso!!!, continuando com o script."
 					 echo
