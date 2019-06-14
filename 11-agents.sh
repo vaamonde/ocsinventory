@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 04/02/2018
-# Data de atualização: 09/02/2018
-# Versão: 0.6
+# Data de atualização: 14/06/2019
+# Versão: 0.7
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -58,6 +58,7 @@ then
 					 wget $OCSAGENTTOOLS -O /var/lib/ocsinventory-reports/download/OCSAgentTools.zip &>> $LOG
 					 wget $OCSAGENTDEPLOY -O /var/lib/ocsinventory-reports/download/OCSAgentDeploy.zip &>> $LOG
 					 wget $OCSAGENTANDROID -O /var/lib/ocsinventory-reports/download/OCSAgentAndroid.apk &>> $LOG
+					 wget $OCSUNIXPACKAGER -O /var/lib/ocsinventory-reports/download/OCSAgentUnix.zip &>> $LOG
 					 echo -e "Download dos arquivos concluído com sucesso!!!, continuando o script"
 					 echo
 					 
