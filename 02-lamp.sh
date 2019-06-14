@@ -77,7 +77,7 @@ then
 					 #Instalando as dependências do PHP7 para dá suporte a recursos extras
 					 apt-get -y install php7.0-snmp php-mysql php7.0-dev php-mbstring php-soap php-dev php-apcu php-xmlrpc php7.0-zip \
 					 php7.0-gd php7.0-mysql php-pclzip php7.0-json php7.0-mbstring php7.0-curl php7.0-imap php7.0-ldap zlib1g-dev \
-					 php-mbstring php-gettext &>> $LOG
+					 php-mbstring php-gettext php-cas &>> $LOG
 					 
 					 echo -e "Instalação das dependências do PHP7 feito com sucesso!!!, continuando com o script."
 					 echo
