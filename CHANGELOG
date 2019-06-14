@@ -13,6 +13,7 @@ Kernel >= 4.4.x
 
 ==================================== ATUALIZAÇÕES DO OCS INVENTORY ===========================================
 
+13/06/2019 - Robson Vaamonde - Atualização da versão do GLPI para 9.4.2 e Pluguin do OCS Inventory para 1.6.0
 13/06/2019 - Robson Vaamonde - Atualização do arquivo 02-lamp.sh acréscimo da nova dependêncai do Perl perl -MCPAN -e 'install Mojolicious::Lite'
 13/06/2019 - Robson Vaamonde - Atualização da versão do Agent do OCS Inventory para 2.4.2
 13/06/2019 - Robson Vaamonde - Atualização dos arquivos de configuração: ocsinventory-reports.conf, z-ocsinventory-server.conf e zz-ocsinventory-restapi.conf.
