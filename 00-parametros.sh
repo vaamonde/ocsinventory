@@ -94,7 +94,7 @@ GLPIFISINSTALL="fusioninventory"
 # Versão antiga utilizada no vídeo: 2.4/FusionInventory-Agent-2.4.tar.gz
 # Versão atualizada para 2.5 no dia 14/06/2019 - verificar arquivo CHANGELOG
 GLPIFIAVERSION="2.5/FusionInventory-Agent-2.5.tar.gz"
-GLPIFIATAR="FFusionInventory-Agent-2.5.tar.gz"
+GLPIFIATAR="FusionInventory-Agent-2.5.tar.gz"
 GLPIFIAINSTALL="FusionInventory-Agent-2.5"
 #
 
