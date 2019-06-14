@@ -14,7 +14,7 @@ Kernel >= 4.4.x
 ==================================== ATUALIZAÇÕES DO OCS INVENTORY ===========================================
 
 14/06/2019 - Robosn Vaamonde - Atualização do arquivo 02-lamp.sh adicionado as dependências do Netdata mysql-client e python-pymsql.
-14/06/2019 - Robson Vaamonde - Atualização do arquivo 06-glpi.sh remoção da instalação do pip e seus dependêncais.
+14/06/2019 - Robson Vaamonde - Atualização do arquivo 07-netdata.sh remoção da instalação do pip e seus dependêncais.
 
 13/06/2019 - Robson Vaamonde - Atualização do arquivo 02-lamp.sh com a nova dependência do GLPI php-cas
 13/06/2019 - Robson Vaamonde - Atualização da versão do GLPI para 9.4.2 e Pluguin do OCS Inventory para 1.6.0
