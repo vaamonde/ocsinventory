@@ -5,7 +5,7 @@ Facebook: facebook.com/BoraParaPratica
 YouTube: youtube.com/BoraParaPratica
 Data de criação: 11/12/2018
 Data de atualização: 14/06/2019
-Versão: 0.6
+Versão: 0.7
 Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 Testado e homologado para a versão do Ubuntu Server 16.04.5 LTS x64
 Testado e homologado para a versão do Ubuntu Server 16.04.6 LTS x64
@@ -13,6 +13,7 @@ Kernel >= 4.4.x
 
 ==================================== ATUALIZAÇÕES DO OCS INVENTORY ===========================================
 
+14/06/2019 - Robson Vaamonde - Atualização do arquivo 00-parametros.sh mudança das versões do FusionInventory Server para 9.4 e Agent para 2.5.
 14/06/2019 - Robson Vaamonde - Atualização do arquivo 11-agents.sh acréscimo da opção de download do Pacote de Unix.
 14/06/2019 - Robson Vaamonde - Atualização do arquivo 00-parametros.sh com as novas versões dos Agents para Instalação no Windows, MAc, Android e Ferramentas
 14/06/2019 - Robson Vaamonde - Atualização do arquivo 10-backup.sh adicionado a configuração do IPDiscovery no agendamento do Cron.
