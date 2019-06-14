@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 29/01/2017
-# Versão: 0.13
+# Data de atualização: 13/06/2019
+# Versão: 0.14
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -79,7 +79,7 @@ then
 					 echo -e "Permissões aplicada com sucesso!!!"
 					 sleep 2
 					 
-					 #MENSAGENS QUE SERÃO SOLICIDATAS NA INSTALAÇÃO DO GLPI HELP DESK VIA NAVEGADOR:
+					 #MENSAGENS QUE SERÃO SOLICITADAS NA INSTALAÇÃO DO GLPI HELP DESK VIA NAVEGADOR:
 					 #01. Selecione a linguage: Português do Brasil <OK>;
 					 #02. Licença: Eu li e ACEITO os termons de licença acima: <Continuar>;
 					 #03. Início da Instalação: <Instalar>;
@@ -108,15 +108,15 @@ then
 					 read
 					 
 					 #Instalação do apcu-bc
-					 #Mensagem:  ? [no] <-- pressione <Enter>
 					 pecl install apcu_bc-beta
+					 #Enable internal debbugging in APcu [no] <-- pressione <Enter>
 					 echo -e "APCU instalado com sucesso!!!, continuando o script"
 					 
 					 echo
 					 
 					 echo -e "Habilitando o módulo no PHP"
 					 #Habilitando o módulo do APCU no PHP
-					 phpenmod apcu
+					 phpenmod apcu &>> $LOG
 					 echo -e "Modulo habilitado com sucesso!!!, continuando o script"
 					 
 					 echo
@@ -128,7 +128,7 @@ then
 					 echo
 					 
 					 echo -e "Habilitando o Conf do GLPI no Apache2"
-					 a2enconf glpi
+					 a2enconf glpi &>> $LOG
 					 echo -e "Conf habilitado com sucesso!!!, continuando o script"
 					 echo
 					 
