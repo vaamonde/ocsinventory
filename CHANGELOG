@@ -5,7 +5,7 @@ Facebook: facebook.com/BoraParaPratica
 YouTube: youtube.com/BoraParaPratica
 Data de criação: 11/12/2018
 Data de atualização: 13/06/2019
-Versão: 0.4
+Versão: 0.5
 Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 Testado e homologado para a versão do Ubuntu Server 16.04.5 LTS x64
 Testado e homologado para a versão do Ubuntu Server 16.04.6 LTS x64
@@ -13,6 +13,8 @@ Kernel >= 4.4.x
 
 ==================================== ATUALIZAÇÕES DO OCS INVENTORY ===========================================
 
+13/06/2019 - Robson Vaamonde - Atualização do arquivo 02-lamp.sh acréscimo da nova dependêncai do Perl perl -MCPAN -e 'install Mojolicious::Lite'
+13/06/2019 - Robson Vaamonde - Atualização da versão do Agent do OCS Inventory para 2.4.2
 13/06/2019 - Robson Vaamonde - Atualização dos arquivos de configuração: ocsinventory-reports.conf, z-ocsinventory-server.conf e zz-ocsinventory-restapi.conf.
 
 12/06/2019 - Robson Vaamonde - Atualizaçao do arquivo 04-pos_ocs_server.sh, acréscimo da configuração do zz-ocsinventory-restapi.conf.
@@ -23,8 +25,7 @@ Kernel >= 4.4.x
 11/06/2019 - Robson Vaamonde - Atualização de software e versões do OCS Inventory, GLPI e FusionInventory;
 11/06/2019 - Robson Vaamonde - Atualização dos arquivos: 00-parametros.sh, 01-update.sh, 02-lamp.sh e 03-ocs_server.sh;
 11/06/2019 - Robson Vaamonde - Atualização da versão do OCS Server de 2.4 para 2.6;
-11/06/2019 - Robson Vaamonde - Atualização dos arquivos de configuração: z-ocsinventory-server.conf, ocsinventory-reports.conf
-ocsreports/dbconfig.inc.php e o novo arquivo zz-ocsinventory-restapi.conf
+11/06/2019 - Robson Vaamonde - Atualização dos arquivos de configuração: z-ocsinventory-server.conf, ocsinventory-reports.conf ocsreports/dbconfig.inc.php e o novo arquivo zz-ocsinventory-restapi.conf
 11/06/2019 - Robson Vaamonde - Versão 2.6 agora utiliza o arquivo zz-ocsinventory-restapi.conf, correção no script 04-pos_ocs_server.sh
 
 22/02/2019 - Robson Vaamonde - Análise das versões 2.5 e 2.6 do Servidor e Cliente.
