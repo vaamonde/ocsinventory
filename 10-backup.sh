@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 09/01/2018
-# Data de atualização: 29/01/2018
-# Versão: 0.2
+# Data de atualização: 14/06/2018
+# Versão: 0.3
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
