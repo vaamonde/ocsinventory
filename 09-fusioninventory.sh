@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 07/01/2018
-# Data de atualização: 09/01/2018
-# Versão: 0.2
+# Data de atualização: 19/06/2018
+# Versão: 0.3
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -37,18 +37,18 @@ then
 					 echo
 					 echo  ============================================================ &>> $LOG
 					 
-					 echo -e "Instalação do sistema de Inventário de Rede Fusion Inventory"
+					 echo -e "Instalação do sistema de Inventário de Rede FusionInventory"
 					 echo -e "Pressione <Enter> para instalar"
 					 read
 					 sleep 2
 					 echo
 					 
-					 echo -e "Fazendo o download do Fusion Inventory Server e Agent integrado com o GLPI"
+					 echo -e "Fazendo o download do FusionInventory Server e Agent integrado com o GLPI"
 					 
-					 #Download do Fusion Inventory Server, Pluguin do GLPI Help Desk
+					 #Download do FusionInventory Server, Pluguin do GLPI Help Desk
 					 wget https://github.com/fusioninventory/fusioninventory-for-glpi/releases/download/$GLPIFISVERSION &>> $LOG
 					 
-					 #Download do Fusion Inventory Agent, integração com GLPI ou OCS Inventory
+					 #Download do FusionInventory Agent, integração com GLPI ou OCS Inventory
 					 wget https://github.com/fusioninventory/fusioninventory-agent/releases/download/$GLPIFIAVERSION &>> $LOG
 					 
 					 echo -e "Download Feito com sucesso!!!, continuando o script"
@@ -65,23 +65,23 @@ then
 					 echo -e "Arquivos descompactados com sucesso!!!, continuando o script"
 					 echo
 					 
-					 echo -e "Movendo o diretório do Fusion Inventory Server para o GLPI"
+					 echo -e "Movendo o diretório do FusionInventory Server para o GLPI"
 					 
-					 #Movendo o diretório do Fusion Inventory Server para o Diretório de Pluguin do GLPI
+					 #Movendo o diretório do FusionInventory Server para o Diretório de Pluguin do GLPI
 					 mv -v $GLPIFISINSTALL /var/www/html/glpi/plugins/ &>> $LOG
 					 
 					 echo -e "Diretório movido com sucesso!!!, continuando o script"
 					 echo
 					 
-					 echo -e "Instalando o Fusion Inventory Agent, pressione <Enter> para continuar."
+					 echo -e "Instalando o FusionInventory Agent, pressione <Enter> para continuar."
 					 read
 					 sleep 2
 					 clear
 					 
-					 #Acessando o diretório do Fusion Invetory Agent
+					 #Acessando o diretório do FusionInvetory Agent
 					 cd $GLPIFIAINSTALL
 					 
-					 echo -e "Configurando o Fusion Inventory Agent"
+					 echo -e "Configurando o FusionInventory Agent"
 					 echo
 					 
 					 #Configurando as opções do Fusion Inventory Agent e checando as dependências"
@@ -92,10 +92,10 @@ then
 					 sleep 3
 					 clear
 					 
-					 #Compilando o Fusion Inventory Agent
+					 #Compilando o FusionInventory Agent
 					 make &>> $LOG
 					 echo
-					 echo -e "Fusion Inventory compilado com sucesso!!!, pressione <Enter> para continuar"
+					 echo -e "FusionInventory compilado com sucesso!!!, pressione <Enter> para continuar"
 					 read
 					 sleep 3
 					 clear
@@ -103,15 +103,36 @@ then
 					 #Instalando o Fusion Inventory Agent
 					 make install &>> $LOG
 					 echo
-					 echo -e "Fusion Inventory Agent instalado com sucesso!!!, pressione <Enter> para continuar."
+					 echo -e "FusionInventory Agent instalado com sucesso!!!, pressione <Enter> para continuar."
 					 read
 					 sleep 2
 					 clear
 					 
+					 echo -e "Copiando o arquivo de configuração do FusionInventory"
+					 
+					 cp -v /usr/local/etc/fusioninventory/agent.cfg /usr/local/etc/fusioninventory/agent.cfg.old &>> $LOG
+					 echo -e "Backup feito com sucesso!!!, continuando o script"
+					 sleep  2
+					 
+					 cp conf/agent.cfg /usr/local/etc/fusioninventory/agent.cfg &>> $LOG
+					 echo -e "Arquivo atualizado com sucesso!!!, continuando o script"
+					 sleep  2
+					 
+					 echo -e "Pressione <Enter> para editar o arquivo"
+					 read
+					 vim /usr/local/etc/fusioninventory/agent.cfg
+					 echo -e "Arquivo editado com sucesso!!!, continuando com o script"
+					 sleep 2
+					 
+					 echo -e "Executando o inventário pela primeira vez"
+					 fusioninventory-agent --debug &>> $LOG
+					 echo -e "Inventário feito com sucesso!!!!, continuando o script"
+					 sleep 2
+					 
            				 echo  ============================================================ >> $LOG
                      
 					 echo -e "Fim do $LOGSCRIPT em: `date`" &>> $LOG
-					 echo -e "Instalação do Fusion Inventory Server e Agent feito com Sucesso!!!!!"
+					 echo -e "Instalação do FusionInventory Server e Agent feito com Sucesso!!!!!"
 					 echo
 					 # Script para calcular o tempo gasto para a execução do fusioninventory.sh
 						 DATAFINAL=`date +%s`
