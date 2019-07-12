@@ -50,7 +50,8 @@ e zz-ocsinventory-restapi.conf.
 11/06/2019 - Robson Vaamonde - Atualização de software e versões do OCS Inventory, GLPI e FusionInventory;
 11/06/2019 - Robson Vaamonde - Atualização dos arquivos: 00-parametros.sh, 01-update.sh, 02-lamp.sh e 03-ocs_server.sh;
 11/06/2019 - Robson Vaamonde - Atualização da versão do OCS Server de 2.4 para 2.6;
-11/06/2019 - Robson Vaamonde - Atualização dos arquivos de configuração: z-ocsinventory-server.conf, ocsinventory-reports.conf ocsreports/dbconfig.inc.php e o novo arquivo zz-ocsinventory-restapi.conf
+11/06/2019 - Robson Vaamonde - Atualização dos arquivos de configuração: z-ocsinventory-server.conf, ocsinventory-reports.conf
+ocsreports/dbconfig.inc.php e o novo arquivo zz-ocsinventory-restapi.conf
 11/06/2019 - Robson Vaamonde - Versão 2.6 agora utiliza o arquivo zz-ocsinventory-restapi.conf, correção no script 
 04-pos_ocs_server.sh
 
@@ -58,4 +59,5 @@ e zz-ocsinventory-restapi.conf.
 
 11/12/2018 - Robson Vaamonde - Versões do OCS Inventory: Server 2.5 | Client 2.4.2. 
 
-11/12/2018 - Robson Vaamonde - Criação do arquivo CHANGELOG, começando a atualizar todos os scripts do curso para a nova versão do OCS Inventory.
+11/12/2018 - Robson Vaamonde - Criação do arquivo CHANGELOG, começando a atualizar todos os scripts do curso para a nova 
+versão do OCS Inventory.
