@@ -4,8 +4,8 @@ Facebook: facebook.com/ProcedimentosEmTI
 Facebook: facebook.com/BoraParaPratica
 YouTube: youtube.com/BoraParaPratica
 Data de criação: 11/12/2018
-Data de atualização: 19/06/2019
-Versão: 0.8
+Data de atualização: 11/07/2019
+Versão: 0.9
 Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 Testado e homologado para a versão do Ubuntu Server 16.04.5 LTS x64
 Testado e homologado para a versão do Ubuntu Server 16.04.6 LTS x64
@@ -13,21 +13,32 @@ Kernel >= 4.4.x
 
 ==================================== ATUALIZAÇÕES DO OCS INVENTORY ===========================================
 
-19/06/2019 - Robson Vaamonde - Atualização do arquivo 09-fusioninventory.sh acréscimo do bloco de configuração do arquivo de agent.cfg
+11/07/2019 - Patrick Scalco, Luiz Fernando Sena, Robson Vaamonde - Falha no script: 02-lamp, erro de instalação do MySQL
+Server, falha localizada na linha 69, dependência python-pymssql estava escrito errada: python-pymsql faltando um s, essa
+dependência foi acrescentada depois (dia 14/06/2019 conforme o log), que é utilizada no netdata.
 
-14/06/2019 - Robson Vaamonde - Atualização do arquivo 00-parametros.sh mudança das versões do FusionInventory Server para 9.4 e Agent para 2.5.
+19/06/2019 - Robson Vaamonde - Atualização do arquivo 09-fusioninventory.sh acréscimo do bloco de configuração do arquivo
+de agent.cfg
+
+14/06/2019 - Robson Vaamonde - Atualização do arquivo 00-parametros.sh mudança das versões do FusionInventory Server para 
+9.4 e Agent para 2.5.
 14/06/2019 - Robson Vaamonde - Atualização do arquivo 11-agents.sh acréscimo da opção de download do Pacote de Unix.
-14/06/2019 - Robson Vaamonde - Atualização do arquivo 00-parametros.sh com as novas versões dos Agents para Instalação no Windows, MAc, Android e Ferramentas
-14/06/2019 - Robson Vaamonde - Atualização do arquivo 10-backup.sh adicionado a configuração do IPDiscovery no agendamento do Cron.
+14/06/2019 - Robson Vaamonde - Atualização do arquivo 00-parametros.sh com as novas versões dos Agents para Instalação no 
+Windows, MAc, Android e Ferramentas
+14/06/2019 - Robson Vaamonde - Atualização do arquivo 10-backup.sh adicionado a configuração do IPDiscovery no agendamento 
+do Cron.
 14/06/2019 - Robson Vaamonde - Criação do arquivo req.conf para gerar certificados SSL com Múltiplos Domínios FQDN.
-14/06/2019 - Robosn Vaamonde - Atualização do arquivo 02-lamp.sh adicionado as dependências do Netdata mysql-client e python-pymsql.
+14/06/2019 - Robosn Vaamonde - Atualização do arquivo 02-lamp.sh adicionado as dependências do Netdata mysql-client e 
+python-pymsql.
 14/06/2019 - Robson Vaamonde - Atualização do arquivo 07-netdata.sh remoção da instalação do pip e seus dependêncais.
 
 13/06/2019 - Robson Vaamonde - Atualização do arquivo 02-lamp.sh com a nova dependência do GLPI php-cas.
 13/06/2019 - Robson Vaamonde - Atualização da versão do GLPI para 9.4.2 e Pluguin do OCS Inventory para 1.6.0.
-13/06/2019 - Robson Vaamonde - Atualização do arquivo 02-lamp.sh acréscimo da nova dependência do Perl perl -MCPAN -e 'install Mojolicious::Lite'.
+13/06/2019 - Robson Vaamonde - Atualização do arquivo 02-lamp.sh acréscimo da nova dependência do Perl perl -MCPAN -e 'install
+Mojolicious::Lite'.
 13/06/2019 - Robson Vaamonde - Atualização da versão do Agent do OCS Inventory para 2.4.2.
-13/06/2019 - Robson Vaamonde - Atualização dos arquivos de configuração: ocsinventory-reports.conf, z-ocsinventory-server.conf e zz-ocsinventory-restapi.conf.
+13/06/2019 - Robson Vaamonde - Atualização dos arquivos de configuração: ocsinventory-reports.conf, z-ocsinventory-server.conf
+e zz-ocsinventory-restapi.conf.
 
 12/06/2019 - Robson Vaamonde - Atualização do arquivo 04-pos_ocs_server.sh, acréscimo da configuração do zz-ocsinventory-restapi.conf.
 
@@ -38,7 +49,8 @@ Kernel >= 4.4.x
 11/06/2019 - Robson Vaamonde - Atualização dos arquivos: 00-parametros.sh, 01-update.sh, 02-lamp.sh e 03-ocs_server.sh;
 11/06/2019 - Robson Vaamonde - Atualização da versão do OCS Server de 2.4 para 2.6;
 11/06/2019 - Robson Vaamonde - Atualização dos arquivos de configuração: z-ocsinventory-server.conf, ocsinventory-reports.conf ocsreports/dbconfig.inc.php e o novo arquivo zz-ocsinventory-restapi.conf
-11/06/2019 - Robson Vaamonde - Versão 2.6 agora utiliza o arquivo zz-ocsinventory-restapi.conf, correção no script 04-pos_ocs_server.sh
+11/06/2019 - Robson Vaamonde - Versão 2.6 agora utiliza o arquivo zz-ocsinventory-restapi.conf, correção no script 
+04-pos_ocs_server.sh
 
 22/02/2019 - Robson Vaamonde - Análise das versões 2.5 e 2.6 do Servidor e Cliente.
 
