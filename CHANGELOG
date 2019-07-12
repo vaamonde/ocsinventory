@@ -15,7 +15,9 @@ Kernel >= 4.4.x
 
 11/07/2019 - Patrick Scalco, Luiz Fernando Sena, Robson Vaamonde - Falha no script: 02-lamp, erro de instalação do MySQL
 Server, falha localizada na linha 69, dependência python-pymssql estava escrito errada: python-pymsql faltando um s, essa
-dependência foi acrescentada depois (dia 14/06/2019 conforme o log), que é utilizada no netdata.
+dependência foi acrescentada depois (dia 14/06/2019 conforme o log), que é utilizada no netdata, essa falha de dependência
+gerava o erro de instalação do Servidor do MySQL, instalando somente o cliente, auditado o arquivo de log do script em:
+/var/log/ocsinstall/02-lamp.sh.
 
 19/06/2019 - Robson Vaamonde - Atualização do arquivo 09-fusioninventory.sh acréscimo do bloco de configuração do arquivo
 de agent.cfg
