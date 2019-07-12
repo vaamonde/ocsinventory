@@ -66,7 +66,7 @@ then
 					 #Instalando o LAMP Server completo e todas as suas dependêncais do OCS Inventory Server, Agent, GLPI Help Desk e do Netdata
 					 apt-get -y install lamp-server^ gcc make autoconf autogen automake pkg-config uuid-dev net-tools pciutils smartmontools \
 					 read-edid nmap ipmitool dmidecode samba samba-common samba-testsuite snmp snmp-mibs-downloader unzip hwdata perl \
-					 perl-modules python python-dev python3-dev python-pip apache2-dev mysql-client python-pymsql &>> $LOG
+					 perl-modules python python-dev python3-dev python-pip apache2-dev mysql-client python-pymssql &>> $LOG
 					 
 					 echo -e "Instalação do LAMP Server feito com sucesso!!!, continuando com o script."
 					 echo
