@@ -133,3 +133,7 @@ OCSAGENTANDROID="https://github.com/OCSInventory-NG/AndroidAgent/releases/downlo
 OCSAGENTTOOLS="https://github.com/OCSInventory-NG/Packager-for-Windows/releases/download/2.3/OCSNG-Windows-Packager-2.3.zip"
 OCSAGENTDEPLOY="https://github.com/OCSInventory-NG/Agent-Deployment-Tool/releases/download/2.3/OCSNG-Agent-Deploy-Tool-2.3.zip"
 OCSUNIXPACKAGER="https://github.com/OCSInventory-NG/Packager-for-Unix/releases/download/1.0/OCSNG-Unix-Packager-1.0.zip"
+
+## Variáveis de download do OCS Inventory Plugins
+# Site: https://plugins.ocsinventory-ng.org/
+#
