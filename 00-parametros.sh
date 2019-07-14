@@ -5,9 +5,9 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 17/06/2017
-# Data de atualização: 14/06/2019
-# Versão: 0.9
-# Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
+# Data de atualização: 14/07/2019
+# Versão: 0.10
+# Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
 # Kernel >= 4.4.x
 #
 # Parâmetros (variáveis de ambiente) utilizados nos scripts de instalação do OCS Inventory, GLPI, FusionInventory e Netdata
@@ -18,30 +18,36 @@ VARLOGPATH="/var/log/ocsinstall"
 #
 
 # Variável para criação do arquivo de Log dos Script
+# echo impressão na tela | $0 variável de ambiente do nome do arquivo | cut -d'/' delimitador -f2 mostrar segunda coluna
 LOGSCRIPT=`echo $0 | cut -d'/' -f2`
 #
 
 # Variável da Data Inicial para calcular o tempo de execução dos Scripts
+# date +%s seta a data como segundos
 DATAINICIAL=`date +%s`
 #
 
 # Variáveis de Validação do ambiente, verificando se o usuário e "root", versão do "ubuntu" e versão do "kernel"
+# id -u listar a identificação do usuário | lsb_release -rs listar a versão da distribuição | uname -r listar a versão do Kernel
+# cut -d'.' delimitador -f1,2 mostrar primeira e segunda coluna
 USUARIO=`id -u`
 UBUNTU=`lsb_release -rs`
 KERNEL=`uname -r | cut -d'.' -f1,2`
 #
 
-# Variáveis de configuração da instalação MySQL Server
-PASSWORD="123456"
+# Variáveis de configuração da instalação MySQL Server (USER usuário root do MySQL | PASSWORD senha do usuário Root)
 USER="root"
+PASSWORD="123456"
 #
 
 # Variáveis de configuração da instalação do PhpMyAdmin
-APP_PASSWORD="123456"
-ADMIN_PASS="123456"
-APP_PASS="123456"
-WEBSERVER="apache2"
+# ADMINUSER usuário de administração do MySQL | WEBSERVER servidor Web para configuração do PhpMyAmin | ADMIN_PASS senha do
+# usuário de administração do MySQL | APP_PASSWORD e APP_PASS senha de administração do PhpMyAdmin
 ADMINUSER="root"
+WEBSERVER="apache2"
+ADMIN_PASS="123456"
+APP_PASSWORD="123456"
+APP_PASS="123456"
 #
 
 # Variáveis de download do OCS Inventory Server e Reports
@@ -104,12 +110,15 @@ NETDATAVERSION="netdata.git"
 NETDATAINSTALL="netdata"
 #
 
-# Variáveis de alteração de senha do OCS Inventory Reports
+# Variáveis de alteração de senha do OCS Inventory Reports no Banco de Dados do MySQL
+# 'ocs'@'localhost' usuário de administração do banco de dados do OCS Inventory | PASSWORD('123456') nova senha do usuário ocs
 SETOCSPWD="SET PASSWORD FOR 'ocs'@'localhost' = PASSWORD('123456');"
 FLUSH="FLUSH PRIVILEGES;"
 #
 
 # Variáveis de verificação do Chip Gráfico da NVIDIA
+# lshw -class display lista as informações da placa de vídeo | grep NVIDIA filtra linhas que tenha a palavra NVIDIA
+# cut -d':' delimitador -f2 mostrar segunda coluna
 NVIDIA=`lshw -class display | grep NVIDIA | cut -d':' -f2 | cut -d' ' -f2`
 #
 
