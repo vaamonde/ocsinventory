@@ -1,4 +1,4 @@
-# Curso GRÁTIS OCS Inventory e GLPI
+# Curso GRÁTIS OCS Inventory NG e GLPI Help Desk
 
 Essa série de cursos Hands On (Mão na Massa) do Projeto AulaEAD criado pelo Prof. Robson Vaamonde dos Projetos ProcedimentosEmTI e BoraParaPrática!!!! tem como objetivo mostrar soluções técnicas e operacionais dos melhores Appliances Open Source do mercado.
 
