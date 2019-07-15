@@ -136,4 +136,8 @@ OCSUNIXPACKAGER="https://github.com/OCSInventory-NG/Packager-for-Unix/releases/d
 
 ## Variáveis de download do OCS Inventory Plugins
 # Site: https://plugins.ocsinventory-ng.org/
+#Plugin01: Installed drivers (Retrieve list of installed drivers - Windows)
+DRIVERLIST="https://github.com/PluginsOCSInventory-NG/driverslist/releases/download/v2.0/driverslist.zip"
+#Plugin02: Machine Uptime (Retrieve Machine Uptime - Windows e Linux)
+UPTIME="https://github.com/PluginsOCSInventory-NG/uptime/releases/download/2.0/uptime.zip"
 #
