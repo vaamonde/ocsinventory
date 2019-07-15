@@ -32,8 +32,6 @@ then
 					 clear
 					 
 					 echo -e "Usuário é `whoami`, continuando a executar o $LOGSCRIPT"
-					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
-					 export DEBIAN_FRONTEND=noninteractive
 					 echo
 					 echo  ============================================================ &>> $LOG
 					 
