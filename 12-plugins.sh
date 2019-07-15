@@ -44,18 +44,13 @@ then
 					 echo
 					 
 					 echo -e "Download dos arquivos, aguarde..."
-					 wget $OCSAGENTWIN10 -O /var/lib/ocsinventory-reports/download/OCSAgentWin10.zip &>> $LOG
-					 wget $OCSAGENTWINXP -O /var/lib/ocsinventory-reports/download/OCSAgentWinXP.zip &>> $LOG
-					 wget $OCSAGENTMAC -O /var/lib/ocsinventory-reports/download/OCSAgentMAC.zip &>> $LOG
-					 wget $OCSAGENTTOOLS -O /var/lib/ocsinventory-reports/download/OCSAgentTools.zip &>> $LOG
-					 wget $OCSAGENTDEPLOY -O /var/lib/ocsinventory-reports/download/OCSAgentDeploy.zip &>> $LOG
-					 wget $OCSAGENTANDROID -O /var/lib/ocsinventory-reports/download/OCSAgentAndroid.apk &>> $LOG
-					 wget $OCSUNIXPACKAGER -O /var/lib/ocsinventory-reports/download/OCSAgentUnix.zip &>> $LOG
+					 wget $DRIVERLIST -O /usr/share/ocsinventory-reports/ocsreports/extensions/drivelist.zip &>> $LOG
+					 wget $UPTIME -O /usr/share/ocsinventory-reports/ocsreports/extensions/uptime.zip &>> $LOG
 					 echo -e "Download dos arquivos concluído com sucesso!!!, continuando o script"
 					 echo
 					 
 					 echo -e "Descompactando todos os arquivos Zipados, aguarde..."
-					 cd /var/lib/ocsinventory-reports/download/
+					 cd /usr/share/ocsinventory-reports/ocsreports/extensions/
 					 	for i in $(ls *.zip);do unzip $i; done &>> $LOG
 					 cd - &>> $LOG
 					 echo -e "Arquivos descompactados com sucesso!!!, continuando o script"
@@ -64,7 +59,7 @@ then
 					 
 					 echo -e "Listando o contéudo do diretório"
 					 echo
-					 ls 
+					 ls -lh /usr/share/ocsinventory-reports/ocsreports/extensions/
 					 echo
 					 echo -e "Arquivos listados com sucesso!!!, pressione <Enter> para continuar"
 					 read
