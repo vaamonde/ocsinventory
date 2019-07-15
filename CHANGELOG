@@ -13,10 +13,12 @@ Kernel >= 4.4.x
 
 ==================================== ATUALIZAÇÕES DO OCS INVENTORY ===========================================
 
-14/07/2017 - Robson Vaamonde - atualização do arquivo 00-parametros.sh, melhoria na documentação, acréscimo do bloco de 
+14/07/2019 - Robson Vaamonde - Atualização do arquivo 00-parametros.sh, melhoria na documentação, acréscimo do bloco de 
 configuação do download dos Plugins
-14/07/2017 - Robson Vaamonde - atualização do arquivo phpinfo.php, acréscimo de quebra de linhas para facilitar a leitura
+14/07/2019 - Robson Vaamonde - Atualização do arquivo phpinfo.php, acréscimo de quebra de linhas para facilitar a leitura
 do arquivo
+14/07/2019 - Robson Vaamonde - Criação do script 12-plugins.sh, esse script tem o objetivo de baixar, descompactar e instalar
+alguns Plugins no OCS Inventory Server.
 
 11/07/2019 - Patrick Scalco, Luiz Fernando Sena, Robson Vaamonde - Falha no script: 02-lamp, erro de instalação do MySQL
 Server, falha localizada na linha 69, dependência python-pymssql estava escrito errada: python-pymsql faltando um s, essa
