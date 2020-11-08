@@ -51,7 +51,6 @@ echo -e "Após a instalação, acessar a url: http://`hostname`/ocsreports e fin
 echo -e "Usuário padrão após a instalação do OCS Inventory: admin | Senha padrão: admin"
 echo
 #
-#
 echo -e "Atualizando as listas do Apt, aguarde..."
 	#opção do comando: &>> (redirecionar a saída padrão)
 	apt-get update &>> $LOG
@@ -87,7 +86,7 @@ echo
 #
 echo -e "Acessando a diretório de instalação do OCS Inventory, aguarde..."
 	cd $OCSINSTALL
-echo -e "Diretório de instalação do OCS Inventory acessada com sucesso!!!, continuando com o script..."
+echo -e "Diretório de instalação do OCS Inventory acessado com sucesso!!!, continuando com o script..."
 sleep 2
 echo
 #

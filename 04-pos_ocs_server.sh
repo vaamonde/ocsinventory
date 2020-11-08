@@ -10,7 +10,7 @@
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
-# Pós-Instalação do OCS Inventory Server e OCS Inventory Reports, configuração do arquivos z-ocsinventory-server.conf (Arquivo de configuração do 
+# Pós-Instalação do OCS Inventory Server e OCS Inventory Reports, configuração dos arquivos: z-ocsinventory-server.conf (Arquivo de configuração do 
 # Servidor do OCS Inventory que vai receber as atualização do Clientes), zz-ocsinventory-restapi.conf (Novo arquivo de configuração do Servidor 
 # do OCS Inventory que vai receber as atualização do Clientes), ocsinventory-reports.conf (Arquivo de configuração do Servidor do OCS Inventory 
 # Reports responsável pelos relatórios e distribuição dos softwares), dbconfig.inc.php (Arquivo de configuração para conexão com o Banco de Dados
