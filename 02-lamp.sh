@@ -342,6 +342,8 @@ sleep 5
 echo
 #
 echo -e "Instalação do LAMP Server Feito com Sucesso!!!!!"
+echo -e "Após a instalação do LAMP Server acessar a URL: http://`hostname`/ para verificar se o Apache2 está OK"
+echo
 	# script para calcular o tempo gasto (SCRIPT MELHORADO, CORRIGIDO FALHA DE HORA:MINUTO:SEGUNDOS)
 	# opção do comando date: +%T (Time)
 	HORAFINAL=`date +%T`

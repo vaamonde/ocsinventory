@@ -10,8 +10,8 @@
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
-# Instalação do OCS Inventory Server
-# Instalação do OCS Inventory Reports
+# Instalação do OCS Inventory Server e OCS Inventory Reports, configuração dos Hosts Virtual no Apache2, alteração de permissão dos diretórios e
+# arquivos do OCS Inventory
 #
 # Arquivo de configuração dos parâmetros
 source 00-parametros.sh
@@ -42,15 +42,13 @@ fi
 # Script de instalação do OCS Inventory Server e Reports no GNU/Linux Ubuntu Server 16.04.x
 # opção do comando: &>> (redirecionar a saída padrão)
 # opção do comando echo: -e (enable interpretation of backslash escapes), \n (new line)
-# opção do comando hostname: -I (all IP address)
 # opção do comando date: + (format), %d (day), %m (month), %Y (year 1970), %H (hour 24), %M (minute 60)
-# opção do comando cut: -d (delimiter), -f (fields)
 echo -e "Início do script $0 em: `date +%d/%m/%Y-"("%H:%M")"`\n" &>> $LOG
 clear
 #
 echo
 echo -e "Após a instalação, acessar a url: http://`hostname`/ocsreports e finalizar a instalação"
-echo -e "Usuário padrão após a instalação: admin | Senha padrão: admin"
+echo -e "Usuário padrão após a instalação do OCS Inventory: admin | Senha padrão: admin"
 echo
 #
 #
@@ -114,18 +112,24 @@ clear
 #07. Which user group is running Apache web server [www-data]?: Deixe o padrão pressione <Enter>;
 #08. Where is Apache Include configuration directory [/etc/apache2/conf-available]?: Deixe o padrão pressione <Enter>;
 #09. Where is PERL Intrepreter binary [/usr/bin/perl]?: Deixe o padrão pressione <Enter>;
-#10. Do you wish to setup Communication server on this computer ([y]/n)?: y <-- digite y pressione <Enter>;
-#11. Where to put Communication server log directory [/var/log/ocsinventory-server]?: Deixe o padrão pressione <Enter>;
-#12. Where to put Communication server plugins configuration files [/etc/ocsinventory-server/plugins]?: Deixe o padrão pressione <Enter>;
-#13. Where to put Communication server plugins Perl module files [/etc/ocsinventory-server/perl]?: Deixe o padrão pressione <Enter>;
-#14. Do you  wish to setup Rest API server on this computer ([y]/n)?: y <-- digite y pressione <Enter>;
-#15. Where do you want the API code to be store [/usr/local/share/perl/5.22.1]?: Deixe o padrão pressione <Enter>;
-#16. Do you allow Setup renaming Communication Server Apache configuration file to 'z-ocsinventory-server.conf' ([y]/n)?: y <-- digite y pressione <Enter>;
-#17. Do you wish to setup Administration Server (Web Administration Console) on this computer ([y]/n)?: y <-- digite y pressione <Enter>;
-#18. Do you wish to continue ([y]/n)?: y <-- digite y pressione <Enter>;
-#19. Where to copy Administration Server static files for PHP Web Console [/usr/share/ocsinventory-reports]?: Deixe o padrão pressione <Enter>;
-#20. Where to create writable/cache directories for deployment packages administration console logs, IPDiscover and SNMP [/var/lib/ocsinventory-reports]?: Deixe o padrão pressione <Enter>;
-#APÓS A INSTALAÇÃO VIA NAVEGADOR, REMOVER O ARQUIVO install
+#10. Do you wish to setup Rest API server on this computer ([y]/n)? y <-- digite y pressione <Enter>;
+#11. Where do you want the API code to be store [/usr/local/share/perl/5.22.1]? Deixe o padrão pressione <Enter>;
+#12. Do you allow Setup renaming Communication Server Apache configuration file to 'z-ocsinventory-server.conf' ([y]/n)?: y <-- digite y pressione <Enter>;
+#13. Do you wish to setup Administration Server (Web Administration Console) on this computer ([y]/n)?: y <-- digite y pressione <Enter>;
+#14. Do you wish to continue ([y]/n)?: y <-- digite y pressione <Enter>;
+#15. Where to copy Administration Server static files for PHP Web Console [/usr/share/ocsinventory-reports]?: Deixe o padrão pressione <Enter>;
+#16. Where to create writable/cache directories for deployment packages administration console logs, IPDiscover and SNMP [/var/lib/ocsinventory-reports]?: Deixe o padrão pressione <Enter>;
+#
+#INFORMAÇÕES QUE SERÃO SOLICITADAS VIA NAVEGADOR:
+#01. MySQL login: root
+#02. MySQL password: 123456
+#03. Name of Database: ocsweb
+#04. MySQL HostName: localhost
+#05. MySQL Port: 3306
+#06. Enable SSL: no
+#OBS: opções: SSL mode, SSL key path, SSL certificat path e CA certificat path será configurada futuramente.
+#
+#APÓS A INSTALAÇÃO VIA NAVEGADOR DO OCS INVENTORY, REMOVER O ARQUIVO INSTALL, ELE SERÁ REMOVIDO AUTOMÁTICAMENTE NO SCRIPT 04-pos_ocs_server.sh
 #
 echo
 echo -e "OCS Inventory instalado com sucesso!!!, continuando com o script..."
@@ -207,7 +211,7 @@ sleep 5
 echo
 #
 echo -e "Instalação do OCS Inventory Server Feito com Sucesso!!!!!"
-echo -e "Após a reinicialização, acessar a URL: http://`hostname`/ocsreports para finalizar a instalação"
+echo -e "Após a instalação do OCS Inventory acessar a URL: http://`hostname`/ocsreports para finalizar a configuração."
 echo
 	# script para calcular o tempo gasto (SCRIPT MELHORADO, CORRIGIDO FALHA DE HORA:MINUTO:SEGUNDOS)
 	# opção do comando date: +%T (Time)

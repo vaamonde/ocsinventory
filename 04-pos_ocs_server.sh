@@ -5,198 +5,200 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 18/06/2017
-# Data de atualização: 13/06/2019
-# Versão: 0.4
+# Data de atualização: 08/11/2020
+# Versão: 0.5
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
-# Pós-instalação do OCS Inventory Server
+# Pós-Instalação do OCS Inventory Server e OCS Inventory Reports, configuração do arquivos z-ocsinventory-server.conf (Arquivo de configuração do 
+# Servidor do OCS Inventory que vai receber as atualização do Clientes), zz-ocsinventory-restapi.conf (Novo arquivo de configuração do Servidor 
+# do OCS Inventory que vai receber as atualização do Clientes), ocsinventory-reports.conf (Arquivo de configuração do Servidor do OCS Inventory 
+# Reports responsável pelos relatórios e distribuição dos softwares), dbconfig.inc.php (Arquivo de configuração para conexão com o Banco de Dados
+# do MySQL - Configuração das variáveis de usuário e senha do banco de dados: database name (ocsweb) e user (ocs)), 
 #
-# Utilizar o comando: sudo -i para executar o script
-#
-
-# Arquivo de configuração de parâmetros
+# Arquivo de configuração dos parâmetros
 source 00-parametros.sh
 #
-
-# Caminho para o Log do script
+# Caminho do arquivo para o Log do script
 LOG=$VARLOGPATH/$LOGSCRIPT
 #
-
-if [ "$USUARIO" == "0" ]
-then
-	if [ "$UBUNTU" == "16.04" ]
-		then
-			if [ "$KERNEL" == "4.4" ]
-				then
-					 clear
-					 
-					 echo -e "Usuário é `whoami`, continuando a executar o $LOGSCRIPT"
-					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
-					 export DEBIAN_FRONTEND=noninteractive
-					 echo
-					 echo  ============================================================ >> $LOG
-
- 					 echo -e "Alterando a senha do usuário ocs do MySQL, pressione <Enter> para continuar"
-					 read
-					 
-					 #Alterando a senha do usário ocs utilizando o mysql command line
-					 mysql -u $USER -p$PASSWORD -e "$SETOCSPWD" mysql &>> $LOG
-					 echo -e "Senha alterada com suceso!!!"
-					 sleep 2
-					 
-					 mysql -u $USER -p$PASSWORD -e "$FLUSH" mysql &>> $LOG
-					 echo -e "Permissão alterada com sucesso!!!"
-					 sleep 2
-					 
-					 echo
-					 
-					 echo -e "Senha alterada com Sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-
- 					 echo -e "Removendo o arquivo install.php do OCS Reports, pressione <Enter> para continuar"
-					 read
-					 
-					 #Fazendo o backup do arquivo install.php
-					 mv -v /usr/share/ocsinventory-reports/ocsreports/install.php /usr/share/ocsinventory-reports/ocsreports/install.php.bkp &>> $LOG
-					 echo -e "Backup feito com sucesso!!!!"
-					 sleep 2
-					 
-					 echo
-					 
-					 echo -e "Arquivo removido com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-
-					 echo -e "Atualizando os arquivos de configuração do OCS Inventory Server"
-					 echo
-					 echo -e "Editando o arquivo do OCS Inventory Server z-ocsinventory-server.conf, pressione <Enter> para continuar"
-					 read
-					 
-					 #Arquivo de configuração do Servidor do OCS Inventory que vai receber as atualização do Clientes
-					 #Fazendo o backup do arquivo de configuração original
-					 mv -v /etc/apache2/conf-available/z-ocsinventory-server.conf /etc/apache2/conf-available/z-ocsinventory-server.conf.bkp &>> $LOG
-					 echo -e "Backup feito com sucesso!!!"
-					 sleep 2
-					 
-					 #Atualizando para o novo arquivo de configuração
-					 cp -v conf/z-ocsinventory-server.conf /etc/apache2/conf-available/ &>> $LOG
-					 echo -e "Atualização feita com sucesso!!!"
-					 sleep 2
-					 
-					 #Editando o arquivo de configuração
-					 vim /etc/apache2/conf-available/z-ocsinventory-server.conf
-					 
-					 echo -e "Arquivo editado com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-
-					 echo -e "Editando o arquivo do OCS Inventory RestApi zz-ocsinventory-restapi.conf, pressione <Enter> para continuar"
-					 read
-					 
-					 #Novo arquivo de configuração do Servidor do OCS Inventory que vai receber as atualização do Clientes
-					 #Fazendo o backup do arquivo de configuração original
-					 mv -v /etc/apache2/conf-available/zz-ocsinventory-restapi.conf /etc/apache2/conf-available/zz-ocsinventory-restapi.conf.bkp &>> $LOG
-					 echo -e "Backup feito com sucesso!!!"
-					 sleep 2
-					 
-					 #Atualizando para o novo arquivo de configuração
-					 cp -v conf/zz-ocsinventory-restapi.conf /etc/apache2/conf-available/ &>> $LOG
-					 echo -e "Atualização feita com sucesso!!!"
-					 sleep 2
-					 
-					 #Editando o arquivo de configuração
-					 vim /etc/apache2/conf-available/zz-ocsinventory-restapi.conf
-					 
-					 echo -e "Arquivo editado com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
-					 echo -e "Atualizando os arquivos de configuração do OCS Inventory Reports"
-					 echo
-					 echo -e "Editando o arquivo do OCS Inventory Reports ocsinventory-reports.conf, pressione <Enter> para continuar"
-					 read
-					 
-					 #Arquivo de configuração do Servidor do OCS Inventory Reports responsável pelos relatórios e distribuição dos softwares
-					 #Fazendo o backup do arquivo de configuração original
-					 mv -v /etc/apache2/conf-available/ocsinventory-reports.conf /etc/apache2/conf-available/ocsinventory-reports.conf.bkp &>> $LOG
-					 echo -e "Backup feito com sucesso!!!"
-					 sleep 2
-					 
-					 #Atualizando para o novo arquivo de configuração
-					 cp -v conf/ocsinventory-reports.conf /etc/apache2/conf-available/ &>> $LOG
-					 echo -e "Atualização feita com sucesso!!!"
-					 sleep 2
-					 
-					 #Editando o arquivo de configuração
-					 vim /etc/apache2/conf-available/ocsinventory-reports.conf
-					 
-					 echo -e "Arquivo editado com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
-					 echo -e "Editando o arquivo do OCS Inventory Server DBConfig dbconfig.inc.php, pressione <Enter> para continuar"
-					 read
-					 
-					 #Arquivo de configuração para conexão com o Banco de Dados do MySQL
-					 #Configuração das variáveis de usuário e senha do banco de dados: database name (ocsweb) e user (ocs)
-					 #Esse arquivo será recriado novamente após a instalação via navegador
-					 #Fazendo o backup do arquivo de configuração original
-					 mv -v /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php.bkp &>> $LOG
-					 echo -e "Backup feito com sucesso!!!"
-					 sleep 2
-					 
-					 #Atualizando para o novo arquivo de configuração
-					 cp -v conf/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/ &>> $LOG
-					 echo -e "Atualização feita com sucesso!!!"
-					 sleep 2
-					 
-					 #Editando o arquivo de configuração
-					 vim /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php
-					 
-					 #Reinicializando o Apache2
-					 sudo service apache2 restart
-					 echo -e "Apache2 reinicializado com sucesso!!!"
-					 sleep 2
-					 
-					 echo -e "Arquivo editado com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-
-					 echo ============================================================ >> $LOG
-
-					 echo -e "Fim do $LOGSCRIPT em: `date`" >> $LOG
-					 echo -e "Finalização da Pós-Instalação do OCS Inventory Server Feito com Sucesso!!!!!"
-					 echo
-					 # Script para calcular o tempo gasto para a execução do ocs_server.sh
-						 DATAFINAL=`date +%s`
-						 SOMA=`expr $DATAFINAL - $DATAINICIAL`
-						 RESULTADO=`expr 10800 + $SOMA`
-						 TEMPO=`date -d @$RESULTADO +%H:%M:%S`
-					 echo -e "Tempo gasto para execução do ocs_server.sh: $TEMPO"
-					 echo -e "Pressione <Enter> para reinicializar o servidor: `hostname`"
-					 read
-					 sleep 2
-					 reboot
-					 else
-						 echo -e "Versão do Kernel: $KERNEL não homologada para esse script, versão: >= 4.4 "
-						 echo -e "Pressione <Enter> para finalizar o script"
-						 read
-			fi
-	 	 else
-			 echo -e "Distribuição GNU/Linux: `lsb_release -is` não homologada para esse script, versão: $UBUNTU"
-			 echo -e "Pressione <Enter> para finalizar o script"
-			 read
-	fi
-else
-	 echo -e "Usuário não é ROOT, execute o comando com a opção: sudo -i <Enter> depois digite a senha do usuário `whoami`"
-	 echo -e "Pressione <Enter> para finalizar o script"
-	read
+# Exportando o recurso de Noninteractive do Debconf para não solicitar telas de configuração
+export DEBIAN_FRONTEND="noninteractive"
+#
+# Verificando se o usuário é Root, Distribuição é >=16.04 e o Kernel é >=4.4 <IF MELHORADO)
+# opção do comando if: [ ] = teste de expressão, && = operador lógico AND, == comparação de string, exit 1 = 
+# A maioria dos erros comuns na execução
+clear
+if [ "$USUARIO" == "0" ] && [ "$UBUNTU" == "16.04" ] && [ "$KERNEL" == "4.4" ]
+	then
+		echo -e "O usuário é Root, continuando com o script..."
+		echo -e "Distribuição é >=16.04.x, continuando com o script..."
+		echo -e "Kernel é >= 4.4, continuando com o script..."
+		sleep 5
+	else
+		echo -e "Usuário não é Root ($USUARIO) ou Distribuição não é >=16.04.x ($UBUNTU) ou Kernel não é >=4.4 ($KERNEL)"
+		echo -e "Caso você não tenha executado o script com o comando: sudo -i"
+		echo -e "Execute novamente o script para verificar o ambiente."
+		exit 1
 fi
+#
+# Script de instalação do OCS Inventory Server e Reports no GNU/Linux Ubuntu Server 16.04.x
+# opção do comando: &>> (redirecionar a saída padrão)
+# opção do comando echo: -e (enable interpretation of backslash escapes), \n (new line)
+# opção do comando date: + (format), %d (day), %m (month), %Y (year 1970), %H (hour 24), %M (minute 60)
+echo -e "Início do script $0 em: `date +%d/%m/%Y-"("%H:%M")"`\n" &>> $LOG
+clear
+#
+echo -e "Alterando a senha e permissões do usuário ocs do MySQL, pressione <Enter> para continuar"
+read
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando mysql: -u (user), -p (password), -e (execute)
+	mysql -u $USER -p$PASSWORD -e "$SETOCSPWD" mysql &>> $LOG
+	mysql -u $USER -p$PASSWORD -e "$FLUSH" mysql &>> $LOG
+echo -e "Senha e permissões do usuário ocs alteradas com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Removendo o arquivo install.php do OCS Reports, pressione <Enter> para continuar"
+read
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando mv: -v (verbose)
+	mv -v /usr/share/ocsinventory-reports/ocsreports/install.php /usr/share/ocsinventory-reports/ocsreports/install.php.bkp &>> $LOG
+echo -e "Arquivo removido com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Atualizando os arquivos de configuração do OCS Inventory Server"
+echo
+echo -e "Editando o arquivo do OCS Inventory Server z-ocsinventory-server.conf, pressione <Enter> para continuar"
+read
+sleep 2
+#
+echo -e "Fazendo o backup do arquivo de configuração do OCS Inventory Server, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando mv: -v (verbose)
+	mv -v /etc/apache2/conf-available/z-ocsinventory-server.conf /etc/apache2/conf-available/z-ocsinventory-server.conf.bkp &>> $LOG
+echo -e "Backup do arquivo de configuração do OCS Inventory Server feito com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Atualizando do arquivo de configuração do OCS Inventory Server, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando cp: -v (verbose)
+	cp -v conf/z-ocsinventory-server.conf /etc/apache2/conf-available/ &>> $LOG
+echo -e "Atualização do arquivo de configuração do OCS Inventory Server feita com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Editando do arquivo de configuração do OCS Inventory Server, aguarde..."
+sleep 2
+	vim /etc/apache2/conf-available/z-ocsinventory-server.conf
+echo -e "Arquivo de configuração do OCS Inventory Server editado com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Editando o arquivo do OCS Inventory RestApti zz-ocsinventory-restapi.conf, pressione <Enter> para continuar"
+read
+sleep 2
+#
+echo -e "Fazendo o backup do arquivo de configuração do OCS Inventory RestApi, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando mv: -v (verbose)
+	mv -v /etc/apache2/conf-available/zz-ocsinventory-restapi.conf /etc/apache2/conf-available/zz-ocsinventory-restapi.conf.bkp &>> $LOG
+echo -e "Backup do arquivo de configuração do OCS Inventory RestApi feito com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Atualizando do arquivo de configuração do OCS Inventory RestApi, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando cp: -v (verbose)
+	cp -v conf/zz-ocsinventory-restapi.conf /etc/apache2/conf-available/ &>> $LOG
+echo -e "Atualização do arquivo de configuração do OCS Inventory RestApi feita com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Editando do arquivo de configuração do OCS Inventory RestApti, aguarde..."
+sleep 2
+	vim /etc/apache2/conf-available/zz-ocsinventory-restapi.conf
+echo -e "Arquivo de configuração do OCS Inventory RestApi editado com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Editando o arquivo do OCS Inventory Reports ocsinventory-reports.conf, pressione <Enter> para continuar"
+read
+sleep 2
+#
+echo -e "Fazendo o backup do arquivo de configuração do OCS Inventory Reports, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando mv: -v (verbose)
+	mv -v /etc/apache2/conf-available/ocsinventory-reports.conf /etc/apache2/conf-available/ocsinventory-reports.conf.bkp &>> $LOG
+echo -e "Backup do arquivo de configuração do OCS Inventory Reports feito com sucesso!!!, continuando com o script.."
+sleep 2
+echo
+#
+echo -e "Atualizando do arquivo de configuração do OCS Inventory Reports, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando cp: -v (verbose)
+	cp -v conf/ocsinventory-reports.conf /etc/apache2/conf-available/ &>> $LOG
+echo -e "Atualização do arquivo de configuração do OCS Inventory Reports feita com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Editando do arquivo de configuração do OCS Inventory Reports, aguarde..."
+sleep 2
+	vim /etc/apache2/conf-available/ocsinventory-reports.conf
+echo -e "Arquivo de configuração do OCS Inventory Reports editado com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Editando o arquivo do OCS Inventory Server DBConfig dbconfig.inc.php, pressione <Enter> para continuar"
+read
+sleep 2
+#
+echo -e "Fazendo o backup do arquivo de configuração do OCS Inventory Reports DBConfig, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando mv: -v (verbose)
+	mv -v /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php.bkp &>> $LOG
+echo -e "Backup do arquivo de configuração do OCS Inventory Reports DBConfig feito com sucesso!!!, continuando com o script.."
+sleep 2
+echo
+#
+echo -e "Atualizando do arquivo de configuração do OCS Inventory Reports DBConfig, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando cp: -v (verbose)
+	cp -v conf/dbconfig.inc.php /usr/share/ocsinventory-reports/ocsreports/ &>> $LOG
+echo -e "Atualização do arquivo de configuração do OCS Inventory Reports DBConfig feita com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Editando do arquivo de configuração do OCS Inventory Reports DBConfig, aguarde..."
+sleep 2
+	vim /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php
+echo -e "Arquivo de configuração do OCS Inventory Reports DBConfig editado com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Reinicializando o serviço do Apache2, aguarde..."
+	sudo service apache2 restart
+echo -e "Serviço do Apache2 reinicializado com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Finalização da Pós-Instalação do OCS Inventory Server Feito com Sucesso!!!!!"
+echo -e "Após a configuração acessar a URL: http://`hostname`/ocsreports para verificar as mudanças do OCS Inventory"
+echo
+	# script para calcular o tempo gasto (SCRIPT MELHORADO, CORRIGIDO FALHA DE HORA:MINUTO:SEGUNDOS)
+	# opção do comando date: +%T (Time)
+	HORAFINAL=`date +%T`
+	# opção do comando date: -u (utc), -d (date), +%s (second since 1970)
+	HORAINICIAL01=$(date -u -d "$HORAINICIAL" +"%s")
+	HORAFINAL01=$(date -u -d "$HORAFINAL" +"%s")
+	# opção do comando date: -u (utc), -d (date), 0 (string command), sec (force second), +%H (hour), %M (minute), %S (second), 
+	TEMPO=`date -u -d "0 $HORAFINAL01 sec - $HORAINICIAL01 sec" +"%H:%M:%S"`
+	# $0 (variável de ambiente do nome do comando)
+	echo -e "Tempo gasto para execução do script $0: $TEMPO"
+echo -e "Pressione <Enter> para concluir a configuração do servidor: `hostname`"
+# opção do comando date: + (format), %d (day), %m (month), %Y (year 1970), %H (hour 24), %M (minute 60)
+echo -e "Fim do script $0 em: `date +%d/%m/%Y-"("%H:%M")"`\n" &>> $LOG
+read
+sleep 2
