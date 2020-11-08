@@ -5,12 +5,10 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 11/06/2019
-# Versão: 0.14
+# Data de atualização: 07/08/2020
+# Versão: 0.15
 # Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
 # Kernel >= 4.4.x
-#
-# Instalação dos pacotes principais para a primeira etapa, indicado para a distribuição GNU/Linux Ubuntu Server 16.04.x LTS x64
 #
 # Atualização das listas do Apt-Get
 # Atualização dos Aplicativos Instalados
@@ -19,131 +17,139 @@
 # Limpeza do repositório Local do Apt-Get
 # Reinicialização do Servidor
 #
-# Utilizar o comando: sudo -i para executar o script
-#
-
 # Arquivo de configuração dos parâmetros
 source 00-parametros.sh
 #
-
 # Caminho do arquivo para o Log do script
 LOG=$VARLOGPATH/$LOGSCRIPT
 #
-
 # Verificação da criação do Diretório de Log, usado somente no script de atualização
+# opção do comando: echo: -e (interpretador de escapes de barra invertida)
+# opção do comando if: [ ] = testa uma expressão, -e = testa se é diretório existe
+echo -e "Verificando se o diretório de Log existe, aguarde...\n"
 if [ -e "$VARLOGPATH" ]; then
 	echo -e "Diretório: $VARLOGPATH já existe, continuando com o script"
 	sleep 3
 else
-	echo -e "Diretório: $VARLOGPATH não existe, criando o diretório..."
-	mkdir $VARLOGPATH
-	echo -e "Diretório criado com sucesso!!!, continuando com o script"
+	echo -e "Diretório: $VARLOGPATH não existe, criando o diretório, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando mkdir: -v (verbose)
+	mkdir -v $VARLOGPATH &>> $LOG
+	echo -e "Diretório criado com sucesso!!!, continuando com o script..."
 	sleep 3
 fi
-
-
-if [ "$USUARIO" == "0" ]
-then
-	if [ "$UBUNTU" == "16.04" ]
-		then
-			if [ "$KERNEL" == "4.4" ]
-				then
-					 clear
-					 echo -e "Usuário é `whoami`, continuando a executar o $LOGSCRIPT"
-					 echo
-					 echo -e "Atualização das Listas do Apt-Get"
-					 echo -e "Atualização dos Aplicativos Instalados"
-					 echo -e "Atualização da Distribuição Ubuntu Server (Kernel)"
-					 echo -e "Remoção dos aplicativos desnecessários"
-					 echo -e "Limpando o repositório Local do Apt-Get (Cache)"
-					 echo
-					 echo -e "Após o término o Servidor será reinicializado"
-					 echo
-					 echo  ============================================================ >> $LOG
-					 
-					 echo -e "Atualizando as listas do Apt-Get, aguarde..."
-					 
-					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
-					 export DEBIAN_FRONTEND=noninteractive
-					 
-					 #Atualizando as listas do apt-get
-					 apt-get update &>> $LOG
-					 
-					 echo -e "Listas atualizadas com sucesso!!!, continuando com o script"
-					 echo
-					 echo  ============================================================ >> $LOG
-
-					 echo -e "Atualizando os pacotes instalados, aguarde..."
-					 
-					 #Fazendo a atualização de todos os pacotes instalados no servidor
-					 apt-get -o Dpkg::Options::="--force-confold" upgrade -q -y --force-yes &>> $LOG
-					 
-					 echo -e "Pacotes atualizados com sucesso!!!, continuando com o script"
-					 echo
-					 echo  ============================================================ >> $LOG
-
-					 echo -e "Atualizando a distribuição é o Kernel, aguarde..."
-					 echo -e "Kernel atual: `uname -r`"
-					 
-					 #Fazendo a atualização da distribuição e do Kernel
-					 apt-get -o Dpkg::Options::="--force-confold" dist-upgrade -q -y --force-yes &>> $LOG
-					 
-					 echo
-					 echo -e "Distribuição e Kernel atualizados, versões instaladas."
-					 #Listando os pacotes instalados, filtrando por palavras, cortando por colunas.
-					 dpkg --list | grep linux-image-4.4 | cut -d' ' -f 3
-					 
-					 echo -e "Distribuição e Kernel atualizadas com sucesso!!!, continuando com o script"
-					 echo
-					 echo ============================================================ >> $LOG
-
-					 echo -e "Remoção dos aplicativos desnecessários, aguarde..."
-					 
-					 #Fazendo a autoremoção de aplicativas instalados
-					 apt-get -y autoremove &>> $LOG
-					 apt-get -y autoclean &>> $LOG
-					 
-					 echo -e "Remoção dos aplicativos concluída com sucesso!!!, continuando com o script"
-					 echo
-					 echo ============================================================ >> $LOG
-					 echo >> $LOG
-					 
-					 echo -e "Limpando o cache do Apt-Get, aguarde..."
-					 
-					 #Limpando o diretório de cache do apt-get
-					 apt-get clean &>> $LOG
-					 
-					 echo -e "Cache limpo com sucesso!!!, continuando com o script"
-					 echo
-					 echo ============================================================ >> $LOG
-					 echo >> $LOG
-					 echo -e "Fim do $LOGSCRIPT em: `date`" >> $LOG
-
-					 echo
-					 echo -e "Atualização das Listas, Atualização dos Aplicativos e Atualização do Kernel feito com sucesso!!!!!"
-					 echo
-					 # Script para calcular o tempo gasto para a execução
-						 DATAFINAL=`date +%s`
-						 SOMA=`expr $DATAFINAL - $DATAINICIAL`
-						 RESULTADO=`expr 10800 + $SOMA`
-						 TEMPO=`date -d @$RESULTADO +%H:%M:%S`
-					 echo -e "Tempo gasto para execução do 01-update.sh: $TEMPO"
-					 echo -e "Pressione <Enter> para reinicializar o servidor: `hostname`"
-					 read
-					 sleep 2
-					 reboot
-					 else
-						 echo -e "Versão do Kernel: $KERNEL não homologada para esse script, versão: >= 4.4 "
-						 echo -e "Pressione <Enter> para finalizar o script"
-						 read
-			fi
-	 	 else
-			 echo -e "Distribuição GNU/Linux: `lsb_release -is` não homologada para esse script, versão: $UBUNTU"
-			 echo -e "Pressione <Enter> para finalizar o script"
-			 read
-	fi
-else
-	 echo -e "Usuário não é ROOT, execute o comando com a opção: sudo -i <Enter> depois digite a senha do usuário `whoami`"
-	 echo -e "Pressione <Enter> para finalizar o script"
-	read
+#
+# Exportando o recurso de Noninteractive do Debconf para não solicitar telas de configuração
+export DEBIAN_FRONTEND="noninteractive"
+#
+# Verificando se o usuário é Root, Distribuição é >=16.04 e o Kernel é >=4.4 <IF MELHORADO)
+# opção do comando if: [ ] = teste de expressão, && = operador lógico AND, == comparação de string, exit 1 = 
+# A maioria dos erros comuns na execução
+clear
+if [ "$USUARIO" == "0" ] && [ "$UBUNTU" == "16.04" ] && [ "$KERNEL" == "4.4" ]
+	then
+		echo -e "O usuário é Root, continuando com o script..."
+		echo -e "Distribuição é >=16.04.x, continuando com o script..."
+		echo -e "Kernel é >= 4.4, continuando com o script..."
+		sleep 5
+	else
+		echo -e "Usuário não é Root ($USUARIO) ou Distribuição não é >=16.04.x ($UBUNTU) ou Kernel não é >=4.4 ($KERNEL)"
+		echo -e "Caso você não tenha executado o script com o comando: sudo -i"
+		echo -e "Execute novamente o script para verificar o ambiente."
+		exit 1
 fi
+#
+# Script de atualização do GNU/Linux Ubuntu Server 16.04.x
+# opção do comando: &>> (redirecionar a saída padrão)
+# opção do comando echo: -e (enable interpretation of backslash escapes), \n (new line)
+# opção do comando hostname: -I (all IP address)
+# opção do comando date: + (format), %d (day), %m (month), %Y (year 1970), %H (hour 24), %M (minute 60)
+echo -e "Início do script $0 em: `date +%d/%m/%Y-"("%H:%M")"`\n" &>> $LOG
+clear
+#
+echo -e "Usuário é `whoami`, continuando a executar o $LOGSCRIPT\n"
+echo -e "Atualização das Listas do Apt-Get"
+echo -e "Atualização dos Aplicativos Instalados"
+echo -e "Atualização da Distribuição Ubuntu Server (Kernel)"
+echo -e "Remoção dos aplicativos desnecessários"
+echo -e "Limpando o repositório Local do Apt-Get (Cache)"
+echo
+echo -e "Após o término o Servidor será reinicializado, aguarde..."
+echo
+#
+echo -e "Adicionando o Repositório Universal do Apt, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	add-apt-repository universe &>> $LOG
+echo -e "Repositório adicionado com sucesso!!!, continuando com o script..."
+sleep 5
+echo
+#
+echo -e "Adicionando o Repositório Multiversão do Apt, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	add-apt-repository multiverse &>> $LOG
+echo -e "Repositório adicionado com sucesso!!!, continuando com o script..."
+sleep 5
+echo
+#
+echo -e "Atualizando as listas do Apt, aguarde..."
+	#opção do comando: &>> (redirecionar a saída padrão)
+	apt-get update &>> $LOG
+echo -e "Listas atualizadas com sucesso!!!, continuando com o script..."
+sleep 5
+echo
+#
+echo -e "Atualizando os pacotes instalados, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando apt-get: -o (options), -q (quiet), -y (yes)
+	apt-get -o Dpkg::Options::="--force-confold" upgrade -q -y --force-yes &>> $LOG
+echo -e "Pacotes atualizados com sucesso!!!, continuando com o script..."
+sleep 5
+echo
+#
+echo -e "Atualizando a distribuição é o Kernel, aguarde..."
+echo -e "Kernel atual: `uname -r`"
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando apt-get: -o (options), -q (quiet), -y (yes)
+	# opção do comando uname: -r (kernel release)
+	apt-get -o Dpkg::Options::="--force-confold" dist-upgrade -q -y --force-yes &>> $LOG
+echo -e "Distribuição e Kernel atualizados, versões instaladas.\n"
+	# opção do comando cut: -d (delimiter), -f (fields)
+	dpkg --list | grep linux-image-4.4 | cut -d' ' -f 3
+echo -e "Distribuição e Kernel atualizadas com sucesso!!!, continuando com o script..."
+sleep 5
+echo
+#
+echo -e "Remoção dos aplicativos desnecessários, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando apt-get: -y (yes)
+	apt-get -y autoremove &>> $LOG
+	apt-get -y autoclean &>> $LOG
+echo -e "Remoção dos aplicativos concluída com sucesso!!!, continuando com o script..."
+sleep 5
+echo
+#
+echo -e "Limpando o cache do Apt-Get, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando apt-get: -y (yes)
+	apt-get clean &>> $LOG
+echo -e "Cache limpo com sucesso!!!, continuando com o script..."
+sleep 5
+echo
+#
+echo -e "Atualização das Listas, Aplicativos e do Kernel feito com sucesso!!!!!"
+	# script para calcular o tempo gasto (SCRIPT MELHORADO, CORRIGIDO FALHA DE HORA:MINUTO:SEGUNDOS)
+	# opção do comando date: +%T (Time)
+	HORAFINAL=`date +%T`
+	# opção do comando date: -u (utc), -d (date), +%s (second since 1970)
+	HORAINICIAL01=$(date -u -d "$HORAINICIAL" +"%s")
+	HORAFINAL01=$(date -u -d "$HORAFINAL" +"%s")
+	# opção do comando date: -u (utc), -d (date), 0 (string command), sec (force second), +%H (hour), %M (minute), %S (second), 
+	TEMPO=`date -u -d "0 $HORAFINAL01 sec - $HORAINICIAL01 sec" +"%H:%M:%S"`
+	# $0 (variável de ambiente do nome do comando)
+	echo -e "Tempo gasto para execução do script $0: $TEMPO"
+echo -e "Pressione <Enter> para reinicializar o servidor: `hostname`"
+# opção do comando date: + (format), %d (day), %m (month), %Y (year 1970), %H (hour 24), %M (minute 60)
+echo -e "Fim do script $0 em: `date +%d/%m/%Y-"("%H:%M")"`\n" &>> $LOG
+read
+sleep 2
+reboot

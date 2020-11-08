@@ -4,14 +4,18 @@ Facebook: facebook.com/ProcedimentosEmTI
 Facebook: facebook.com/BoraParaPratica
 YouTube: youtube.com/BoraParaPratica
 Data de criação: 11/12/2018
-Data de atualização: 15/07/2019
-Versão: 0.11
+Data de atualização: 08/11/2020
+Versão: 0.12
 Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 Testado e homologado para a versão do Ubuntu Server 16.04.5 LTS x64
 Testado e homologado para a versão do Ubuntu Server 16.04.6 LTS x64
 Kernel >= 4.4.x
 
 ==================================== ATUALIZAÇÕES DO OCS INVENTORY ===========================================
+
+08/11/2020 - Robson Vaamonde - Atualização do arquivo 00-parametros.sh com as versões novas do OCS, GLPI e Fusion.
+08/11/2020 - Robson Vaamonde - Atualização de todos os scripts, melhorias na documentação e correção de dependências.
+08/11/2020 - Robson Vaamonde - Homologação para a versão 16.04.7 LTS do Ubuntu Server
 
 15/07/2019 - Robson Vaamonde - Atualização do arquivo 02-lamp.sh, acréscimo da dependência nova do Netdata para monitorar
 o MySQL Server: python-mysqldb.
@@ -44,10 +48,10 @@ do Cron.
 14/06/2019 - Robson Vaamonde - Criação do arquivo req.conf para gerar certificados SSL com Múltiplos Domínios FQDN.
 14/06/2019 - Robosn Vaamonde - Atualização do arquivo 02-lamp.sh adicionado as dependências do Netdata mysql-client e 
 python-pymsql.
-14/06/2019 - Robson Vaamonde - Atualização do arquivo 07-netdata.sh remoção da instalação do pip e seus dependêncais.
+14/06/2019 - Robson Vaamonde - Atualização do arquivo 07-netdata.sh remoção da instalação do pip e seus dependências.
 
 13/06/2019 - Robson Vaamonde - Atualização do arquivo 02-lamp.sh com a nova dependência do GLPI php-cas.
-13/06/2019 - Robson Vaamonde - Atualização da versão do GLPI para 9.4.2 e Pluguin do OCS Inventory para 1.6.0.
+13/06/2019 - Robson Vaamonde - Atualização da versão do GLPI para 9.4.2 e Plugin do OCS Inventory para 1.6.0.
 13/06/2019 - Robson Vaamonde - Atualização do arquivo 02-lamp.sh acréscimo da nova dependência do Perl perl -MCPAN -e 'install
 Mojolicious::Lite'.
 13/06/2019 - Robson Vaamonde - Atualização da versão do Agent do OCS Inventory para 2.4.2.
