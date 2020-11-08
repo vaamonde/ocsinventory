@@ -52,7 +52,6 @@ APP_PASS="123456"
 # Github: https://github.com/OCSInventory-NG/OCSInventory-ocsreports/releases
 # Versão antiga utilizada no vídeo: 2.4/OCSNG_UNIX_SERVER_2.4.tar.gz
 # Versão atualizada para 2.6 no dia 11/06/2019 - verificar arquivo CHANGELOG
-# Atualização para a versão 2.7 no dia 07/08/2020 - verificar arquivo CHANGELOG
 # Atualização para a versão 2.8 no dia 08/11/2020 - verificar arquivo CHANGELOG
 OCSVERSION="2.8/OCSNG_UNIX_SERVER_2.8.tar.gz"
 OCSTAR="OCSNG_UNIX_SERVER_2.8.tar.gz"
@@ -63,7 +62,6 @@ OCSINSTALL="OCSNG_UNIX_SERVER_2.8"
 # Github: https://github.com/OCSInventory-NG/UnixAgent/releases
 # Versão antiga utilizada no vídeo: 2.3/Ocsinventory-Unix-Agent-2.3.tar.gz
 # Versão atualizada para 2.4.2 no dia 13/06/2019 - verificar arquivo CHANGELOG
-# Atualização para a versão 2.5 no dia 07/08/2020 - verificar arquivo CHANGELOG
 # Atualização para a versão 2.8 no dia 08/11/2020 - verificar arquivo CHANGELOG
 OCSAGENTVERSION="v2.8.0/Ocsinventory-Unix-Agent-2.8.0.tar.gz"
 OCSAGENTTAR="Ocsinventory-Unix-Agent-2.8.0.tar.gz"
@@ -74,7 +72,6 @@ OCSAGENTINSTALL="Ocsinventory-Unix-Agent-2.8.0"
 # Github: https://github.com/glpi-project/glpi/releases
 # Versão antiga utilizada no vídeo: 9.2.1/glpi-9.2.1.tgz
 # Versão atualizada para 9.4.2 no dia 13/06/2019 - verificar arquivo CHANGELOG
-# Atualização para a versão 9.5 no dia 07/08/2020 - verificar arquivo CHANGELOG
 # Atualização para a versão 9.5.2 no dia 08/11/2020 - verificar arquivo CHANGELOG
 GLPIVERSION="9.5.2/glpi-9.5.2.tgz"
 GLPITAR="glpi-9.5.2.tgz"
@@ -84,8 +81,7 @@ GLPIINSTALL="glpi"
 # Site: https://github.com/pluginsGLPI/ocsinventoryng/releases
 # Versão antiga utilizada no vídeo: 1.4.2/glpi-ocsinventoryng-1.4.2.tar.gz
 # Versão atualizada para 1.6.0 no dia 13/06/2019 - verificar arquivo CHANGELOG
-# Atualização para a versão 2.7 no dia 07/08/2020 - verificar arquivo CHANGELOG
-# Atualização para a versão 1.71 no dia 08/11/2020 - verificar arquivo CHANGELOG
+# Atualização para a versão 1.7.1 no dia 08/11/2020 - verificar arquivo CHANGELOG
 GLPIOCSVERSION="1.7.1/glpi-ocsinventoryng-1.7.1.tar.gz"
 GLPIOCSTAR="glpi-ocsinventoryng-1.7.1.tar.gz"
 GLPIOCSINSTALL="ocsinventoryng"

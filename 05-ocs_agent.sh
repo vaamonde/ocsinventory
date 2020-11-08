@@ -165,6 +165,7 @@ echo -e "Fazendo o backup do arquivo de configuração do OCS Inventory Agent, a
 	mv -v /etc/ocsinventory-agent/ocsinventory-agent.cfg /etc/ocsinventory-agent/ocsinventory-agent.cfg.bkp &>> $LOG
 echo -e "Backup do arquivo de configuração do OCS Inventory Agent feito com sucesso!!!, continuando com o script..."
 sleep 2
+echo
 #
 echo -e "Atualizando do arquivo de configuração do OCS Inventory Agent, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
@@ -181,9 +182,10 @@ echo -e "Arquivo de configuração do OCS Inventory Agent editado com sucesso!!!
 sleep 2
 echo
 #
-echo -e "Forçando inventário do OCS Inventory Agent, aguarde..."
+echo -e "Forçando o inventário do OCS Inventory Agent, aguarde..."
 sleep 2
-	ocsinventory-agent
+	# opção do comando: &>> (redirecionar a saída padrão)
+	ocsinventory-agent &>> $LOG
 echo -e "Inventário do OCS Inventory Agent feito com sucesso!!!, continuando com o script..."
 sleep 2
 echo
@@ -191,6 +193,8 @@ echo
 echo -e "Editando o arquivo do Agendamento do OCS Inventory Agent ocsinventory-agent, pressione <Enter> para continuar"
 read
 sleep 2
+echo
+#
 echo -e "Atualizando do arquivo de agendamento do OCS Inventory Agent, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando cp: -v (verbose)
