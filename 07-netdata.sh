@@ -10,7 +10,8 @@
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
-# Instalação e configuração do sistema de monitoramento em Tempo Real do Netdata
+# Instalação e configuração do sistema de monitoramento em Tempo Real do Netdata, instalação das dependências, configuração do monitoramento do
+# MySQL
 #
 # Arquivo de configuração dos parâmetros
 source 00-parametros.sh
@@ -64,6 +65,14 @@ echo -e "Pacotes atualizados com sucesso!!!, continuando com o script..."
 sleep 2
 echo
 #
+echo -e "Instalação das dependências do Netdata, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando apt-get: -o (options), -q (quiet), -y (yes)
+	apt-get -y install uuid-dev libuuid1 zlib1g zlib1g-dev gcc make autoconf2.64 automake pkg-config cmake libuv1-dev &>> $LOG
+echo -e "Instalação das dependências do Netdata feito com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
 echo -e "Removendo o arquivo install do GLPI Help Desk da etapa 06-glpi.sh, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando mv: v (verbose)
@@ -79,11 +88,10 @@ sleep 2
 echo
 #
 echo -e "Acessando o diretório do Netdata e fazendo a sua compilação, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando echo |: faz a função de Enter no Script
 	cd $NETDATAINSTALL
-	./netdata-installer.sh
-	#MENSAGENS QUE SERÃO SOLICITADAS NA INSTALAÇÃO DO NETDATA
-	#Press ENTER to build and install netdata to your system? <-- pressione <Enter>
-	#Saindo do diretório do Netdata
+	echo | ./netdata-installer.sh &>> $LOG
 	cd ..
 	echo
 echo -e "Instalação do Netdata feita com sucesso!!!, pressione <Enter> para continuar"
