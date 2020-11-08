@@ -80,7 +80,7 @@ echo -e "Descompactando o arquivo OCS Inventory, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando: tar z (gzip), x (extract), v (verbose) e f (file)
 	tar -zxvf $OCSTAR &>> $LOG
-echo -e "Arquivo descompactado com sucesso!!!, continuando com o script..."
+echo -e "Arquivo do OCS Inventory descompactado com sucesso!!!, continuando com o script..."
 sleep 2
 echo
 #

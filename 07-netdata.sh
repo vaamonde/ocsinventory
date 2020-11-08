@@ -10,142 +10,168 @@
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
-# Instalação do Netdata
+# Instalação e configuração do sistema de monitoramento em Tempo Real do Netdata
 #
-# Utilizar o comando: sudo -i para executar o script
-#
-
-# Arquivo de configuração de parâmetros
+# Arquivo de configuração dos parâmetros
 source 00-parametros.sh
 #
-
-# Caminho para o Log do script
+# Caminho do arquivo para o Log do script
 LOG=$VARLOGPATH/$LOGSCRIPT
 #
-
-if [ "$USUARIO" == "0" ]
-then
-	if [ "$UBUNTU" == "16.04" ]
-		then
-			if [ "$KERNEL" == "4.4" ]
-				then
-					 clear
-					 
-					 echo -e "Usuário é `whoami`, continuando a executar o $LOGSCRIPT"
-					 #Exportando a variável do Debian Frontend Noninteractive para não solicitar interação com o usuário
-					 export DEBIAN_FRONTEND=noninteractive
-					 echo
-					 echo  ============================================================ >> $LOG
-					 
-					 echo -e "Instalação do sistema de monitoramente em tempo real Netdata"
-					 echo -e "Após a instalação acessar a URL http://`hostname`:19999"
-					 echo -e "Pressione <Enter> para instalar"
-					 read
-					 sleep 2
-					 echo
-					 
-					 echo -e "Removendo o arquivo install do GLPI"
-					 #Removendo o diretório install do GLPI
-					 mv -v /var/www/html/glpi/install /var/www/html/glpi/install.bkp &>> $LOG
-					 echo -e "Arquivo removido com sucesso!!!"
-					 
-					 echo -e "Clonando o Netdata"
-					 #Clonando o site do GitHub do Netdata
-					 git clone https://github.com/firehol/$NETDATAVERSION --depth=1 &>> $LOG
-					 
-					 echo -e "Clonagem do software do Netdata feito com sucesso!!!"
-					 echo
-					 
-					 echo -e "Acessando o diretório do Netdata"
-					 #Acessando o diretório do Netdata
-					 cd $NETDATAINSTALL
-					 
-					 #Compilando e instalando o Netdata
-					 echo -e "Pressione <Enter> para compilar o software do NetData"
-					 echo
-					 read
-					 
-					 #Executando o script de instalação do Netdata
-					 ./netdata-installer.sh
-					 
-					 #MENSAGENS QUE SERÃO SOLICITADAS NA INSTALAÇÃO DO NETDATA
-					 #Press ENTER to build and install netdata to your system? <-- pressione <Enter>
-					 #Saindo do diretório do Netdata
-					 cd ..
-					 
-					 echo
-					 echo -e "Instalação do Netdata feita com sucesso!!!, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
-					 echo -e "Atualizando o arquivo de configuração do MySQL para acesso as informações via Netdata, pressione <Enter> para continuar"
-					 read
-					 sleep 2
-					 clear
-					 
-					 echo -e "Fazendo o backup das configurações"
-					 #Fazendo o backup das configurações do arquivo do mysql.conf
-					 mv -v /etc/netdata/python.d/mysql.conf /etc/netdata/python.d/mysql.conf.old &>> $LOG
-					 echo -e "Backup feito com sucesso!!!"
-					 
-					 echo
-					 
-					 echo -e "Atualizando o arquivo de configuração"
-					 #Fazendo a atualização do arquivo de configuração do MySQL
-					 cp -v conf/mysql.conf /etc/netdata/python.d/ &>> $LOG
-					 echo -e "Arquivo atualizado com sucesso!!!"
-					 
-					 echo
-					 
-					 echo -e "Alterando as permissões do arquivo Mysql.conf"
-					 #Alterando o dono/grupo do arquivo
-					 chown -v netdata.netdata /etc/netdata/python.d/mysql.conf &>> $LOG
-					 #Alterando as permissões de acesso ao arquivo
-					 chmod -v 660 /etc/netdata/python.d/mysql.conf &>> $LOG
-					 echo -e "Permissões alteradas com sucesso!!!"
-					 
-					 echo
-					 
-					 echo -e "Editando o arquivo de configuração do MySQL"
-					 sleep 2
-					 #Editando o arquivo de configuração do mysqlconf
-					 vim /etc/netdata/python.d/mysql.conf
-					 
-					 echo -e "Reinicializando o serviço do Netdata"
-					 #Reinicializando o serviços do Netdata
-					 sudo service netdata restart
-					 
-					 echo -e "Arquivo editado com sucesso!!!, pressione <Enter> para continuar."
-					 read
-					 sleep 2
-					 clear
-					 
-					 echo -e "Fim do $LOGSCRIPT em: `date`" >> $LOG
-					 echo -e "Instalação do Netdata feito com Sucesso!!!!!"
-					 echo
-					 # Script para calcular o tempo gasto para a execução do netdata.sh
-						 DATAFINAL=`date +%s`
-						 SOMA=`expr $DATAFINAL - $DATAINICIAL`
-						 RESULTADO=`expr 10800 + $SOMA`
-						 TEMPO=`date -d @$RESULTADO +%H:%M:%S`
-					 echo -e "Tempo gasto para execução do netdata.sh: $TEMPO"
-					 echo -e "Pressione <Enter> para reinicializar o servidor: `hostname`"
-					 read
-					 sleep 2
-					 reboot
-					 else
-						 echo -e "Versão do Kernel: $KERNEL não homologada para esse script, versão: >= 4.4 "
-						 echo -e "Pressione <Enter> para finalizar o script"
-						 read
-			fi
-	 	 else
-			 echo -e "Distribuição GNU/Linux: `lsb_release -is` não homologada para esse script, versão: $UBUNTU"
-			 echo -e "Pressione <Enter> para finalizar o script"
-			 read
-	fi
-else
-	 echo -e "Usuário não é ROOT, execute o comando com a opção: sudo -i <Enter> depois digite a senha do usuário `whoami`"
-	 echo -e "Pressione <Enter> para finalizar o script"
-	read
+# Exportando o recurso de Noninteractive do Debconf para não solicitar telas de configuração
+export DEBIAN_FRONTEND="noninteractive"
+#
+# Verificando se o usuário é Root, Distribuição é >=16.04 e o Kernel é >=4.4 <IF MELHORADO)
+# opção do comando if: [ ] = teste de expressão, && = operador lógico AND, == comparação de string, exit 1 = 
+# A maioria dos erros comuns na execução
+clear
+if [ "$USUARIO" == "0" ] && [ "$UBUNTU" == "16.04" ] && [ "$KERNEL" == "4.4" ]
+	then
+		echo -e "O usuário é Root, continuando com o script..."
+		echo -e "Distribuição é >=16.04.x, continuando com o script..."
+		echo -e "Kernel é >= 4.4, continuando com o script..."
+		sleep 5
+	else
+		echo -e "Usuário não é Root ($USUARIO) ou Distribuição não é >=16.04.x ($UBUNTU) ou Kernel não é >=4.4 ($KERNEL)"
+		echo -e "Caso você não tenha executado o script com o comando: sudo -i"
+		echo -e "Execute novamente o script para verificar o ambiente."
+		exit 1
 fi
+#
+# Script de instalação do GLPI Help Desk e Plugin do OCS Inventory no GNU/Linux Ubuntu Server 16.04.x
+# opção do comando: &>> (redirecionar a saída padrão)
+# opção do comando echo: -e (enable interpretation of backslash escapes), \n (new line)
+# opção do comando date: + (format), %d (day), %m (month), %Y (year 1970), %H (hour 24), %M (minute 60)
+echo -e "Início do script $0 em: `date +%d/%m/%Y-"("%H:%M")"`\n" &>> $LOG
+clear
+echo
+#
+echo -e "Após a instalação do Netdata acessar a url: http://`hostname`:19999/ para verificar se o serviço está OK"
+echo
+#
+echo -e "Atualizando as listas do Apt, aguarde..."
+	#opção do comando: &>> (redirecionar a saída padrão)
+	apt-get update &>> $LOG
+echo -e "Listas atualizadas com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Atualizando os pacotes instalados, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando apt-get: -o (options), -q (quiet), -y (yes)
+	apt-get -o Dpkg::Options::="--force-confold" upgrade -q -y --force-yes &>> $LOG
+echo -e "Pacotes atualizados com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Removendo o arquivo install do GLPI Help Desk da etapa 06-glpi.sh, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando mv: v (verbose)
+	mv -v /var/www/html/glpi/install /var/www/html/glpi/install.bkp &>> $LOG
+echo -e "Arquivo de install do GLPI Help Desk removido com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Clonando o diretório do Netdata do Github, aguarde..."
+	git clone https://github.com/firehol/$NETDATAVERSION --depth=1 &>> $LOG
+echo -e "Clonagem do diretório do Netdata feito com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Acessando o diretório do Netdata e fazendo a sua compilação, aguarde..."
+	cd $NETDATAINSTALL
+	./netdata-installer.sh
+	#MENSAGENS QUE SERÃO SOLICITADAS NA INSTALAÇÃO DO NETDATA
+	#Press ENTER to build and install netdata to your system? <-- pressione <Enter>
+	#Saindo do diretório do Netdata
+	cd ..
+	echo
+echo -e "Instalação do Netdata feita com sucesso!!!, pressione <Enter> para continuar"
+read
+sleep 2
+clear
+#
+echo -e "Atualizando o arquivo de configuração do MySQL para acessar as informações via Netdata, pressione <Enter> para continuar"
+read
+sleep 2
+echo
+#
+echo -e "Fazendo o backup das configurações do arquivo do MySQL do Netdata, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando mv: v (verbose)
+	mv -v /etc/netdata/python.d/mysql.conf /etc/netdata/python.d/mysql.conf.old &>> $LOG
+echo -e "Backup das configurações do MySQL feito com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Atualizando o arquivo de configuração do MySQL do Netdata, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando mv: v (verbose)
+	cp -v conf/mysql.conf /etc/netdata/python.d/ &>> $LOG
+echo -e "Arquivo de configuração do MySQL atualizado com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Alterando as permissões do arquivo Mysql.conf do Netdata, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando chown: -R (recursive), -v (verbose), netdata.netdata (user and group)
+	# opção do comando chmod: -R (recursive), -v (verbose), 660 (User=RW-, Group=RW-, Other=---)
+	chown -v netdata.netdata /etc/netdata/python.d/mysql.conf &>> $LOG
+	chmod -v 660 /etc/netdata/python.d/mysql.conf &>> $LOG
+echo -e "Permissões do arquivo de configuração do MySQL atualizado com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Editando o arquivo de configuração do MySQL do Netdata, aguarde..."
+sleep 2
+	vim /etc/netdata/python.d/mysql.conf
+echo -e "Arquivo do MySQL editado com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Reinicializando o Serviço do Netdata, aguarde..."
+	sudo service netdata restart
+echo -e "Serviço do Netdata reinicializado com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Instalação e Configuração do Netdata feito com sucesso!!!, pressione <Enter> para continuar"
+read
+sleep 2
+clear
+#			
+echo -e "Remoção dos aplicativos desnecessários, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando apt-get: -y (yes)
+	apt-get -y autoremove &>> $LOG
+	apt-get -y autoclean &>> $LOG
+echo -e "Remoção dos aplicativos desnecessários concluída com sucesso!!!, continuando com o script..."
+sleep 5
+echo
+#
+echo -e "Limpando o cache do Apt-Get, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando apt-get: -y (yes)
+	apt-get clean &>> $LOG
+echo -e "Cache limpo com sucesso!!!, continuando com o script..."
+sleep 5
+echo
+#
+echo -e "Instalação do Netdata Feito com Sucesso!!!!!"
+echo -e "Após a instalação do Netdata acessar a URL: http://`hostname`:19999/ para finalizar a configuração."
+echo
+	# script para calcular o tempo gasto (SCRIPT MELHORADO, CORRIGIDO FALHA DE HORA:MINUTO:SEGUNDOS)
+	# opção do comando date: +%T (Time)
+	HORAFINAL=`date +%T`
+	# opção do comando date: -u (utc), -d (date), +%s (second since 1970)
+	HORAINICIAL01=$(date -u -d "$HORAINICIAL" +"%s")
+	HORAFINAL01=$(date -u -d "$HORAFINAL" +"%s")
+	# opção do comando date: -u (utc), -d (date), 0 (string command), sec (force second), +%H (hour), %M (minute), %S (second), 
+	TEMPO=`date -u -d "0 $HORAFINAL01 sec - $HORAINICIAL01 sec" +"%H:%M:%S"`
+	# $0 (variável de ambiente do nome do comando)
+	echo -e "Tempo gasto para execução do script $0: $TEMPO"
+echo -e "Pressione <Enter> para concluir a instalação do servidor: `hostname`"
+# opção do comando date: + (format), %d (day), %m (month), %Y (year 1970), %H (hour 24), %M (minute 60)
+echo -e "Fim do script $0 em: `date +%d/%m/%Y-"("%H:%M")"`\n" &>> $LOG
+read
+sleep 2

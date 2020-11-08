@@ -39,7 +39,7 @@ if [ "$USUARIO" == "0" ] && [ "$UBUNTU" == "16.04" ] && [ "$KERNEL" == "4.4" ]
 		exit 1
 fi
 #
-# Script de instalação do OCS Inventory Server e Reports no GNU/Linux Ubuntu Server 16.04.x
+# Script de instalação do OCS Inventory Agent no GNU/Linux Ubuntu Server 16.04.x
 # opção do comando: &>> (redirecionar a saída padrão)
 # opção do comando echo: -e (enable interpretation of backslash escapes), \n (new line)
 # opção do comando date: + (format), %d (day), %m (month), %Y (year 1970), %H (hour 24), %M (minute 60)
