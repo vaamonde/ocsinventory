@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 07/08/2020
-# Versão: 0.23
+# Data de atualização: 08/11/2020
+# Versão: 0.24
 # Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
 # Kernel >= 4.4.x
 #
@@ -20,7 +20,6 @@
 #
 # Nesse script está sendo instalado todas as dependências do OCS Inventory Server, OCS Inventory Agent, 
 # FusionInventory, GLPI Help Desk e do Netdata;
-#
 # Nas linhas do apt-get install todas as dependências já estão sendo instaladas;
 # Nas linhas do perl -e -MCPAN está sendo instalada as dependências do OCS Inventory Server e Agent.
 #
@@ -240,6 +239,7 @@ echo -e "Instalação das dependências do Perl nvidia::ml via CPAN, pressione <
 	else
 	echo -e "Você não tem o Chip Gráfico da NVIDIA, continuando com o script..."
 		sleep 5
+		echo
 	fi
 #
 echo -e "Instalação das dependências do Perl Net::Ping via CPAN, pressione <Enter> para continuar"
@@ -286,7 +286,7 @@ echo -e "Editando o arquivo do Apache2, pressione <Enter> para continuar"
 	read
 	mv -v /etc/apache2/apache2.conf /etc/apache2/apache2.conf.bkp &>> $LOG
 	echo -e "Backup feito com sucesso!!!, continuando com o script..."
-	sllep 5
+	sleep 5
 	cp -v conf/apache2.conf /etc/apache2/apache2.conf &>> $LOG
 	echo -e "Atualização feita com sucesso!!!, continuando com o script..."
 	sleep 5

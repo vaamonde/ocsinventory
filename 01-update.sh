@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 07/08/2020
-# Versão: 0.15
+# Data de atualização: 08/11/2020
+# Versão: 0.16
 # Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
 # Kernel >= 4.4.x
 #
@@ -34,7 +34,7 @@ else
 	echo -e "Diretório: $VARLOGPATH não existe, criando o diretório, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando mkdir: -v (verbose)
-	mkdir -v $VARLOGPATH &>> $LOG
+	mkdir -v $VARLOGPATH
 	echo -e "Diretório criado com sucesso!!!, continuando com o script..."
 	sleep 3
 fi
