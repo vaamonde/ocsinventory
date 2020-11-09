@@ -132,8 +132,9 @@ echo
 #
 echo -e "Editando o arquivo de configuração do MySQL do Netdata, aguarde..."
 sleep 2
-	# Adicionar o usuário: root e senha: 123456 do MySQL
-	vim /usr/lib/netdata/conf.d/python.d/mysql.conf +151
+	# opção do comando vim: +163 (open line number)
+	# adicionar o usuário: root e senha: 123456 do MySQL
+	vim /usr/lib/netdata/conf.d/python.d/mysql.conf +163
 echo -e "Arquivo do MySQL editado com sucesso!!!, continuando com o script..."
 sleep 2
 echo

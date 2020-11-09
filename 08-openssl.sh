@@ -10,7 +10,7 @@
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
-# Criação dos Certificados utilizado pelo Apache2m OCS Inventory Server e Agent
+# Criação dos Certificados utilizados pelo Apache2, OCS Inventory Server e Agent
 #
 # Arquivo de configuração dos parâmetros
 source 00-parametros.sh
@@ -53,6 +53,7 @@ sleep 2
 echo
 #
 echo -e "Criando o Chave de Criptografia de 2048 bits, senha padrão: ocsinventory, aguarde..." 
+	# opção do comando openssl: genrsa (Generation of RSA Private Key), -des3 (Triple-DES Cipher), -out (output file)
 	openssl genrsa -des3 -out ocs.key 2048
 echo -e "Chave de criptografia criada com sucesso!!!, continuando com o script..."
 sleep 2
@@ -67,12 +68,14 @@ sleep 2
 echo
 #
 echo -e "Alterando as informações das chaves de criptografia, senha padrão: ocsinventory, aguarde..."
+	# opção do comando openssl: rsa (RSA key management), -in (input file), -out (output file)
 	openssl rsa -in ocs-old.key -out ocs.key
 echo -e "Chave alterada com sucesso!!!, continuando com o script..."
 sleep 2
 echo
 #
 echo -e "Criando o arquivo CSR (Certificate Signing Request), nome FQDN: `hostname`, aguarde..."
+	# opção do comando openssl: req (PKCS#10 X.509 Certificate Signing Request (CSR) Management), -new (new CSR), -key (input file RSA), -out (output file CSR)
 	#Criando o arquivo CSR, mensagens que serão solicitadas para a criação do certificado
 	#Country Name (2 letter code): BR <-- pressione <Enter>
 	#State or Province Name (full name): Brasil <-- pressione <Enter>
@@ -89,6 +92,8 @@ sleep 2
 echo
 #
 echo -e "Alterando o arquivo CSR (Certificate Signing Request), nome FQDN: `hostname`, aguarde..."
+	# opção do comando openssl: x509 (X.509 Certificate Data Management), -req (PKCS#10 X.509 Certificate Signing Request (CSR) Management), -days
+	# (validate certificate file), -in (input file CSR), -singkey (file RSA), -out (output file CRT)
 	openssl x509 -req -days 3650 -in ocs.csr -signkey ocs.key -out ocs.crt
 echo -e "Arquivo CSR alterado com sucesso!!!, continuando com o script..."
 sleep 2
