@@ -13,9 +13,9 @@
 # Instalação e Configuração do GLPI Help Desk, plugin do OCS Inventory, alteração das permissões do diretório do GLPI e instalação das dependência do GLPI
 #
 #MENSAGENS QUE SERÃO SOLICITADAS NA INSTALAÇÃO DO GLPI HELP DESK VIA NAVEGADOR:
-#01. Selecione a linguage: Português do Brasil <OK>;
-#02. Licença: Eu li e ACEITO os termons de licença acima: <Continuar>;
-#03. Início da Instalação: <Instalar>;
+#01. Select your language.: Português do Brasil <OK>;
+#02. Licença: Eu li e ACEITO os termos de licença acima.: <Continuar>;
+#03. Escolha "Instalar" para uma nova instalação do GLPI.: <Instalar>;
 #04. Etapa 0: <Continuar>;
 #05. Etapa 1: Servidor: localhost, Usuário: root, Senha: 123456 <Continuar>;
 #06. Etapa 2: Criar um novo banco de dados ou utilizar um existente: glpi <Continuar>;
@@ -190,7 +190,7 @@ echo
 echo -e "Instalação do GLPI Help Desk e Plugin do OCS Inventory feito com sucesso!!!, pressione <Enter> para continuar"
 read
 sleep 2
-clear
+echo
 #			
 echo -e "Remoção dos aplicativos desnecessários, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
@@ -222,7 +222,7 @@ echo
 	TEMPO=`date -u -d "0 $HORAFINAL01 sec - $HORAINICIAL01 sec" +"%H:%M:%S"`
 	# $0 (variável de ambiente do nome do comando)
 	echo -e "Tempo gasto para execução do script $0: $TEMPO"
-echo -e "Pressione <Enter> para concluir a instalação do servidor: `hostname`"
+echo -e "Pressione <Enter> para concluir a configuração do servidor: `hostname`"
 # opção do comando date: + (format), %d (day), %m (month), %Y (year 1970), %H (hour 24), %M (minute 60)
 echo -e "Fim do script $0 em: `date +%d/%m/%Y-"("%H:%M")"`\n" &>> $LOG
 read

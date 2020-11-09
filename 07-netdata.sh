@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 14/06/2019
-# Versão: 0.13
+# Data de atualização: 08/11/2020
+# Versão: 0.14
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -97,7 +97,7 @@ echo -e "Acessando o diretório do Netdata e fazendo a sua compilação, aguarde
 echo -e "Instalação do Netdata feita com sucesso!!!, pressione <Enter> para continuar"
 read
 sleep 2
-clear
+echo
 #
 echo -e "Atualizando o arquivo de configuração do MySQL para acessar as informações via Netdata, pressione <Enter> para continuar"
 read
@@ -107,7 +107,7 @@ echo
 echo -e "Fazendo o backup das configurações do arquivo do MySQL do Netdata, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando mv: v (verbose)
-	mv -v /etc/netdata/python.d/mysql.conf /etc/netdata/python.d/mysql.conf.old &>> $LOG
+	mv -v /usr/lib/netdata/conf.d/python.d/mysql.conf /usr/lib/netdata/conf.d/python.d/mysql.conf.old &>> $LOG
 echo -e "Backup das configurações do MySQL feito com sucesso!!!, continuando com o script..."
 sleep 2
 echo
@@ -115,7 +115,7 @@ echo
 echo -e "Atualizando o arquivo de configuração do MySQL do Netdata, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando mv: v (verbose)
-	cp -v conf/mysql.conf /etc/netdata/python.d/ &>> $LOG
+	cp -v conf/mysql.conf /usr/lib/netdata/conf.d/python.d/ &>> $LOG
 echo -e "Arquivo de configuração do MySQL atualizado com sucesso!!!, continuando com o script..."
 sleep 2
 echo
@@ -124,15 +124,16 @@ echo -e "Alterando as permissões do arquivo Mysql.conf do Netdata, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando chown: -R (recursive), -v (verbose), netdata.netdata (user and group)
 	# opção do comando chmod: -R (recursive), -v (verbose), 660 (User=RW-, Group=RW-, Other=---)
-	chown -v netdata.netdata /etc/netdata/python.d/mysql.conf &>> $LOG
-	chmod -v 660 /etc/netdata/python.d/mysql.conf &>> $LOG
+	chown -v netdata.netdata /usr/lib/netdata/conf.d/python.d/mysql.conf &>> $LOG
+	chmod -v 660 /usr/lib/netdata/conf.d/python.d/mysql.conf &>> $LOG
 echo -e "Permissões do arquivo de configuração do MySQL atualizado com sucesso!!!, continuando com o script..."
 sleep 2
 echo
 #
 echo -e "Editando o arquivo de configuração do MySQL do Netdata, aguarde..."
 sleep 2
-	vim /etc/netdata/python.d/mysql.conf
+	# Adicionar o usuário: root e senha: 123456 do MySQL
+	vim /usr/lib/netdata/conf.d/python.d/mysql.conf +151
 echo -e "Arquivo do MySQL editado com sucesso!!!, continuando com o script..."
 sleep 2
 echo
@@ -146,8 +147,15 @@ echo
 echo -e "Instalação e Configuração do Netdata feito com sucesso!!!, pressione <Enter> para continuar"
 read
 sleep 2
-clear
-#			
+echo
+#
+echo -e "Verificando a porta de conexão do Netdata, aguarde..."
+	# opção do comando netstat: -a (all), -n (numeric)
+	netstat -an | grep 19999
+echo -e "Porta de conexão verificada com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
 echo -e "Remoção dos aplicativos desnecessários, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando apt-get: -y (yes)
@@ -178,7 +186,7 @@ echo
 	TEMPO=`date -u -d "0 $HORAFINAL01 sec - $HORAINICIAL01 sec" +"%H:%M:%S"`
 	# $0 (variável de ambiente do nome do comando)
 	echo -e "Tempo gasto para execução do script $0: $TEMPO"
-echo -e "Pressione <Enter> para concluir a instalação do servidor: `hostname`"
+echo -e "Pressione <Enter> para concluir a configuração do servidor: `hostname`"
 # opção do comando date: + (format), %d (day), %m (month), %Y (year 1970), %H (hour 24), %M (minute 60)
 echo -e "Fim do script $0 em: `date +%d/%m/%Y-"("%H:%M")"`\n" &>> $LOG
 read

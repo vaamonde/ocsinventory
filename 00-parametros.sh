@@ -82,9 +82,10 @@ GLPIINSTALL="glpi"
 # Site: https://github.com/pluginsGLPI/ocsinventoryng/releases
 # Versão antiga utilizada no vídeo: 1.4.2/glpi-ocsinventoryng-1.4.2.tar.gz
 # Versão atualizada para 1.6.0 no dia 13/06/2019 - verificar arquivo CHANGELOG
-# Atualização para a versão 1.7.1 no dia 08/11/2020 - verificar arquivo CHANGELOG
-GLPIOCSVERSION="1.7.1/glpi-ocsinventoryng-1.7.1.tar.gz"
-GLPIOCSTAR="glpi-ocsinventoryng-1.7.1.tar.gz"
+# Atualização para a versão 1.6.1 no dia 08/11/2020 - verificar arquivo CHANGELOG
+# OBSERVAÇÃO: a versão 9.4.2 é a última com suporte ao PHP 7.0 e a versão 1.6.1 do Plugin do OCS Inventory suportada
+GLPIOCSVERSION="1.6.1/glpi-ocsinventoryng-1.6.1.tar.gz"
+GLPIOCSTAR="glpi-ocsinventoryng-1.6.1.tar.gz"
 GLPIOCSINSTALL="ocsinventoryng"
 #
 # Variáveis de download do FusionInventory Server para GLPI
