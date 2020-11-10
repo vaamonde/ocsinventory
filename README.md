@@ -28,7 +28,7 @@ OCS Inventory NG: https://ocsinventory-ng.org/?lang=en<br>
 FusionInventory: http://fusioninventory.org/<br>
 GLPI Help Desk: https://glpi-project.org/pt-br/
 
-## **Playlist do YouTUBE com todos os Vídeos do GNU/Linux Ubuntu Server 18.04.x LTS DevOps:**
+## **Playlist do YouTUBE com todos os Vídeos do OCS Inventory NG, FusionInventory e GLPI Help Desk:**
 Link da Playlist: https://www.youtube.com/playlist?list=PLozhsZB1lLUOfUAlD4BRUKGcrQDagYcCH
 
 ## **Apresentação do Curso Hands On OCS Inventory Server e GLPI Help Desk**
