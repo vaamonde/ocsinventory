@@ -10,7 +10,8 @@
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
-# Instalação e Configuração do FusionInventory Server e Agent com integração com GLPI Help Desk, atualização dos arquivos de configuração
+# Instalação e Configuração do FusionInventory Server e Agent com integração com GLPI Help Desk, atualização dos 
+# arquivos de configuração dos serviços.
 #
 # Arquivo de configuração dos parâmetros
 source 00-parametros.sh
@@ -91,7 +92,7 @@ echo -e "Alterando o dono e grupo padrão do diretório do FusionInventory Serve
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando chown: -R (recursive), -v (verbose), www-data.www-data (user and group)
 	chown -Rf www-data.www-data /var/www/html/glpi/plugins/$GLPIFISINSTALL &>> $LOG
-echo -e "Alteração do dono e grupo do FusionInventory Server alteradas com sucesso!!!, continuando com o script..."
+echo -e "Permissões do dono e grupo do FusionInventory Server alteradas com sucesso!!!, continuando com o script..."
 sleep 2
 echo
 #
@@ -134,7 +135,6 @@ echo -e "Executando o inventário pela primeira vez do FusionInventory, aguarde.
 echo -e "Inventário do FusionInventory feito com sucesso!!!!, continuando com o script..."
 sleep 2
 echo
-#
 #
 echo -e "Instalação do FusionInventory Feito com Sucesso!!!!!"
 echo -e "Após a instalação do FusionInventory acessar a URL do GLPI: http://`hostname`/glpi para finalizar a configuração."
