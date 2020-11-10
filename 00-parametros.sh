@@ -118,7 +118,7 @@ FLUSH="FLUSH PRIVILEGES;"
 NVIDIA=`lshw -class display | grep NVIDIA | cut -d':' -f2 | cut -d' ' -f2`
 #
 # Variável da localização do diretório de download dos Agentes do OCS Inventory
-PATHDOWNLOAD="/var/lib/ocsinventory-reports/download/"
+PATHDOWNLOAD="/var/lib/ocsinventory-reports/download"
 #
 # Variáveis de download do OCS Inventory Agent Microsoft, MacOS, Android e Ferramentas de Deploy
 # Site Agent Windows: https://github.com/OCSInventory-NG/WindowsAgent/releases
@@ -139,6 +139,9 @@ OCSUNIXPACKAGER="https://github.com/OCSInventory-NG/Packager-for-Unix/releases/d
 #
 ## Variáveis de download do OCS Inventory Plugins
 # Site: https://plugins.ocsinventory-ng.org/
+#
+# Variável da localização do diretório de plugins do OCS Inventory
+PATHPLUGINS="/usr/share/ocsinventory-reports/ocsreports/extensions"
 #
 # Plugin01: Installed drivers (Retrieve list of installed drivers - Windows)
 # Atualização para a versão 2.7 no dia 07/08/2020 - verificar arquivo CHANGELOG

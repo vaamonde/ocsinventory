@@ -66,13 +66,13 @@ echo
 echo -e "Download dos agentes do OCS Inventory e ferramentas de suporte, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando wget: -O (file)
-    wget $OCSAGENTWIN10 -O /var/lib/ocsinventory-reports/download/OCSAgentWin10.zip &>> $LOG
-    wget $OCSAGENTWINXP -O /var/lib/ocsinventory-reports/download/OCSAgentWinXP.zip &>> $LOG
-    wget $OCSAGENTMAC -O /var/lib/ocsinventory-reports/download/OCSAgentMAC.zip &>> $LOG
-    wget $OCSAGENTTOOLS -O /var/lib/ocsinventory-reports/download/OCSAgentTools.zip &>> $LOG
-    wget $OCSAGENTDEPLOY -O /var/lib/ocsinventory-reports/download/OCSAgentDeploy.zip &>> $LOG
-    wget $OCSAGENTANDROID -O /var/lib/ocsinventory-reports/download/OCSAgentAndroid.apk &>> $LOG
-    wget $OCSUNIXPACKAGER -O /var/lib/ocsinventory-reports/download/OCSAgentUnix.zip &>> $LOG
+    wget $OCSAGENTWIN10 -O $PATHDOWNLOAD/OCSAgentWin10.zip &>> $LOG
+    wget $OCSAGENTWINXP -O $PATHDOWNLOAD/OCSAgentWinXP.zip &>> $LOG
+    wget $OCSAGENTMAC -O $PATHDOWNLOAD/OCSAgentMAC.zip &>> $LOG
+    wget $OCSAGENTTOOLS -O $PATHDOWNLOAD/OCSAgentTools.zip &>> $LOG
+    wget $OCSAGENTDEPLOY -O $PATHDOWNLOAD/OCSAgentDeploy.zip &>> $LOG
+    wget $OCSAGENTANDROID -O $PATHDOWNLOAD/OCSAgentAndroid.apk &>> $LOG
+    wget $OCSUNIXPACKAGER -O $PATHDOWNLOAD/OCSAgentUnix.zip &>> $LOG
 echo -e "Download dos agentes do OCS Inventory e ferramentas de suporte feito com sucesso!!!, continuando com o script..."
 sleep 2
 echo
@@ -90,7 +90,7 @@ echo
 echo -e "Copiando o Certificado do OCS Inventory para o diretório de Download, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando cp: -v (verbose)
-    cp -v ocs.crt $PATHDOWNLOAD &>> $LOG
+    cp -v ocs.crt $PATHDOWNLOAD/ &>> $LOG
 echo -e "Certificado copiado com sucesso!!!, continuando com o script..."
 sleep 2
 echo
@@ -98,12 +98,12 @@ echo
 echo -e "Copiando os Arquivos de Configurações do OCS Inventory Agent, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando cp: -v (verbose)
-    cp -v /etc/ocsinventory-agent/ocsinventory-agent.cfg $PATHDOWNLOAD &>> $LOG
-    cp -v conf/ocsinventory.ini $PATHDOWNLOAD &>> $LOG
-    cp -v conf/ocsinstall.bat $PATHDOWNLOAD &>> $LOG
-    cp -v conf/linuxinstall.sh $PATHDOWNLOAD &>> $LOG
-    cp -v conf/ucsinstall.sh $PATHDOWNLOAD &>> $LOG
-    cp -v conf/pfsenseinstall.sh $PATHDOWNLOAD &>> $LOG
+    cp -v /etc/ocsinventory-agent/ocsinventory-agent.cfg $PATHDOWNLOAD/ &>> $LOG
+    cp -v conf/ocsinventory.ini $PATHDOWNLOAD/ &>> $LOG
+    cp -v conf/ocsinstall.bat $PATHDOWNLOAD/ &>> $LOG
+    cp -v conf/linuxinstall.sh $PATHDOWNLOAD/ &>> $LOG
+    cp -v conf/ucsinstall.sh $PATHDOWNLOAD/ &>> $LOG
+    cp -v conf/pfsenseinstall.sh $PATHDOWNLOAD/ &>> $LOG
 echo -e "Arquivos de Configurações copiados com sucesso!!!, continuando com o script..."
 sleep 2
 echo

@@ -5,92 +5,93 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 14/07/2019
-# Data de atualização: 14/07/2019
-# Versão: 0.1
+# Data de atualização: 10/11/2020
+# Versão: 0.2
 # Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
 # Kernel >= 4.4.x
 #
-# Download dos Plugins do OCS Inventory
+# Download dos Plugins do OCS Inventory: DriverList, UpTime
 #
-# Utilizar o comando: sudo -i para executar o script
-#
-
-# Arquivo de configuração de parâmetros
+# Arquivo de configuração dos parâmetros
 source 00-parametros.sh
 #
-
-# Caminho para o Log do script
+# Caminho do arquivo para o Log do script
 LOG=$VARLOGPATH/$LOGSCRIPT
 #
-
-if [ "$USUARIO" == "0" ]
-then
-if [ "$UBUNTU" == "16.04" ]
-then
-if [ "$KERNEL" == "4.4" ]
-then
+# Exportando o recurso de Noninteractive do Debconf para não solicitar telas de configuração
+export DEBIAN_FRONTEND="noninteractive"
+#
+# Verificando se o usuário é Root, Distribuição é >=16.04 e o Kernel é >=4.4 <IF MELHORADO)
+# opção do comando if: [ ] = teste de expressão, && = operador lógico AND, == comparação de string, exit 1 = 
+# A maioria dos erros comuns na execução
 clear
-
-echo -e "Usuário é `whoami`, continuando a executar o $LOGSCRIPT"
-echo
-echo  ============================================================ &>> $LOG
-
-echo -e "Download dos Plugins do OCS Inventory"
-echo -e "Pressione <Enter> para começar o Download"
-read
-sleep 2
-echo
-
-echo -e "Download dos arquivos, aguarde..."
-wget $DRIVERLIST -O /usr/share/ocsinventory-reports/ocsreports/extensions/drivelist.zip &>> $LOG
-wget $UPTIME -O /usr/share/ocsinventory-reports/ocsreports/extensions/uptime.zip &>> $LOG
-echo -e "Download dos arquivos concluído com sucesso!!!, continuando o script"
-echo
-
-echo -e "Descompactando todos os arquivos Zipados, aguarde..."
-cd /usr/share/ocsinventory-reports/ocsreports/extensions/
-for i in $(ls *.zip);do unzip $i; done &>> $LOG
-cd - &>> $LOG
-echo -e "Arquivos descompactados com sucesso!!!, continuando o script"
-echo
-sleep 2
-
-echo -e "Listando o contéudo do diretório"
-echo
-ls -lh /usr/share/ocsinventory-reports/ocsreports/extensions/
-echo
-echo -e "Arquivos listados com sucesso!!!, pressione <Enter> para continuar"
-read
-sleep 2
+if [ "$USUARIO" == "0" ] && [ "$UBUNTU" == "16.04" ] && [ "$KERNEL" == "4.4" ]
+	then
+		echo -e "O usuário é Root, continuando com o script..."
+		echo -e "Distribuição é >=16.04.x, continuando com o script..."
+		echo -e "Kernel é >= 4.4, continuando com o script..."
+		sleep 5
+	else
+		echo -e "Usuário não é Root ($USUARIO) ou Distribuição não é >=16.04.x ($UBUNTU) ou Kernel não é >=4.4 ($KERNEL)"
+		echo -e "Caso você não tenha executado o script com o comando: sudo -i"
+		echo -e "Execute novamente o script para verificar o ambiente."
+		exit 1
+fi
+#
+# Script de download dos Plugins do OCS Inventory no GNU/Linux Ubuntu Server 16.04.x
+# opção do comando: &>> (redirecionar a saída padrão)
+# opção do comando echo: -e (enable interpretation of backslash escapes), \n (new line)
+# opção do comando date: + (format), %d (day), %m (month), %Y (year 1970), %H (hour 24), %M (minute 60)
+echo -e "Início do script $0 em: `date +%d/%m/%Y-"("%H:%M")"`\n" &>> $LOG
 clear
-
-echo  ============================================================ >> $LOG
-
-echo -e "Fim do $LOGSCRIPT em: `date`" &>> $LOG
-echo -e "Finalização do Download dos Plugins feito com Sucesso!!!!!"
 echo
-# Script para calcular o tempo gasto para a execução do agents.sh
-DATAFINAL=`date +%s`
-SOMA=`expr $DATAFINAL - $DATAINICIAL`
-RESULTADO=`expr 10800 + $SOMA`
-TEMPO=`date -d @$RESULTADO +%H:%M:%S`
-echo -e "Tempo gasto para execução do netdata.sh: $TEMPO"
-echo -e "Pressione <Enter> para reinicializar o servidor: `hostname`"
+#
+echo -e "Download dos Plugins do OCS Inventory, aguarde..."
+sleep 2
+echo
+#
+echo -e "Download dos arquivos de plugins do OCS Inventory, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+    # opção do comando wget: -O (file)
+    wget $DRIVERLIST -O $PATHPLUGINS/drivelist.zip &>> $LOG
+    wget $UPTIME -O $PATHPLUGINS/uptime.zip &>> $LOG
+echo -e "Download dos arquivos de plugins concluído com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Descompactando todos os arquivos Zipados dos Plugins do OCS Inventory, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+    # opção do comando cd: - (return back to directory)
+    cd $PATHPLUGINS
+    for i in $(ls *.zip);do unzip $i; done &>> $LOG
+    cd - &>> $LOG
+echo -e "Arquivos descompactados com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Listando o conteúdo do diretório $PATHPLUGINS, aguarde..."
+	# opção do comando ls: -l (list), -h (human)
+    echo
+    ls -lh $PATHPLUGINS
+    echo
+echo -e "Arquivos listados com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Download dos Plugins do OCS Inventory Feito com Sucesso!!!!!"
+echo
+	# script para calcular o tempo gasto (SCRIPT MELHORADO, CORRIGIDO FALHA DE HORA:MINUTO:SEGUNDOS)
+	# opção do comando date: +%T (Time)
+	HORAFINAL=`date +%T`
+	# opção do comando date: -u (utc), -d (date), +%s (second since 1970)
+	HORAINICIAL01=$(date -u -d "$HORAINICIAL" +"%s")
+	HORAFINAL01=$(date -u -d "$HORAFINAL" +"%s")
+	# opção do comando date: -u (utc), -d (date), 0 (string command), sec (force second), +%H (hour), %M (minute), %S (second), 
+	TEMPO=`date -u -d "0 $HORAFINAL01 sec - $HORAINICIAL01 sec" +"%H:%M:%S"`
+	# $0 (variável de ambiente do nome do comando)
+	echo -e "Tempo gasto para execução do script $0: $TEMPO"
+echo -e "Pressione <Enter> para concluir a configuração do servidor: `hostname`"
+# opção do comando date: + (format), %d (day), %m (month), %Y (year 1970), %H (hour 24), %M (minute 60)
+echo -e "Fim do script $0 em: `date +%d/%m/%Y-"("%H:%M")"`\n" &>> $LOG
 read
 sleep 2
-reboot
-else
-echo -e "Versão do Kernel: $KERNEL não homologada para esse script, versão: >= 4.4 "
-echo -e "Pressione <Enter> para finalizar o script"
-read
-fi
-else
-echo -e "Distribuição GNU/Linux: `lsb_release -is` não homologada para esse script, versão: $UBUNTU"
-echo -e "Pressione <Enter> para finalizar o script"
-read
-fi
-else
-echo -e "Usuário não é ROOT, execute o comando com a opção: sudo -i <Enter> depois digite a senha do usuário `whoami`"
-echo -e "Pressione <Enter> para finalizar o script"
-read
-fi
