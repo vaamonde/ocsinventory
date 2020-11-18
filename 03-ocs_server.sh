@@ -110,7 +110,7 @@ clear
 #06. Which user account is running Apache Web Server [www-data]?: Deixe o padrão pressione <Enter>;
 #07. Which user group is running Apache web server [www-data]?: Deixe o padrão pressione <Enter>;
 #08. Where is Apache Include configuration directory [/etc/apache2/conf-available]?: Deixe o padrão pressione <Enter>;
-#09. Where is PERL Intrepreter binary [/usr/bin/perl]?: Deixe o padrão pressione <Enter>;
+#09. Where is PERL Interpreter binary [/usr/bin/perl]?: Deixe o padrão pressione <Enter>;
 #10. Do you wish to setup Rest API server on this computer ([y]/n)? y <-- digite y pressione <Enter>;
 #11. Where do you want the API code to be store [/usr/local/share/perl/5.22.1]? Deixe o padrão pressione <Enter>;
 #12. Do you allow Setup renaming Communication Server Apache configuration file to 'z-ocsinventory-server.conf' ([y]/n)?: y <-- digite y pressione <Enter>;
@@ -126,7 +126,7 @@ clear
 #04. MySQL HostName: localhost
 #05. MySQL Port: 3306
 #06. Enable SSL: no
-#OBS: opções: SSL mode, SSL key path, SSL certificat path e CA certificat path será configurada futuramente.
+#OBS: opções: SSL mode, SSL key path, SSL certificate path e CA certificate path será configurada futuramente.
 #
 #APÓS A INSTALAÇÃO VIA NAVEGADOR DO OCS INVENTORY, REMOVER O ARQUIVO INSTALL, ELE SERÁ REMOVIDO AUTOMÁTICAMENTE NO SCRIPT 04-pos_ocs_server.sh
 #

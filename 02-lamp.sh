@@ -102,7 +102,7 @@ echo -e "Variáveis configuradas com sucesso!!!, continuando com o script..."
 sleep 5
 echo
 #
-echo -e "Instalando o LAMP-SERVER, aguarde..."
+echo -e "Instalando o LAMP-SERVER e suas dependências do OCS Inventory e GLPI, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando apt: -y (yes), \ (bar left) quebra de linha na opção do apt-get
 	# opção do comando ^ (circunflexo): (expressão regular - Casa o começo da linha)
@@ -113,7 +113,7 @@ echo -e "Instalação do LAMP-SERVER feito com sucesso!!!, continuando com o scr
 sleep 5
 echo
 #
-echo -e "Instalando as dependências do PHP7, aguarde..."
+echo -e "Instalando as dependências do PHP7 para suportar o OCS Inventory e GLPI, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando apt: -y (yes), \ (bar left) quebra de linha na opção do apt-get
 	apt-get -y install php7.0-snmp php-mysql php7.0-dev php-mbstring php-soap php-dev php-apcu php-xmlrpc php7.0-zip \
@@ -123,7 +123,7 @@ echo -e "Instalação das dependências do PHP7 feita com sucesso!!!, continuand
 sleep 5
 echo
 #
-echo -e "Instalando as dependências do Perl, aguarde..."
+echo -e "Instalando as dependências do Perl específicas para o OCS Inventory, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando apt: -y (yes), \ (bar left) quebra de linha na opção do apt-get
 	apt-get -y install libc6-dev libcompress-raw-zlib-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl \
@@ -168,11 +168,11 @@ echo -e "Instalação do PhpMyAdmin feita com sucesso!!!, continuando com o scri
 sleep 5
 echo
 #
-echo -e "Atualizando as dependências do PHP para o PhpMyAdmin, aguarde..."
+echo -e "Atualizando os módulos do PHP7 para o suporte do PhpMyAdmin, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	phpenmod mcrypt &>> $LOG
 	phpenmod mbstring &>> $LOG
-	echo -e "Atualização das dependências feita com sucesso!!!, continuando com o script..."
+	echo -e "Atualização dos módulos feita com sucesso!!!, continuando com o script..."
 sleep 5
 echo
 #

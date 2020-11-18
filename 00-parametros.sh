@@ -137,7 +137,7 @@ OCSAGENTTOOLS="https://github.com/OCSInventory-NG/Packager-for-Windows/releases/
 OCSAGENTDEPLOY="https://github.com/OCSInventory-NG/Agent-Deployment-Tool/releases/download/2.3/OCSNG-Agent-Deploy-Tool-2.3.zip"
 OCSUNIXPACKAGER="https://github.com/OCSInventory-NG/Packager-for-Unix/releases/download/1.1/Packager-for-Unix-1.1.zip"
 #
-## Variáveis de download do OCS Inventory Plugins
+# Variáveis de download do OCS Inventory Plugins
 # Site: https://plugins.ocsinventory-ng.org/
 #
 # Variável da localização do diretório de plugins do OCS Inventory
@@ -151,3 +151,8 @@ DRIVERLIST="https://github.com/PluginsOCSInventory-NG/driverslist/releases/downl
 # Atualização para a versão 2.7 no dia 07/08/2020 - verificar arquivo CHANGELOG
 UPTIME="https://github.com/PluginsOCSInventory-NG/uptime/releases/download/2.0/uptime.zip"
 #
+# Variáveis de download do OCS Inventory Plugins
+# Site: http://www.circitor.fr/Mibs/Mibs.php
+#
+# Variável da localização do diretório dos arquivos de MIBs do SNMP do OCS Inventory
+MIBS="/usr/share/snmp/mibs"

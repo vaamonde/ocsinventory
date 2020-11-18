@@ -76,16 +76,16 @@ echo
 #
 echo -e "Criando o arquivo CSR (Certificate Signing Request), nome FQDN: `hostname`, aguarde..."
 	# opção do comando openssl: req (PKCS#10 X.509 Certificate Signing Request (CSR) Management), -new (new CSR), -key (input file RSA), -out (output file CSR)
-	#Criando o arquivo CSR, mensagens que serão solicitadas para a criação do certificado
-	#Country Name (2 letter code): BR <-- pressione <Enter>
-	#State or Province Name (full name): Brasil <-- pressione <Enter>
-	#Locality Name (eg, city): Sao Paulo <-- pressione <Enter>
-	#Organization Name (eg, company): Bora para Pratica <-- pressione <Enter>
-	#Organization Unit Name (eg, section): Procedimentos em TI <-- pressione <Enter>
-	#Common Name (eg, server FQDN or YOUR name): ocs.pti.intra <-- pressione <Enter>
-	#Email Address: pti@pti.intra <-- pressione <Enter>
-	#A challenge password: <-- pressione <Enter>
-	#A optional company name: <-- pressione <Enter>
+	# Criando o arquivo CSR, mensagens que serão solicitadas para a criação do certificado
+	# Country Name (2 letter code): BR <-- pressione <Enter>
+	# State or Province Name (full name): Brasil <-- pressione <Enter>
+	# Locality Name (eg, city): Sao Paulo <-- pressione <Enter>
+	# Organization Name (eg, company): Bora para Pratica <-- pressione <Enter>
+	# Organization Unit Name (eg, section): Procedimentos em TI <-- pressione <Enter>
+	# Common Name (eg, server FQDN or YOUR name): ocs.pti.intra <-- pressione <Enter>
+	# Email Address: pti@pti.intra <-- pressione <Enter>
+	# A challenge password: <-- pressione <Enter>
+	# A optional company name: <-- pressione <Enter>
 	openssl req -new -key ocs.key -out ocs.csr
 echo -e "Arquivo CSR criado com sucesso!!!, continuando com o script..."
 sleep 2
@@ -129,7 +129,7 @@ echo -e "Fazendo o backup do arquivo default-ssl.conf, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando mv: v (verbose)
 	mv -v /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf.old &>> $LOG
-echo -e "Arquivo backupado com sucesso!!!, continuando com o script..."
+echo -e "Arquivo backupeado com sucesso!!!, continuando com o script..."
 sleep 2
 echo
 #
