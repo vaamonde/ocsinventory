@@ -140,7 +140,7 @@ echo -e "Instalando as dependências do Perl específicas para o OCS Inventory, 
 	libdatetime-perl libthread-queue-any-perl libnet-write-perl libarchive-extract-perl libjson-pp-perl \
 	liburi-escape-xs-perl liblwp-protocol-https-perl libnet-ping-external-perl libnmap-parser-perl \
 	libmojolicious-perl libswitch-perl libplack-perl liblwp-useragent-determined-perl libsys-syslog-perl \
-	libdigest-hmac-perl libossp-uuid-perl libperl-dev libsnmp-perl &>> $LOG
+	libdigest-hmac-perl libossp-uuid-perl libperl-dev libsnmp-perl libsnmp-dev &>> $LOG
 echo -e "Instalação das dependências do Perl feito com sucesso!!!, continuando com o script."
 sleep 5
 echo
