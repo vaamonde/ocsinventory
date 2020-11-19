@@ -144,15 +144,19 @@ OCSUNIXPACKAGER="https://github.com/OCSInventory-NG/Packager-for-Unix/releases/d
 PATHPLUGINS="/usr/share/ocsinventory-reports/ocsreports/extensions"
 #
 # Plugin01: Installed drivers (Retrieve list of installed drivers - Windows)
-# Atualização para a versão 2.7 no dia 07/08/2020 - verificar arquivo CHANGELOG
+# Atualização para a versão 2.0 no dia 07/08/2020 - verificar arquivo CHANGELOG
 DRIVERLIST="https://github.com/PluginsOCSInventory-NG/driverslist/releases/download/v2.0/driverslist.zip"
 #
 # Plugin02: Machine Uptime (Retrieve Machine Uptime - Windows e Linux)
-# Atualização para a versão 2.7 no dia 07/08/2020 - verificar arquivo CHANGELOG
+# Atualização para a versão 2.0 no dia 07/08/2020 - verificar arquivo CHANGELOG
 UPTIME="https://github.com/PluginsOCSInventory-NG/uptime/releases/download/2.0/uptime.zip"
 #
-# Variáveis de download do OCS Inventory Plugins
+# Plugin03: List printers (Retrieve connected printers - Windows e Linux)
+# Atualização para a versão 2.0 no dia 07/08/2020 - verificar arquivo CHANGELOG
+LISTPRINTERS="https://github.com/PluginsOCSInventory-NG/listprinters/releases/download/v2.0/listprinters.zip"
+#
+# Variáveis de download do OCS Inventory MIBs para o suporte ao SNMP
 # Site: http://www.circitor.fr/Mibs/Mibs.php
 #
 # Variável da localização do diretório dos arquivos de MIBs do SNMP do OCS Inventory
-MIBS="/usr/share/snmp/mibs"
+MIBS="/var/lib/ocsinventory-reports/snmp"
