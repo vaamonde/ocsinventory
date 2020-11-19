@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 08/11/2020
-# Versão: 0.24
+# Data de atualização: 19/11/2020
+# Versão: 0.25
 # Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
 # Kernel >= 4.4.x
 #
@@ -107,7 +107,7 @@ echo -e "Instalando o LAMP-SERVER e suas dependências do OCS Inventory e GLPI, 
 	# opção do comando apt: -y (yes), \ (bar left) quebra de linha na opção do apt-get
 	# opção do comando ^ (circunflexo): (expressão regular - Casa o começo da linha)
 	apt-get -y install lamp-server^ gcc make autoconf autogen automake pkg-config uuid-dev net-tools pciutils smartmontools \
-	read-edid nmap ipmitool dmidecode samba samba-common samba-testsuite snmp snmp-mibs-downloader unzip hwdata perl \
+	read-edid nmap ipmitool dmidecode samba samba-common samba-testsuite snmp snmp-mibs-downloader snmpd unzip hwdata perl \
 	perl-modules python python-dev python3-dev python-pip apache2-dev mysql-client python-pymssql python-mysqldb &>> $LOG
 echo -e "Instalação do LAMP-SERVER feito com sucesso!!!, continuando com o script..."
 sleep 5
@@ -140,7 +140,7 @@ echo -e "Instalando as dependências do Perl específicas para o OCS Inventory, 
 	libdatetime-perl libthread-queue-any-perl libnet-write-perl libarchive-extract-perl libjson-pp-perl \
 	liburi-escape-xs-perl liblwp-protocol-https-perl libnet-ping-external-perl libnmap-parser-perl \
 	libmojolicious-perl libswitch-perl libplack-perl liblwp-useragent-determined-perl libsys-syslog-perl \
-	libdigest-hmac-perl libossp-uuid-perl &>> $LOG
+	libdigest-hmac-perl libossp-uuid-perl libperl-dev libsnmp-perl &>> $LOG
 echo -e "Instalação das dependências do Perl feito com sucesso!!!, continuando com o script."
 sleep 5
 echo
@@ -253,7 +253,7 @@ echo
 #			
 echo -e "Instalação das dependências do LWP::UserAgent::Cached via CPAN, pressione <Enter> para continuar"
 	# opção do comando perl: -e (single line command)
-	# Menssagem: Append this modules to installaation queue? [y] <-- Pressione <Enter>
+	# Mensagem: Append this modules to installation queue? [y] <-- Pressione <Enter>
 	read
 	perl -MCPAN -e 'install LWP::UserAgent::Cached'
 	echo
@@ -274,6 +274,15 @@ echo -e "Instalação das dependências do Mojolicious::Lite via CPAN, pressione
 	# opção do comando perl: -e (single line command)
 	read
 	perl -MCPAN -e 'install Mojolicious::Lite'
+	echo
+echo -e "Instalação concluída com sucesso!!!, continuando com o script..."
+sleep 5
+echo
+#
+echo -e "Instalação das dependências do NetSNMP::OID via CPAN, pressione <Enter> para continuar"
+	# opção do comando perl: -e (single line command)
+	read
+	perl -MCPAN -e 'install NetSNMP::OID'
 	echo
 echo -e "Instalação concluída com sucesso!!!, continuando com o script..."
 sleep 5
