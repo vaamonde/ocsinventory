@@ -4,8 +4,8 @@ Facebook: facebook.com/ProcedimentosEmTI
 Facebook: facebook.com/BoraParaPratica
 YouTube: youtube.com/BoraParaPratica
 Data de criação: 11/12/2018
-Data de atualização: 19/11/2020
-Versão: 0.13
+Data de atualização: 21/11/2020
+Versão: 0.14
 Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 Testado e homologado para a versão do Ubuntu Server 16.04.5 LTS x64
 Testado e homologado para a versão do Ubuntu Server 16.04.6 LTS x64
@@ -13,6 +13,8 @@ Testado e homologado para a versão do Ubuntu Server 16.04.7 LTS x64
 Kernel >= 4.4.x
 
 ==================================== ATUALIZAÇÕES DO OCS INVENTORY ===========================================
+21/11/2020 - Robson Vaamonde - acrescentada as configurações do SNMP MIBs no script 04-pos_ocs_server.sh, atualização
+do arquivo snmp.conf, download das MIBs genéricas
 
 19/11/2020 - Robson Vaamonde - Atualização do arquivo 00-parametros.sh com as versões dos Plugins e novas variáveis
 para a configuração das MIBs do SNMP, acréscimo da instalação das novas dependências do SNMP no arquivo 02-lamp.sh,

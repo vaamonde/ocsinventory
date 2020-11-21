@@ -91,7 +91,7 @@ sleep 2
 echo
 #
 echo -e "Editando do arquivo de configuração do OCS Inventory Server, aguarde..."
-sleep 2
+	sleep 2
 	vim /etc/apache2/conf-available/z-ocsinventory-server.conf
 echo -e "Arquivo de configuração do OCS Inventory Server editado com sucesso!!!, continuando com o script..."
 sleep 2
@@ -117,8 +117,8 @@ echo -e "Atualização do arquivo de configuração do OCS Inventory RestApi fei
 sleep 2
 echo
 #
-echo -e "Editando do arquivo de configuração do OCS Inventory RestApti, aguarde..."
-sleep 2
+echo -e "Editando do arquivo de configuração do OCS Inventory RestApi, aguarde..."
+	sleep 2
 	vim /etc/apache2/conf-available/zz-ocsinventory-restapi.conf
 echo -e "Arquivo de configuração do OCS Inventory RestApi editado com sucesso!!!, continuando com o script..."
 sleep 2
@@ -145,7 +145,7 @@ sleep 2
 echo
 #
 echo -e "Editando do arquivo de configuração do OCS Inventory Reports, aguarde..."
-sleep 2
+	sleep 2
 	vim /etc/apache2/conf-available/ocsinventory-reports.conf
 echo -e "Arquivo de configuração do OCS Inventory Reports editado com sucesso!!!, continuando com o script..."
 sleep 2
@@ -172,7 +172,7 @@ sleep 2
 echo
 #
 echo -e "Editando do arquivo de configuração do OCS Inventory Reports DBConfig, aguarde..."
-sleep 2
+	sleep 2
 	vim /usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php
 echo -e "Arquivo de configuração do OCS Inventory Reports DBConfig editado com sucesso!!!, continuando com o script..."
 sleep 2
@@ -181,6 +181,46 @@ echo
 echo -e "Reinicializando o serviço do Apache2, aguarde..."
 	sudo service apache2 restart
 echo -e "Serviço do Apache2 reinicializado com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Editando o arquivo do SNMP MIBs snmp.conf, pressione <Enter> para continuar"
+read
+sleep 2
+#
+echo -e "Fazendo o backup do arquivo de configuração do SNMP MIBs, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando mv: -v (verbose)
+	mv -v /etc/snmp/snmp.conf  /etc/snmp/snmp.conf.bkp &>> $LOG
+echo -e "Backup do arquivo de configuração do SNMP MIBs feito com sucesso!!!, continuando com o script.."
+sleep 2
+echo
+#
+echo -e "Atualizando do arquivo de configuração do SNMP MIBs, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando cp: -v (verbose)
+	cp -v conf/snmp.conf /etc/snmp/snmp.conf &>> $LOG
+echo -e "Atualização do arquivo de configuração do OCS Inventory Reports DBConfig feita com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Editando do arquivo de configuração do SNMP MIBs, aguarde..."
+	sleep 2
+	vim /etc/snmp/snmp.conf
+echo -e "Arquivo de configuração do OCS Inventory Reports DBConfig editado com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Reinicializando o serviço do SNMP, aguarde..."
+	sudo service snmp restart
+echo -e "Serviço do SNMP reinicializado com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Atualizando as MIBs genéricas do SNMP, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	download-mibs &>> $LOG
+echo -e "MIBs genéricas do SNMP atualizadas com sucesso!!!, continuando com o script..."
 sleep 2
 echo
 #
