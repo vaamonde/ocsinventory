@@ -1,0 +1,333 @@
+-- MIB file created 28-Dec-2002 11:14:16, by
+--   SMICng version 2.2.11-beta(PRO)(Solaris), January 20, 2001. Enterprise key cisco.com
+
+CISCO-PORT-CHANNEL-MIB DEFINITIONS ::= BEGIN
+
+-- From file: "CISCO-PORT-CHANNEL-MIB.my"
+-- Compile options "4 7 F H N W 03 06 0B 0G 0N 0T"
+
+IMPORTS
+    RowStatus, TimeStamp
+            FROM SNMPv2-TC-v1
+    SnmpAdminString
+            FROM SNMP-FRAMEWORK-MIB
+    InterfaceIndex
+            FROM IF-MIB
+    ciscoMgmt
+            FROM CISCO-SMI
+    PortMemberList
+            FROM CISCO-ST-TC
+    Gauge
+            FROM RFC1155-SMI
+    OBJECT-TYPE
+            FROM RFC-1212;
+
+ciscoPortChannelMIB OBJECT IDENTIFIER ::= { ciscoMgmt 285 }
+-- MODULE-IDENTITY
+--  LastUpdated
+--    200210020000Z
+--  OrgName
+--    Cisco Systems Inc.
+--  ContactInfo
+--         Cisco Systems 
+--          Customer Service 
+--    Postal: 170 W Tasman Drive 
+--          San Jose, CA  95134 
+--          USA 
+--    Tel: +1 800 553 -NETS 
+--    E-mail: cs-san@cisco.com
+--  Descr
+--    The MIB module for management of Port Channel ports. 
+--     In addition to this MIB, CISCO-FC-FE-MIB and interface 
+--     mib (rfc2863) will also contain entries for Port Channel 
+--     ports.
+--  RevDate
+--    200210020000Z
+--  RevDescr
+--    Initial version of this MIB module.
+
+ciscoPortChannelObjects OBJECT IDENTIFIER ::= { ciscoPortChannelMIB 1 }
+portChannelMIBConformance OBJECT IDENTIFIER ::= { ciscoPortChannelMIB 2 }
+portChannelConfig OBJECT IDENTIFIER ::= { ciscoPortChannelObjects 1 }
+portChannelStatistics OBJECT IDENTIFIER ::= { ciscoPortChannelObjects 2 }
+portChannelNotification OBJECT IDENTIFIER ::= { ciscoPortChannelObjects 3 }
+portChannelNotifications OBJECT IDENTIFIER ::= { portChannelNotification 0 }
+portChannelMIBCompliances OBJECT IDENTIFIER ::= { portChannelMIBConformance 1 }
+portChannelMIBGroups OBJECT IDENTIFIER ::= { portChannelMIBConformance 2 }
+
+PortChannelMode ::= INTEGER {
+        auto(1),
+        on(2),
+        off(3),
+        desirable(4)
+        }
+-- TEXTUAL-CONVENTION
+--  Status
+--    mandatory
+--  Descr
+--    Defines how a Port Channel does channeling. 
+--              auto(1)      - place the port into passive  
+--                             negotiation state, in which the 
+--                             port waits for its peer to  
+--                             initiate negotiation. 
+--              on(2)        - force the port to enable  
+--                             channeling. 
+--              off(3)       - channeling is disabled. 
+--              desirable(4) - place the port into active 
+--                             negotiating state, in which the 
+--                             port initiates negotiations with 
+--                             its peer and if the peer end  
+--                             agrees, channeling is enabled  
+--                             between them. 
+
+portChannelTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF PortChannelEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "This table facilitates the creation and deletion of a 
+         Port Channel interface to achieve higher bandwidths 
+         than just one E_port. More than one E_port can be a  
+         member of an Port Channel port. 
+         NOTE:Only E_ports can be members of an Port Channel 
+         port. 
+          
+         A port is added to a Port Channel port by setting  
+         portChannelMemberList,and the 'manner' in which the  
+         agent performs the type of addition is determined  
+         by the value of portChannelAddType. 
+          
+         During the period when port(s) is being added to the 
+         Port Channel, the agent will not allow to change any  
+         parameters of the port(s) being added. Also if the  
+         operation is successful (i.e. port(s) is added to the  
+         Port Channel) then also the agent will not allow to  
+         change any parameters of the individual port(s) that is 
+         added. But any change done to the Port Channel port 
+         will also be applied to the port(s) which are member(s) 
+         of this Port channel port. Once a port(s) is removed 
+         from a Port Channel Port it will retain the values that 
+         it had when it was a member of the Port Channel port. 
+         It will not have the old values it had before joining 
+         the Port Channel port.  
+        
+         The port(s) that are added/removed to/from a  
+         Port Channel port will be put into administratively 
+         down (ifAdminStatus='down') which results into 
+         operationally down(ifOperStatus='down'). To bring the  
+         port up again, the user has to set the port to be 
+         administratively up(ifAdminStatus='up'). Then the port 
+         goes through its initialization cycle to become  
+         active(ifOperStatus='up'). "
+    ::= { portChannelConfig 1 }
+
+portChannelEntry OBJECT-TYPE
+    SYNTAX PortChannelEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "There is one entry in this table for each created 
+         Port Channel port. "
+    INDEX { portChannelIndex }
+    ::= { portChannelTable 1 }
+
+PortChannelEntry ::= SEQUENCE {
+    portChannelIndex Gauge,
+    portChannelIfIndex InterfaceIndex,
+    portChannelAdminChannelMode PortChannelMode,
+    portChannelOperChannelMode PortChannelMode,
+    portChannelAddType INTEGER,
+    portChannelLastActionStatus INTEGER,
+    portChannelLastActionStatusCause SnmpAdminString,
+    portChannelLastActionTime TimeStamp,
+    portChannelMemberList PortMemberList,
+    portChannelCreationTime TimeStamp,
+    portChannelRowStatus RowStatus
+    }
+
+portChannelIndex OBJECT-TYPE
+    SYNTAX Gauge(1..2048)
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "An index that uniquely identifies an entry in the 
+         portChannelTable table. "
+    ::= { portChannelEntry 1 }
+
+portChannelIfIndex OBJECT-TYPE
+    SYNTAX InterfaceIndex
+--    Rsyntax INTEGER(1..2147483647)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The ifIndex of this interface. "
+    ::= { portChannelEntry 2 }
+
+portChannelAdminChannelMode OBJECT-TYPE
+    SYNTAX PortChannelMode
+--    Rsyntax INTEGER {
+--        auto(1),
+--        on(2),
+--        off(3),
+--        desirable(4)
+--        }
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The channel mode desired by the network manager. 
+         If this object is configured to be auto(1), then the  
+         'portChannelOperChannelMode' will show the current 
+          operating channel mode of port. "
+    DEFVAL { on }
+    ::= { portChannelEntry 3 }
+
+portChannelOperChannelMode OBJECT-TYPE
+    SYNTAX PortChannelMode
+--    Rsyntax INTEGER {
+--        auto(1),
+--        on(2),
+--        off(3),
+--        desirable(4)
+--        }
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The current operating channel mode of the port. "
+    ::= { portChannelEntry 4 }
+
+portChannelAddType OBJECT-TYPE
+    SYNTAX INTEGER {
+        normal(1),
+        force(2)
+        }
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The method to be adopted by the agent to add  
+         port(s) to a Port Channel port. 
+         If normal(1), then a compatibility check is done on the 
+         parameters of the port(s) being added to this Port 
+         Channel. The port(s) being added must have the same 
+         physical and configured parameters as the Port 
+         Channel port. 
+         If force(2), a compatibility check is done on only 
+         physical parameters. The port(s) being added to this 
+         Port Channel port must have same physical parameters. 
+         The operation will fail only if the physical parameters 
+         are not same. The configured parameters of the  
+         port(s) being added are overwritten by  
+         configured parameters of this Port Channel port. "
+    DEFVAL { normal }
+    ::= { portChannelEntry 5 }
+
+portChannelLastActionStatus OBJECT-TYPE
+    SYNTAX INTEGER {
+        successful(1),
+        failed(2)
+        }
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The status of the last operation (add or remove a  
+         member) done to change the member list of a Port  
+         Channel Port. 
+         When no ports are added or the last operation is 
+         successful then this object will be successful(1). 
+         If this value is failed(2) then the user can look 
+         at portChannelLastAddStatusCause to find the reason 
+         of failure. "
+    ::= { portChannelEntry 6 }
+
+portChannelLastActionStatusCause OBJECT-TYPE
+    SYNTAX SnmpAdminString
+--    Rsyntax OCTET STRING(SIZE(0..255))
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The cause of failure to last operation (add or remove 
+         a member) done to change the member list of a Port 
+         Channel port. This object will be zero length string 
+         if 'portChannelLastActionStatus' is successful(1). "
+    ::= { portChannelEntry 7 }
+
+portChannelLastActionTime OBJECT-TYPE
+    SYNTAX TimeStamp
+--    Rsyntax TimeTicks
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The timestamp indicating the time of last action 
+         performed on this entry. "
+    ::= { portChannelEntry 8 }
+
+portChannelMemberList OBJECT-TYPE
+    SYNTAX PortMemberList
+--    Rsyntax OCTET STRING(SIZE(0..64))
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The list of ifIndex's of the E_ports that are members 
+         of this Port Channel port. "
+    DEFVAL { ''H }
+    ::= { portChannelEntry 9 }
+
+portChannelCreationTime OBJECT-TYPE
+    SYNTAX TimeStamp
+--    Rsyntax TimeTicks
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The timestamp of this entry's creation time. 
+         Note that at this creation time, a discontinuity occurs 
+         in the statistic/error counters which are defined in 
+         CISCO-FC-FE-MIB, and which are associated with this 
+         Port Channel. "
+    ::= { portChannelEntry 10 }
+
+portChannelRowStatus OBJECT-TYPE
+    SYNTAX RowStatus
+--    Rsyntax INTEGER {
+--        active(1),
+--        notInService(2),
+--        notReady(3),
+--        createAndGo(4),
+--        createAndWait(5),
+--        destroy(6)
+--        }
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The status of this conceptual row. "
+    ::= { portChannelEntry 11 }
+
+portChannelGroup OBJECT IDENTIFIER ::= { portChannelMIBGroups 1 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects related to Port Channel Interface 
+--     parameters.
+--  objects
+--    portChannelIfIndex, portChannelAdminChannelMode, 
+--    portChannelOperChannelMode, portChannelAddType, 
+--    portChannelLastActionStatus, portChannelLastActionStatusCause, 
+--    portChannelLastActionTime, portChannelMemberList, 
+--    portChannelCreationTime, portChannelRowStatus
+
+portChannelMIBCompliance OBJECT IDENTIFIER ::= { portChannelMIBCompliances 1 }
+-- MODULE-COMPLIANCE
+--  Status
+--    mandatory
+--  Descr
+--    The compliance statement for entities which  
+--    implement the CISCO-PORT-CHANNEL-MIB mib.
+--  Module
+--    >>current<<
+--   MandGroup
+--    portChannelGroup
+--   ObjVar
+--    portChannelRowStatus
+
+
+END
+

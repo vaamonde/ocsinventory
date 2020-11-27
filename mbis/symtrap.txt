@@ -1,0 +1,406 @@
+SYMTRAP     DEFINITIONS ::=  BEGIN
+
+IMPORTS
+    enterprises
+        FROM RFC1155-SMI
+    DisplayString
+        FROM RFC1213-MIB
+    OBJECT-TYPE
+        FROM RFC-1212
+    TRAP-TYPE
+        FROM RFC-1215;
+
+-- The following object tree is for the symbios Trap objects.
+
+    symbios           OBJECT IDENTIFIER ::=  {enterprises 1123}
+    coloradosprings   OBJECT IDENTIFIER ::=  {symbios 3}
+    scsi              OBJECT IDENTIFIER ::=  {coloradosprings 1}
+    symc8xx           OBJECT IDENTIFIER ::=  {scsi 2}
+    symTrap           OBJECT IDENTIFIER ::=  {symc8xx 2}
+
+-- The following are the object defined for SCSI Traps
+
+    symTrapMajor OBJECT-TYPE
+                    SYNTAX  INTEGER (1..65535)
+                    ACCESS  read-only
+                    STATUS  mandatory
+                    DESCRIPTION
+                    "The major revision level of the MIB.
+
+                    A change in the major revision level represents a major
+                    change in the architecture or functions of the MIB."
+                    ::= { symTrap 1 }
+
+    symTrapMinor OBJECT-TYPE
+                    SYNTAX  INTEGER (0..65535)
+                    ACCESS  read-only
+                    STATUS  mandatory
+                    DESCRIPTION
+                    "The minor revision level of the MIB.
+
+                    A change in the minor revision level may represent some
+                    minor additional support, no changes to any pre-existing
+                    information has occurred."
+                    ::= { symTrap 2 }
+
+    managerName OBJECT-TYPE
+                    SYNTAX DisplayString    (SIZE(1..16))
+                    ACCESS read-only
+                    STATUS mandatory
+                    DESCRIPTION
+                    "ASCII string description of SCSI Manager"
+                    ::=  {symTrap 501}
+
+    managerVersion OBJECT-TYPE
+                    SYNTAX INTEGER
+                    ACCESS read-only
+                    STATUS mandatory
+                    DESCRIPTION
+                    "SCSI Manager version"
+                    ::=  { symTrap 502 }
+
+    controllerName  OBJECT-TYPE
+                    SYNTAX DisplayString    (SIZE(1..16))
+                    ACCESS read-only
+                    STATUS mandatory
+                    DESCRIPTION
+                    "ASCII String description of SCSI Controller"
+                    ::=  {symTrap 503}
+
+    scsiController  OBJECT-TYPE
+                    SYNTAX INTEGER
+                    ACCESS read-only
+                    STATUS mandatory
+                    DESCRIPTION
+                    "The unique SCSI Controller Number"
+                    ::=  {symTrap 504}
+
+-- (The channel information is for future controllers with dual SCSI buses)
+    scsiChannel     OBJECT-TYPE
+                    SYNTAX INTEGER
+                    ACCESS read-only
+                    STATUS mandatory
+                    DESCRIPTION
+                    "SCSI Channel Number"
+                    ::=  { symTrap 505 }
+
+    scsiTarget      OBJECT-TYPE
+                    SYNTAX INTEGER
+                    ACCESS read-only
+                    STATUS mandatory
+                    DESCRIPTION
+                    "SCSI Target Identification number"
+                    ::=  { symTrap 506 }
+
+    scsiLun         OBJECT-TYPE
+                    SYNTAX INTEGER
+                    ACCESS read-only
+                    STATUS mandatory
+                    DESCRIPTION
+                    "The LUN of the device"
+                    ::=  { symTrap 507 }
+
+    vendorName      OBJECT-TYPE
+                    SYNTAX DisplayString    (SIZE(1..8))
+                    ACCESS read-only
+                    STATUS mandatory
+                    DESCRIPTION
+                    "The SCSI device Vendor information"
+                    ::=  {symTrap 508}
+
+    productName     OBJECT-TYPE
+                    SYNTAX DisplayString    (SIZE(1..16))
+                    ACCESS read-only
+                    STATUS mandatory
+                    DESCRIPTION
+                    "The SCSI Product information"
+                    ::=  {symTrap 509}
+
+    controllerModel OBJECT-TYPE
+                    SYNTAX DisplayString    (SIZE (1..32))
+                    ACCESS read-only
+                    STATUS mandatory
+                    DESCRIPTION
+                    "The controller model string. eg SYM875UI"
+                    ::=  { symTrap 510 }
+
+    pciBusNumber    OBJECT-TYPE
+                    SYNTAX INTEGER
+                    ACCESS read-only
+                    STATUS mandatory
+                    DESCRIPTION
+                    "The PCI Bus number"
+                    ::=  { symTrap 511 }
+
+    scsiSmartData   OBJECT-TYPE
+                    SYNTAX INTEGER
+                    ACCESS read-only
+                    STATUS mandatory
+                    DESCRIPTION
+                    "The SMART information from the sense buffer of the device"
+                    ::=  { symTrap 512 }
+
+    errorType       OBJECT-TYPE
+                    SYNTAX INTEGER
+                    ACCESS read-only
+                    STATUS mandatory
+                    DESCRIPTION
+                    "The type of internal error"
+                    ::=  { symTrap 513 }
+
+
+-- Traps
+
+-- This trap is generated when the symbios SCSI agent is up.
+
+    symbiosAgentIsUp            TRAP-TYPE
+                                ENTERPRISE  symTrap
+                                DESCRIPTION
+                                "Symbios SCSI Agent is up."
+                                --#SUMMARY "Symbios SCSI Agent is up."
+                                --#SEVERITY INFORMATIONAL
+                                --#STATE OPERATIONAL
+                                --#HELP "symscsi.hlp"
+                                --#HELPTAG 101
+                                ::=  101
+
+
+-- This trap is generated when the symbios SCSI agent goes down.
+
+    symbiosAgentIsDown          TRAP-TYPE
+                                ENTERPRISE  symTrap
+                                DESCRIPTION
+                                "Symbios SCSI Agent is down."
+                                --#SUMMARY "Symbios SCSI Agent is down."
+                                --#SEVERITY INFORMATIONAL
+                                --#STATE OPERATIONAL
+                                --#HELP "symscsi.hlp"
+                                --#HELPTAG 102
+                                ::=  102
+
+
+-- SCSI Traps
+
+
+-- This Trap is issued when a new SCSI Controller is found.
+
+    scsiControllerDiscovered    TRAP-TYPE
+                                ENTERPRISE  symTrap
+                                VARIABLES {
+                                scsiController,
+                                controllerName,
+                                managerName
+                                }
+                                DESCRIPTION
+                                "The SCSI Controller# %d with
+                                ControllerName %s and ManagerName Id %s
+                                has been discovered"
+                                --#SUMMARY "The Controller Index# %d with SCSI Controller Id %s and Manager Id %s has been discovered"
+                                --#ARGUMENTS {0,1,2}
+                                --#SEVERITY INFORMATIONAL
+                                --#STATE OPERATIONAL
+                                --#HELP "symscsi.hlp"
+                                --#HELPTAG 108
+                                ::= 108
+
+-- This Trap is issued when a SCSI controller is replaced with another adapter
+-- of a different adapter family
+
+    scsiControllerChanged       TRAP-TYPE
+                                ENTERPRISE  symTrap
+                                VARIABLES {
+                                scsiController,
+                                controllerName,
+                                managerName
+                                }
+                                DESCRIPTION
+                                "The SCSI Controller# %d has been
+                                replaced by new ControllerName %s,
+                                ManagerName %s"
+                                --#SUMMARY "The Controller Index# %d has new SSCIController %s and ManagerName %s"
+                                --#ARGUMENTS {0,1,2}
+                                --#SEVERITY CRITICAL
+                                --#STATE OPERATIONAL
+                                --#HELP "symscsi.hlp"
+                                --#HELPTAG 109
+                                ::= 109
+
+--This Trap is issued when a SCSI controller fails.
+
+    scsiControllerFailed        TRAP-TYPE
+                                ENTERPRISE  symTrap
+                                VARIABLES {
+                                    scsiController
+                                }
+                                DESCRIPTION
+                                "The SCSI Controller# %d has Failed"
+                                --#SUMMARY "The Controller Index# %d has Failed"
+                                --#ARGUMENTS {0}
+                                --#SEVERITY CRITICAL
+                                --#STATE OPERATIONAL
+                                --#HELP "symscsi.hlp"
+                                --#HELPTAG 110
+                                ::= 110
+
+--This Trap is issued when a failed SCSI controller starts working again
+
+    scsiControllerRecovered     TRAP-TYPE
+                                ENTERPRISE  symTrap
+                                VARIABLES {
+                                    scsiController
+                                }
+                                DESCRIPTION
+                                "SCSI Controller# %d recovered"
+                                --#SUMMARY "SCSI Controller# %d recovered"
+                                --#ARGUMENTS {0}
+                                --#SEVERITY CRITICAL
+                                --#STATE OPERATIONAL
+                                --#HELP "symscsi.hlp"
+                                --#HELPTAG 111
+                                ::= 111
+
+--This Trap is issued when a previously unknown device is found.
+
+    scsiDeviceDiscovered        TRAP-TYPE
+                                ENTERPRISE  symTrap
+                                VARIABLES {
+                                    scsiController,
+                                    scsiTarget,
+                                    scsiLun,
+                                    vendorName,
+                                    productName
+                                }
+                                DESCRIPTION
+                                "A new SCSI Device at
+                                Controller# %d, Target# %d, Lun# %d
+                                of Vendor: %s   Product: %s
+                                has been discovered"
+                                --#SUMMARY   "The device at SCSIController# %d , SCSITarget# %d, SCSILun# %d of vendor %s  product %s has discovered "
+                                --#ARGUMENTS {0,1,2}
+                                --#SEVERITY INFORMATIONAL
+                                --#STATE OPERATIONAL
+                                --#HELP "symscsi.hlp"
+                                --#HELPTAG 113
+                                ::= 113
+
+
+
+-- This Trap is issued when a device is swapped.  If the device supports the
+-- SCSI serial number page, this trap is sent even if the replaced device is
+-- identical.
+
+    scsiDeviceChanged           TRAP-TYPE
+                                ENTERPRISE  symTrap
+                                VARIABLES {
+                                    scsiController,
+                                    scsiTarget,
+                                    scsiLun,
+                                    vendorName,
+                                    productName
+                                }
+                                DESCRIPTION
+                                "The SCSI Device at
+                                Controller# %d, Target# %d, Lun# %d
+                                has been replaced by Vendor %s
+                                and Product %s"
+                                --#SUMMARY "The SCSI Device at (%d,%d,%d) has new Vendor %s and Product %s information"
+                                --#ARGUMENTS {0,1,2,3,4}
+                                --#SEVERITY INFORMATIONAL
+                                --#STATE OPERATIONAL
+                                --#HELP "symscsi.hlp"
+                                --#HELPTAG 115
+                                ::= 115
+-- This Trap is issued when an attached SCSI device fails
+
+    scsiDeviceFailed            TRAP-TYPE
+                                ENTERPRISE  symTrap
+                                VARIABLES {
+                                    scsiController,
+                                    scsiTarget,
+                                    scsiLun
+                                }
+                                DESCRIPTION
+                                "The SCSI Device at
+                                Controller# %d, Target# %d, Lun# %d
+                                has failed "
+                                --#SUMMARY "The SCSIController# %d , SCSITargetID %d, SCSILun# %d has failed "
+                                --#ARGUMENTS {0,1,2}
+                                --#SEVERITY CRITICAL
+                                --#STATE OPERATIONAL
+                                --#HELP "symscsi.hlp"
+                                --#HELPTAG 112
+                                ::= 112
+
+--This Trap is issued when a previously failed device starts working again.
+
+    scsiDeviceRecovered         TRAP-TYPE
+                                ENTERPRISE  symTrap
+                                VARIABLES {
+                                    scsiController,
+                                    scsiTarget,
+                                    scsiLun
+                                }
+                                DESCRIPTION
+                                "The SCSI Device at
+                                Controller# %d, Target# %d, Lun# %d
+                                has recovered "
+                                --#SUMMARY "The SCSI Device at (%d,%d,%d) has recovered"
+                                --#ARGUMENTS {0,1,2}
+                                --#SEVERITY CRITICAL
+                                --#STATE OPERATIONAL
+                                --#HELP "symscsi.hlp"
+                                --#HELPTAG 114
+                                ::= 114
+
+
+--This Trap is issued when a SMART event occurs on a device.
+
+    scsiDeviceSMART             TRAP-TYPE
+                                ENTERPRISE  symTrap
+                                VARIABLES {
+                                    scsiController,
+                                    scsiTarget,
+                                    scsiLun,
+                                    vendorName,
+                                    productName,
+                                    scsiSmartData
+                                }
+                                DESCRIPTION
+                                "The Device at
+                                Controller Index# %d , TargetID %d, Lun# %d,
+                                Vendor %s Product %s has a SMART notification
+                                with sense information %d"
+                                --#SUMMARY   "The Controller Index# %d , TargetID %d, Lun# %d, Vendor %s,  Product %s has a SMART notification with senseinfo %d"
+                                --#ARGUMENTS {0,1,2,3,4,5}
+                                --#SEVERITY INFORMATIONAL
+                                --#STATE OPERATIONAL
+                                --#HELP "symscsi.hlp"
+                                --#HELPTAG 116
+                                ::= 116
+
+--This Trap is issued when there's an internal error.
+
+    symbiosInternalError        TRAP-TYPE
+                                ENTERPRISE  symTrap
+                                VARIABLES {
+                                    errorType
+                                }
+                                DESCRIPTION
+                                "There was an internal Symbios error -
+                                Please restart the Symbios agent."
+                                --#SUMMARY "This error is internal to symbios and can be one of the following:
+                                -- (1XX) Memory Error
+                                --   - Restart the SNMP agent
+                                -- (2XX) Device Database Error
+                                --   - Clear the database & restart
+                                -- (3XX) Database Inconsistency Error
+                                --   - Clear the database & restart
+                                -- (4XX) Unknown Error
+                                --   - Restart the SNMP agent
+                                --#SEVERITY WARNING
+                                --#STATE OPERATIONAL
+                                --#HELP "symscsi.hlp"
+                                --#HELPTAG 117
+                                ::= 117
+END
+

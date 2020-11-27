@@ -1,0 +1,37 @@
+-- *********************************************
+-- Modified by Garth K. Williams
+-- Williams Technology Consulting Services
+-- Date: 21Sep2001
+-- *********************************************
+--  Modified for compatability with SNMP4W2K PERFMIB
+-- *********************************************
+
+
+MSFT-MIB DEFINITIONS ::= BEGIN
+
+-- Added Counter to IMPORTS section
+        IMPORTS
+                enterprises,
+                Counter
+                        FROM RFC1155-SMI
+                OBJECT-TYPE
+                        FROM RFC-1212;
+
+-- EXPORTS not required for some browsers (i.e. Visual MIB Browser)
+--       EXPORTS
+--                microsoft,
+--                software;
+
+microsoft       OBJECT IDENTIFIER ::= { enterprises 311 }
+software        OBJECT IDENTIFIER ::= { microsoft 1 }
+systems         OBJECT IDENTIFIER ::= { software 1 }
+os              OBJECT IDENTIFIER ::= { systems 3 }
+windowsNT       OBJECT IDENTIFIER ::= { os 1 }
+windows         OBJECT IDENTIFIER ::= { os 2 }
+
+-- workstation OID conflicts with PERFMIB.MIB/DLL OIDs
+-- workstation     OBJECT IDENTIFIER ::= { windowsNT 1 }
+server          OBJECT IDENTIFIER ::= { windowsNT 2 }
+dc              OBJECT IDENTIFIER ::= { windowsNT 3 }
+
+END

@@ -1,0 +1,588 @@
+BEA-WEBLOGIC-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+     enterprises, Counter
+     FROM RFC1155-SMI
+     OBJECT-TYPE
+     FROM RFC-1212
+     DisplayString
+     FROM RFC1213-MIB
+     TRAP-TYPE
+     FROM RFC-1215;
+
+bea		OBJECT IDENTIFIER ::=  {  enterprises  140  }
+weblogic	OBJECT IDENTIFIER  ::=  { bea  600  }
+
+clusterTable	OBJECT-TYPE
+	SYNTAX	SEQUENCE  OF  ClusterEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+ 	DESCRIPTION
+		"Lists all clusters this agent is monitoring.
+                 The cluster must be contacted at least once before it will
+                 appear in the table."
+	::=  { weblogic  10 }
+
+clusterEntry	OBJECT-TYPE
+	SYNTAX	ClusterEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+ 	DESCRIPTION
+		"Entry of clusterTable"
+	INDEX	{  clusterName  }
+	::=  { clusterTable 1 }
+
+ClusterEntry  ::=  SEQUENCE {
+	clusterName  DisplayString,
+	multicastAddress  IpAddress,
+	defaultLoadBalancingAlgorithm  DisplayString,
+	serverList  DisplayString
+	}
+
+clusterName	OBJECT-TYPE 
+	SYNTAX	DisplayString (SIZE(1..16))
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Name of the cluster."
+	
+	::=  {  clusterEntry  5  }
+
+multicastAddress	OBJECT-TYPE 
+	SYNTAX	IpAddress 
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Multicast Address of the cluster."
+	
+	::=  {  clusterEntry  10  }
+
+defaultLoadBalancingAlgorithm	OBJECT-TYPE 
+	SYNTAX	DisplayString	(SIZE(1..256))
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Default load balancing algorithm of the cluster."
+	
+	::=  {  clusterEntry  15  }
+
+serverList	OBJECT-TYPE 
+	SYNTAX	DisplayString (SIZE(1..256)) 
+	ACCESS	read-only 
+	STATUS	mandatory
+ 
+	
+	DESCRIPTION
+		"Comma separated list of servers in the Cluster."
+	
+	::=  {  clusterEntry  20  }
+
+
+serverTable    OBJECT-TYPE
+        SYNTAX  SEQUENCE  OF  ServerEntry
+        ACCESS      not-accessible
+        STATUS  mandatory
+        DESCRIPTION
+                "Lists all Weblogic Servers the agent is monitoring.
+                 A server must be contacted at least once, or be reported
+                 as a member of a cluster at least once, before it will
+                 appear in this table.  Servers are only reported as
+                 a member of a cluster when they are actively participating
+                 in the cluster, or shortly thereafter."
+        ::=  { weblogic  20 }
+
+serverEntry    OBJECT-TYPE
+        SYNTAX  ServerEntry
+        ACCESS      not-accessible
+        STATUS  mandatory
+        DESCRIPTION
+                "Entry of serverTable"
+        INDEX   {  serverClusterName , serverName  }
+        ::=  { serverTable 1 }
+
+ServerEntry  ::=  SEQUENCE {
+        serverClusterName  DisplayString,
+        serverName  DisplayString,
+        serverHostName  DisplayString,
+        serverState  INTEGER,
+	serverLoginEnable INTEGER,
+        serverVersion  DisplayString,
+        serverDateTimeLaunched  DisplayString,
+        serverUptime  DisplayString,
+        serverSystemHome  DisplayString,
+        serverJVMVendor  DisplayString,
+        serverJVMVersion  DisplayString,
+        serverMaxHeapSpace  INTEGER,
+        serverHeapUsedPct  INTEGER,
+        serverQueueLength  INTEGER,
+        serverQueueThroughput  INTEGER,
+	serverNumEJBDeployments INTEGER,
+	serverNumEJBBeansDeployed INTEGER
+        }
+
+
+serverClusterName	OBJECT-TYPE 
+	SYNTAX	DisplayString (SIZE(1..16))
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Name of the cluster to which this server belongs. If the
+		 the server is standalone, the value returned is 'standalone'."
+	
+	::=  {  serverEntry  5  }
+
+serverName	OBJECT-TYPE 
+	SYNTAX	DisplayString (SIZE(1..16))
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Name of the server.
+                 All servers monitored by a given agent must have a unique name.
+                 In particular, a single agent cannot monitor several servers
+                 named 'myserver' running on different hosts but participating
+                 in the same cluster."
+	
+	::=  {  serverEntry  10  }
+
+serverHostName	OBJECT-TYPE 
+	SYNTAX	DisplayString (SIZE(1..30))
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"DNS host name of the machine on which the server is running."
+	
+	::=  {  serverEntry  15  }
+
+
+serverState	OBJECT-TYPE 
+	SYNTAX	INTEGER { up(1), down(2) } 
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"State of the Weblogic Server, as inferred by the snmp agent.
+		 Up implies the agent can contact the server; 
+                 down implies the agent cannot contact the server."
+	::=  {  serverEntry  20  }
+
+serverLoginEnable	OBJECT-TYPE 
+	SYNTAX	INTEGER { true(1), false(2) } 
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"This value is true if client logins are enabled on the server."
+	::=  {  serverEntry  25  }
+
+serverVersion	OBJECT-TYPE 
+	SYNTAX	DisplayString (SIZE(0..50))
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Version string for the Weblogic server."
+	::=  {  serverEntry  30  }
+
+serverDateTimeLaunched	OBJECT-TYPE 
+	SYNTAX	DisplayString (SIZE(0..28))
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Date and time at which the server was started.
+                 The format is 'ddd mmm dd hh:mm:ss zzz yyy',
+                 where ddd=day of week, mmm=month, dd=day of month,
+                 hh=hour, mm=minute, ss=second, zzz=time zone, yyy=year."
+	::=  {  serverEntry  35  }
+
+serverUptime	OBJECT-TYPE 
+	SYNTAX	DisplayString (SIZE(0..13))
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Amount of time the server has been up.
+                 The format is 'nd hh:mm:ss',
+                 where n=number of days, hh=hours, mm=minutes, ss=seconds."
+	::=  {  serverEntry  40  }
+
+serverSystemHome	OBJECT-TYPE 
+	SYNTAX	DisplayString (SIZE(1..256))
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Home directory for the server.
+                 This is the installation directory for the server
+                 as a whole."
+	::=  {  serverEntry  45  }
+
+serverJVMVendor	OBJECT-TYPE 
+	SYNTAX	DisplayString (SIZE(0..64))
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Name of the JVM Vendor in which the server is running."
+	::=  {  serverEntry  50  }
+
+serverJVMVersion	OBJECT-TYPE
+	SYNTAX	DisplayString (SIZE(0..16))
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"Version of the JVM in which the server is running."
+	::=  {  serverEntry  55  }
+
+serverMaxHeapSpace	OBJECT-TYPE 
+	SYNTAX	INTEGER 
+	ACCESS	read-only 
+	STATUS	mandatory
+ 
+	
+	DESCRIPTION
+		"Maximum heap size for this server, in KB."
+	
+	::=  {  serverEntry  60  }
+
+serverHeapUsedPct	OBJECT-TYPE 
+	SYNTAX	INTEGER (0..100)
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Percentage of heap space currently in use in the server."
+	::=  {  serverEntry  65  }
+
+serverQueueLength	OBJECT-TYPE 
+	SYNTAX	INTEGER 
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Current length of the server execute queue."
+	::=  {  serverEntry  70  }
+
+serverQueueThroughput	OBJECT-TYPE 
+	SYNTAX	INTEGER 
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Current throughput of execute queue, expressed as
+                 number of requests processed per second."
+	::=  {  serverEntry  75  }
+
+serverNumEJBDeployments	OBJECT-TYPE 
+	SYNTAX	INTEGER 
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Total number of EJB deployment units known to the server."
+	::=  {  serverEntry  80  }
+
+serverNumEJBBeansDeployed	OBJECT-TYPE 
+	SYNTAX	INTEGER 
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Total number of EJB beans actively deployed on the server."
+	::=  {  serverEntry  85  }
+
+-- Listen table
+
+listenTable  OBJECT-TYPE
+               SYNTAX  SEQUENCE OF ListenEntry
+               ACCESS  not-accessible
+               STATUS  mandatory
+               DESCRIPTION  
+			"The set of protocol, ip address, port combinations 
+			 on which servers are listening.
+                         There will be multiple entries for each server;
+                         one for each (protocol,ipAddr,port) combination."
+             ::= { weblogic 30 }
+
+listenEntry   OBJECT-TYPE
+               SYNTAX  ListenEntry
+               ACCESS  not-accessible
+               STATUS  mandatory
+               DESCRIPTION  
+			"A row in the listenTable"
+               INDEX   { listenServerName , listenProtocol, 
+			 listenIpAddress , listenPort }
+             ::= { listenTable 1 }
+
+ListenEntry ::= SEQUENCE {
+             listenServerName DisplayString,
+             listenProtocol DisplayString,
+             listenIpAddress IpAddress,
+             listenPort INTEGER,
+             listenAdminOK INTEGER,
+	     listenState INTEGER
+}
+
+listenServerName   OBJECT-TYPE
+               SYNTAX  DisplayString (SIZE(1..16))
+               ACCESS  read-only
+               STATUS  mandatory
+               DESCRIPTION  
+			"Server name"
+             ::= { listenEntry 5 }
+
+listenProtocol   OBJECT-TYPE
+               SYNTAX  DisplayString (SIZE(1..16))
+               ACCESS  read-only
+               STATUS  mandatory
+               DESCRIPTION  
+			"TCP protocol"
+             ::= { listenEntry 10 }
+
+listenIpAddress   OBJECT-TYPE
+               SYNTAX  IpAddress
+               ACCESS  read-only
+               STATUS  mandatory
+               DESCRIPTION  
+			"IP Address"
+             ::= { listenEntry 15 }
+
+listenPort   OBJECT-TYPE
+               SYNTAX  INTEGER
+               ACCESS  read-only
+               STATUS  mandatory
+               DESCRIPTION  
+			"Port number"
+             ::= { listenEntry 20 }
+
+listenAdminOK   OBJECT-TYPE
+               SYNTAX  INTEGER { true(1), false(2) }
+               ACCESS  read-only
+               STATUS  mandatory
+               DESCRIPTION  
+			"True if admin requests are allowed on this 
+			 (protocol,ipAddr,port), else false."
+             ::= { listenEntry 25 }
+
+listenState   OBJECT-TYPE
+               SYNTAX  INTEGER { listening(1), notListening(2) }
+               ACCESS  read-only
+               STATUS  mandatory
+               DESCRIPTION  
+			"listening if the (protocol,ipAddr,port) is enabled
+                         on the server; notListening if it is not.
+                         The server may be listening but not accepting new
+                         clients if its serverLoginEnable state is false.
+                         In this case existing clients will continue to
+                         function but new ones will not."
+             ::= { listenEntry 30 }
+
+-- Classpath table
+
+classpathTable  OBJECT-TYPE
+               SYNTAX  SEQUENCE OF ClasspathEntry
+               ACCESS  not-accessible
+               STATUS  mandatory
+               DESCRIPTION
+                        "Table of classpath elements for JAVA, Weblogic Server
+		   	 and servlets.
+                         There are multiple entries in this table for each
+                         server; and there may be multiple entries for each
+                         path on a server."
+             ::= { weblogic 40 }
+
+classpathEntry   OBJECT-TYPE
+               SYNTAX  ClasspathEntry
+               ACCESS  not-accessible
+               STATUS  mandatory
+               DESCRIPTION
+                        "A row in the classpathTable"
+               INDEX   { cpServerName , cpType, cpIndex }
+             ::= { classpathTable 1 }
+
+ClasspathEntry ::= SEQUENCE {
+             cpServerName DisplayString,
+             cpType INTEGER,
+             cpElement DisplayString,
+	     cpIndex INTEGER
+}
+
+cpServerName   OBJECT-TYPE
+               SYNTAX  DisplayString (SIZE(1..16))
+               ACCESS  read-only
+               STATUS  mandatory
+               DESCRIPTION  
+			"Server name"
+             ::= { classpathEntry 5 }
+
+cpType   OBJECT-TYPE
+               SYNTAX  INTEGER { java(1), weblogic(2), servlet(3) }
+               ACCESS  read-only
+               STATUS  mandatory
+               DESCRIPTION  
+			"A type of java means the cpElement is one of the
+                         elements in the normal java classpath.
+                         A type of weblogic means the cpElement is one of the
+                         elements in the weblogic.class.path.
+                         A type of servlet means the cpElement is one of the
+                         elements in the dynamic servlet classpath."
+             ::= { classpathEntry 10 }
+
+cpElement   OBJECT-TYPE
+               SYNTAX  DisplayString (SIZE(1..256))
+               ACCESS  read-only
+               STATUS  mandatory
+               DESCRIPTION  
+			"One element in the classpath."
+             ::= { classpathEntry 15 }
+
+cpIndex   OBJECT-TYPE
+               SYNTAX  INTEGER (1..64)
+               ACCESS  read-only
+               STATUS  mandatory
+               DESCRIPTION  
+			"Position of element within its path.
+                         The index starts at 1."
+             ::= { classpathEntry 16 }
+
+-- JDBC Connection Pools table
+
+jdbcPoolTable  OBJECT-TYPE
+               SYNTAX  SEQUENCE OF JdbcPoolEntry
+               ACCESS  not-accessible
+               STATUS  mandatory
+               DESCRIPTION
+                        "Table of JDBC connection pools.
+                         There is one entry for each pool on a server."
+             ::= { weblogic 50 }
+
+jdbcPoolEntry   OBJECT-TYPE
+               SYNTAX  JdbcPoolEntry
+               ACCESS  not-accessible
+               STATUS  mandatory
+               DESCRIPTION
+                        "A row in the jdbcPoolTable"
+               INDEX   { jdbcPoolName , jdbcServerName }
+             ::= { jdbcPoolTable 1 }
+
+JdbcPoolEntry ::= SEQUENCE {
+             jdbcPoolName DisplayString,
+             jdbcServerName DisplayString,
+             jdbcMaxCapacity INTEGER,
+             jdbcInitCapacity INTEGER,
+             jdbcCurrentPoolSize INTEGER,
+             jdbcCurrentInUse INTEGER,
+             jdbcTotalPendingConnections INTEGER,
+             jdbcHighwaterPendingConnections INTEGER,
+	     jdbcHighwaterWaitTime INTEGER
+}
+
+jdbcPoolName	OBJECT-TYPE 
+	SYNTAX	DisplayString (SIZE(1..16)) 
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Name of JDBC connection pool."
+	::=  {  jdbcPoolEntry  5  }
+
+jdbcServerName	OBJECT-TYPE
+	SYNTAX	DisplayString (SIZE(1..16))
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"Name of server hosting the connection pool."
+	::=  {  jdbcPoolEntry  10  }
+
+jdbcMaxCapacity	OBJECT-TYPE 
+	SYNTAX	INTEGER
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Maximum number of database conections allowed for this pool."
+	::=  {  jdbcPoolEntry  15  }
+
+jdbcInitCapacity	OBJECT-TYPE 
+	SYNTAX	INTEGER
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Initial number of database connections to be opened for this pool."
+	::=  {  jdbcPoolEntry  20  }
+
+jdbcCurrentPoolSize	OBJECT-TYPE 
+	SYNTAX	INTEGER
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Current number of database connections opened for this pool."
+	::=  {  jdbcPoolEntry  25  }
+
+jdbcCurrentInUse	OBJECT-TYPE 
+	SYNTAX	INTEGER
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Current number of database connections in use for this pool."
+	::=  {  jdbcPoolEntry  30  }
+
+jdbcTotalPendingConnections	OBJECT-TYPE 
+	SYNTAX	INTEGER
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"Number of pending database connection requests on this pool. "
+	::=  {  jdbcPoolEntry  35  }
+
+jdbcHighwaterPendingConnections	OBJECT-TYPE 
+	SYNTAX	INTEGER
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"High water mark value for the number of pending connections."
+	::=  {  jdbcPoolEntry  40  }
+
+jdbcHighwaterWaitTime	OBJECT-TYPE 
+	SYNTAX	INTEGER
+	ACCESS	read-only 
+	STATUS	mandatory
+	DESCRIPTION
+		"High water mark for the wait time of a client in seconds."
+	::=  {  jdbcPoolEntry  45  }
+
+wlsServerRestart TRAP-TYPE
+        ENTERPRISE weblogic
+        VARIABLES {
+                serverName
+        }
+        DESCRIPTION
+	"This trap is generated when the agent reconnects to a server which 
+	was restarted, since the last connect.
+        Either wlsServerUnAvailable or wlsServerShutDown will always precede 
+	this trap."
+        ::= 5
+
+wlsServerAvailable TRAP-TYPE
+        ENTERPRISE weblogic
+        VARIABLES {
+                serverName
+        }
+        DESCRIPTION
+        "The server has been identified as being reachable, after having
+        previously been unavailable for some reason.
+        e.g. it may have been unreachable due to network problems,
+        or this may be the first time it has been contacted by the agent."
+        ::= 10
+
+wlsServerUnAvailable TRAP-TYPE
+        ENTERPRISE weblogic
+        VARIABLES {
+                serverName
+        }
+        DESCRIPTION
+                "The server has been identified as being down.
+                 For example, it may be unreachable due to network problems,
+                 or it may have crashed,
+                 or it may have been shut down while unreachable due to 
+		 network problems.
+                 If the server is supposed to be up, a responsible
+                 party should probably be notified to check on it."
+        ::= 15
+
+wlsServerShutDown TRAP-TYPE
+        ENTERPRISE weblogic
+        VARIABLES {
+                serverName
+        }
+        DESCRIPTION
+                "The server has been deliberately shut down."
+        ::= 20
+
+END

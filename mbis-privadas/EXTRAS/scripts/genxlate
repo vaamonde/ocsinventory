@@ -1,0 +1,70 @@
+#!/usr/bin/env perl
+# genxlate [vendor|*] - run snmptranslate on MIBs and save output
+# no param will make a single report for all MIBs and one for each vendor
+
+use strict;
+use warnings;
+
+use charnames ':full';
+binmode STDOUT, ':utf8';
+$|++;
+
+use Time::HiRes 'sleep';
+use File::Temp;
+use File::Spec::Functions qw(splitdir catfile);
+use Term::ANSIColor qw(:constants);
+use POSIX qw(:sys_wait_h);
+
+use FindBin;
+use lib catfile($FindBin::Bin, 'lib');
+use Helpers;
+
+# TODO: arguably rfc:net-snmp should be enough!
+# but it seems cisco, nortel, etc are required. maybe in the future, fix this.
+my @mibdirs = sort grep { -d and $_ !~ m#/EXTRAS$# } glob("$ENV{MIBHOME}/*");
+$ENV{MIBDIRS} = join ':', @mibdirs;
+
+# load mib_index2.txt mapping all current known MIBs
+my (undef, undef, $mibs_for) = parse_index2();
+
+my $vendor = shift;
+if ($vendor and !exists $mibs_for->{$vendor} and $vendor ne '*') {
+  print "error: vendor arg must exist in MIBHOME\n";
+  exit(1);
+}
+my @vendors = (defined $vendor)
+  ? (($vendor eq '*') ? (sort keys %{$mibs_for}) : ($vendor, 'all'))
+  : ((sort keys %{$mibs_for}), 'all');
+
+foreach my $v (@vendors) {
+  my $mibs = ($v eq 'all') ? 'ALL' : (join ':', sort @{$mibs_for->{$v}});
+  my $out = catfile($ENV{MIBHOME}, 'EXTRAS', 'reports', $v);
+  my $err = File::Temp->new();
+  status("Parsing $v");
+
+  defined(my $pid = fork) or die "Couldn't fork: $!";
+  if (!$pid) { # Child
+    exec(qq{snmptranslate -Tt -Le -m '$mibs' 2>'$err' | perl -p -e 's/ tc=[0-9]+//g; s/anonymous#[0-9]*/anonymous/' 1>'$out'})
+      or die "Couldn't exec: $!";
+  } else { # Parent
+    my $slept = 0.5;
+    while (! waitpid($pid, WNOHANG)) {
+      status("Parsing $v");
+      sleep 0.05;
+      $slept -= 0.05;
+    }
+    sleep $slept if $slept > 0;
+  }
+
+  if (-s $err) {
+    blank();
+    print RED, "\N{HEAVY BALLOT X} ", CYAN, 'Errors from ',
+      MAGENTA, $v, CYAN, " MIBs\n", RESET;
+    while (<$err>) { print }
+    print "\n";
+  }
+}
+
+blank();
+print "\N{BLACK FLAG} Reports complete.\n";
+exit(0);

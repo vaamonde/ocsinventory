@@ -1,0 +1,1925 @@
+-- MIB file created 06-Nov-2002 11:56:49, by
+--   SMICng version 2.2.11-beta(PRO)(Solaris), January 20, 2001. Enterprise key cisco.com
+
+CISCO-MOBILE-IP-MIB DEFINITIONS ::= BEGIN
+
+-- From file: "CISCO-MOBILE-IP-MIB.my"
+-- Compile options "4 7 F H N W 03 06 0B 0G 0N 0T"
+
+IMPORTS
+    RowStatus, TimeInterval, TimeStamp, DateAndTime, TruthValue
+            FROM SNMPv2-TC-v1
+    RegistrationFlags, haMobilityBindingMN, haMobilityBindingCOA
+            FROM MIP-MIB
+    ciscoMgmt
+            FROM CISCO-SMI
+    Counter, Gauge, IpAddress
+            FROM RFC1155-SMI
+    OBJECT-TYPE
+            FROM RFC-1212;
+
+ciscoMobileIpMIB OBJECT IDENTIFIER ::= { ciscoMgmt 174 }
+-- MODULE-IDENTITY
+--  LastUpdated
+--    200205170000Z
+--  OrgName
+--    Cisco Systems, Inc.
+--  ContactInfo
+--           Cisco Systems
+--            Customer Service
+--    
+--    Postal: 170 W. Tasman Drive
+--            San Jose, CA  95134
+--            USA
+--    
+--       Tel: +1 800 553-NETS
+--    
+--    E-mail: cs-mobileip@cisco.com
+--  Descr
+--    An extension to the IETF MIB module defined in
+--    RFC-2006 for managing Mobile IP implementations.
+--    
+--    Mobile IP introduces the following new functional 
+--    entities:
+--    
+--    Mobile Node(MN)
+--       A host or router that changes its point of
+--       attachment from one network or subnetwork to 
+--       another. A mobile node may change its location 
+--       without changing its IP address; it may continue to
+--       communicate with other Internet nodes at any
+--       location using its (constant) IP address, assuming 
+--       link-layer connectivity to a point of attachment is
+--       available.
+--    
+--    Home Agent(HA)
+--       A router on a mobile node's home network which 
+--       tunnels datagrams for delivery to the mobile node 
+--       when it is away from home, and maintains current 
+--       location information for the mobile node.
+--    
+--    Foreign Agent(FA)
+--       A router on a mobile node's visited network which 
+--       provides routing services to the mobile node while 
+--       registered. The foreign agent detunnels and delivers 
+--       datagrams to the mobile node that were tunneled by 
+--       the mobile node's home agent. For datagrams sent by
+--       a mobile node, the foreign agent may serve as a 
+--       default router for registered mobile nodes.
+--    
+--    Following is the terminology associated with Mobile IP
+--    protocol:
+--    
+--    Agent Advertisement
+--       An advertisement message constructed by attaching a
+--       special Extension to a router advertisement message.
+--    
+--    Care-of Address
+--       The termination point of a tunnel toward a mobile 
+--       node, for datagrams forwarded to the mobile node 
+--       while it is away from home. The protocol can use
+--       two different types of care-of address: a 'foreign 
+--       agent care-of address' is an address of a foreign 
+--       agent with which the mobile node is registered, and
+--       a 'co-located care-of address' is an externally 
+--       obtained local address which the mobile node has 
+--       associated with one of its own network interfaces.
+--    
+--    Correspondent Node
+--       A peer with which a mobile node is communicating.  
+--       A correspondent node may be either mobile or 
+--       stationary.
+--    
+--    Foreign Network
+--       Any network other than the mobile node's Home 
+--       Network.
+--    
+--    Home Address
+--       An IP address that is assigned for an extended 
+--       period of time to a mobile node. It remains 
+--       unchanged regardless of where the node is attached 
+--       to the Internet.
+--    
+--    Home Network
+--       A network, possibly virtual, having a network prefix
+--       matching that of a mobile node's home address. Note
+--       that standard IP routing mechanisms will deliver 
+--       datagrams destined to a mobile node's Home Address 
+--       to the mobile node's Home Network.
+--    
+--    Mobility Agent
+--       Either a home agent or a foreign agent.
+--    
+--    Mobility Binding
+--       The association of a home address with a care-of 
+--       address, along with the remaining lifetime of that 
+--       association.
+--    
+--    Mobility Security Association
+--       A collection of security contexts, between a pair
+--       of nodes, which may be applied to Mobile IP protocol
+--       messages exchanged between them. Each context 
+--       indicates an authentication algorithm and mode, a 
+--       secret (a shared key, or appropriate public/private
+--       key pair), and a style of replay protection in use.
+--    
+--    Node     
+--       A host or a router.
+--    
+--    Nonce    
+--       A randomly chosen value, different from previous 
+--       choices, inserted in a message to protect against 
+--       replays.
+--    
+--    Security Parameter Index (SPI)
+--       An index identifying a security context between a 
+--       pair of nodes among the contexts available in the 
+--       Mobility Security Association. SPI values 0 through
+--       255 are reserved and MUST NOT be used in any
+--       Mobility Security Association.
+--    
+--    Tunnel   
+--       The path followed by a datagram while it is 
+--       encapsulated. The model is that, while it is 
+--       encapsulated, a datagram is routed to a 
+--       knowledgeable decapsulating agent, which 
+--       decapsulates the datagram and then correctly 
+--       delivers it to its ultimate destination.
+--    
+--    Visited Network
+--       A network other than a mobile node's Home Network, 
+--       to which the mobile node is currently connected.
+--    
+--    Visitor List
+--       The list of mobile nodes visiting a foreign agent.
+--    
+--    The following support services are defined for 
+--    Mobile IP:
+--    
+--    Agent Discovery
+--       Home agents and foreign agents may advertise their
+--       availability on each link for which they provide 
+--       service. A newly arrived mobile node can send a 
+--       solicitation on the link to learn if any prospective 
+--       agents are present.
+--    
+--    Registration
+--       When the mobile node is away from home, it registers
+--       its care-of address with its home agent. Depending 
+--       on its method of attachment, the mobile node will 
+--       register either directly with its home agent, or 
+--       through a foreign agent which forwards the 
+--       registration to the home agent.
+--    
+--    Following is the terminology associated with the home
+--    agent redundancy feature:
+--       
+--    Peer Home Agent
+--       Active home agent and standby home agent are peers 
+--       to each other.
+--    
+--    Binding Update  
+--       A binding update contains the registration request
+--    information. The home agent sends the update to its 
+--    peer after accepting a registration.  
+--    
+--    Binding Information
+--       Binding information contains the entries in the 
+--    mobility binding table. The home agent sends a binding
+--    information request to its peer to retrieve all 
+--    mobility bindings for a specified home agent address.
+--    
+--    This MIB is organized as described below:
+--       
+--       The IETF Mobile IP MIB module [RFC-2006] has six
+--       main groups. Three of them represent the Mobile IP 
+--       entities i.e. 'MipFA': foreign agent, 'MipHA': 
+--       home agent and 'MipMN': mobile node. Each of these 
+--       groups have been further subdivided into different 
+--       subgroups. Each of these subgroups is a collection 
+--       of objects related to a particular function, 
+--       performed by the entity represented by its main 
+--       group e.g. 'faRegistration' is a subgroup under 
+--       group 'MipFA' which has collection of objects for 
+--       registration function within a foreign agent. This 
+--       MIB also follows the same hierarchical structure to
+--       maintain the modularity with respect to Mobile IP.
+--  RevDate
+--    200205170000Z
+--  RevDescr
+--    Add HA/FA initial registration,re-registration,
+--    de-registration counters for more granularity.
+--  RevDate
+--    200107060000Z
+--  RevDescr
+--    Add cmiFaRegVisitorTable, cmiHaRegCounterTable, 
+--    cmiHaRegMobilityBindingTable, cmiSecAssocTable,
+--    and cmiSecViolationTable. Add counters for home agent 
+--    redundancy feature. Add performance counters for 
+--    registration function of the mobility agents.
+--  RevDate
+--    200101250000Z
+--  RevDescr
+--    Initial version of this MIB module.
+
+ciscoMobileIpMIBObjects OBJECT IDENTIFIER ::= { ciscoMobileIpMIB 1 }
+cmiFa           OBJECT IDENTIFIER ::= { ciscoMobileIpMIBObjects 1 }
+cmiHa           OBJECT IDENTIFIER ::= { ciscoMobileIpMIBObjects 2 }
+cmiSecurity     OBJECT IDENTIFIER ::= { ciscoMobileIpMIBObjects 3 }
+cmiMa           OBJECT IDENTIFIER ::= { ciscoMobileIpMIBObjects 4 }
+cmiFaReg        OBJECT IDENTIFIER ::= { cmiFa 1 }
+cmiHaReg        OBJECT IDENTIFIER ::= { cmiHa 1 }
+cmiHaRedun      OBJECT IDENTIFIER ::= { cmiHa 2 }
+cmiMaReg        OBJECT IDENTIFIER ::= { cmiMa 1 }
+ciscoMobileIpMIBConformance OBJECT IDENTIFIER ::= { ciscoMobileIpMIB 3 }
+ciscoMobileIpCompliances OBJECT IDENTIFIER ::= { ciscoMobileIpMIBConformance 1 }
+ciscoMobileIpGroups OBJECT IDENTIFIER ::= { ciscoMobileIpMIBConformance 2 }
+
+CmiEntityIdentifierType ::= INTEGER {
+        other(1),
+        ipaddress(2),
+        nai(3)
+        }
+-- TEXTUAL-CONVENTION
+--  Status
+--    mandatory
+--  Descr
+--    A value that represents a type of Mobile IP entity
+--    identifier.
+--    other(1)     Indicates identifier which 
+--                 is not in one of the formats defined 
+--                 below.
+--    
+--    ipaddress(2) IP address as defined by InetAddressIPv4
+--                 textual convention in INET-ADDRESS-MIB.
+--    
+--    nai(3)       A network access identifier as defined by
+--                 the CmiEntityIdentifierNAI textual 
+--                 convention.
+
+CmiEntityIdentifier ::= OCTET STRING(SIZE(1..255))
+-- TEXTUAL-CONVENTION
+--  Status
+--    mandatory
+--  Descr
+--    Represents the generic identifier for Mobile IP 
+--    entities. A CmiEntityIdentifier value is always 
+--    interpreted within the context of a
+--    CmiEntityIdentifierType  value. 
+--                 Foreign agents and Home agents are 
+--    identified by the IP addresses. Mobile nodes can be 
+--    identified in more than one way e.g. IP addresses, 
+--    network access identifiers (NAI). If mobile node is 
+--    identified by  something other than IP address say by 
+--    NAI and it gets IP address dynamically from the home 
+--    agent then value of object of this type should be same
+--    as NAI. This is because then IP address is not tied 
+--    with mobile node and it can change across registrations 
+--    over period of time.
+
+CmiEntityIdentifierNAI ::= OCTET STRING(SIZE(1..255))
+-- TEXTUAL-CONVENTION
+--  Status
+--    mandatory
+--  Descr
+--    Represents a Network Access Identifer(NAI). Mobile
+--    nodes may use NAI to authenticate themselves to the
+--    foreign agent and home agent and to get the home 
+--    address dynamically from the home agent.
+--  Refer
+--    RFC-2794 - Mobile IP Network Access Identifier
+--    Extension for IPv4
+
+CmiSpi ::= Gauge(256..4294967295)
+-- TEXTUAL-CONVENTION
+--  Status
+--    mandatory
+--  Descr
+--    An index identifying a security context between a pair
+--    of nodes among the contexts available in the Mobility
+--    Security Association.  SPI values 0 through 255 are
+--    reserved and MUST NOT be used in any Mobility Security
+--    Association.
+--  Refer
+--    RFC-2002 - IP Mobility Support, section 3.5.1
+
+cmiFaRegTotalVisitors OBJECT-TYPE
+    SYNTAX Gauge
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The current number of entries in faVisitorTable.
+        faVisitorTable contains the foreign agent's visitor 
+        list. The foreign agent updates this table in 
+        response to registration events from mobile nodes."
+    REFERENCE
+        "RFC-2006 - Mobile IP MIB Definition using SMIv2"
+    ::= { cmiFaReg 1 }
+
+cmiFaRegVisitorTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF CmiFaRegVisitorEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "A table containing the foreign agent's visitor
+        list. The foreign agent updates this table in 
+        response to registration events from mobile nodes.
+        This table provides the same information as
+        faVisitorTable of MIP-MIB. The difference is
+        that indices of the table are changed so that visitors
+        which are not identified by the IP address will also 
+        be included in the table."
+    ::= { cmiFaReg 2 }
+
+cmiFaRegVisitorEntry OBJECT-TYPE
+    SYNTAX CmiFaRegVisitorEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "Information for one visitor regarding registration."
+    INDEX { cmiFaRegVisitorIdentifierType, cmiFaRegVisitorIdentifier }
+    ::= { cmiFaRegVisitorTable 1 }
+
+CmiFaRegVisitorEntry ::= SEQUENCE {
+    cmiFaRegVisitorIdentifierType CmiEntityIdentifierType,
+    cmiFaRegVisitorIdentifier CmiEntityIdentifier,
+    cmiFaRegVisitorHomeAddress IpAddress,
+    cmiFaRegVisitorHomeAgentAddress IpAddress,
+    cmiFaRegVisitorTimeGranted TimeInterval,
+    cmiFaRegVisitorTimeRemaining TimeInterval,
+    cmiFaRegVisitorRegFlags RegistrationFlags,
+    cmiFaRegVisitorRegIDLow Gauge,
+    cmiFaRegVisitorRegIDHigh Gauge,
+    cmiFaRegVisitorRegIsAccepted TruthValue
+    }
+
+cmiFaRegVisitorIdentifierType OBJECT-TYPE
+    SYNTAX CmiEntityIdentifierType
+--    Rsyntax INTEGER {
+--        other(1),
+--        ipaddress(2),
+--        nai(3)
+--        }
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "The type of the visitor's identifier."
+    ::= { cmiFaRegVisitorEntry 1 }
+
+cmiFaRegVisitorIdentifier OBJECT-TYPE
+    SYNTAX CmiEntityIdentifier
+--    Rsyntax OCTET STRING(SIZE(1..255))
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "The identifier associated with the visitor."
+    ::= { cmiFaRegVisitorEntry 2 }
+
+cmiFaRegVisitorHomeAddress OBJECT-TYPE
+    SYNTAX IpAddress
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Home (IP) address of visiting mobile node."
+    ::= { cmiFaRegVisitorEntry 3 }
+
+cmiFaRegVisitorHomeAgentAddress OBJECT-TYPE
+    SYNTAX IpAddress
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Home agent IP address for that visiting mobile node."
+    ::= { cmiFaRegVisitorEntry 4 }
+
+cmiFaRegVisitorTimeGranted OBJECT-TYPE
+    SYNTAX TimeInterval
+--    Rsyntax INTEGER(0..2147483647)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The lifetime granted to the mobile node for this 
+        registration.  Only valid if faVisitorRegIsAccepted 
+        is true(1)."
+    ::= { cmiFaRegVisitorEntry 5 }
+
+cmiFaRegVisitorTimeRemaining OBJECT-TYPE
+    SYNTAX TimeInterval
+--    Rsyntax INTEGER(0..2147483647)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The time remaining until the registration is expired.
+        It has the same initial value as 
+        cmiFaRegVisitorTimeGranted, and is counted down by the
+        foreign agent."
+    ::= { cmiFaRegVisitorEntry 6 }
+
+cmiFaRegVisitorRegFlags OBJECT-TYPE
+    SYNTAX RegistrationFlags
+--    Rsyntax OCTET STRING(SIZE(1..2))
+--         BITS are:
+--           vjCompression(0)
+--           gre(1)
+--           minEnc(2)
+--           decapsulationbyMN(3)
+--           broadcastDatagram(4)
+--           simultaneousBindings(5)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Registration flags sent by the mobile node."
+    ::= { cmiFaRegVisitorEntry 7 }
+
+cmiFaRegVisitorRegIDLow OBJECT-TYPE
+    SYNTAX Gauge(0..4294967295)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Low 32 bits of Identification used in that
+        registration by the mobile node."
+    ::= { cmiFaRegVisitorEntry 8 }
+
+cmiFaRegVisitorRegIDHigh OBJECT-TYPE
+    SYNTAX Gauge(0..4294967295)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "High 32 bits of Identification used in that
+        registration by the mobile node."
+    ::= { cmiFaRegVisitorEntry 9 }
+
+cmiFaRegVisitorRegIsAccepted OBJECT-TYPE
+    SYNTAX TruthValue
+--    Rsyntax INTEGER {
+--        true(1),
+--        false(2)
+--        }
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Whether the registration has been accepted or not. If
+        it is false(2), this registration is still pending for
+        reply."
+    ::= { cmiFaRegVisitorEntry 10 }
+
+cmiFaInitRegRequestsReceived OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of initial Registration Requests received by
+        the foreign agent."
+    ::= { cmiFaReg 3 }
+
+cmiFaInitRegRequestsRelayed OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of initial Registration Requests relayed by
+        the foreign agent to the home agent."
+    ::= { cmiFaReg 4 }
+
+cmiFaInitRegRequestsDenied OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of initial Registration Requests denied by 
+        the foreign agent.
+        
+        The reasons for which FA denies a request include:
+        
+        1. FA CHAP authentication failures.
+        
+        2. HA is not reachable.
+        
+        3. No HA address set in the packet."
+    ::= { cmiFaReg 5 }
+
+cmiFaInitRegRequestsDiscarded OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of initial Registration Requests discarded 
+        by the foreign agent.
+        
+        The reasons for which FA discards a request include:
+        
+        1. ip mobile foreign-service is not enabled on the
+        interface on which the request is received.
+        
+        2. NAI length exceeds the length of the packet.
+        
+        3. There are no active COAs."
+    ::= { cmiFaReg 6 }
+
+cmiFaInitRegRepliesValidFromHA OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of initial valid Registration Replies from 
+        the home agent to foreign agent."
+    ::= { cmiFaReg 7 }
+
+cmiFaInitRegRepliesValidRelayMN OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of initial Registration Replies relayed to
+        MN by the foreign agent."
+    ::= { cmiFaReg 8 }
+
+cmiFaReRegRequestsReceived OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of Re-Registration Requests received by
+        the foreign agent from mobile nodes."
+    ::= { cmiFaReg 9 }
+
+cmiFaReRegRequestsRelayed OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of Re-Registration Requests relayed to
+        MN by the foreign agent."
+    ::= { cmiFaReg 10 }
+
+cmiFaReRegRequestsDenied OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of Re-Registration Requests denied by
+        the foreign agent.
+        
+        Refer cmiFaInitRegRequestsDenied for the reasons for
+        which FA denies a request."
+    ::= { cmiFaReg 11 }
+
+cmiFaReRegRequestsDiscarded OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of Re-Registration Requests discarded by
+        the foreign agent.  
+        
+        Refer cmiFaInitRegRequestsDiscarded for the reasons for
+        which FA discards a request."
+    ::= { cmiFaReg 12 }
+
+cmiFaReRegRepliesValidFromHA OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of valid Re-Registration Replies from
+        home agent."
+    ::= { cmiFaReg 13 }
+
+cmiFaReRegRepliesValidRelayToMN OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of valid Re-Registration Replies relayed
+        to MN by the foreign agent."
+    ::= { cmiFaReg 14 }
+
+cmiFaDeRegRequestsReceived OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of De-Registration Requests received by
+        the foreign agent."
+    ::= { cmiFaReg 15 }
+
+cmiFaDeRegRequestsRelayed OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of De-Registration Requests relayed to home
+        agent by the foreign agent."
+    ::= { cmiFaReg 16 }
+
+cmiFaDeRegRequestsDenied OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of De-Registration Requests denied by the
+        foreign agent.
+        
+        Refer cmiFaInitRegRequestsDenied for the reasons for
+        which FA denies a request."
+    ::= { cmiFaReg 17 }
+
+cmiFaDeRegRequestsDiscarded OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of De-Registration Requests discarded by
+        the foreign agent.
+        
+        Refer cmiFaInitRegRequestsDiscarded for the reasons for
+        which FA discards a request."
+    ::= { cmiFaReg 18 }
+
+cmiFaDeRegRepliesValidFromHA OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of valid De-Registration Replies received
+        from the home agent by the foreign agent."
+    ::= { cmiFaReg 19 }
+
+cmiFaDeRegRepliesValidRelayToMN OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of De-Registration Replies relayed to the
+        MN by the foreign agent."
+    ::= { cmiFaReg 20 }
+
+cmiHaRegTotalMobilityBindings OBJECT-TYPE
+    SYNTAX Gauge
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The current number of entries in 
+        haMobilityBindingTable. haMobilityBindingTable 
+        contains the home agent's mobility binding list. 
+        The home agent updates this table in response to 
+        registration events from mobile nodes."
+    REFERENCE
+        "RFC-2006 - Mobile IP MIB Definition using SMIv2"
+    ::= { cmiHaReg 1 }
+
+cmiHaRegMobilityBindingTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF CmiHaRegMobilityBindingEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "The home agent updates this table in response to 
+         registration events from mobile nodes."
+    ::= { cmiHaReg 2 }
+
+cmiHaRegMobilityBindingEntry OBJECT-TYPE
+    SYNTAX CmiHaRegMobilityBindingEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "Additional information about a particular entry on 
+        the mobility binding list beyond that provided by
+        MIP MIB haMobilityBindingEntry."
+    INDEX { haMobilityBindingMN, haMobilityBindingCOA }
+-- Augments haMobilityBindingEntry FROM MIP-MIB
+    ::= { cmiHaRegMobilityBindingTable 1 }
+
+CmiHaRegMobilityBindingEntry ::= SEQUENCE {
+    cmiHaRegMnIdentifierType CmiEntityIdentifierType,
+    cmiHaRegMnIdentifier CmiEntityIdentifier
+    }
+
+cmiHaRegMnIdentifierType OBJECT-TYPE
+    SYNTAX CmiEntityIdentifierType
+--    Rsyntax INTEGER {
+--        other(1),
+--        ipaddress(2),
+--        nai(3)
+--        }
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The type of the mobile node's identifier."
+    ::= { cmiHaRegMobilityBindingEntry 1 }
+
+cmiHaRegMnIdentifier OBJECT-TYPE
+    SYNTAX CmiEntityIdentifier
+--    Rsyntax OCTET STRING(SIZE(1..255))
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The identifier associated with the mobile node."
+    ::= { cmiHaRegMobilityBindingEntry 2 }
+
+cmiHaRegCounterTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF CmiHaRegCounterEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "A table containing registration statistics for all
+        mobile nodes authorized to use this home agent. This 
+        table provides the same information as haCounterTable 
+        of MIP MIB. The only difference is that indices 
+        of table are changed so that mobile nodes which are 
+        not identified by the IP address will also be included
+        in the table."
+    ::= { cmiHaReg 3 }
+
+cmiHaRegCounterEntry OBJECT-TYPE
+    SYNTAX CmiHaRegCounterEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "Registration statistics for a single mobile node."
+    INDEX { cmiHaRegMnIdType, cmiHaRegMnId }
+    ::= { cmiHaRegCounterTable 1 }
+
+CmiHaRegCounterEntry ::= SEQUENCE {
+    cmiHaRegMnIdType CmiEntityIdentifierType,
+    cmiHaRegMnId CmiEntityIdentifier,
+    cmiHaRegServAcceptedRequests Counter,
+    cmiHaRegServDeniedRequests Counter,
+    cmiHaRegOverallServTime TimeInterval,
+    cmiHaRegRecentServAcceptedTime TimeStamp,
+    cmiHaRegRecentServDeniedTime TimeStamp,
+    cmiHaRegRecentServDeniedCode INTEGER
+    }
+
+cmiHaRegMnIdType OBJECT-TYPE
+    SYNTAX CmiEntityIdentifierType
+--    Rsyntax INTEGER {
+--        other(1),
+--        ipaddress(2),
+--        nai(3)
+--        }
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "The type of the mobile node's identifier."
+    ::= { cmiHaRegCounterEntry 1 }
+
+cmiHaRegMnId OBJECT-TYPE
+    SYNTAX CmiEntityIdentifier
+--    Rsyntax OCTET STRING(SIZE(1..255))
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "The identifier associated with the mobile node."
+    ::= { cmiHaRegCounterEntry 2 }
+
+cmiHaRegServAcceptedRequests OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of service requests for the mobile node
+        accepted by the home agent (Code 0 + Code 1)."
+    REFERENCE
+        "RFC-2002 - IP Mobility Support, section 3.4"
+    ::= { cmiHaRegCounterEntry 3 }
+
+cmiHaRegServDeniedRequests OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of service requests for the mobile node
+        denied by the home agent (sum of all registrations
+        denied with Code 128 through Code 159)."
+    REFERENCE
+        "RFC-2002 - IP Mobility Support, section 3.4"
+    ::= { cmiHaRegCounterEntry 4 }
+
+cmiHaRegOverallServTime OBJECT-TYPE
+    SYNTAX TimeInterval
+--    Rsyntax INTEGER(0..2147483647)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Overall service time that has accumulated for the 
+        mobile node since the home agent last rebooted."
+    ::= { cmiHaRegCounterEntry 5 }
+
+cmiHaRegRecentServAcceptedTime OBJECT-TYPE
+    SYNTAX TimeStamp
+--    Rsyntax TimeTicks
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The time at which the most recent Registration
+        Request was accepted by the home agent for this mobile
+        node."
+    REFERENCE
+        "RFC-2002 - IP Mobility Support, section 3"
+    ::= { cmiHaRegCounterEntry 6 }
+
+cmiHaRegRecentServDeniedTime OBJECT-TYPE
+    SYNTAX TimeStamp
+--    Rsyntax TimeTicks
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The time at which the most recent Registration
+        Request was denied by the home agent for this mobile
+        node."
+    REFERENCE
+        "RFC-2002 - IP Mobility Support, section 3"
+    ::= { cmiHaRegCounterEntry 7 }
+
+cmiHaRegRecentServDeniedCode OBJECT-TYPE
+    SYNTAX INTEGER {
+        reasonUnspecified(128),
+        admProhibited(129),
+        insufficientResource(130),
+        mnAuthenticationFailure(131),
+        faAuthenticationFailure(132),
+        idMismatch(133),
+        poorlyFormedRequest(134),
+        tooManyBindings(135),
+        unknownHA(136)
+        }
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The Code indicating the reason why the most recent
+        Registration Request for this mobile node was rejected
+        by the home agent."
+    REFERENCE
+        "RFC-2002 - IP Mobility Support, section 3.4"
+    ::= { cmiHaRegCounterEntry 8 }
+
+cmiHaRegTotalProcLocRegs OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The total number of Registration Requests processed 
+        by the home agent. It includes only those Registration
+        Requests which were authenticated locally by the 
+        home agent."
+    REFERENCE
+        "RFC-2002 - IP Mobility Support, section 3"
+    ::= { cmiHaReg 4 }
+
+cmiHaRegMaxProcLocInMinRegs OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The maximum number of Registration Requests processed
+        in a minute by the home agent. It includes only those 
+        Registration Requests which were authenticated locally
+        by the home agent."
+    REFERENCE
+        "RFC-2002 - IP Mobility Support, section 3"
+    ::= { cmiHaReg 5 }
+
+cmiHaRegDateMaxRegsProcLoc OBJECT-TYPE
+    SYNTAX DateAndTime
+--    Rsyntax OCTET STRING(SIZE(8|11))
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The time at which number of Registration Requests
+        processed in a minute by the home agent were maximum. 
+        It includes only those Registration Requests  which 
+        were authenticated locally by the home agent."
+    REFERENCE
+        "RFC-2002 - IP Mobility Support, section 3"
+    ::= { cmiHaReg 6 }
+
+cmiHaRegProcLocInLastMinRegs OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The number of Registration Requests processed in 
+        the last minute by the home agent. It includes only 
+        those Registration Requests which were authenticated 
+        locally by the home agent."
+    REFERENCE
+        "RFC-2002 - IP Mobility Support, section 3"
+    ::= { cmiHaReg 7 }
+
+cmiHaRegTotalProcByAAARegs OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The total number of Registration Requests processed 
+        by the home agent. It includes only those Registration
+        Requests which were authenticated by the AAA server."
+    REFERENCE
+        "RFC-2002 - IP Mobility Support, section 3"
+    ::= { cmiHaReg 8 }
+
+cmiHaRegMaxProcByAAAInMinRegs OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The maximum number of Registration Requests processed
+        in a minute by the home agent. It includes only those 
+        Registration Requests which were authenticated by the 
+        AAA server."
+    REFERENCE
+        "RFC-2002 - IP Mobility Support, section 3"
+    ::= { cmiHaReg 9 }
+
+cmiHaRegDateMaxRegsProcByAAA OBJECT-TYPE
+    SYNTAX DateAndTime
+--    Rsyntax OCTET STRING(SIZE(8|11))
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The time at which number of Registration Requests
+        processed in a minute by the home agent were maximum.
+        It includes only those Registration Requests which
+        were authenticated by the AAA server."
+    REFERENCE
+        "RFC-2002 - IP Mobility Support, section 3"
+    ::= { cmiHaReg 10 }
+
+cmiHaRegProcAAAInLastByMinRegs OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The number of Registration Requests processed 
+        in the last minute by the home agent. It includes 
+        only those Registration Requests which were
+        authenticated by the AAA server."
+    REFERENCE
+        "RFC-2002 - IP Mobility Support, section 3"
+    ::= { cmiHaReg 11 }
+
+cmiHaRegAvgTimeRegsProcByAAA OBJECT-TYPE
+    SYNTAX INTEGER(0..2147483647)
+--  Units
+--    milli seconds
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The average time taken by the home agent to process 
+        a Registration Request. It is calculated based on only
+        those Registration Requests which were authenticated by 
+        the AAA server."
+    REFERENCE
+        "RFC-2002 - IP Mobility Support, section 3"
+    ::= { cmiHaReg 12 }
+
+cmiHaRegMaxTimeRegsProcByAAA OBJECT-TYPE
+    SYNTAX INTEGER(0..2147483647)
+--  Units
+--    milli seconds
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The maximum time taken by the home agent to process 
+        a Registration Request. It considers only those 
+        Registration Requests which were authenticated by 
+        the AAA server."
+    REFERENCE
+        "RFC-2002 - IP Mobility Support, section 3"
+    ::= { cmiHaReg 13 }
+
+cmiHaRegRequestsReceived OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of Registration Requests received by the 
+        home agent.  This include initial registration requests,
+        re-registration requests and de-registration requests."
+    ::= { cmiHaReg 14 }
+
+cmiHaRegRequestsDenied OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of Registration Requests denied by the home
+        agent.
+        
+        The reasons for which HA denies a request include:
+        
+        1. Can't allocate IP address for MN.
+        
+        2. Request parsing failed.
+        
+        3. NAI length exceeds the packet length."
+    ::= { cmiHaReg 15 }
+
+cmiHaRegRequestsDiscarded OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of Registration Requests discarded by the 
+        home agent.
+        
+        The reasons for which HA discards a request include:
+        
+        1. ip mobile home-agent service is not enabled.
+        
+        2. HA-CHAP authentication failed.
+        
+        3. MN Security Association retrieval failed."
+    ::= { cmiHaReg 16 }
+
+cmiHaEncapUnavailable OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of Registration Requests denied by the home
+        agent due to an unsupported encapsulation."
+    ::= { cmiHaReg 17 }
+
+cmiHaNAICheckFailures OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of Registration Requests denied by the home
+        agent due to an NAI check failures."
+    ::= { cmiHaReg 18 }
+
+cmiHaInitRegRequestsReceived OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of initial Registration Requests received by
+        the home agent."
+    ::= { cmiHaReg 19 }
+
+cmiHaInitRegRequestsAccepted OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of initial Registration Requests accepted by
+        the home agent."
+    ::= { cmiHaReg 20 }
+
+cmiHaInitRegRequestsDenied OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of initial Registration Requests denied by 
+        the home agent.
+        
+        Refer cmiHaRegRequestsReceived for the reasons for which
+        HA denies a request."
+    ::= { cmiHaReg 21 }
+
+cmiHaInitRegRequestsDiscarded OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of initial Registration Requests discarded
+        by the home agent.
+        
+        Refer cmiHaRegRequestsDiscarded for the reasons for which
+        HA discards a request."
+    ::= { cmiHaReg 22 }
+
+cmiHaReRegRequestsReceived OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of Re-Registration Requests received by the
+        home agent."
+    ::= { cmiHaReg 23 }
+
+cmiHaReRegRequestsAccepted OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of Re-Registration Requests accepted by the
+        home agent."
+    ::= { cmiHaReg 24 }
+
+cmiHaReRegRequestsDenied OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of Re-Registration Requests denied by the
+        home agent.
+        
+        Refer cmiHaRegRequestsReceived for the reasons for which
+        HA denies a request."
+    ::= { cmiHaReg 25 }
+
+cmiHaReRegRequestsDiscarded OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of Re-Registration Requests discarded by
+        the home agent.
+        
+        Refer cmiHaRegRequestsDiscarded for the reasons for which
+        HA discards a request."
+    ::= { cmiHaReg 26 }
+
+cmiHaDeRegRequestsReceived OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of De-Registration Requests received by
+        the home agent."
+    ::= { cmiHaReg 27 }
+
+cmiHaDeRegRequestsAccepted OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of De-Registration Requests accepted by
+        the home agent."
+    ::= { cmiHaReg 28 }
+
+cmiHaDeRegRequestsDenied OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of De-Registration Requests denied by the
+        home agent.
+        
+        Refer cmiHaRegRequestsReceived for the reasons for which
+        HA denies a request."
+    ::= { cmiHaReg 29 }
+
+cmiHaDeRegRequestsDiscarded OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of De-Registration Requests discarded by the
+        home agent.
+        
+        Refer cmiHaRegRequestsDiscarded for the reasons for which
+        HA discards a request."
+    ::= { cmiHaReg 30 }
+
+cmiHaRedunSentBUs OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of binding updates sent by the home
+        agent."
+    ::= { cmiHaRedun 1 }
+
+cmiHaRedunFailedBUs OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of binding updates sent by the home
+        agent for which no acknowledgement is received 
+        from the standby home agent."
+    ::= { cmiHaRedun 2 }
+
+cmiHaRedunReceivedBUAcks OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of acknowledgements received in response
+        to binding updates sent by the home agent."
+    ::= { cmiHaRedun 3 }
+
+cmiHaRedunTotalSentBUs OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of binding updates sent by the home
+        agent including retransmissions of same binding
+        update."
+    ::= { cmiHaRedun 4 }
+
+cmiHaRedunReceivedBUs OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of binding updates received by the
+        home agent."
+    ::= { cmiHaRedun 5 }
+
+cmiHaRedunSentBUAcks OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of acknowledgements sent in response to
+        binding updates received by the home agent."
+    ::= { cmiHaRedun 6 }
+
+cmiHaRedunSentBIReqs OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of binding information requests sent
+        by the home agent."
+    ::= { cmiHaRedun 7 }
+
+cmiHaRedunFailedBIReqs OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of binding information requests sent
+        by the home agent for which no reply is received from
+        the active home agent."
+    ::= { cmiHaRedun 8 }
+
+cmiHaRedunTotalSentBIReqs OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of binding information requests sent
+        by the home agent including retransmissions of the
+        same request."
+    ::= { cmiHaRedun 9 }
+
+cmiHaRedunReceivedBIReps OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of binding information replies received 
+        by the home agent."
+    ::= { cmiHaRedun 10 }
+
+cmiHaRedunDroppedBIReps OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of binding information replies dropped 
+        since there is no corresponding binding information 
+        request sent by the home agent."
+    ::= { cmiHaRedun 11 }
+
+cmiHaRedunSentBIAcks OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of acknowledgements sent in response to 
+        binding information replies received by the home
+        agent."
+    ::= { cmiHaRedun 12 }
+
+cmiHaRedunReceivedBIReqs OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of binding information requests received 
+        by the home agent."
+    ::= { cmiHaRedun 13 }
+
+cmiHaRedunSentBIReps OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of binding information replies sent by
+        the home agent."
+    ::= { cmiHaRedun 14 }
+
+cmiHaRedunFailedBIReps OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of binding information replies sent by 
+        by the home agent for which no acknowledgement is 
+        received from the standby home agent."
+    ::= { cmiHaRedun 15 }
+
+cmiHaRedunTotalSentBIReps OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of binding information replies sent  
+        by the home agent including retransmissions of the
+        same reply."
+    ::= { cmiHaRedun 16 }
+
+cmiHaRedunReceivedBIAcks OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of acknowledgements received in response
+        to binding information replies sent by the home
+        agent."
+    ::= { cmiHaRedun 17 }
+
+cmiHaRedunDroppedBIAcks OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of acknowledgements dropped by the
+        home agent since there are no corresponding binding 
+        information replies sent by it."
+    ::= { cmiHaRedun 18 }
+
+cmiHaRedunSecViolations OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of security violations in the home
+        agent caused by processing of the packets received 
+        from the peer home agent. Security violations can 
+        occur due to the following reasons. 
+        - the authenticator value in the packet is invalid.
+        - value stored in the identification field of the 
+          packet is invalid."
+    ::= { cmiHaRedun 19 }
+
+cmiSecAssocsCount OBJECT-TYPE
+    SYNTAX Gauge
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of mobility security associations
+        known to the entity i.e. the number of entries in 
+        the cmiSecAssocTable."
+    ::= { cmiSecurity 1 }
+
+cmiSecAssocTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF CmiSecAssocEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "A table containing Mobility Security Associations.
+        This table provides the same information as 
+        mipSecAssocTable of MIP MIB. The differences are: 
+        - indices of the table are changed so that mobile 
+          nodes which are not identified by the IP address will 
+          also be included in the table.
+        - rowStatus object is added to the table."
+    ::= { cmiSecurity 2 }
+
+cmiSecAssocEntry OBJECT-TYPE
+    SYNTAX CmiSecAssocEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "One particular Mobility Security Association."
+    INDEX { cmiSecPeerIdentifierType, cmiSecPeerIdentifier, cmiSecSPI }
+    ::= { cmiSecAssocTable 1 }
+
+CmiSecAssocEntry ::= SEQUENCE {
+    cmiSecPeerIdentifierType CmiEntityIdentifierType,
+    cmiSecPeerIdentifier CmiEntityIdentifier,
+    cmiSecSPI CmiSpi,
+    cmiSecAlgorithmType INTEGER,
+    cmiSecAlgorithmMode INTEGER,
+    cmiSecKey OCTET STRING,
+    cmiSecReplayMethod INTEGER,
+    cmiSecStatus RowStatus
+    }
+
+cmiSecPeerIdentifierType OBJECT-TYPE
+    SYNTAX CmiEntityIdentifierType
+--    Rsyntax INTEGER {
+--        other(1),
+--        ipaddress(2),
+--        nai(3)
+--        }
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "The type of the peer entity's identifier."
+    ::= { cmiSecAssocEntry 1 }
+
+cmiSecPeerIdentifier OBJECT-TYPE
+    SYNTAX CmiEntityIdentifier
+--    Rsyntax OCTET STRING(SIZE(1..255))
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "The identifier of the peer entity with which this
+        node shares the mobility security association."
+    ::= { cmiSecAssocEntry 2 }
+
+cmiSecSPI OBJECT-TYPE
+    SYNTAX CmiSpi
+--    Rsyntax Gauge(256..4294967295)
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "The SPI is the 4-byte index within the Mobility 
+        Security Association which selects the specific 
+        security parameters to be used to authenticate the
+        peer, i.e. the rest of the variables in this 
+        cmiSecAssocEntry."
+    ::= { cmiSecAssocEntry 3 }
+
+cmiSecAlgorithmType OBJECT-TYPE
+    SYNTAX INTEGER {
+        other(1),
+        md5(2)
+        }
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "Type of authentication algorithm.
+        
+        other(1)  Any other authentication algorithm not 
+                  specified here. 
+                  
+        md5(2)    MD5 message-digest algorithm."
+    REFERENCE
+        "RFC-2002 - IP Mobility Support, section 3.5.1"
+    DEFVAL { md5 }
+    ::= { cmiSecAssocEntry 4 }
+
+cmiSecAlgorithmMode OBJECT-TYPE
+    SYNTAX INTEGER {
+        other(1),
+        prefixSuffix(2)
+        }
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "Security mode used by this algorithm.
+        
+        other(1)         Any other mode not specified here.  
+        
+        prefixSuffix(2)  In this mode, data over which 
+                         authenticator value needs to be
+                         calculated is preceded and followed
+                         by the 128 bit shared secret key."
+    REFERENCE
+        "RFC-2002 - IP Mobility Support, section 3.5.1"
+    DEFVAL { prefixSuffix }
+    ::= { cmiSecAssocEntry 5 }
+
+cmiSecKey OBJECT-TYPE
+    SYNTAX OCTET STRING(SIZE(16))
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The shared secret key for the security
+        associations. Reading this object will always return
+        zero length value."
+    ::= { cmiSecAssocEntry 6 }
+
+cmiSecReplayMethod OBJECT-TYPE
+    SYNTAX INTEGER {
+        other(1),
+        timestamps(2),
+        nonces(3)
+        }
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The replay-protection method supported for this SPI
+        within this Mobility Security Association.
+        
+        other(1)      Any other replay protection method not 
+                      specified here.
+        
+        timestamps(2) Timestamp based replay protection method.
+        
+        nonces(3)     Nonce based replay protection method."
+    REFERENCE
+        "RFC-2002 - IP Mobility Support, section 5.6"
+    DEFVAL { timestamps }
+    ::= { cmiSecAssocEntry 7 }
+
+cmiSecStatus OBJECT-TYPE
+    SYNTAX RowStatus
+--    Rsyntax INTEGER {
+--        active(1),
+--        notInService(2),
+--        notReady(3),
+--        createAndGo(4),
+--        createAndWait(5),
+--        destroy(6)
+--        }
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The row status for this table."
+    ::= { cmiSecAssocEntry 8 }
+
+cmiSecViolationTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF CmiSecViolationEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "A table containing information about security
+        violations. This table provides the same information 
+        as mipSecViolationTable of MIP MIB. The only
+        difference is that indices of the table are changed so
+        that mobile nodes which are not identified by the IP
+        address will also be included in the table."
+    REFERENCE
+        "RFC-2002 - IP Mobility Support, sections 3.6.2.1,
+        3.7.2.1 and 3.8.2.1"
+    ::= { cmiSecurity 3 }
+
+cmiSecViolationEntry OBJECT-TYPE
+    SYNTAX CmiSecViolationEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "Information about one particular security violation."
+    INDEX { cmiSecViolatorIdentifierType, cmiSecViolatorIdentifier }
+    ::= { cmiSecViolationTable 1 }
+
+CmiSecViolationEntry ::= SEQUENCE {
+    cmiSecViolatorIdentifierType CmiEntityIdentifierType,
+    cmiSecViolatorIdentifier CmiEntityIdentifier,
+    cmiSecTotalViolations Counter,
+    cmiSecRecentViolationSPI CmiSpi,
+    cmiSecRecentViolationTime TimeStamp,
+    cmiSecRecentViolationIDLow Gauge,
+    cmiSecRecentViolationIDHigh Gauge,
+    cmiSecRecentViolationReason INTEGER
+    }
+
+cmiSecViolatorIdentifierType OBJECT-TYPE
+    SYNTAX CmiEntityIdentifierType
+--    Rsyntax INTEGER {
+--        other(1),
+--        ipaddress(2),
+--        nai(3)
+--        }
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "The type of Violator's identifier."
+    ::= { cmiSecViolationEntry 1 }
+
+cmiSecViolatorIdentifier OBJECT-TYPE
+    SYNTAX CmiEntityIdentifier
+--    Rsyntax OCTET STRING(SIZE(1..255))
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "Violator's identifier. The violator is not necessary
+        in the cmiSecAssocTable."
+    ::= { cmiSecViolationEntry 2 }
+
+cmiSecTotalViolations OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of security violations for this peer."
+    ::= { cmiSecViolationEntry 3 }
+
+cmiSecRecentViolationSPI OBJECT-TYPE
+    SYNTAX CmiSpi
+--    Rsyntax Gauge(256..4294967295)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "SPI of the most recent security violation for this
+        peer. If the security violation is due to an
+        identification mismatch, then this is the SPI from the
+        Mobile-Home Authentication Extension.  If the security
+        violation is due to an invalid authenticator, then
+        this is the SPI from the offending authentication
+        extension.  In all other cases, it should be set to
+        zero."
+    ::= { cmiSecViolationEntry 4 }
+
+cmiSecRecentViolationTime OBJECT-TYPE
+    SYNTAX TimeStamp
+--    Rsyntax TimeTicks
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Time of the most recent security violation for this
+        peer."
+    ::= { cmiSecViolationEntry 5 }
+
+cmiSecRecentViolationIDLow OBJECT-TYPE
+    SYNTAX Gauge(0..4294967295)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Low-order 32 bits of identification used in request or
+         reply of the most recent security violation for this
+         peer."
+    ::= { cmiSecViolationEntry 6 }
+
+cmiSecRecentViolationIDHigh OBJECT-TYPE
+    SYNTAX Gauge(0..4294967295)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "High-order 32 bits of identification used in request
+        or reply of the most recent security violation for
+        this peer."
+    ::= { cmiSecViolationEntry 7 }
+
+cmiSecRecentViolationReason OBJECT-TYPE
+    SYNTAX INTEGER {
+        noMobilitySecurityAssociation(1),
+        badAuthenticator(2),
+        badIdentifier(3),
+        badSPI(4),
+        missingSecurityExtension(5),
+        other(6)
+        }
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Reason for the most recent security violation for
+        this peer."
+    REFERENCE
+        "RFC-2002 - IP Mobility Support"
+    ::= { cmiSecViolationEntry 8 }
+
+cmiMaRegMaxInMinuteRegs OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The maximum number of Registration Requests received
+        in a minute by the mobility agent."
+    ::= { cmiMaReg 1 }
+
+cmiMaRegDateMaxRegsReceived OBJECT-TYPE
+    SYNTAX DateAndTime
+--    Rsyntax OCTET STRING(SIZE(8|11))
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The time at which number of Registration Requests
+        received in a minute by the mobility agent were 
+        maximum."
+    ::= { cmiMaReg 2 }
+
+cmiMaRegInLastMinuteRegs OBJECT-TYPE
+    SYNTAX Counter
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The number of Registration Requests received in the 
+        last minute by the mobility agent."
+    ::= { cmiMaReg 3 }
+
+ciscoMobileIpFaRegGroup OBJECT IDENTIFIER ::= { ciscoMobileIpGroups 1 }
+-- OBJECT-GROUP
+--  Status
+--    obsolete
+--  Descr
+--    A collection of objects providing management
+--    information for the registration function within
+--    a foreign agent. Superseded by 
+--    ciscoMobileIpFaRegGroupV12R02.
+--  objects
+--    cmiFaRegTotalVisitors
+
+ciscoMobileIpHaRegGroup OBJECT IDENTIFIER ::= { ciscoMobileIpGroups 2 }
+-- OBJECT-GROUP
+--  Status
+--    obsolete
+--  Descr
+--    A collection of objects providing management
+--    information for the registration function within
+--    a home agent. Superseded by 
+--    ciscoMobileIpHaRegGroupV12R02.
+--  objects
+--    cmiHaRegTotalMobilityBindings
+
+ciscoMobileIpFaRegGroupV12R02 OBJECT IDENTIFIER ::= { ciscoMobileIpGroups 3 }
+-- OBJECT-GROUP
+--  Status
+--    deprecated
+--  Descr
+--    A collection of objects providing management
+--    information for the registration function within
+--    a foreign agent.  Superseded by
+--    ciscoMobileIpFaRegGroupV12R03.
+--  objects
+--    cmiFaRegTotalVisitors, cmiFaRegVisitorHomeAddress, 
+--    cmiFaRegVisitorHomeAgentAddress, cmiFaRegVisitorTimeGranted, 
+--    cmiFaRegVisitorTimeRemaining, cmiFaRegVisitorRegFlags, 
+--    cmiFaRegVisitorRegIDLow, cmiFaRegVisitorRegIDHigh, 
+--    cmiFaRegVisitorRegIsAccepted
+
+ciscoMobileIpHaRegGroupV12R02 OBJECT IDENTIFIER ::= { ciscoMobileIpGroups 4 }
+-- OBJECT-GROUP
+--  Status
+--    deprecated
+--  Descr
+--    A collection of objects providing management
+--    information for the registration function within
+--    a home agent.  Superseded by
+--    ciscoMobileIpHaRegGroupV12R03.
+--  objects
+--    cmiHaRegTotalMobilityBindings, cmiHaRegMnIdentifierType, 
+--    cmiHaRegMnIdentifier, cmiHaRegServAcceptedRequests, 
+--    cmiHaRegServDeniedRequests, cmiHaRegOverallServTime, 
+--    cmiHaRegRecentServAcceptedTime, cmiHaRegRecentServDeniedTime, 
+--    cmiHaRegRecentServDeniedCode, cmiHaRegTotalProcLocRegs, 
+--    cmiHaRegMaxProcLocInMinRegs, cmiHaRegDateMaxRegsProcLoc, 
+--    cmiHaRegProcLocInLastMinRegs, cmiHaRegTotalProcByAAARegs, 
+--    cmiHaRegMaxProcByAAAInMinRegs, cmiHaRegDateMaxRegsProcByAAA, 
+--    cmiHaRegProcAAAInLastByMinRegs, cmiHaRegAvgTimeRegsProcByAAA, 
+--    cmiHaRegMaxTimeRegsProcByAAA
+
+ciscoMobileIpHaRedunGroup OBJECT IDENTIFIER ::= { ciscoMobileIpGroups 5 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects providing management
+--    information for the redundancy function within
+--    a home agent.
+--  objects
+--    cmiHaRedunSentBUs, cmiHaRedunFailedBUs, 
+--    cmiHaRedunReceivedBUAcks, cmiHaRedunTotalSentBUs, 
+--    cmiHaRedunReceivedBUs, cmiHaRedunSentBUAcks, 
+--    cmiHaRedunSentBIReqs, cmiHaRedunFailedBIReqs, 
+--    cmiHaRedunTotalSentBIReqs, cmiHaRedunReceivedBIReps, 
+--    cmiHaRedunDroppedBIReps, cmiHaRedunSentBIAcks, 
+--    cmiHaRedunReceivedBIReqs, cmiHaRedunSentBIReps, 
+--    cmiHaRedunFailedBIReps, cmiHaRedunTotalSentBIReps, 
+--    cmiHaRedunReceivedBIAcks, cmiHaRedunDroppedBIAcks, 
+--    cmiHaRedunSecViolations
+
+ciscoMobileIpSecAssocGroup OBJECT IDENTIFIER ::= { ciscoMobileIpGroups 6 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects providing the management
+--    information for security associations of Mobile IP
+--    entities.
+--  objects
+--    cmiSecAssocsCount, cmiSecAlgorithmType, cmiSecAlgorithmMode, 
+--    cmiSecKey, cmiSecReplayMethod, cmiSecStatus
+
+ciscoMobileIpSecViolationGroup OBJECT IDENTIFIER ::= { ciscoMobileIpGroups 7 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects providing the management
+--    information for security violation logging of Mobile
+--    IP entities.
+--  objects
+--    cmiSecTotalViolations, cmiSecRecentViolationSPI, 
+--    cmiSecRecentViolationTime, cmiSecRecentViolationIDLow, 
+--    cmiSecRecentViolationIDHigh, cmiSecRecentViolationReason
+
+ciscoMobileIpMaRegGroup OBJECT IDENTIFIER ::= { ciscoMobileIpGroups 8 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects providing the management
+--    information for the registration function within
+--    a mobility agent.
+--  objects
+--    cmiMaRegMaxInMinuteRegs, cmiMaRegDateMaxRegsReceived, 
+--    cmiMaRegInLastMinuteRegs
+
+ciscoMobileIpFaRegGroupV12R03 OBJECT IDENTIFIER ::= { ciscoMobileIpGroups 9 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects providing management
+--    information for the registration function within
+--    a foreign agent.
+--  objects
+--    cmiFaRegTotalVisitors, cmiFaRegVisitorHomeAddress, 
+--    cmiFaRegVisitorHomeAgentAddress, cmiFaRegVisitorTimeGranted, 
+--    cmiFaRegVisitorTimeRemaining, cmiFaRegVisitorRegFlags, 
+--    cmiFaRegVisitorRegIDLow, cmiFaRegVisitorRegIDHigh, 
+--    cmiFaRegVisitorRegIsAccepted, cmiFaInitRegRequestsReceived, 
+--    cmiFaInitRegRequestsDiscarded, cmiFaInitRegRequestsRelayed, 
+--    cmiFaInitRegRequestsDenied, cmiFaInitRegRepliesValidFromHA, 
+--    cmiFaInitRegRepliesValidRelayMN, cmiFaReRegRequestsReceived, 
+--    cmiFaReRegRequestsDiscarded, cmiFaReRegRequestsRelayed, 
+--    cmiFaReRegRequestsDenied, cmiFaReRegRepliesValidFromHA, 
+--    cmiFaReRegRepliesValidRelayToMN, cmiFaDeRegRequestsReceived, 
+--    cmiFaDeRegRequestsDiscarded, cmiFaDeRegRequestsRelayed, 
+--    cmiFaDeRegRequestsDenied, cmiFaDeRegRepliesValidFromHA, 
+--    cmiFaDeRegRepliesValidRelayToMN
+
+ciscoMobileIpHaRegGroupV12R03 OBJECT IDENTIFIER ::= { ciscoMobileIpGroups 10 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects providing management
+--    information for the registration function within
+--    a home agent.
+--  objects
+--    cmiHaRegTotalMobilityBindings, cmiHaRegMnIdentifierType, 
+--    cmiHaRegMnIdentifier, cmiHaRegServAcceptedRequests, 
+--    cmiHaRegServDeniedRequests, cmiHaRegOverallServTime, 
+--    cmiHaRegRecentServAcceptedTime, cmiHaRegRecentServDeniedTime, 
+--    cmiHaRegRecentServDeniedCode, cmiHaRegTotalProcLocRegs, 
+--    cmiHaRegMaxProcLocInMinRegs, cmiHaRegDateMaxRegsProcLoc, 
+--    cmiHaRegProcLocInLastMinRegs, cmiHaRegTotalProcByAAARegs, 
+--    cmiHaRegMaxProcByAAAInMinRegs, cmiHaRegDateMaxRegsProcByAAA, 
+--    cmiHaRegProcAAAInLastByMinRegs, cmiHaRegAvgTimeRegsProcByAAA, 
+--    cmiHaRegMaxTimeRegsProcByAAA, cmiHaRegRequestsReceived, 
+--    cmiHaRegRequestsDenied, cmiHaRegRequestsDiscarded, 
+--    cmiHaEncapUnavailable, cmiHaNAICheckFailures, 
+--    cmiHaInitRegRequestsReceived, cmiHaInitRegRequestsAccepted, 
+--    cmiHaInitRegRequestsDenied, cmiHaInitRegRequestsDiscarded, 
+--    cmiHaReRegRequestsReceived, cmiHaReRegRequestsAccepted, 
+--    cmiHaReRegRequestsDenied, cmiHaReRegRequestsDiscarded, 
+--    cmiHaDeRegRequestsReceived, cmiHaDeRegRequestsAccepted, 
+--    cmiHaDeRegRequestsDenied, cmiHaDeRegRequestsDiscarded
+
+ciscoMobileIpCompliance OBJECT IDENTIFIER ::= { ciscoMobileIpCompliances 1 }
+-- MODULE-COMPLIANCE
+--  Status
+--    obsolete
+--  Descr
+--    The compliance statement for management entities
+--    which implement the Cisco Mobile IP MIB. Superseded 
+--    by ciscoMobileIPComplianceV12R02.
+--  Module
+--    >>current<<
+--   OptGroup
+--    ciscoMobileIpFaRegGroup
+--   OptGroup
+--    ciscoMobileIpHaRegGroup
+
+ciscoMobileIpComplianceV12R02 OBJECT IDENTIFIER ::= { ciscoMobileIpCompliances 2 }
+-- MODULE-COMPLIANCE
+--  Status
+--    deprecated
+--  Descr
+--    The compliance statement for management entities
+--    which implement the Cisco Mobile IP MIB. Superseded
+--    by ciscoMobileIPComplianceV12R03.
+--  Module
+--    >>current<<
+--   OptGroup
+--    ciscoMobileIpFaRegGroupV12R02
+--   OptGroup
+--    ciscoMobileIpHaRegGroupV12R02
+--   OptGroup
+--    ciscoMobileIpHaRedunGroup
+--   OptGroup
+--    ciscoMobileIpSecAssocGroup
+--   OptGroup
+--    ciscoMobileIpSecViolationGroup
+--   OptGroup
+--    ciscoMobileIpMaRegGroup
+
+ciscoMobileIpComplianceV12R03 OBJECT IDENTIFIER ::= { ciscoMobileIpCompliances 3 }
+-- MODULE-COMPLIANCE
+--  Status
+--    mandatory
+--  Descr
+--    The compliance statement for management entities
+--    which implement the Cisco Mobile IP MIB.
+--  Module
+--    >>current<<
+--   OptGroup
+--    ciscoMobileIpFaRegGroupV12R03
+--   OptGroup
+--    ciscoMobileIpHaRegGroupV12R03
+--   OptGroup
+--    ciscoMobileIpHaRedunGroup
+--   OptGroup
+--    ciscoMobileIpSecAssocGroup
+--   OptGroup
+--    ciscoMobileIpSecViolationGroup
+--   OptGroup
+--    ciscoMobileIpMaRegGroup
+
+
+END
+

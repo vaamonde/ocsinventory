@@ -1,0 +1,214 @@
+--
+-- **************************************************************
+--
+-- This mib was lifted from the HP web managment web page 
+-- url http://harrison.rgv.hp.com/WebMgmt/WebRfc.txt
+-- and is current as of 053097, mlau
+--
+--
+-- Internet Draft          Web Based Management             June 13, 1996
+--
+--
+--               Web Based System and Network Management
+--
+--
+--
+-- HTTP Manageable MIB
+--
+--  A SNMP agent in operation together with an HTTP server allows 
+--  management information to be accessed using either the SNMP 
+--  protocol or using HTTP. In order to determine if an SNMP agent 
+--  also supports HTTP, a SNMP Management Information Base (MIB) is 
+--  utilized. The "HTTP Manageable MIB" provides SNMP objects which 
+--  advertise an agent's HTTP capabilities. This allows a network 
+--  management application using SNMP to query the "HTTP Manageable 
+--  MIB" to determine its HTTP management capabilities and interface. 
+--  The presence of this MIB in an agent implies that a HTTP server is
+--  operational in a management context. In order to determine the 
+--  exact interface for HTTP access, the "HTTP Manageable MIB" provides 
+--  a MIB object, "httpMgDefaultURL". This object represents the 
+--  complete Universal Request Locator (URL) for management access to 
+--  the agent via HTTP. The value of this URL will reflect port 280
+--  usage when applicable.
+--
+--  A second MIB object defines an agent's capability to perform SNMP
+--  over HTTP. The "httpMgSNMPEnabled" object represents a truth 
+--  value indicating if the HTTP server can perform SNMP over HTTP. 
+--  If set true, the HTTP server supports the SNMP over HTTP tunneling 
+--  protocol as described in the subsequent section.
+--
+--  Below is the MIB definition for the "HTTP Manageable MIB". Note, the
+--  MIB is currently designed to reside under the Hewlett-Packard MIB
+--  branch. The long term intent will be to move this MIB under a
+--  standard branch (The actual MIB branch is pending IANA[4] approval).
+--
+--  hp	                                    (1.3.6.1.4.1.11)
+--     nm   		    		            (1.3.6.1.4.1.11.2)
+--        hpWebMgmt   	        		    (1.3.6.1.4.1.11.2.36)
+--           httpMgMod   	                (hpWebMgmt.1)
+--              httpMgTraps    	            (httpMgMod.0) 
+--              httpMgObjects 	     	    (httpMgMod.1)
+--                 httpMgDefaults  	        (httpMgObjects.1)
+--		              httpMgDefautlURL  	(httpMgDefaults.1)
+--                    httpMgSNMPEnabled	    (httpMgDefaults.2)
+--              httpMgGroups   		        (httpMgMod.2)
+--           	   httpMgDefaultGroup 	    (httpMgGroups.1)
+--              httpMgCompliances  	        (httpMgMod.3)
+--                 httpMgMinCompliance 	    (httpMgCompliances.1)
+--
+-- *************************************************************
+--
+--
+--  HP-httpManageable-MIB DEFINITIONS ::= BEGIN
+--
+-- IMPORTS
+--     OBJECT-TYPE, MODULE-IDENTITY, NOTIFICATION-TYPE
+--       FROM SNMPv2-SMI
+--     DisplayString, TruthValue
+--       FROM SNMPv2-TC  
+--     OBJECT-GROUP, MODULE-COMPLIANCE
+--       FROM SNMPv2-CONF;
+--                         
+--  hp        OBJECT IDENTIFIER ::= { enterprises 11 }
+--  nm        OBJECT IDENTIFIER ::= { hp 2 }
+--  hpWebMgmt OBJECT IDENTIFIER ::= { nm 36 }
+--
+--
+--  httpMgMod MODULE-IDENTITY
+--    LAST-UPDATED "9606120000Z"
+--    ORGANIZATION "Hewlett-Packard Web-based Management Working Group"
+--    CONTACT-INFO
+--    "WG E-mail: webmgmt@sysman.hpl.hp.com
+--         Chair: Brian Harrison
+--        Postal: Hewlett-Packard
+--                5301 Stevens Creek Blvd
+--                Santa Clara  CA 95052  USA
+--           Tel: +1-408-553-3786
+--           Fax: +1-408-553-2909
+--        E-mail: harrison@ppg01.sc.hp.com"
+--
+-- DESCRIPTION
+--      "Management information for HTTP manageable devices.
+--       This MIB gives SNMP systems information on how to
+--      manage a device using HTTP."
+-- REVISION     "9606120000Z"
+-- DESCRIPTION  "Initial Version"
+--        ::= { hpWebMgmt 1 }
+--
+--    httpMgTraps         OBJECT IDENTIFIER ::= { httpMgMod 0 } 
+--    httpMgObjects       OBJECT IDENTIFIER ::= { httpMgMod 1 }
+--    httpMgGroups        OBJECT IDENTIFIER ::= { httpMgMod 2 }
+--    httpMgCompliances   OBJECT IDENTIFIER ::= { httpMgMod 3 }
+--
+--    MIB Objects
+--    Default attributes for managing via HTTP
+--    httpMgDefaults      OBJECT IDENTIFIER ::= { httpMgObjects 1 }
+--
+--    httpMgDefaultURL    OBJECT-TYPE
+--       
+--      MAX-ACCESS  read-write
+-- 		ACCESS read-write
+--      STATUS      current
+--		
+--        DESCRIPTION
+--            "A Uniform Resource Locator (URL), as defined in RFC1738,
+--             for the default management information for this device.
+--             This URL is typically used by a HTTP browser to display
+--             management information for this device.  This default
+--             page should contain links to any other management
+--             pages for this device."
+--        ::= { httpMgDefaults 1}
+--
+--    httpMgSNMPEnabled OBJECT-TYPE
+--        SYNTAX       TruthValue
+--        MAX-ACCESS   read-write
+--        STATUS       current
+--		
+--        DESCRIPTION
+--              "Indicates whether a HTTP server supports SNMP
+--              over HTTP where SNMP requests may be contained
+--              in the Entity-Body of a HTTP POST operation"
+--        ::= { httpMgDefaults 2 }
+--        
+--    Compliance statements
+--
+--
+--    httpMgMinCompliance MODULE-COMPLIANCE
+--   
+--      STATUS  current
+--      
+--	  	DESCRIPTION
+--              "The compliance statement for SNMP entities which
+--               are http manageable."
+--
+--        MODULE   this module
+--        MANDATORY-GROUPS { httpMgDefaultGroup }
+--
+--        ::= { httpMgCompliances 1 }
+--
+--  
+--    httpMgDefaultGroup OBJECT-GROUP
+--        OBJECTS { httpMgDefaultURL, httpMgSNMPEnabled }
+--        STATUS current
+--        DESCRIPTION
+--            "The objects providing information applicable to all
+--             http manageable systems"
+--             ::= { httpMgGroups 1 }
+--              
+--  END
+--
+--
+--
+--
+-- *******************************************************************
+--
+--  Converted to so that the Novell MIB complier would work
+--  as this is developed for the portable agent mlau
+--
+--
+-- *******************************************************************
+
+  HP-httpManageable-MIB DEFINITIONS ::= BEGIN
+
+  IMPORTS
+    enterprises     FROM RFC1155-SMI
+    DisplayString   FROM RFC1213-MIB
+    OBJECT-TYPE     FROM RFC-1212;
+
+                         
+  hp                OBJECT IDENTIFIER ::= { enterprises 11 }
+  nm                OBJECT IDENTIFIER ::= { hp 2 }
+  hpWebMgmt         OBJECT IDENTIFIER ::= { nm 36 }
+
+  httpMgMod         OBJECT IDENTIFIER ::= { hpWebMgmt 1 }
+  httpMgObjects     OBJECT IDENTIFIER ::= { httpMgMod 1 }
+  httpMgDefaults    OBJECT IDENTIFIER ::= { httpMgObjects 1 }
+  
+
+    httpMgDefaultURL    OBJECT-TYPE
+        SYNTAX 	  DisplayString (SIZE (0..255))
+        ACCESS      read-write
+        STATUS      mandatory
+        DESCRIPTION
+            "A Uniform Resource Locator (URL), as defined in RFC1738,
+             for the default management information for this device.
+             This URL is typically used by a HTTP browser to display
+             management information for this device.  This default
+             page should contain links to any other management
+             pages for this device."
+        ::= { httpMgDefaults 1}
+
+
+    httpMgSNMPEnabled   OBJECT-TYPE
+        SYNTAX      INTEGER {
+                    Disabled(0),
+                    Enabled(1)
+                    }
+       	ACCESS      read-write
+		STATUS      mandatory
+        DESCRIPTION
+              "Indicates whether a HTTP server supports SNMP
+              over HTTP where SNMP requests may be contained
+              in the Entity-Body of a HTTP POST operation"
+        ::= { httpMgDefaults 2 }
+  END

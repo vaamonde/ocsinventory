@@ -1,0 +1,205 @@
+-- MIB file created 07-Jan-2003 14:47:40, by
+--   SMICng version 2.2.11-beta(PRO)(Solaris), January 20, 2001. Enterprise key cisco.com
+
+CISCO-PAE-MIB DEFINITIONS ::= BEGIN
+
+-- From file: "CISCO-PAE-MIB.my"
+-- Compile options "4 7 F H N W 03 06 0B 0G 0N 0T"
+
+IMPORTS
+    TruthValue
+            FROM SNMPv2-TC-v1
+    dot1xPaePortNumber
+            FROM IEEE8021-PAE-MIB
+    VlanIndex
+            FROM CISCO-VTP-MIB
+    ciscoMgmt
+            FROM CISCO-SMI
+    OBJECT-TYPE
+            FROM RFC-1212;
+
+ciscoPaeMIB OBJECT IDENTIFIER ::= { ciscoMgmt 220 }
+-- MODULE-IDENTITY
+--  LastUpdated
+--    200210160000Z
+--  OrgName
+--    Cisco System, Inc.
+--  ContactInfo
+--             Cisco Systems
+--              Customer Service
+--    
+--      Postal: 170 W Tasman Drive
+--              San Jose, CA  95134
+--              USA
+--    
+--         Tel: +1 800 553-NETS
+--    
+--    E-mail: cs-wbu@cisco.com
+--  Descr
+--    Cisco Port Access Entity (PAE) module for managing 
+--    IEEE Std 802.1x.
+--    
+--    This MIB provides Port Access Entity information that are 
+--    either excluded by IEEE Std 802.1x (IEEE8021-PAE-MIB) or
+--    specific to Cisco products.
+--  RevDate
+--    200210160000Z
+--  RevDescr
+--    Add SNMP support for the Multiple Authentication and
+--     and Guest Vlan features.
+--     
+--     The objects cpaeMultipleHost has been deprecated, and 
+--     cpaePortMode has been added to cpaePortTable to support
+--     for Multiple Authentication feature. The object 
+--     cpaeGuestVlanId has been added to support for Guest Vlan
+--     feature.
+--  RevDate
+--    200105241016Z
+--  RevDescr
+--    Initial version of this MIB module.
+
+cpaeMIBNotification OBJECT IDENTIFIER ::= { ciscoPaeMIB 0 }
+cpaeMIBObject   OBJECT IDENTIFIER ::= { ciscoPaeMIB 1 }
+cpaeMIBConformance OBJECT IDENTIFIER ::= { ciscoPaeMIB 2 }
+cpaeMIBCompliances OBJECT IDENTIFIER ::= { cpaeMIBConformance 1 }
+cpaeMIBGroups   OBJECT IDENTIFIER ::= { cpaeMIBConformance 2 }
+
+cpaePortTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF CpaePortEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "A table of system level information for each port
+        supported by the Port Access Entity.  An entry 
+        appears in this table for each PAE port of this system.
+        This table contains additional objects for the
+        dot1xPaePortTable."
+    REFERENCE
+        "IEEE 802.1x Subclause 9.6.1"
+    ::= { cpaeMIBObject 1 }
+
+cpaePortEntry OBJECT-TYPE
+    SYNTAX CpaePortEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "An entry containing additional management information
+        applicable to a particular PAE port."
+    INDEX { dot1xPaePortNumber }
+-- Augments dot1xPaePortEntry FROM IEEE8021-PAE-MIB
+    ::= { cpaePortTable 1 }
+
+CpaePortEntry ::= SEQUENCE {
+    cpaeMultipleHost TruthValue,
+    cpaePortMode INTEGER
+    }
+
+cpaeMultipleHost OBJECT-TYPE
+    SYNTAX TruthValue
+--    Rsyntax INTEGER {
+--        true(1),
+--        false(2)
+--        }
+    ACCESS read-write
+    STATUS deprecated
+    DESCRIPTION
+        "Specifies whether the port allows multiple-host connection
+        or not."
+    ::= { cpaePortEntry 1 }
+
+cpaePortMode OBJECT-TYPE
+    SYNTAX INTEGER {
+        singleHost(1),
+        multiHost(2),
+        multiAuth(3)
+        }
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "Specifies the current mode of dot1x operation on the port.
+            - singleHost(1): port allows one host to connect and
+                 authenticate.
+            - multiHost(2) : port allows multiple hosts to connect.
+                 Once a host is authenticated, all remaining hosts
+                 are also authorized.
+            - multiAuth(3) : port allows multiple hosts to connect.
+                 Authorized hosts will be secured by Port Security
+                 feature. The number of hosts that can be authorized
+                 is restricted by the maximum hosts allowed by Port
+                 Security, which is controlled by the object
+                 portSecurityMaxSrcAddr in portSecurityTable."
+    REFERENCE
+        "CISCO-STACK-MIB, portSecurityTable"
+    ::= { cpaePortEntry 2 }
+
+cpaeGuestVlanId OBJECT-TYPE
+    SYNTAX VlanIndex
+--    Rsyntax INTEGER(0..4095)
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "Specifies the Guest Vlan of the system. An interface in
+         singleHost(1) mode will be moved to Guest Vlan if its 
+         access is unsuccessfully authenticated. A value of zero
+         indicates no Guest Vlan configured in the system."
+    ::= { cpaeMIBObject 2 }
+
+cpaeMultipleHostGroup OBJECT IDENTIFIER ::= { cpaeMIBGroups 1 }
+-- OBJECT-GROUP
+--  Status
+--    deprecated
+--  Descr
+--    A collection of objects that provide the multiple 
+--    host configuration information for a PAE port.  
+--    These are additional to the IEEE Std 802.1x PAE MIB.
+--  objects
+--    cpaeMultipleHost
+
+cpaePortEntryGroup OBJECT IDENTIFIER ::= { cpaeMIBGroups 2 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects that provides the port-mode
+--     configuration for a PAE port.
+--  objects
+--    cpaePortMode
+
+cpaeGuestVlanGroup OBJECT IDENTIFIER ::= { cpaeMIBGroups 3 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects that provides the Guest Vlan
+--     configuration information for the system.
+--  objects
+--    cpaeGuestVlanId
+
+cpaeCompliance OBJECT IDENTIFIER ::= { cpaeMIBCompliances 1 }
+-- MODULE-COMPLIANCE
+--  Status
+--    deprecated
+--  Descr
+--    The compliance statement.
+--  Module
+--    >>current<<
+--   MandGroup
+--    cpaeMultipleHostGroup
+
+cpaeCompliance2 OBJECT IDENTIFIER ::= { cpaeMIBCompliances 2 }
+-- MODULE-COMPLIANCE
+--  Status
+--    mandatory
+--  Descr
+--    The compliance statement for devices that implement
+--     the CISCO-PAE-MIB.
+--  Module
+--    >>current<<
+--   MandGroup
+--    cpaePortEntryGroup
+--   OptGroup
+--    cpaeGuestVlanGroup
+
+
+END
+

@@ -1,0 +1,226 @@
+-- MIB file created 10-Dec-2002 16:24:52, by
+--   SMICng version 2.2.11-beta(PRO)(Solaris), January 20, 2001. Enterprise key cisco.com
+
+ALTIGA-ADDRESS-STATS-MIB DEFINITIONS ::= BEGIN
+
+-- From file: "ALTIGA-ADDRESS-STATS-MIB.my"
+-- Compile options "4 7 F H N W 03 06 0B 0G 0N 0T"
+
+IMPORTS
+    alStatsAddress, alAddressGroup
+            FROM ALTIGA-MIB
+    alAddressMibModule
+            FROM ALTIGA-GLOBAL-REG
+    Gauge
+            FROM RFC1155-SMI
+    OBJECT-TYPE
+            FROM RFC-1212;
+
+altigaAddressStatsMibModule OBJECT IDENTIFIER ::= { alAddressMibModule 2 }
+-- MODULE-IDENTITY
+--  LastUpdated
+--    200209051300Z
+--  OrgName
+--    Cisco Systems, Inc.
+--  ContactInfo
+--    Cisco Systems 
+--     170 W Tasman Drive 
+--     San Jose, CA  95134 
+--     USA 
+--    
+--     Tel: +1 800 553-NETS 
+--     E-mail: cs-cvpn3000@cisco.com
+--  Descr
+--    The Altiga Address Statistics MIB models counters and objects that are 
+--     of management interest for address assignment. 
+--     
+--     Acronyms 
+--     The following acronyms are used in this document: 
+--    
+--       MIB:        Management Information Base 
+--    
+--  RevDate
+--    200209051300Z
+--  RevDescr
+--    Added module compliance.
+--  RevDate
+--    200207100000Z
+--  RevDescr
+--    Updated with new header
+
+alAddressStatsGlobal OBJECT IDENTIFIER ::= { alStatsAddress 1 }
+altigaAddressStatsMibConformance OBJECT IDENTIFIER ::= { altigaAddressStatsMibModule 1 }
+altigaAddressStatsMibCompliances OBJECT IDENTIFIER ::= { altigaAddressStatsMibConformance 1 }
+
+alAddressStatsPoolTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF AlAddressStatsPoolEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "The list of trap destinations."
+    ::= { alStatsAddress 2 }
+
+alAddressStatsPoolEntry OBJECT-TYPE
+    SYNTAX AlAddressStatsPoolEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "An entry in the alAddressStatsPoolTable."
+    INDEX { alAddressStatsPoolId }
+    ::= { alAddressStatsPoolTable 1 }
+
+AlAddressStatsPoolEntry ::= SEQUENCE {
+    alAddressStatsPoolId INTEGER,
+    alAddressStatsTotalPoolAddresses INTEGER,
+    alAddressStatsCurrAllocAddresses Gauge,
+    alAddressStatsCurrAvailAddresses Gauge,
+    alAddressStatsMaxAddressesAssigned Gauge
+    }
+
+alAddressStatsPoolId OBJECT-TYPE
+    SYNTAX INTEGER(0..65535)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The Global Address Pool ID for this entry."
+    ::= { alAddressStatsPoolEntry 1 }
+
+alAddressStatsTotalPoolAddresses OBJECT-TYPE
+    SYNTAX INTEGER(0..65535)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of legal addresses defined in pool. 
+         This does not include Network and Broadcast addresses."
+    ::= { alAddressStatsPoolEntry 2 }
+
+alAddressStatsCurrAllocAddresses OBJECT-TYPE
+    SYNTAX Gauge
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of addresses currently assigned"
+    ::= { alAddressStatsPoolEntry 3 }
+
+alAddressStatsCurrAvailAddresses OBJECT-TYPE
+    SYNTAX Gauge
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of addresses currently available"
+    ::= { alAddressStatsPoolEntry 4 }
+
+alAddressStatsMaxAddressesAssigned OBJECT-TYPE
+    SYNTAX Gauge
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of addresses currently available"
+    ::= { alAddressStatsPoolEntry 5 }
+
+alAddressStatsPoolGroupTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF AlAddressStatsPoolGroupEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "The list of trap destinations."
+    ::= { alStatsAddress 3 }
+
+alAddressStatsPoolGroupEntry OBJECT-TYPE
+    SYNTAX AlAddressStatsPoolGroupEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "An entry in the alAddressPoolTable."
+    INDEX { alAddressStatsGrpId, alAddressStatsGrpPoolId }
+    ::= { alAddressStatsPoolGroupTable 1 }
+
+AlAddressStatsPoolGroupEntry ::= SEQUENCE {
+    alAddressStatsGrpId INTEGER,
+    alAddressStatsGrpPoolId INTEGER,
+    alAddressStatsGrpTotalPoolAddresses INTEGER,
+    alAddressStatsGrpCurrAllocAddresses Gauge,
+    alAddressStatsGrpCurrAvailAddresses Gauge,
+    alAddressStatsGrpMaxAddressesAssigned Gauge
+    }
+
+alAddressStatsGrpId OBJECT-TYPE
+    SYNTAX INTEGER(0..65535)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The Group ID for this entry."
+    ::= { alAddressStatsPoolGroupEntry 1 }
+
+alAddressStatsGrpPoolId OBJECT-TYPE
+    SYNTAX INTEGER(0..65535)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The Group Pool ID for this entry."
+    ::= { alAddressStatsPoolGroupEntry 2 }
+
+alAddressStatsGrpTotalPoolAddresses OBJECT-TYPE
+    SYNTAX INTEGER(0..65535)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of legal addresses defined in pool. 
+         This does not include Network and Broadcast addresses."
+    ::= { alAddressStatsPoolGroupEntry 3 }
+
+alAddressStatsGrpCurrAllocAddresses OBJECT-TYPE
+    SYNTAX Gauge
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of addresses currently assigned"
+    ::= { alAddressStatsPoolGroupEntry 4 }
+
+alAddressStatsGrpCurrAvailAddresses OBJECT-TYPE
+    SYNTAX Gauge
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of addresses currently available"
+    ::= { alAddressStatsPoolGroupEntry 5 }
+
+alAddressStatsGrpMaxAddressesAssigned OBJECT-TYPE
+    SYNTAX Gauge
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Total number of addresses currently available"
+    ::= { alAddressStatsPoolGroupEntry 6 }
+
+altigaAddressStatsGroup OBJECT IDENTIFIER ::= { alAddressGroup 2 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    The objects for address statistics.
+--  objects
+--    alAddressStatsPoolId, alAddressStatsTotalPoolAddresses, 
+--    alAddressStatsCurrAllocAddresses, 
+--    alAddressStatsCurrAvailAddresses, 
+--    alAddressStatsMaxAddressesAssigned, alAddressStatsGrpId, 
+--    alAddressStatsGrpPoolId, alAddressStatsGrpTotalPoolAddresses, 
+--    alAddressStatsGrpCurrAllocAddresses, 
+--    alAddressStatsGrpCurrAvailAddresses, 
+--    alAddressStatsGrpMaxAddressesAssigned
+
+altigaAddressStatsMibCompliance OBJECT IDENTIFIER ::= { altigaAddressStatsMibCompliances 1 }
+-- MODULE-COMPLIANCE
+--  Status
+--    mandatory
+--  Descr
+--    The compliance statement for agents which  
+--     implement the Altiga Address Statistics MIB.
+--  Module
+--    >>current<<
+--   MandGroup
+--    altigaAddressStatsGroup
+
+
+END
+

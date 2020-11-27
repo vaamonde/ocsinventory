@@ -1,0 +1,855 @@
+-- MIB file created 21-Feb-2003 10:21:11, by
+--   SMICng version 2.2.11-beta(PRO)(Solaris), January 20, 2001. Enterprise key cisco.com
+
+CISCO-VSAN-MIB DEFINITIONS ::= BEGIN
+
+-- From file: "CISCO-VSAN-MIB.my"
+-- Compile options "4 7 F H N W 03 06 0B 0G 0N 0T"
+
+IMPORTS
+    RowStatus, TruthValue, TimeStamp
+            FROM SNMPv2-TC-v1
+    SnmpAdminString
+            FROM SNMP-FRAMEWORK-MIB
+    ifIndex
+            FROM IF-MIB
+    ciscoMgmt
+            FROM CISCO-SMI
+    ListIndex, ListIndexOrZero, CiscoMilliSeconds
+            FROM CISCO-TC
+    FcNameId, VsanIndex
+            FROM CISCO-ST-TC
+    Gauge
+            FROM RFC1155-SMI
+    OBJECT-TYPE
+            FROM RFC-1212
+    TRAP-TYPE
+            FROM RFC-1215;
+
+ciscoVsanMIB OBJECT IDENTIFIER ::= { ciscoMgmt 282 }
+-- MODULE-IDENTITY
+--  LastUpdated
+--    200212180000Z
+--  OrgName
+--    Cisco Systems Inc. 
+--  ContactInfo
+--         Cisco Systems
+--          Customer Service
+--    Postal: 170 W Tasman Drive
+--          San Jose, CA  95134
+--          USA
+--    Tel: +1 800 553 -NETS
+--    E-mail: cs-san@cisco.com
+--  Descr
+--    The MIB module for the management of the Virtual Storage 
+--    Networks (VSANs) within the frame  work of Cisco's VSAN 
+--    Architecture.  This MIB enables the users to configure 
+--    and monitor VSAN parameters.
+--  RevDate
+--    200212180000Z
+--  RevDescr
+--    Use CiscoMilliSeconds instead MilliSeconds from CISCO-TC.
+--  RevDate
+--    200211040000Z
+--  RevDescr
+--    Changed the MIB descriptors fcSwitchLatency and 
+--    fcNetworkLatency to fcSwitchDropLatency and 
+--    fcNetworkDropLatency respectively.
+--    MAX-ACCESS for fcSwitchLatency is changed to read-write.
+--  RevDate
+--    200209230000Z
+--  RevDescr
+--    Initial version of this MIB module.
+
+ciscoVsanMIBObjects OBJECT IDENTIFIER ::= { ciscoVsanMIB 1 }
+vsanMIBConformance OBJECT IDENTIFIER ::= { ciscoVsanMIB 3 }
+vsanConfiguration OBJECT IDENTIFIER ::= { ciscoVsanMIBObjects 1 }
+vsanMembership  OBJECT IDENTIFIER ::= { ciscoVsanMIBObjects 2 }
+vsanNotification OBJECT IDENTIFIER ::= { ciscoVsanMIBObjects 3 }
+vsanFcConfiguration OBJECT IDENTIFIER ::= { ciscoVsanMIBObjects 4 }
+vsanNotifications OBJECT IDENTIFIER ::= { vsanNotification 0 }
+vsanMIBCompliances OBJECT IDENTIFIER ::= { vsanMIBConformance 1 }
+vsanMIBGroups   OBJECT IDENTIFIER ::= { vsanMIBConformance 2 }
+
+VsanMediaType ::= INTEGER {
+        fibreChannel(1),
+        ethernet(2),
+        infiniband(3),
+        other(4)
+        }
+-- TEXTUAL-CONVENTION
+--  Status
+--    mandatory
+--  Descr
+--    Media type of the fabric.
+--    fibreChannel(1) - media type is Fibre Channel
+--    ethernet (2)    - media type is ethernet
+--    infiniband (3)  - media type is infiniband
+--    other(4)        - other.
+
+VsanAdminState ::= INTEGER {
+        active(1),
+        suspended(2)
+        }
+-- TEXTUAL-CONVENTION
+--  Status
+--    mandatory
+--  Descr
+--    State of the VSAN.
+--     active - the VSAN is active 
+--     suspended - VSAN is de-activated but the configuration 
+--     is retained.
+
+VsanOperationalState ::= INTEGER {
+        up(1),
+        down(2)
+        }
+-- TEXTUAL-CONVENTION
+--  Status
+--    mandatory
+--  Descr
+--    State of the VSAN.
+--     up - the VSAN is up. 
+--     down - VSAN is down. No traffic running on the VSAN.
+
+VsanLoadBalancingType ::= INTEGER {
+        srcIdDestId(1),
+        srcIdDestIdOxId(2)
+        }
+-- TEXTUAL-CONVENTION
+--  Status
+--    mandatory
+--  Descr
+--    Type of load balancing.
+--    
+--    srcIdDestId - based on only source Id (S_ID) and
+--                  destination Id (D_ID).
+--    srcIdDestIdOxId - Originator exchange Id (OX_ID)
+--                   is also used for load balancing in
+--                   addition to S_ID and D_ID.
+--    OX_ID is an exchange Id assigned by the originator
+--    Interconnect Port for an exchange with the target
+--    Interconnect Port.
+--  Refer
+--    For more information on OX_ID, refer to Fibre Channel
+--    Switch Fabric 2 (FC-SW2) section 5.8.
+
+vsanNumber OBJECT-TYPE
+    SYNTAX INTEGER(0..4095)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The number of VSANs configured on this device."
+    ::= { vsanConfiguration 1 }
+
+vsanLastChange OBJECT-TYPE
+    SYNTAX TimeStamp
+--    Rsyntax TimeTicks
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The value of sysUpTime at the time of the last creation,
+        deletion or modification of an entry in the vsanTable and
+        the vsanIfTable, where modification is a change in the 
+        value of any object instance within the table."
+    ::= { vsanConfiguration 2 }
+
+vsanTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF VsanEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "This table lists all the VSAN configured on this device. 
+        This table allows users to create, delete and manage the 
+        VSANs on local device."
+    ::= { vsanConfiguration 3 }
+
+vsanEntry OBJECT-TYPE
+    SYNTAX VsanEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "An entry (conceptual row) in the vsanTable. This 
+        contains information about a VSAN."
+    INDEX { vsanIndex }
+    ::= { vsanTable 1 }
+
+VsanEntry ::= SEQUENCE {
+    vsanIndex VsanIndex,
+    vsanName SnmpAdminString,
+    vsanMediaType VsanMediaType,
+    vsanAdminState VsanAdminState,
+    vsanMtu Gauge,
+    vsanLoadBalancingType VsanLoadBalancingType,
+    vsanInterOperMode TruthValue,
+    vsanOperState VsanOperationalState,
+    vsanRowStatus RowStatus
+    }
+
+vsanIndex OBJECT-TYPE
+    SYNTAX VsanIndex
+--    Rsyntax INTEGER(1..4094)
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "The id of the VSAN."
+    ::= { vsanEntry 1 }
+
+vsanName OBJECT-TYPE
+    SYNTAX SnmpAdminString(SIZE(0..32))
+--    Rsyntax OCTET STRING(SIZE(0..32))
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The name of the VSAN.
+        Note that default value of this object will be the 
+        string 'VSANxxxx' where xxxx is value of vsanIndex 
+        expressed as 4 digits. For example, if vsanIndex is 
+        23, the default value of this object is 'VSAN0023'."
+    ::= { vsanEntry 2 }
+
+vsanMediaType OBJECT-TYPE
+    SYNTAX VsanMediaType
+--    Rsyntax INTEGER {
+--        fibreChannel(1),
+--        ethernet(2),
+--        infiniband(3),
+--        other(4)
+--        }
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The network media type on which this VSAN is defined."
+    DEFVAL { fibreChannel }
+    ::= { vsanEntry 3 }
+
+vsanAdminState OBJECT-TYPE
+    SYNTAX VsanAdminState
+--    Rsyntax INTEGER {
+--        active(1),
+--        suspended(2)
+--        }
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The state of this VSAN."
+    DEFVAL { active }
+    ::= { vsanEntry 4 }
+
+vsanMtu OBJECT-TYPE
+    SYNTAX Gauge(1..65535)
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The MTU of the VSAN. Normally, this object is 2112 
+        for all VSANs for which object vsanMediaType has the 
+        value 'fibreChannel'."
+    DEFVAL { 2112 }
+    ::= { vsanEntry 5 }
+
+vsanLoadBalancingType OBJECT-TYPE
+    SYNTAX VsanLoadBalancingType
+--    Rsyntax INTEGER {
+--        srcIdDestId(1),
+--        srcIdDestIdOxId(2)
+--        }
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The type of load balancing used on this VSAN."
+    DEFVAL { srcIdDestIdOxId }
+    ::= { vsanEntry 6 }
+
+vsanInterOperMode OBJECT-TYPE
+    SYNTAX TruthValue
+--    Rsyntax INTEGER {
+--        true(1),
+--        false(2)
+--        }
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The interoperability mode of the local switch on this 
+        VSAN. This object indicates if this device can 
+        inter-operate with devices from other vendors on this 
+        VSAN."
+    DEFVAL { false }
+    ::= { vsanEntry 7 }
+
+vsanOperState OBJECT-TYPE
+    SYNTAX VsanOperationalState
+--    Rsyntax INTEGER {
+--        up(1),
+--        down(2)
+--        }
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The operational state of the VSAN."
+    ::= { vsanEntry 8 }
+
+vsanRowStatus OBJECT-TYPE
+    SYNTAX RowStatus
+--    Rsyntax INTEGER {
+--        active(1),
+--        notInService(2),
+--        notReady(3),
+--        createAndGo(4),
+--        createAndWait(5),
+--        destroy(6)
+--        }
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The status of this conceptual row."
+    ::= { vsanEntry 9 }
+
+notifyVsanIndex OBJECT-TYPE
+    SYNTAX VsanIndex
+--    Rsyntax INTEGER(1..4094)
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "The id of the VSAN.
+        This object is to be used only as an object in the 
+        notification. We cannot use the vsanIndex in a 
+        notification as it is defined to not-accessible in the 
+        vsanTable."
+    ::= { vsanConfiguration 4 }
+
+vsanDenyUnknownWwn OBJECT-TYPE
+    SYNTAX TruthValue
+--    Rsyntax INTEGER {
+--        true(1),
+--        false(2)
+--        }
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "On a Fibre Channel fabric, an N_port is required to 
+        issue an Fabric Login (FLOGI) in order to login to the 
+        fabric. The FLOGI contains port's Port World Wide Name 
+        (WWN). By default, if this object is false and if a 
+        Port WWN is not present in the VSAN WWN database (if 
+        there is one), the static VSAN membership is used. If 
+        this object is 'true', then the FLOGI is denied if the 
+        Port WWN is not present in membership database.
+        
+        On other kinds of fabric, this object's value is 
+        undefined."
+    DEFVAL { false }
+    ::= { vsanMembership 1 }
+
+vsanWwnListNumber OBJECT-TYPE
+    SYNTAX INTEGER(0..2147483647)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The number of WWNs configured both for static and dynamic 
+        membership purposes on this device. This is number of rows 
+        in the vsanWwnListTable."
+    ::= { vsanMembership 2 }
+
+vsanWwnListTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF VsanWwnListEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "A table of Port WWN lists. vsanIfTable and 
+        vsanDynamicTable use these Port WWN lists for the 
+        static and dynamic configuration of Port WWNs. In 
+        static case, this list serves as a list of Port WWNs
+        that are denied on a interface, whereas in the 
+        dynamic case, it is the list of Port WWNs that are 
+        allowed on any interface.
+        Here is an example :
+        
+        listIndex      wwnIndex   WWN
+        1             1       WWN1 
+        1             2       WWN2 
+        1             3       WWN3 
+        1             4       WWN4 
+        2             1       WWN5 
+        2             2       WWN6 
+        3             1       WWN7 
+        3             2       WWN8 
+        3             3       WWN9 
+        4             1       WWN10 
+        5             1       WWN11 
+        5             2       WWN12 
+        ."
+    ::= { vsanMembership 3 }
+
+vsanWwnListEntry OBJECT-TYPE
+    SYNTAX VsanWwnListEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "This entry contains a Port WWN indexed by a list index 
+        and Port WWN index. So each entry is a member of Port 
+        WWN list. A list consists of all the entries with the 
+        same value of vsanWwnListIndex."
+    INDEX { vsanWwnListIndex, vsanWwnListWwnIndex }
+    ::= { vsanWwnListTable 1 }
+
+VsanWwnListEntry ::= SEQUENCE {
+    vsanWwnListIndex ListIndex,
+    vsanWwnListWwnIndex Gauge,
+    vsanWwnListWwn FcNameId,
+    vsanWwnListRowStatus RowStatus
+    }
+
+vsanWwnListIndex OBJECT-TYPE
+    SYNTAX ListIndex(1..2147483647)
+--    Rsyntax INTEGER(1..2147483647)
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "This is an index to a Port WWN list."
+    ::= { vsanWwnListEntry 1 }
+
+vsanWwnListWwnIndex OBJECT-TYPE
+    SYNTAX Gauge(1..2147483647)
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "This is an index to a Port WWN within a Port WWN 
+        list."
+    ::= { vsanWwnListEntry 2 }
+
+vsanWwnListWwn OBJECT-TYPE
+    SYNTAX FcNameId
+--    Rsyntax OCTET STRING(SIZE(8))
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The Port WWN associated with this entry."
+    ::= { vsanWwnListEntry 3 }
+
+vsanWwnListRowStatus OBJECT-TYPE
+    SYNTAX RowStatus
+--    Rsyntax INTEGER {
+--        active(1),
+--        notInService(2),
+--        notReady(3),
+--        createAndGo(4),
+--        createAndWait(5),
+--        destroy(6)
+--        }
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The status of this conceptual row. Users can create,
+         and delete the Port WWN entry."
+    ::= { vsanWwnListEntry 4 }
+
+vsanIfNumber OBJECT-TYPE
+    SYNTAX INTEGER(0..2147483647)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The number of rows in the vsanIfTable."
+    ::= { vsanMembership 4 }
+
+vsanIfTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF VsanIfEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "A table containing VSAN-related information for 
+        interfaces.
+        This table gives a list of interface that are statically
+        assigned to different VSANs. In addition, it also gives the 
+        list of Port WWNs that are denied on a particular interface.
+        Here is a example of this table :
+        
+        ifIndex   vsanIndex    denyList
+        2            1           0
+        9            4           4
+        12           3           0
+        34           2           0
+        345          1           3
+        456          1           0
+        1234         2           0
+        5676         3           0
+        ."
+    ::= { vsanMembership 5 }
+
+vsanIfEntry OBJECT-TYPE
+    SYNTAX VsanIfEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "This contains information on the static membership
+        of a interface and the list of Port WWNs that are 
+        denied fabric login on that interface.
+        The table contains membership information only for 
+        E_port and Fx_ports."
+    INDEX { ifIndex }
+    ::= { vsanIfTable 1 }
+
+VsanIfEntry ::= SEQUENCE {
+    vsanIfVsan VsanIndex,
+    vsanIfDenyList ListIndexOrZero
+    }
+
+vsanIfVsan OBJECT-TYPE
+    SYNTAX VsanIndex
+--    Rsyntax INTEGER(1..4094)
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "Index of the VSAN to which this interface is 
+        statically assigned."
+    DEFVAL { 1 }
+    ::= { vsanIfEntry 1 }
+
+vsanIfDenyList OBJECT-TYPE
+    SYNTAX ListIndexOrZero
+--    Rsyntax INTEGER(0..2147483647)
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "Index of the Port WWN list in the vsanWwnListTable. 
+        This is the list of Port WWNs which are denied the 
+        login when the Nx_ports try to login to the fabric 
+        on this interface. 
+        The value of this object is 0, if and only if there 
+        is no list to be denied on this port."
+    DEFVAL { 0 }
+    ::= { vsanIfEntry 2 }
+
+vsanDynamicListNumber OBJECT-TYPE
+    SYNTAX INTEGER(0..2147483647)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The number of  WWN lists configured for dynamic 
+        membership.This is the number of rows in the 
+        vsanDynamicTable."
+    ::= { vsanMembership 6 }
+
+vsanDynamicTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF VsanDynamicEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "The global database of Port WWN list to VSAN mappings 
+        which are used to determining dynamic membership of 
+        VSANs. If the port WWN in the login request is present
+        in the database, then it is allowed login to the 
+        fabric. 
+        Following is an example for this table:
+        
+         listIndex     vsanIndex    
+             1            3
+             2            3
+             3            3
+             5            4
+         ."
+    ::= { vsanMembership 7 }
+
+vsanDynamicEntry OBJECT-TYPE
+    SYNTAX VsanDynamicEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "A row containing VSAN information, which is 
+        dynamically applied, based on a particular list of 
+        Port WWNs."
+    INDEX { vsanWwnListIndex }
+    ::= { vsanDynamicTable 1 }
+
+VsanDynamicEntry ::= SEQUENCE {
+    vsanDynamicVsan VsanIndex,
+    vsanDynamicRowStatus RowStatus
+    }
+
+vsanDynamicVsan OBJECT-TYPE
+    SYNTAX VsanIndex
+--    Rsyntax INTEGER(1..4094)
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The VSAN associated with this Port WWN list. If a 
+        Nx_port tries to login into the fabric with a Port WWN
+        contained in this list, then the interface connected 
+        to that port is assigned to this VSAN."
+    DEFVAL { 1 }
+    ::= { vsanDynamicEntry 1 }
+
+vsanDynamicRowStatus OBJECT-TYPE
+    SYNTAX RowStatus
+--    Rsyntax INTEGER {
+--        active(1),
+--        notInService(2),
+--        notReady(3),
+--        createAndGo(4),
+--        createAndWait(5),
+--        destroy(6)
+--        }
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The status of this conceptual row. Users can create,
+         and delete a Port WWN to VSAN mapping entry."
+    ::= { vsanDynamicEntry 2 }
+
+fcTimerRatov OBJECT-TYPE
+    SYNTAX CiscoMilliSeconds(5000..100000)
+--    Rsyntax Gauge(5000..100000)
+--  Units
+--    msec
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The Resource_Allocation_Timeout Value used for FxPorts 
+        as the timeout value for determining when to reuse an 
+        NxPort resource such as a Recovery_Qualifier.  It 
+        represents E_D_TOV (fcTimerEdtov) plus twice the
+        maximum time that a frame may be delayed within the 
+        Fabric and still be delivered.
+        Note that all switches in a fabric should be configured
+        with the same value of this timeout."
+    REFERENCE
+        "Section 29.2.1.3 R_A_TOV in FC-PH (Fibre Channel - 
+        Physical and Signaling Interface) Rev 4.3."
+    DEFVAL { 15000 }
+    ::= { vsanFcConfiguration 1 }
+
+fcTimerEdtov OBJECT-TYPE
+    SYNTAX CiscoMilliSeconds(1000..100000)
+--    Rsyntax Gauge(1000..100000)
+--  Units
+--    msec
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The Error_Detect_Timeout Value used for FxPorts as
+        the timeout value for detecting an error condition. 
+        Note that all switches in a fabric should be configured
+        with the same value of this timeout.
+        Note that value of this object must be less than value
+        of fcTimerDstov."
+    REFERENCE
+        "Section 29.2.1.2 E_D_TOV in FC-PH (Fibre Channel - 
+        Physical and Signaling Interface) Rev 4.3."
+    DEFVAL { 10000 }
+    ::= { vsanFcConfiguration 2 }
+
+fcTimerFstov OBJECT-TYPE
+    SYNTAX CiscoMilliSeconds
+--    Rsyntax Gauge
+--  Units
+--    msec
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The Fabric_Stability_Timeout Value used to ensure that
+        Fabric stability has been achieved during Fabric 
+        Configuration."
+    REFERENCE
+        "Section 3.1.40 F_S_TOV in FC-SW2 (Fibre Channel - 
+        Switch Fabric) Rev 5.4."
+    ::= { vsanFcConfiguration 3 }
+
+fcTimerDstov OBJECT-TYPE
+    SYNTAX CiscoMilliSeconds(5000..100000)
+--    Rsyntax Gauge(5000..100000)
+--  Units
+--    msec
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The Distributed_Services_Timeout Value which indicates
+        that how long a distributed services requestor will 
+        wait for a response."
+    REFERENCE
+        "Section 3.1.25 in FC-SW2 (Fibre Channel - 
+        Switch Fabric) Rev 5.4."
+    DEFVAL { 15000 }
+    ::= { vsanFcConfiguration 4 }
+
+fcNetworkDropLatency OBJECT-TYPE
+    SYNTAX CiscoMilliSeconds(0..60000)
+--    Rsyntax Gauge(0..60000)
+--  Units
+--    msec
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "Network latency of this switch. This is the time 
+        interval after which the frames are dropped if they are
+        not delivered in the order they were transmitted.
+        Note that fcNetworkLatency is always greater than 
+        fcSwitchLatency."
+    DEFVAL { 2000 }
+    ::= { vsanFcConfiguration 5 }
+
+fcSwitchDropLatency OBJECT-TYPE
+    SYNTAX CiscoMilliSeconds(0..60000)
+--    Rsyntax Gauge(0..60000)
+--  Units
+--    msec
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The switch latency of this switch.
+        This is the time interval after which a switch drops the
+        undelivered frames on a link which went down after 
+        delivering some frames to the next hop. This way the 
+        undelivered frames can be transmitted on a new link if 
+        there is one avaialable."
+    DEFVAL { 500 }
+    ::= { vsanFcConfiguration 6 }
+
+fcInorderDelivery OBJECT-TYPE
+    SYNTAX TruthValue
+--    Rsyntax INTEGER {
+--        true(1),
+--        false(2)
+--        }
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The InorderDelivery guarantee flag of device.
+        If the value of the object is 'true', then the 
+        inorder delivery is guaranteed. If 'false', it is not
+        guaranteed."
+    DEFVAL { false }
+    ::= { vsanFcConfiguration 7 }
+
+vsanStatusChange TRAP-TYPE
+-- Reverse mappable trap
+    ENTERPRISE vsanNotification
+    VARIABLES {
+        notifyVsanIndex, vsanAdminState, vsanOperState }
+--  Status
+--    mandatory
+    DESCRIPTION
+        "A state change notification is generated whenever
+        vsanOperState is changed. The index and both states of 
+        the VSAN after the change, are included as variables 
+        in the notification."
+    ::= 1
+
+vsanGroup OBJECT IDENTIFIER ::= { vsanMIBGroups 1 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects for configuring and
+--    displaying information on VSANs.
+--  objects
+--    vsanNumber, vsanLastChange, vsanName, vsanMediaType, vsanMtu, 
+--    vsanAdminState, vsanLoadBalancingType, vsanInterOperMode, 
+--    vsanOperState, vsanRowStatus, notifyVsanIndex, 
+--    fcInorderDelivery
+
+vsanMembershipGroup OBJECT IDENTIFIER ::= { vsanMIBGroups 3 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects for controlling VSAN 
+--    membership.
+--  objects
+--    vsanDenyUnknownWwn
+
+vsanStaticMembershipGroup OBJECT IDENTIFIER ::= { vsanMIBGroups 4 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects for displaying and
+--      configuring VSAN static membership.
+--  objects
+--    vsanIfNumber, vsanIfVsan, vsanIfDenyList
+
+vsanWWNListGroup OBJECT IDENTIFIER ::= { vsanMIBGroups 5 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects for creating WWN lists and
+--    adding Port WWNs into Port WWN list.
+--  objects
+--    vsanWwnListNumber, vsanWwnListWwn, vsanWwnListRowStatus
+
+vsanDynamicMembershipGroup OBJECT IDENTIFIER ::= { vsanMIBGroups 6 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects for dynamic VSAN 
+--    configuration.
+--  objects
+--    vsanDynamicListNumber, vsanDynamicVsan, vsanDynamicRowStatus
+
+vsanFcTimerGroup OBJECT IDENTIFIER ::= { vsanMIBGroups 8 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects for configuring and 
+--    monitoring Fibre Channel timers.
+--  objects
+--    fcTimerRatov, fcTimerEdtov, fcTimerFstov, fcTimerDstov
+
+vsanFcLatencyGroup OBJECT IDENTIFIER ::= { vsanMIBGroups 9 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects for configuring and 
+--    monitoring Fibre Channel latencies.
+--  objects
+--    fcNetworkDropLatency, fcSwitchDropLatency
+
+vsanNotificationGroup OBJECT IDENTIFIER ::= { vsanMIBGroups 7 }
+-- NOTIFICATION-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects for status change monitoring 
+--    and notifications.
+--  notifications
+--    vsanStatusChange
+
+vsanMIBCompliance OBJECT IDENTIFIER ::= { vsanMIBCompliances 1 }
+-- MODULE-COMPLIANCE
+--  Status
+--    mandatory
+--  Descr
+--    The compliance statement for entities which
+--     implement the VSANs.
+--  Module
+--    >>current<<
+--   MandGroup
+--    vsanGroup
+--   MandGroup
+--    vsanMembershipGroup
+--   MandGroup
+--    vsanStaticMembershipGroup
+--   MandGroup
+--    vsanNotificationGroup
+--   MandGroup
+--    vsanFcTimerGroup
+--   MandGroup
+--    vsanFcLatencyGroup
+--   OptGroup
+--    vsanDynamicMembershipGroup
+--   OptGroup
+--    vsanWWNListGroup
+--   ObjVar
+--    vsanMediaType
+--   ObjVar
+--    vsanMtu
+--   ObjVar
+--    vsanRowStatus
+--   ObjVar
+--    vsanIfDenyList
+
+
+END
+

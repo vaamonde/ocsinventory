@@ -1,0 +1,519 @@
+--
+--                  HP NetServer Assistant Extended Trap Definitions
+--              Management Information Base for SNMP Network Management
+--                          on the NetWare Management System
+--
+--      Copyright 1994 Hewlett-Packard Company
+--      All Rights Reserved.
+--
+--      The information in this document is subject to change without notice. 
+--      The HP enterprise number is 11.
+--      The ASN.1 prefix to, and including the HP Enterprise is:
+--      1.3.6.1.4.1.11
+--
+--
+--
+-- ****************************************************************************
+-- Summary of HP NSA Trap Definitions MIB
+-- ****************************************************************************
+--   hp  (1.3.6.1.4.1.11)
+--      nm  (hp.2)
+--         hpnsa  (nm.23)
+--
+-- ****************************************************************************
+--
+-- Note. All traps have the following format :
+--            VarBind #1: HP NSA Version (integer). For NSA 2.1 this number is 21.
+-- (optional) VarBind #2: Custom Description String
+--
+--
+
+HPNSATRAP-MIB DEFINITIONS ::= BEGIN
+
+	IMPORTS
+	 enterprises    FROM RFC1155-SMI
+	 TRAP-TYPE      FROM RFC-1215;
+
+--
+    hp                          OBJECT IDENTIFIER ::= { enterprises 11 }
+    adaptec                     OBJECT IDENTIFIER ::= { enterprises 795 }
+    nm                          OBJECT IDENTIFIER ::= { hp 2 }
+    hpnsa                       OBJECT IDENTIFIER ::= { nm 23 }  
+    hpnsaECC        OBJECT IDENTIFIER ::= { hpnsa 6 }  
+    hpnsaRemoteAssist                     OBJECT IDENTIFIER ::= { hpnsa 8 }
+    adaptecNm           OBJECT IDENTIFIER ::= { adaptec 4 }
+    adaptecNmScsiStatus         OBJECT IDENTIFIER ::= { adaptecNm 1 }   
+    hpnr OBJECT IDENTIFIER ::= { enterprises 16 }
+    hpNetRAID OBJECT IDENTIFIER ::= { hpnr 1 } 
+    hpNetRaidMib OBJECT IDENTIFIER ::= { hpNetRAID 1 }
+    raidTraps OBJECT IDENTIFIER ::= { hpNetRaidMib 200 }
+
+			
+-- The Following object and trap definitions are from the AMI NetRaid application
+
+rtAdapterNumber  OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"Adapter Number for which Trap is generated."
+::= { raidTraps 1001 }
+
+rtLogicalDriveNumber  OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"Logical Drive Number for which Trap is generated."
+::= { raidTraps 1002 }
+
+rtChannelNumber  OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"Channel Number on the Adapter for which Trap is Generated."
+::= { raidTraps 1003 }
+
+rtTargetID  OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"Device ID of the Physical Drive for which Trap is Generated."
+::= { raidTraps 1004 }
+
+rtOldDriveState  OBJECT-TYPE
+	SYNTAX  DisplayString
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"Old State of Logical/Physical Drive, when a State Change Trap
+		is Generated."
+::= { raidTraps 1005 }
+
+rtNewDriveState  OBJECT-TYPE
+	SYNTAX  DisplayString
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"New State of Logical/Physical Drive, when a State Change Trap
+		is Generated."
+::= { raidTraps 1006 }
+
+rtSenseKey  OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"Check Condition Sense-Key reported by Physical Drive for which
+		Trap is Generated."
+::= { raidTraps 1007 }
+
+rtASC  OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"Check Condition Additional Sense Code (ASC) reported by Physical
+		Drive for which Trap is Generated."
+::= { raidTraps 1008 }
+rtASCQ  OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"Check Condition Additional Sense Code Qualifier (ASCQ) reported by
+		Physical Drive for which Trap is Generated."
+::= { raidTraps 1009 }
+
+rtDriveVendor  OBJECT-TYPE
+	SYNTAX  DisplayString
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"Vendor Identification String from the SCSI Inquiry Data for the
+		Drive."
+::= { raidTraps 1010 }
+rtConfigUpdated TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES { rtAdapterNumber }
+	DESCRIPTION
+		"Adapter-%d: A New Configuration has been written."
+	--#TYPE "RAID Trap: Configuration Updated"
+	--#SUMMARY "Host Adapter-%d: A New Configuration has been written."
+	--#ARGUMENTS { 0 }
+	--#SEVERITY INFORMATIONAL
+	--#TIMEINDEX    100
+	--#STATE OPERATIONAL
+	::= 9001
+
+rtPhysicalDriveStateChange TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ 
+		rtAdapterNumber,
+		rtChannelNumber,
+		rtTargetID,
+		rtOldDriveState,
+		rtNewDriveState
+		}
+	DESCRIPTION
+		"Adapter-%d, Channel-%d, Target-%d: Drive State Changed from %s to %s."
+	--#TYPE "RAID Trap: Physical Drive State Change"
+	--#SUMMARY "Adapter-%d, Channel-%d, Target-%d: Drive State Changed from %s to %s."
+	--#ARGUMENTS { 0, 1, 2, 3, 4 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9002
+
+rtLogicalDriveStateChange TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ 
+		rtAdapterNumber,
+		rtLogicalDriveNumber,
+		rtOldDriveState,
+		rtNewDriveState
+		}
+	DESCRIPTION
+		"Adapter-%d, Logical Drive-%d: State Changed from %s to %s."
+	--#TYPE "RAID Trap: Logical Drive State Change"
+	--#SUMMARY "Adapter-%d, Logical Drive-%d: State Changed from %s to %s."
+	--#ARGUMENTS { 0, 1, 2, 3 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9003
+
+rtInitializeStarted TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ 
+		rtAdapterNumber,
+		rtLogicalDriveNumber
+		}
+	DESCRIPTION
+		"Adapter-%d, Logical Drive-%d: Initialization Started."
+	--#TYPE "RAID Trap: Initialize Started"
+	--#SUMMARY "Adapter-%d, Logical Drive-%d: Initialization Started."
+	--#ARGUMENTS { 0, 1 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9004
+
+rtInitializeCompleted TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ 
+		rtAdapterNumber,
+		rtLogicalDriveNumber
+		}
+	DESCRIPTION
+		"Adapter-%d, Logical Drive-%d: Initialization Completed Successfully."
+	--#TYPE "RAID Trap: Initialize Completed"
+	--#SUMMARY "Adapter-%d, Logical Drive-%d: Initialization Completed Successfully."
+	--#ARGUMENTS { 0, 1 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9005
+
+rtInitializeAborted TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ 
+		rtAdapterNumber,
+		rtLogicalDriveNumber
+		}
+	DESCRIPTION
+		"Adapter-%d, Logical Drive-%d: Initialization Aborted by User."
+	--#TYPE "RAID Trap: Initialize Aborted"
+	--#SUMMARY "Adapter-%d, Logical Drive-%d: Initialization Aborted by User."
+	--#ARGUMENTS { 0, 1 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9006
+
+rtInitializeFailed TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ 
+		rtAdapterNumber,
+		rtLogicalDriveNumber
+		}
+	DESCRIPTION
+		"Adapter-%d, Logical Drive-%d: Initialization Failed."
+	--#TYPE "RAID Trap: Initialize Failed"
+	--#SUMMARY "Adapter-%d, Logical Drive-%d: Initialization Failed."
+	--#ARGUMENTS { 0, 1 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9007
+
+rtCheckConsistencyStarted TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ 
+		rtAdapterNumber,
+		rtLogicalDriveNumber
+		}
+	DESCRIPTION
+		"Adapter-%d, Logical Drive-%d: Check Consistency Started."
+	--#TYPE "RAID Trap: Check Consistency Started"
+	--#SUMMARY "Adapter-%d, Logical Drive-%d: Check Consistency Started."
+	--#ARGUMENTS { 0, 1 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9008
+
+rtCheckConsistencyCompleted TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ 
+		rtAdapterNumber,
+		rtLogicalDriveNumber
+		}
+	DESCRIPTION
+		"Adapter-%d, Logical Drive-%d: Check Consistency Completed. No 
+		Inconsistencies Found."
+	--#TYPE "RAID Trap: Check Consistency Completed"
+	--#SUMMARY "Adapter-%d, Logical Drive-%d: Check Consistency Completed. No"
+	--#SUMMARY "Inconsistencies Found."
+	--#ARGUMENTS { 0, 1 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9009
+
+rtCheckConsistencyAborted TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ 
+		rtAdapterNumber,
+		rtLogicalDriveNumber
+		}
+	DESCRIPTION
+		"Adapter-%d, Logical Drive-%d: Check Consistency Aborted by User."
+	--#TYPE "RAID Trap: Check Consistency Aborted"
+	--#SUMMARY "Adapter-%d, Logical Drive-%d: Check Consistency Aborted by User."
+	--#ARGUMENTS { 0, 1 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9010
+
+rtConsistencyCorrected TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ 
+		rtAdapterNumber,
+		rtLogicalDriveNumber
+		}
+	DESCRIPTION
+		"Adapter-%d, Logical Drive-%d: Check Consistency Operation Completed. 
+		Inconsistencies have been Cured." 
+	--#TYPE "RAID Trap: Check Consistency Corrected"
+	--#SUMMARY "Adapter-%d, Logical Drive-%d: Check Consistency Operation"
+	--#SUMMARY "Completed. Inconsistencies have been Cured." 
+	--#ARGUMENTS { 0, 1 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9011
+
+rtCheckConsistencyFailed TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ 
+		rtAdapterNumber,
+		rtLogicalDriveNumber
+		}
+	DESCRIPTION
+		"Adapter-%d, Logical Drive-%d: Check Consistency Failed."
+	--#TYPE "RAID Trap: Check Consistency Failed"
+	--#SUMMARY "Adapter-%d, Logical Drive-%d: Check Consistency Failed."
+	--#ARGUMENTS { 0, 1 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9012
+
+rtReconstructionStarted TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ 
+		rtAdapterNumber,
+		rtLogicalDriveNumber
+		}
+	DESCRIPTION
+		"Adapter-%d, Logical Drive-%d: Reconstruction Started."
+	--#TYPE "RAID Trap: Reconstruction Started"
+	--#SUMMARY "Adapter-%d, Logical Drive-%d: Reconstruction Started."
+	--#ARGUMENTS { 0, 1 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9013
+
+rtReconstructionCompleted TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ 
+		rtAdapterNumber,
+		rtLogicalDriveNumber
+		}
+	DESCRIPTION
+		"Adapter-%d, Logical Drive-%d: Reconstruction Completed Successfully."
+	--#TYPE "RAID Trap: Reconstruction Completed"
+	--#SUMMARY "Adapter-%d, Logical Drive-%d: Reconstruction Completed Successfully."
+	--#ARGUMENTS { 0, 1 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9014
+
+rtReconstructionFailed TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ 
+		rtAdapterNumber,
+		rtLogicalDriveNumber
+		}
+	DESCRIPTION
+		"Adapter-%d, Logical Drive-%d: Reconstruction Failed."
+	--#TYPE "RAID Trap: Reconstruction Failed"
+	--#SUMMARY "Adapter-%d, Logical Drive-%d: Reconstruction Failed."
+	--#ARGUMENTS { 0, 1 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9015
+
+rtPredictiveFailuresFalse TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ 
+		rtAdapterNumber,
+		rtChannelNumber,
+		rtTargetID,
+		rtDriveVendor,
+		rtSenseKey,
+		rtASC,
+		rtASCQ
+		}
+	DESCRIPTION
+		"Adapter-%d, Channel-%d, Target-%d: Reported Failure Prediction
+		Threshold Exceeded [FALSE].
+		Drive Identification String = %s
+		Sense Key = 0x%x, ASC = 0x%x, ASCQ = 0x%x."
+	--#TYPE "RAID Trap: Physical Drive Predictive Failures [FALSE]"
+	--#SUMMARY "Adapter-%d, Channel-%d, Target-%d: Reported Predictive 
+	--#SUMMARY "Failure. (Failure Prediction Threshold Exceeded [FALSE])"
+	--#SUMMARY "Drive Identification String = %s"
+	--#SUMMARY "Sense Key = 0x%x, ASC = 0x%x, ASCQ = 0x%x."
+	--#ARGUMENTS { 0, 1, 2, 3, 4, 5, 6 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9016
+
+rtPredictiveFailuresExceeded TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ 
+		rtAdapterNumber,
+		rtChannelNumber,
+		rtTargetID,
+		rtDriveVendor,
+		rtSenseKey,
+		rtASC,
+		rtASCQ
+		}
+	DESCRIPTION
+		"Adapter-%d, Channel-%d, Target-%d: Reported Predictive Failure.
+		Drive Identification String = %s
+		Sense Key = 0x%x, ASC = 0x%x, ASCQ = 0x%x."
+	--#TYPE "RAID Trap: Physical Drive Failure Prediction Threshold Exceeded"
+	--#SUMMARY "Adapter-%d, Channel-%d, Target-%d: Reported Predictive 
+	--#SUMMARY "Failure. (Failure Threshold Exceeded)"
+	--#SUMMARY "Drive Identification String = %s"
+	--#SUMMARY "Sense Key = 0x%x, ASC = 0x%x, ASCQ = 0x%x."
+	--#ARGUMENTS { 0, 1, 2, 3, 4, 5, 6 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9017
+
+
+rtCheckConditionStatus TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ 
+		rtAdapterNumber,
+		rtChannelNumber,
+		rtTargetID,
+		rtSenseKey,
+		rtASC,
+		rtASCQ
+		}
+	DESCRIPTION
+		"Adapter-%d, Channel-%d, Target-%d: Command Completed with 
+		Sense_Key-0x%x ASC-0x%x ASCQ-0x%x."
+	--#TYPE "RAID Trap: Physical Drive Check Conditions"
+	--#SUMMARY "Adapter-%d, Channel-%d, Target-%d: Command Completed with"
+	--#SUMMARY "Sense_Key-0x%x ASC-0x%x ASCQ-0x%x."
+	--#ARGUMENTS { 0, 1, 2, 3, 4, 5 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9018
+
+rtNewDriveInserted TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ 
+		rtAdapterNumber,
+		rtChannelNumber,
+		rtTargetID
+		}
+	DESCRIPTION
+		"Adapter-%d, Channel-%d, Target-%d: New Device Inserted."
+	--#TYPE "RAID Trap: New Drive Inserted"
+	--#SUMMARY "Adapter-%d, Channel-%d, Target-%d: New Device Inserted."
+	--#ARGUMENTS { 0, 1, 2 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9019
+
+rtBatteryMissing TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ rtAdapterNumber }
+	DESCRIPTION
+		"Adapter-%d: Battery Module is missing."
+	--#TYPE "RAID Trap: Battery Missing"
+	--#SUMMARY "Adapter-%d: Battery Module is missing."
+	--#ARGUMENTS { 0 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9020
+
+rtBatteryVolatageLow TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ rtAdapterNumber }
+	DESCRIPTION
+		"Adapter-%d: Battery Module Voltage is Low."
+	--#TYPE "RAID Trap: Battery Voltage Low"
+	--#SUMMARY "Adapter-%d: Battery Module Voltage is Low."
+	--#ARGUMENTS { 0 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9021
+
+rtBatteryTemperatureHigh TRAP-TYPE
+	ENTERPRISE raidTraps
+	VARIABLES 
+		{ rtAdapterNumber }
+	DESCRIPTION
+		"Adapter-%d: Battery Module Temperature Exceeded Danger Threshold."
+	--#TYPE "RAID Trap: Battery Temperature High"
+	--#SUMMARY "Adapter-%d: Battery Module Temperature Exceeded Danger Threshold."
+	--#ARGUMENTS { 0 }
+	--#SEVERITY INFORMATIONAL
+	--#STATE OPERATIONAL
+	::= 9022
+--
+-- End of HP NetServer Assistant trap definition file
+--
+
+END

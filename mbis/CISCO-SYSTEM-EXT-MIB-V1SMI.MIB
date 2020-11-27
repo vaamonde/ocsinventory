@@ -1,0 +1,365 @@
+-- MIB file created 27-Dec-2002 16:28:21, by
+--   SMICng version 2.2.11-beta(PRO)(Solaris), January 20, 2001. Enterprise key cisco.com
+
+CISCO-SYSTEM-EXT-MIB DEFINITIONS ::= BEGIN
+
+-- From file: "CISCO-SYSTEM-EXT-MIB.my"
+-- Compile options "4 7 F H N W 03 06 0B 0G 0N 0T"
+
+IMPORTS
+    TruthValue, DateAndTime
+            FROM SNMPv2-TC-v1
+    SnmpAdminString
+            FROM SNMP-FRAMEWORK-MIB
+    InetAddressType, InetAddress
+            FROM INET-ADDRESS-MIB
+    ciscoMgmt
+            FROM CISCO-SMI
+    Gauge
+            FROM RFC1155-SMI
+    OBJECT-TYPE
+            FROM RFC-1212
+    TRAP-TYPE
+            FROM RFC-1215;
+
+ciscoSystemExtMIB OBJECT IDENTIFIER ::= { ciscoMgmt 305 }
+-- MODULE-IDENTITY
+--  LastUpdated
+--    200211190000Z
+--  OrgName
+--    Cisco Systems Inc. 
+--  ContactInfo
+--         Cisco Systems 
+--          Customer Service 
+--    Postal: 170 W Tasman Drive 
+--          San Jose, CA  95134 
+--          USA 
+--    Tel: +1 800 553 -NETS 
+--    E-mail: cs-san@cisco.com
+--  Descr
+--    MIB module for monitoring High Availability,  
+--           SNMP SET errors and bandwidths.
+--  RevDate
+--    200211190000Z
+--  RevDescr
+--    Added cseSysConfLastChange.
+--  RevDate
+--    200210040000Z
+--  RevDescr
+--    Initial version of this MIB module.
+
+ciscoSystemExtMIBObjects OBJECT IDENTIFIER ::= { ciscoSystemExtMIB 1 }
+ciscoSystemExtMIBConformance OBJECT IDENTIFIER ::= { ciscoSystemExtMIB 2 }
+ciscoSysInfoGroup OBJECT IDENTIFIER ::= { ciscoSystemExtMIBObjects 1 }
+ciscoSysErrorGroup OBJECT IDENTIFIER ::= { ciscoSystemExtMIBObjects 2 }
+ciscoHaGroup    OBJECT IDENTIFIER ::= { ciscoSystemExtMIBObjects 3 }
+cseHaNotification OBJECT IDENTIFIER ::= { ciscoHaGroup 5 }
+cseHaNotificationPrefix OBJECT IDENTIFIER ::= { cseHaNotification 0 }
+ciscoSystemExtMIBCompliances OBJECT IDENTIFIER ::= { ciscoSystemExtMIBConformance 1 }
+ciscoSystemExtMIBGroups OBJECT IDENTIFIER ::= { ciscoSystemExtMIBConformance 2 }
+
+CseHaRestartReason ::= INTEGER {
+        unknown(1),
+        ungracefulExit(2),
+        otherSignal(3),
+        sigterm(4),
+        softwareUpgrade(5),
+        configUpdate(6),
+        configRemove(7),
+        shutdown(8),
+        aborted(9),
+        heartbeatFailure(10),
+        userTerminate(11),
+        gracefulExit(12)
+        }
+-- TEXTUAL-CONVENTION
+--  Status
+--    mandatory
+--  Descr
+--    Reason codes for the restart of a service. 
+--       unknown (1)           - ungraceful exit 
+--       ungracefulExit (2)    - ungraceful exit 
+--       otherSignal (3)       - service got some other signal 
+--       sigterm (4)           - received SIGTERM 
+--       softwareUpgrade (5)   - software upgrade 
+--       configUpdate (6)     - config update 
+--       configRemove (7)      - config removal 
+--       shutdown (8)          - manually shutdown 
+--       aborted (9)           - aborted 
+--       heartbeatFailure (10) - heartbeat failure 
+--       userTerminate (11)    - user termnation 
+--       gracefulExit (12)     - graceful exit 
+
+cseSysCPUUtilization OBJECT-TYPE
+    SYNTAX Gauge(0..100)
+--  Units
+--    %
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The average utilization of CPU on the active  
+        supervisor."
+    ::= { ciscoSysInfoGroup 1 }
+
+cseSysMemoryUtilization OBJECT-TYPE
+    SYNTAX Gauge(0..100)
+--  Units
+--    %
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The average utilization of memory on the active  
+        supervisor."
+    ::= { ciscoSysInfoGroup 2 }
+
+cseSysConfLastChange OBJECT-TYPE
+    SYNTAX DateAndTime
+--    Rsyntax OCTET STRING(SIZE(8|11))
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The local date and time when the  
+         configuration was last changed. This object will  
+         be set to zero on power cycle or on reboot of  
+         the system. Also, if the clock is changed on  
+         local system it is set to zero. "
+    ::= { ciscoSysInfoGroup 3 }
+
+cseSnmpErrorTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF CseSnmpErrorEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "A table containing information about the errors which have  
+        recently caused the generation of a SNMP Response PDU with a  
+        non-zero value in its error-status field for SNMP Set Response 
+        PDU.  
+        
+        This table serves as an extension to the SNMP's error status  
+        when a SNMP Set request fails. SNMP returns only a pre-defined 
+        set of standard error codes which does not convey the specific  
+        cause for an error. Typically, there is an incumbent and  
+        sizable burden on the configuration application to determine  
+        if the configuration request failure is the result of a  
+        resource issue, a security issue, or an application error  
+        (like an object depending on some other objects). So from a  
+        user perspective, it is important that a specific error be  
+        made known. 
+        
+        Ideally, when a 'badValue' error occurs for a given set  
+        request, an application can query the command responder for  
+        more details on the error.  
+        
+        This table provides a framework for the command responders to  
+        provide more information on the SET errors. 
+        
+        It is upto the implementation to create entries in this table  
+        for either only certain SNMP errors or all of the SNMP errors. 
+        
+        Note that only most recent incarnation of an entry is kept in  
+        this table."
+    ::= { ciscoSysErrorGroup 1 }
+
+cseSnmpErrorEntry OBJECT-TYPE
+    SYNTAX CseSnmpErrorEntry
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "An entry (conceptual row) in the  cseSnmpErrorTable, containing 
+        information about an error which has recently caused a SNMP  
+        SetRequest to fail.  An entry is created by the agent  
+        on the occurrence of an error, and is deleted approximately 5 
+        minutes later. The reasons for this are : 
+        - to prevent old entries clogging the table. 
+        - optimal utilization of the resources like memory."
+    INDEX { cseSnmpErrorAddressType, cseSnmpErrorAddress, cseSnmpErrorRequestId }
+    ::= { cseSnmpErrorTable 1 }
+
+CseSnmpErrorEntry ::= SEQUENCE {
+    cseSnmpErrorAddressType InetAddressType,
+    cseSnmpErrorAddress InetAddress,
+    cseSnmpErrorRequestId Gauge,
+    cseSnmpErrorCode Gauge,
+    cseSnmpErrorDescription SnmpAdminString
+    }
+
+cseSnmpErrorAddressType OBJECT-TYPE
+    SYNTAX InetAddressType
+--    Rsyntax INTEGER {
+--        ?? enum value of zero may cause problems
+--        unknown(0),
+--        ipv4(1),
+--        ipv6(2),
+--        dns(16)
+--        }
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "The type of address from which the error-ed SetRequest  
+        originated."
+    ::= { cseSnmpErrorEntry 1 }
+
+cseSnmpErrorAddress OBJECT-TYPE
+    SYNTAX InetAddress
+--    Rsyntax OCTET STRING(SIZE(0..255))
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "The address from which the error-ed SetRequest originated."
+    ::= { cseSnmpErrorEntry 2 }
+
+cseSnmpErrorRequestId OBJECT-TYPE
+    SYNTAX Gauge
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "The request-id of the error-ed SetRequest."
+    ::= { cseSnmpErrorEntry 3 }
+
+cseSnmpErrorCode OBJECT-TYPE
+    SYNTAX Gauge
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The code for the Mib object specific error which  
+        caused a SetRequest to fail. 
+        This error code is platform-specific and for debugging 
+        purposes only. For information on this code, the  
+        corresponding instance of cseSnmpErrorDescription must be  
+        used.  
+        This code is not the same as the value contained 
+        in the error-status field of SNMP Response PDU."
+    ::= { cseSnmpErrorEntry 4 }
+
+cseSnmpErrorDescription OBJECT-TYPE
+    SYNTAX SnmpAdminString
+--    Rsyntax OCTET STRING(SIZE(0..255))
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "The error description for the error happened for the  
+        SetRequest."
+    ::= { cseSnmpErrorEntry 5 }
+
+cseHaRestartReason OBJECT-TYPE
+    SYNTAX CseHaRestartReason
+--    Rsyntax INTEGER {
+--        unknown(1),
+--        ungracefulExit(2),
+--        otherSignal(3),
+--        sigterm(4),
+--        softwareUpgrade(5),
+--        configUpdate(6),
+--        configRemove(7),
+--        shutdown(8),
+--        aborted(9),
+--        heartbeatFailure(10),
+--        userTerminate(11),
+--        gracefulExit(12)
+--        }
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "The reason for most recent restart of a service on the  
+        'active' supervisor."
+    ::= { ciscoHaGroup 2 }
+
+cseHaRestartStateless OBJECT-TYPE
+    SYNTAX TruthValue
+--    Rsyntax INTEGER {
+--        true(1),
+--        false(2)
+--        }
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "Tells if the most recent restart of a service on the  
+        'active' supervisor was 'stateless' or not. 
+         A 'stateless' restart of a service is where no runtime  
+         information is preserved while restarting the service."
+    ::= { ciscoHaGroup 3 }
+
+cseHaRestartService OBJECT-TYPE
+    SYNTAX SnmpAdminString(SIZE(0..255))
+--    Rsyntax OCTET STRING(SIZE(0..255))
+    ACCESS not-accessible
+    STATUS mandatory
+    DESCRIPTION
+        "Name of the service (or process) that was restarted on  
+        the 'active' supervisor."
+    ::= { ciscoHaGroup 4 }
+
+cseHaRestartNotify TRAP-TYPE
+-- Reverse mappable trap
+    ENTERPRISE cseHaNotification
+    VARIABLES {
+        cseHaRestartReason, cseHaRestartService, 
+        cseHaRestartStateless }
+--  Status
+--    mandatory
+    DESCRIPTION
+        "A service restart notification is generated  
+        whenever a service (or a process) on the  'active'  
+        supervisor is restarted."
+    ::= 1
+
+ciscoSystemExtInfoGroup OBJECT IDENTIFIER ::= { ciscoSystemExtMIBGroups 1 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects for system information.
+--  objects
+--    cseSysCPUUtilization, cseSysMemoryUtilization, 
+--    cseSysConfLastChange
+
+ciscoSystemExtErrorGroup OBJECT IDENTIFIER ::= { ciscoSystemExtMIBGroups 2 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects for logging SNMP set error.
+--  objects
+--    cseSnmpErrorCode, cseSnmpErrorDescription
+
+ciscoSystemExtHaGroup OBJECT IDENTIFIER ::= { ciscoSystemExtMIBGroups 3 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects for High Availability.
+--  objects
+--    cseHaRestartReason, cseHaRestartService, 
+--    cseHaRestartStateless
+
+ciscoSystemExtNotificationGroup OBJECT IDENTIFIER ::= { ciscoSystemExtMIBGroups 4 }
+-- NOTIFICATION-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of notifications for the  
+--    High Availability.
+--  notifications
+--    cseHaRestartNotify
+
+ciscoSystemExtMIBCompliance OBJECT IDENTIFIER ::= { ciscoSystemExtMIBCompliances 1 }
+-- MODULE-COMPLIANCE
+--  Status
+--    mandatory
+--  Descr
+--    The compliance statement for entities which 
+--     implement the CISCO-SYTEM-EXT-MIB.
+--  Module
+--    >>current<<
+--   MandGroup
+--    ciscoSystemExtInfoGroup
+--   MandGroup
+--    ciscoSystemExtErrorGroup
+--   MandGroup
+--    ciscoSystemExtHaGroup
+--   MandGroup
+--    ciscoSystemExtNotificationGroup
+
+
+END
+

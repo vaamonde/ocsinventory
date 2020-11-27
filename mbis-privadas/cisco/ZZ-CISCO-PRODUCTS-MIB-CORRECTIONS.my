@@ -1,0 +1,34 @@
+CISCO-PRODUCTS-MIB-CORRECTIONS DEFINITIONS ::= BEGIN
+
+IMPORTS
+    MODULE-IDENTITY
+        FROM SNMPv2-SMI
+    ciscoModules,
+    ciscoProducts
+        FROM CISCO-SMI;
+
+ciscoProductsMIBCorrections MODULE-IDENTITY
+    LAST-UPDATED "201508140000Z" -- only update this field, don't add all revisions
+    ORGANIZATION "The Netdisco project"
+    CONTACT-INFO "
+        Mailing list: netdisco-users@lists.sourceforge.net
+        IRC: #netdisco on Freenode
+    "
+    DESCRIPTION "
+        This module augments the CISCO-PRODUCTS-MIB. It
+        defines additional object identifiers that are
+        assigned to various hardware platforms, and hence are
+        returned as values for sysObjectID.
+    "
+        REVISION "201411270000Z"
+        DESCRIPTION "
+            Initial version for the netdisco-mibs distribution.
+            Added OIDs for the Catalyst 3650 platform.
+        "
+    ::= { ciscoModules 65535 }
+
+
+-- Cisco 5520 WLC is out in the field, but not yet listed in 20150720 revision of CISCO-PRODUCTS-MIB
+cisco5520Wlc                    OBJECT IDENTIFIER ::= { ciscoProducts 2170 } -- AIR-CT5520
+
+END

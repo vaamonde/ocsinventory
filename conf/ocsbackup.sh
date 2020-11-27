@@ -25,7 +25,7 @@ if [ -d $PATH_1 ]; then
 else
 	echo -e "Diretório de Log não existe, criando o diretório."
 	mkdir -pv $PATH_1
-	echo -e "Direttório criado sucesso!!!!, continuando o backup..."
+	echo -e "Diretório criado sucesso!!!!, continuando o backup..."
 fi
 
 #Reinicializando o serviço do MySQL

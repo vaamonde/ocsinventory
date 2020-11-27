@@ -1,0 +1,254 @@
+-- MIB file created 27-Dec-2002 14:30:10, by
+--   SMICng version 2.2.11-beta(PRO)(Solaris), January 20, 2001. Enterprise key cisco.com
+
+CISCO-WWNMGR-MIB DEFINITIONS ::= BEGIN
+
+-- From file: "CISCO-WWNMGR-MIB.my"
+-- Compile options "4 7 F H N W 03 06 0B 0G 0N 0T"
+
+IMPORTS
+    MacAddress
+            FROM SNMPv2-TC-v1
+    ciscoMgmt
+            FROM CISCO-SMI
+    Gauge
+            FROM RFC1155-SMI
+    OBJECT-TYPE
+            FROM RFC-1212
+    TRAP-TYPE
+            FROM RFC-1215;
+
+ciscoWwnmgrMIB OBJECT IDENTIFIER ::= { ciscoMgmt 286 }
+-- MODULE-IDENTITY
+--  LastUpdated
+--    200210010000Z
+--  OrgName
+--    Cisco Systems Inc. 
+--  ContactInfo
+--         Cisco Systems 
+--          Customer Service 
+--    Postal: 170 W Tasman Drive 
+--          San Jose, CA  95134 
+--          USA 
+--    Tel: +1 800 553 -NETS 
+--    E-mail: cs-san@cisco.com
+--  Descr
+--    MIB module for WWN Manager related management  
+--    functionalities.
+--  RevDate
+--    200210010000Z
+--  RevDescr
+--    Initial version of this MIB module.
+
+ciscoWwnmMIBObjects OBJECT IDENTIFIER ::= { ciscoWwnmgrMIB 1 }
+wwnmConfigurationGroup OBJECT IDENTIFIER ::= { ciscoWwnmMIBObjects 1 }
+wwnmNotificationGroup OBJECT IDENTIFIER ::= { ciscoWwnmMIBObjects 2 }
+wwnmNotification OBJECT IDENTIFIER ::= { wwnmNotificationGroup 1 }
+wwnmNotificationPrefix OBJECT IDENTIFIER ::= { wwnmNotification 0 }
+ciscoWwnmMIBConformance OBJECT IDENTIFIER ::= { ciscoWwnmgrMIB 2 }
+ciscoWwnmMIBCompliances OBJECT IDENTIFIER ::= { ciscoWwnmMIBConformance 1 }
+ciscoWwnmMIBGroups OBJECT IDENTIFIER ::= { ciscoWwnmMIBConformance 2 }
+
+wwnmSecondaryBaseMacAddress OBJECT-TYPE
+    SYNTAX MacAddress
+--    Rsyntax OCTET STRING(SIZE(6))
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The first MAC address used for generating World Wide 
+        Names (WWNs) when the default range of WWNs generated  
+        from supervisor MAC address are exhausted."
+    DEFVAL { '000000000000'H }
+    ::= { wwnmConfigurationGroup 1 }
+
+wwnmSecondaryMacAddressRange OBJECT-TYPE
+    SYNTAX Gauge(0..4294967295)
+    ACCESS read-write
+    STATUS mandatory
+    DESCRIPTION
+        "The number of secondary MAC Addresses starting from  
+        and including the wwnmSecondayBaseMacAddress."
+    DEFVAL { 0 }
+    ::= { wwnmConfigurationGroup 2 }
+
+wwnmType1MaxWwns OBJECT-TYPE
+    SYNTAX Gauge(0..4294967295)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Maximum number of NAA Type 1 WWNs that are available 
+        for assignment to internal entities."
+    REFERENCE
+        "FC-FS-2 Rev 1.70, Section 14 Name Identifier Formats."
+    ::= { wwnmConfigurationGroup 3 }
+
+wwnmType1AvailableWwns OBJECT-TYPE
+    SYNTAX Gauge
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Number of NAA Type 1 WWNs that are currently  
+        available for assignment to internal entities."
+    REFERENCE
+        "FC-FS-2 Rev 1.70, Section 14 Name Identifier Formats."
+    ::= { wwnmConfigurationGroup 4 }
+
+wwnmTypeOtherMaxWwns OBJECT-TYPE
+    SYNTAX Gauge(0..4294967295)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Maximum number of total WWNs of types NAA Type 2  
+        and Type 5 WWNs available for assignment to  internal 
+        entities."
+    REFERENCE
+        "FC-FS-2 Rev 1.70, Section 14 Name Identifier Formats."
+    ::= { wwnmConfigurationGroup 5 }
+
+wwnmTypeOtherAvailableWwns OBJECT-TYPE
+    SYNTAX Gauge
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Sum of number of NAA Type 2 and Type 5 WWNs currently 
+        available for assignment to the internal entities."
+    REFERENCE
+        "FC-FS-2 Rev 1.70, Section 14 Name Identifier Formats."
+    ::= { wwnmConfigurationGroup 6 }
+
+wwnmType1ReservedWwns OBJECT-TYPE
+    SYNTAX Gauge(0..4294967295)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Number of NAA Type 1 WWNs that are reserved 
+        for internal purposes."
+    REFERENCE
+        "FC-FS-2 Rev 1.70, Section 14 Name Identifier Formats."
+    ::= { wwnmConfigurationGroup 7 }
+
+wwnmTypeOtherReservedWwns OBJECT-TYPE
+    SYNTAX Gauge(0..4294967295)
+    ACCESS read-only
+    STATUS mandatory
+    DESCRIPTION
+        "Number of total WWNs of types NAA Type 2  
+        and Type 5 WWNs reserved for internal purposes."
+    REFERENCE
+        "FC-FS-2 Rev 1.70, Section 14 Name Identifier Formats."
+    ::= { wwnmConfigurationGroup 8 }
+
+wwnmType1WwnShortageNotify TRAP-TYPE
+-- Reverse mappable trap
+    ENTERPRISE wwnmNotification
+    VARIABLES {
+        wwnmType1AvailableWwns }
+--  Status
+--    mandatory
+    DESCRIPTION
+        "A WWN shortage notification is generated whenever the  
+        number of available Type 1 WWNs 'wwnmType1AvailableWwns' 
+        reduces to either 20% or 10% or 0% of the maximum number 
+        of Type 1 WWNs 'wwnmType1MaxWwns'. 
+        After a shortage event is generated for a threshhold 
+        (say 20%), another such event will not be generated until 
+        after an availability event (see  
+        wwnmType1WwnAvailableNotify) is generated for the same  
+        threshold."
+    ::= 1
+
+wwnmType1WwnAvailableNotify TRAP-TYPE
+-- Reverse mappable trap
+    ENTERPRISE wwnmNotification
+    VARIABLES {
+        wwnmType1AvailableWwns }
+--  Status
+--    mandatory
+    DESCRIPTION
+        "An availability notification is generated whenever 
+        the number of available Type 1 WWNs  
+        (wwnmType1AvailableWwns) increases to either 25% or 15%  
+        or 5% of the maximum number of Type 1 WWNs  
+        (wwnmType1MaxWwns) after a wwnmType1WwnShortageNotify 
+        notification has been generated for either 20% or 10% 
+        or 5% respectively."
+    ::= 2
+
+wwnmTypeOtherWwnShortageNotify TRAP-TYPE
+-- Reverse mappable trap
+    ENTERPRISE wwnmNotification
+    VARIABLES {
+        wwnmTypeOtherAvailableWwns }
+--  Status
+--    mandatory
+    DESCRIPTION
+        "A WWN shortage notification is generated whenever the  
+        number of available Type Other WWNs  
+        'wwnmTypeOtherAvailableWwns' reduces to either 20% or  
+        10% or 0% of the maximum number of Type Other WWNs  
+        'wwnmTypeOtherMaxWwns'. 
+        After a shortage event is generated for a threshhold  
+        (say 20%), another such event will not be generated until 
+        after an availability event (see  
+        wwnmType1WwnAvailableNotify) is generated for the same  
+        threshold."
+    ::= 3
+
+wwnmTypeOtherWwnAvailableNotify TRAP-TYPE
+-- Reverse mappable trap
+    ENTERPRISE wwnmNotification
+    VARIABLES {
+        wwnmTypeOtherAvailableWwns }
+--  Status
+--    mandatory
+    DESCRIPTION
+        "An availability notification is generated whenever 
+        the number of available Type Other WWNs 
+        (wwnmTypeOtherAvailableWwns) increases to either 25%  
+        or 15% or 5% of the maximum number of Type Other WWNs 
+        (wwnmTypeOtherMaxWwns) after a  
+        wwnmTypeOtherWwnShortageNotify notification has been  
+        generated for either 20% or 10% or 5% respectively."
+    ::= 4
+
+cwmWwnmConfigurationGroup OBJECT IDENTIFIER ::= { ciscoWwnmMIBGroups 6 }
+-- OBJECT-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of objects for WWN Manager.
+--  objects
+--    wwnmSecondaryBaseMacAddress, wwnmSecondaryMacAddressRange, 
+--    wwnmType1MaxWwns, wwnmType1AvailableWwns, 
+--    wwnmTypeOtherMaxWwns, wwnmTypeOtherAvailableWwns, 
+--    wwnmType1ReservedWwns, wwnmTypeOtherReservedWwns
+
+cwmWwnmNotificationGroup OBJECT IDENTIFIER ::= { ciscoWwnmMIBGroups 8 }
+-- NOTIFICATION-GROUP
+--  Status
+--    mandatory
+--  Descr
+--    A collection of notifications for the  
+--    WWN assignment.
+--  notifications
+--    wwnmType1WwnShortageNotify, wwnmType1WwnAvailableNotify, 
+--    wwnmTypeOtherWwnShortageNotify, 
+--    wwnmTypeOtherWwnAvailableNotify
+
+ciscoWwnmMIBCompliance OBJECT IDENTIFIER ::= { ciscoWwnmMIBCompliances 1 }
+-- MODULE-COMPLIANCE
+--  Status
+--    mandatory
+--  Descr
+--    The compliance statement for entities which 
+--     implement the CISCO-WWNMGR-MIB.
+--  Module
+--    >>current<<
+--   MandGroup
+--    cwmWwnmConfigurationGroup
+--   MandGroup
+--    cwmWwnmNotificationGroup
+
+
+END
+
