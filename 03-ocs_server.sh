@@ -47,8 +47,8 @@ echo -e "Início do script $0 em: `date +%d/%m/%Y-"("%H:%M")"`\n" &>> $LOG
 clear
 #
 echo
-echo -e "Após a instalação, acessar a url: http://`hostname`/ocsreports e finalizar a instalação"
-echo -e "Usuário padrão após a instalação do OCS Inventory: admin | Senha padrão: admin"
+echo -e "Após a instalação do OCS Inventory acessar a url: http://`hostname -I | cut -d ' ' -f1`/ocsreports e concluir a configuração\n"
+echo -e "Usuário padrão após a instalação do OCS Inventory Reports: admin | Senha padrão: admin"
 echo
 #
 echo -e "Atualizando as listas do Apt, aguarde..."
@@ -66,9 +66,9 @@ echo -e "Pacotes atualizados com sucesso!!!, continuando com o script..."
 sleep 5
 echo
 #
-echo -e "Download do OCS Inventory Server do Github, pressione <Enter> para continuar"
-read
-sleep 2
+echo -e "Download do OCS Inventory Server do Github, aguarde..."
+sleep 5
+echo
 echo -e "Fazendo o download do OCS Inventory, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	wget https://github.com/OCSInventory-NG/OCSInventory-ocsreports/releases/download/$OCSVERSION &>> $LOG
@@ -91,7 +91,7 @@ sleep 2
 echo
 #
 echo -e "CUIDADO!!! com as opções que serão solicitadas no decorrer da instalação do OCS Inventory."
-echo -e "Veja a documentação das opções de instalação a partir da linha: 107 do arquivo $0"
+echo -e "Veja a documentação das opções de instalação a partir da linha: 104 do arquivo $0"
 echo -e "Download do OCS Inventory Server feito com Sucesso!!!, pressione <Enter> para instalar"
 echo
 read
@@ -193,9 +193,8 @@ echo -e "Backup do arquivo de Log de Instalação do OCS Inventory feito com suc
 sleep 2
 echo
 #
-echo -e "Instalação do OCS Inventory Server e Reports Service feito com sucesso!!!, pressione <Enter> para continuar"
-read
-sleep 2
+echo -e "Instalação do OCS Inventory Server e Reports Service feito com sucesso!!!, continuando com o script..."
+sleep 5
 clear
 #			
 echo -e "Remoção dos aplicativos desnecessários, aguarde..."
@@ -215,8 +214,8 @@ echo -e "Cache limpo com sucesso!!!, continuando com o script..."
 sleep 5
 echo
 #
-echo -e "Instalação do OCS Inventory Server Feito com Sucesso!!!!!"
-echo -e "Após a instalação do OCS Inventory acessar a URL: http://`hostname`/ocsreports para finalizar a configuração."
+echo -e "Instalação do OCS Inventory Server Feito com Sucesso!!!!!\n"
+echo -e "Após a instalação do OCS Inventory acessar a URL: http://`hostname -I | cut -d ' ' -f1`/ocsreports para finalizar a configuração."
 echo
 	# script para calcular o tempo gasto (SCRIPT MELHORADO, CORRIGIDO FALHA DE HORA:MINUTO:SEGUNDOS)
 	# opção do comando date: +%T (Time)

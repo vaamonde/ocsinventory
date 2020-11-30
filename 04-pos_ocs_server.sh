@@ -49,23 +49,21 @@ fi
 echo -e "Início do script $0 em: `date +%d/%m/%Y-"("%H:%M")"`\n" &>> $LOG
 clear
 #
-echo -e "Alterando a senha e permissões do usuário ocs do MySQL, pressione <Enter> para continuar"
-read
+echo -e "Alterando a senha e permissões do usuário ocs do MySQL, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando mysql: -u (user), -p (password), -e (execute)
 	mysql -u $USER -p$PASSWORD -e "$SETOCSPWD" mysql &>> $LOG
 	mysql -u $USER -p$PASSWORD -e "$FLUSH" mysql &>> $LOG
 echo -e "Senha e permissões do usuário ocs alteradas com sucesso!!!, continuando com o script..."
-sleep 2
+sleep 5
 echo
 #
-echo -e "Removendo o arquivo install.php do OCS Reports, pressione <Enter> para continuar"
-read
+echo -e "Removendo o arquivo install.php do OCS Reports, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando mv: -v (verbose)
 	mv -v /usr/share/ocsinventory-reports/ocsreports/install.php /usr/share/ocsinventory-reports/ocsreports/install.php.bkp &>> $LOG
 echo -e "Arquivo removido com sucesso!!!, continuando com o script..."
-sleep 2
+sleep 5
 echo
 #
 echo -e "Atualizando os arquivos de configuração do OCS Inventory Server"
@@ -269,11 +267,11 @@ echo -e "MIBs customizadas do SNMP atualizadas com sucesso!!!, continuando com o
 sleep 2
 echo
 #
-echo -e "Reinicializando o serviço do SNMP, aguarde..."
-	sudo service snmp restart
-echo -e "Serviço do SNMP reinicializado com sucesso!!!, continuando com o script..."
-sleep 2
-echo
+#echo -e "Reinicializando o serviço do SNMP, aguarde..."
+#	sudo service snmp restart
+#echo -e "Serviço do SNMP reinicializado com sucesso!!!, continuando com o script..."
+#sleep 2
+#echo
 #
 echo -e "Atualizando as MIBs genéricas do SNMP, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
@@ -283,7 +281,7 @@ sleep 2
 echo
 #
 echo -e "Finalização da Pós-Instalação do OCS Inventory Server Feito com Sucesso!!!!!"
-echo -e "Após a configuração acessar a URL: http://`hostname`/ocsreports para verificar as mudanças do OCS Inventory"
+echo -e "Após a configuração acessar a URL: http://`hostname -I | cut -d ' ' -f1`/ocsreports para verificar as mudanças do OCS Inventory"
 echo
 	# script para calcular o tempo gasto (SCRIPT MELHORADO, CORRIGIDO FALHA DE HORA:MINUTO:SEGUNDOS)
 	# opção do comando date: +%T (Time)

@@ -101,7 +101,7 @@ echo
 echo -e "Executando o Backup da Base de Dados do OCS Inventory Server, aguarde..."
     # opção do comando ls: -l (list), -h (human)
     echo
-    ocsbackup.sh
+    ocsbackup.sh &>> $LOG
     echo
     ls -lh /backup/ocsinventory
     echo
@@ -120,7 +120,7 @@ echo
 echo -e "Executando o Backup da Base de Dados do GLPI Help Desk, aguarde..."
     # opção do comando ls: -l (list), -h (human)
     echo
-    glpibackup.sh
+    glpibackup.sh &>> $LOG
     echo
     ls /backup/glpi
     echo

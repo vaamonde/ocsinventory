@@ -47,7 +47,7 @@ echo -e "Início do script $0 em: `date +%d/%m/%Y-"("%H:%M")"`\n" &>> $LOG
 clear
 echo
 #
-echo -e "Após a instalação do Netdata acessar a url: http://`hostname`:19999/ para verificar se o serviço está OK"
+echo -e "Após a instalação do Netdata acessar a url: http://`hostname -I | cut -d ' ' -f1`:19999/ para verificar se o serviço está OK"
 echo
 #
 echo -e "Atualizando as listas do Apt, aguarde..."
@@ -94,9 +94,8 @@ echo -e "Acessando o diretório do Netdata e fazendo a sua compilação, aguarde
 	echo | ./netdata-installer.sh &>> $LOG
 	cd ..
 	echo
-echo -e "Instalação do Netdata feita com sucesso!!!, pressione <Enter> para continuar"
-read
-sleep 2
+echo -e "Instalação do Netdata feita com sucesso!!!, continuando com o script"
+sleep 5
 echo
 #
 echo -e "Atualizando o arquivo de configuração do MySQL para acessar as informações via Netdata, pressione <Enter> para continuar"
@@ -145,11 +144,6 @@ echo -e "Serviço do Netdata reinicializado com sucesso!!!, continuando com o sc
 sleep 2
 echo
 #
-echo -e "Instalação e Configuração do Netdata feito com sucesso!!!, pressione <Enter> para continuar"
-read
-sleep 2
-echo
-#
 echo -e "Remoção dos aplicativos desnecessários, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando apt-get: -y (yes)
@@ -175,7 +169,7 @@ sleep 2
 echo
 #
 echo -e "Instalação do Netdata Feito com Sucesso!!!!!"
-echo -e "Após a instalação do Netdata acessar a URL: http://`hostname`:19999/ para finalizar a configuração."
+echo -e "Após a instalação do Netdata acessar a URL: http://`hostname -I | cut -d ' ' -f1`:19999/ para finalizar a configuração."
 echo
 	# script para calcular o tempo gasto (SCRIPT MELHORADO, CORRIGIDO FALHA DE HORA:MINUTO:SEGUNDOS)
 	# opção do comando date: +%T (Time)

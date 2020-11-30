@@ -66,7 +66,7 @@ echo -e "Início do script $0 em: `date +%d/%m/%Y-"("%H:%M")"`\n" &>> $LOG
 clear
 echo
 #
-echo -e "Após a instalação, acessar a url: http://`hostname`/glpi e finalizar a instalação"
+echo -e "Após a instalação, acessar a url: http://`hostname -I | cut -d ' ' -f1`/glpi e finalizar a instalação"
 echo -e "Usuário padrão após a instalação do GLPI Help Desk: glpi | Senha padrão: glpi"
 echo
 #
@@ -85,9 +85,8 @@ echo -e "Pacotes atualizados com sucesso!!!, continuando com o script..."
 sleep 5
 echo
 #
-echo -e "Download do GLPI Help Desk do Github, pressione <Enter> para continuar"
-read
-sleep 2
+echo -e "Download do GLPI Help Desk do Github, aguarde..."
+sleep 5
 echo
 #
 echo -e "Fazendo o download do GLPI Help Desk, aguarde..."
@@ -146,7 +145,7 @@ echo
 #
 echo -e "Instalação das Dependências do APCU do GLPI Help Desl via Pecl, aguarde..."
 		#Enable internal debbugging in APcu [no] <-- pressione <Enter>
-	echo -e "no" | pecl install apcu_bc-beta
+	echo -e "no" | pecl install apcu_bc-beta &>> $LOG
 echo -e "APCU instalado com sucesso!!!, continuando com o script..."
 sleep 2
 echo
@@ -186,9 +185,8 @@ echo -e "Serviço do Apache 2 reinicializado com sucesso!!!, continuando com o s
 sleep 2
 echo
 #
-echo -e "Instalação do GLPI Help Desk e Plugin do OCS Inventory feito com sucesso!!!, pressione <Enter> para continuar"
-read
-sleep 2
+echo -e "Instalação do GLPI Help Desk e Plugin do OCS Inventory feito com sucesso!!!, continuando com o script..."
+sleep 5
 echo
 #			
 echo -e "Remoção dos aplicativos desnecessários, aguarde..."
@@ -208,8 +206,8 @@ echo -e "Cache limpo com sucesso!!!, continuando com o script..."
 sleep 5
 echo
 #
-echo -e "Instalação do GLPI Help Desk Feito com Sucesso!!!!!"
-echo -e "Após a instalação do GLPI Help Desk acessar a URL: http://`hostname`/glpi para finalizar a configuração."
+echo -e "Instalação do GLPI Help Desk e Plugin do FusionInventory Feito com Sucesso!!!!!\n"
+echo -e "Após a instalação do GLPI Help Desk acessar a URL: http://`hostname -I | cut -d ' ' -f1`/glpi para finalizar a configuração."
 echo
 	# script para calcular o tempo gasto (SCRIPT MELHORADO, CORRIGIDO FALHA DE HORA:MINUTO:SEGUNDOS)
 	# opção do comando date: +%T (Time)
