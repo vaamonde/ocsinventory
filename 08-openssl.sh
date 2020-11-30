@@ -128,7 +128,7 @@ echo
 echo -e "Fazendo o backup do arquivo default-ssl.conf, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando mv: v (verbose)
-	mv -v /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf.old &>> $LOG
+	mv -v /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf.bkp &>> $LOG
 echo -e "Arquivo backupeado com sucesso!!!, continuando com o script..."
 sleep 2
 echo

@@ -91,18 +91,20 @@ GLPIOCSINSTALL="ocsinventoryng"
 # Variáveis de download do FusionInventory Server para GLPI
 # Site: https://github.com/fusioninventory/fusioninventory-for-glpi/releases
 # Versão antiga utilizada no vídeo: glpi9.2%2B1.0/glpi-fusioninventory-9.2.1.0.tar.bz2
-# Atualização para a versão 9.5.0+1.0 no dia 08/11/2020 - verificar arquivo CHANGELOG
-GLPIFISVERSION="glpi9.5.0%2B1.0/fusioninventory-9.5.0+1.0.tar.bz2"
-GLPIFISTAR="fusioninventory-9.5.0+1.0.tar.bz2"
+# Atualização para a versão 9.4+2.4 no dia 08/11/2020 - verificar arquivo CHANGELOG
+# OBSERVAÇÃO: a versão 9.4.6 do GLPI é a última com suporte ao PHP 7.0 e suporte a versão 9.4+2.4 do Plugin do FusionInventory,
+# nesse curso não será mais atualizado as versões do GLPI e do Plugin do FusionInventory
+GLPIFISVERSION="glpi9.4%2B2.4/fusioninventory-9.4+2.4.tar.bz2"
+GLPIFISTAR="fusioninventory-9.4+2.4.tar.bz2"
 GLPIFISINSTALL="fusioninventory"
 #
 # Variáveis de download do FusionInventory Agent
 # Site: https://github.com/fusioninventory/fusioninventory-agent/releases/
 # Versão antiga utilizada no vídeo: 2.4/FusionInventory-Agent-2.4.tar.gz
-# Atualização para a versão 2.5.2 no dia 08/11/2020 - verificar arquivo CHANGELOG
-GLPIFIAVERSION="2.5.2/FusionInventory-Agent-2.5.2.tar.gz"
-GLPIFIATAR="FusionInventory-Agent-2.5.2.tar.gz"
-GLPIFIAINSTALL="FusionInventory-Agent-2.5.2"
+# Atualização para a versão 2.6 no dia 08/11/2020 - verificar arquivo CHANGELOG
+GLPIFIAVERSION="2.6/FusionInventory-Agent-2.6.tar.gz"
+GLPIFIATAR="FusionInventory-Agent-2.6.tar.gz"
+GLPIFIAINSTALL="FusionInventory-Agent-2.6"
 #
 # Variáveis de download do Netdata
 # Site: https://github.com/firehol/netdata
