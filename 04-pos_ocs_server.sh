@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 18/06/2017
-# Data de atualização: 08/11/2020
-# Versão: 0.5
+# Data de atualização: 30/11/2020
+# Versão: 0.6
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -178,6 +178,33 @@ echo -e "Arquivo de configuração do OCS Inventory Reports DBConfig editado com
 sleep 2
 echo
 #
+echo -e "Editando o arquivo do OCS Inventory Server Logrotate ocsinventory-server, pressione <Enter> para continuar"
+read
+sleep 2
+#
+echo -e "Fazendo o backup do arquivo de configuração do OCS Inventory Reports Logrotate, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando mv: -v (verbose)
+	mv -v /etc/logrotate.d/ocsinventory-server /etc/logrotate.d/ocsinventory-server.bkp &>> $LOG
+echo -e "Backup do arquivo de configuração do OCS Inventory Reports Logrotate feito com sucesso!!!, continuando com o script.."
+sleep 2
+echo
+#
+echo -e "Atualizando do arquivo de configuração do OCS Inventory Reports Logrotate, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando cp: -v (verbose)
+	cp -v conf/ocsinventory-server /etc/logrotate.d/ocsinventory-server &>> $LOG
+echo -e "Atualização do arquivo de configuração do OCS Inventory Reports Logrotate feita com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Editando do arquivo de configuração do OCS Inventory Reports Logrotate, aguarde..."
+	sleep 2
+	vim /etc/logrotate.d/ocsinventory-server
+echo -e "Arquivo de configuração do OCS Inventory Reports Logrotate editado com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
 echo -e "Reinicializando o serviço do Apache2, aguarde..."
 	sudo service apache2 restart
 echo -e "Serviço do Apache2 reinicializado com sucesso!!!, continuando com o script..."
@@ -208,6 +235,37 @@ echo -e "Editando do arquivo de configuração do SNMP MIBs, aguarde..."
 	sleep 2
 	vim /etc/snmp/snmp.conf
 echo -e "Arquivo de configuração do OCS Inventory Reports DBConfig editado com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+#
+echo -e "Criando os Links Simbólicos das MIBs do SNMP da IANA e IETF, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando ln: -s (symbolic)
+	ln -sv /var/lib/mibs/iana/ /usr/share/snmp/mibs/iana &>> $LOG
+	ln -sv /var/lib/mibs/ietf/ /usr/share/snmp/mibs/ietf &>> $LOG
+echo -e "Links simbólicos do SNMP MIBs criados com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Atualizando as MIBs genéricas do SNMP, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	download-mibs &>> $LOG
+echo -e "MIBs genéricas do SNMP atualizadas com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Atualizando as MIBs customizadas do SNMP para o OCS Inventory Reports, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando cp: -R (recursive), -v (verbose)
+	# opção do comando chmod: -R (recursive), -v (verbose), 664 (dono=rw-,group=rw-,other=r--)
+	# opção do comando chown: -R (recursive), -v (verbose), www-data.www-data (dono=ww-data,group=ww-data)
+	cp -Rv mbis/ $MIBS &>> $LOG
+	chmod -Rv 664 $MIBS/mbis/ &>> $LOG
+	chmod 775 $MIBS/mbis/ &>> $LOG
+	chown -Rv www-data.www-data $MIBS/mbis/ &>> $LOG
+	cp -v mbis/* $SNMP &>> $LOG
+echo -e "MIBs customizadas do SNMP atualizadas com sucesso!!!, continuando com o script..."
 sleep 2
 echo
 #

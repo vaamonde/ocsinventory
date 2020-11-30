@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 08/11/2020
-# Versão: 0.15
+# Data de atualização: 30/11/2020
+# Versão: 0.16
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -144,10 +144,9 @@ echo -e "Alteração do dono e grupo do OCS Inventory Reports alteradas com suce
 sleep 2
 echo
 #
-echo -e "Instalação das Dependências do APCU do GLPI Help Desl via Pecl, pressione <Enter> para continuar"
-read
-	pecl install apcu_bc-beta
-	#Enable internal debbugging in APcu [no] <-- pressione <Enter>
+echo -e "Instalação das Dependências do APCU do GLPI Help Desl via Pecl, aguarde..."
+		#Enable internal debbugging in APcu [no] <-- pressione <Enter>
+	echo -e "no" | pecl install apcu_bc-beta
 echo -e "APCU instalado com sucesso!!!, continuando com o script..."
 sleep 2
 echo

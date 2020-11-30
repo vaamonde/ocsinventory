@@ -142,7 +142,7 @@ clear
 #17: Do you want to use OCS-Inventory software deployment feature? <-- pressione <Enter>
 #18: Do you want to use OCS-Inventory SNMP scans features? <-- pressione <Enter>
 #19: Do you want to send an inventory of this machine? <-- pressione <Enter>
-
+#
 #Saindo do diretório do OCS Inventory Agent
 cd ..
 #
@@ -182,11 +182,45 @@ echo -e "Arquivo de configuração do OCS Inventory Agent editado com sucesso!!!
 sleep 2
 echo
 #
-echo -e "Forçando o inventário do OCS Inventory Agent, aguarde..."
+echo -e "Editando o arquivo do OCS Inventory Agent modules.conf, pressione <Enter> para continuar"
+read
+sleep 2
+echo
+#
+echo -e "Fazendo o backup do arquivo de módulos do OCS Inventory Agent, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando mv: -v (verbose)
+	mv -v /etc/ocsinventory-agent/modules.conf /etc/ocsinventory-agent/modules.conf.bkp &>> $LOG
+echo -e "Backup do arquivo de módulos do OCS Inventory Agent feito com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Atualizando do arquivo de módulos do OCS Inventory Agent, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando cp: -v (verbose)
+	cp -v conf/modules.conf /etc/ocsinventory-agent/ &>> $LOG
+echo -e "Atualização do arquivo de módulos do OCS Inventory Agent feito com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Editando do arquivo de módulos do OCS Inventory Agent, aguarde..."
+sleep 2
+	vim /etc/ocsinventory-agent/modules.conf
+echo -e "Arquivo de módulos do OCS Inventory Agent editado com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Aplicando o PATCH de correção do OCS Inventory Agent versão 2.6.1, aguarde..."
 sleep 2
 	# opção do comando: &>> (redirecionar a saída padrão)
-	ocsinventory-agent &>> $LOG
-echo -e "Inventário do OCS Inventory Agent feito com sucesso!!!, continuando com o script..."
+	# opção do comando cp: -v (verbose)
+	cp -v conf/Deb.pm /usr/local/share/perl/5.22.1/Ocsinventory/Agent/Backend/OS/Generic/Packaging/ &>> $LOG
+echo -e "Aplicação do PATCH de correção do OCS Inventory Agent feito com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Editando o arquivo do Agendamento do OCS Inventory Agent ocsinventory-agent, pressione <Enter> para continuar"
+read
 sleep 2
 echo
 #
@@ -210,8 +244,18 @@ echo -e "Arquivo de configuração do OCS Inventory Agent editado com sucesso!!!
 sleep 2
 echo
 #
+#
+echo -e "Forçando o inventário do OCS Inventory Agent com as novas configurações, aguarde..."
+sleep 2
+	# opção do comando: &>> (redirecionar a saída padrão)
+	ocsinventory-agent --debug --info &>> $LOG
+echo -e "Inventário do OCS Inventory Agent feito com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
 echo -e "Instalação e Configuração do OCS Inventory Agent Feito com Sucesso!!!!!"
 echo -e "Após a configuração acessar a URL: http://`hostname`/ocsreports para verificar o inventário do servidor"
+echo -e "Verificar o arquivo de Log do OCS Inventory Agent com o comando: less /var/log/ocsinventory-agent/activity.log"
 echo
 	# script para calcular o tempo gasto (SCRIPT MELHORADO, CORRIGIDO FALHA DE HORA:MINUTO:SEGUNDOS)
 	# opção do comando date: +%T (Time)

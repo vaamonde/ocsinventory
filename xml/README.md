@@ -5,5 +5,5 @@ Versão: 0.1<br>
 Testado e homologado para a versão do Ubuntu Server 16.04.7 LTS x64<br>
 Kernel >= 4.4.x<br>
 
-# Servicedesk Brasil
+# Diretório de Arquivos Pesonalizados XML
 Diretório de XML personalizados do Inventário do OCS Inventory

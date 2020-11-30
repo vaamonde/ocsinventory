@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 14/07/2019
-# Data de atualização: 10/11/2020
-# Versão: 0.2
+# Data de atualização: 30/11/2020
+# Versão: 0.4
 # Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
 # Kernel >= 4.4.x
 #
@@ -55,6 +55,7 @@ echo -e "Download dos arquivos de plugins do OCS Inventory, aguarde..."
     # opção do comando wget: -O (file)
     wget $DRIVERLIST -O $PATHPLUGINS/drivelist.zip &>> $LOG
     wget $UPTIME -O $PATHPLUGINS/uptime.zip &>> $LOG
+	wget $LISTPRINTERS -O $PATHPLUGINS/listprinters.zip &>> $LOG
 echo -e "Download dos arquivos de plugins concluído com sucesso!!!, continuando com o script..."
 sleep 2
 echo

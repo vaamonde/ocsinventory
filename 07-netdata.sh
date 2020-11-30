@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 08/11/2020
-# Versão: 0.14
+# Data de atualização: 30/11/2020
+# Versão: 0.15
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -150,13 +150,6 @@ read
 sleep 2
 echo
 #
-echo -e "Verificando a porta de conexão do Netdata, aguarde..."
-	# opção do comando netstat: -a (all), -n (numeric)
-	netstat -an | grep 19999
-echo -e "Porta de conexão verificada com sucesso!!!, continuando com o script..."
-sleep 2
-echo
-#
 echo -e "Remoção dos aplicativos desnecessários, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando apt-get: -y (yes)
@@ -172,6 +165,13 @@ echo -e "Limpando o cache do Apt-Get, aguarde..."
 	apt-get clean &>> $LOG
 echo -e "Cache limpo com sucesso!!!, continuando com o script..."
 sleep 5
+echo
+#
+echo -e "Verificando a porta de conexão do Netdata, aguarde..."
+	# opção do comando netstat: -a (all), -n (numeric)
+	netstat -an | grep 19999
+echo -e "Porta de conexão verificada com sucesso!!!, continuando com o script..."
+sleep 2
 echo
 #
 echo -e "Instalação do Netdata Feito com Sucesso!!!!!"

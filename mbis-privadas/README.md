@@ -5,5 +5,5 @@ Versão: 0.1<br>
 Testado e homologado para a versão do Ubuntu Server 16.04.7 LTS x64<br>
 Kernel >= 4.4.x<br>
 
-# Diretório de MBIs do SNMP Server
-Diretório de MIBs do SNMP do OCS Inventory
+# Diretório de MBIs Privadas do SNMP Server
+Diretório de MIBs Privadas do SNMP do OCS Inventory

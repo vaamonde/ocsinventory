@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 19/11/2020
-# Versão: 0.25
+# Data de atualização: 30/11/2020
+# Versão: 0.26
 # Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
 # Kernel >= 4.4.x
 #
@@ -118,7 +118,7 @@ echo -e "Instalando as dependências do PHP7 para suportar o OCS Inventory e GLP
 	# opção do comando apt: -y (yes), \ (bar left) quebra de linha na opção do apt-get
 	apt-get -y install php7.0-snmp php-mysql php7.0-dev php-mbstring php-soap php-dev php-apcu php-xmlrpc php7.0-zip \
 	php7.0-gd php7.0-mysql php-pclzip php7.0-json php7.0-mbstring php7.0-curl php7.0-imap php7.0-ldap zlib1g-dev \
-	php-mbstring php-gettext php-cas &>> $LOG
+	php-mbstring php-gettext php-cas php-curl &>> $LOG
 echo -e "Instalação das dependências do PHP7 feita com sucesso!!!, continuando com o script."
 sleep 5
 echo
@@ -140,7 +140,7 @@ echo -e "Instalando as dependências do Perl específicas para o OCS Inventory, 
 	libdatetime-perl libthread-queue-any-perl libnet-write-perl libarchive-extract-perl libjson-pp-perl \
 	liburi-escape-xs-perl liblwp-protocol-https-perl libnet-ping-external-perl libnmap-parser-perl \
 	libmojolicious-perl libswitch-perl libplack-perl liblwp-useragent-determined-perl libsys-syslog-perl \
-	libdigest-hmac-perl libossp-uuid-perl libperl-dev libsnmp-perl libsnmp-dev &>> $LOG
+	libdigest-hmac-perl libossp-uuid-perl libperl-dev libsnmp-perl libsnmp-dev libsoap-lite-perl &>> $LOG
 echo -e "Instalação das dependências do Perl feito com sucesso!!!, continuando com o script."
 sleep 5
 echo
@@ -176,64 +176,53 @@ echo -e "Atualizando os módulos do PHP7 para o suporte do PhpMyAdmin, aguarde..
 sleep 5
 echo
 #
-echo -e "Instalação das dependências do Perl XML::Entities via CPAN, pressione <Enter> para continuar"
+echo -e "Instalação das dependências do Perl XML::Entities via CPAN, aguarde..."
 	# opção do comando perl: -e (single line command)
 	# Mensagem: Would you like to configure as much as possible automatically? [Yes] <-- Pressione <Enter>
-	read
-	perl -MCPAN -e 'install XML::Entities'
-	echo
+	echo -e "Yes" | perl -MCPAN -e 'install XML::Entities' &>> $LOG
 echo -e "Instalação concluída com sucesso!!!, continuando com o script..."
 sleep 5
 echo
 #
-echo -e "Instalação das dependências do Perl SOAP::Lite via CPAN, pressione <Enter> para continuar"
+echo -e "Instalação das dependências do Perl SOAP::Lite via CPAN, aguarde..."
 	# opção do comando perl: -e (single line command)
 	# Mensagem: WARNING: Please tell me where I can find your apache src: <-- digite q Pressione <Enter>
 	# Esse procedimento demora um pouco, não se preocupe com a mensagem de erro no final, essa mensagem está 
 	# associada ao Source do Apache2 que não está disponível no servidor
-	read
-	perl -MCPAN -e 'install SOAP::Lite'
-	echo
+	echo -e "q" | perl -MCPAN -e 'install SOAP::Lite' &>> $LOG
 echo -e "Instalação concluída com sucesso!!!, continuando com o script..."
 sleep 5
 echo
 #
-echo -e "Instalação das dependências do Perl Linux::Ethtool via CPAN, pressione <Enter> para continuar"
+echo -e "Instalação das dependências do Perl Linux::Ethtool via CPAN, aguarde..."
 	# opção do comando perl: -e (single line command)
-	read
-	perl -MCPAN -e 'install Linux::Ethtool'
-	echo
+	perl -MCPAN -e 'install Linux::Ethtool' &>> $LOG
 echo -e "Instalação concluída com sucesso!!!, continuando com o script..."
 sleep 5
 echo
 #
-echo -e "Instalação das dependências do Perl Apache2::SOAP via CPAN, pressione <Enter> para continuar"
+echo -e "Instalação das dependências do Perl Apache2::SOAP via CPAN, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando perl: -e (single line command)
 	# opção do comando if: [ ] = testa uma expressão, -d = testa se é diretório
-	read
 	if [ -d /usr/include/apache2 ]; then
 		echo -e "Diretório /usr/include/apache2 já existe, continuando com o script..."
 		else
 		echo -e "Diretório /usr/include/apache2 não existe, criando o diretório, aguarde..."
 			mkdir -v /usr/include/apache2 &>> $LOG
 		echo -e "Diretório criado com sucesso!!!, continuando o script..."
-		echo
 	fi
-	perl -MCPAN -e 'install Apache2::SOAP'
-	echo
+	perl -MCPAN -e 'install Apache2::SOAP' &>> $LOG
 echo -e "Instalação concluída com sucesso!!!, continuando com o script..."
 sleep 5
 echo
 #
-echo -e "Instalação das dependências do Perl nvidia::ml via CPAN, pressione <Enter> para continuar"
+echo -e "Instalação das dependências do Perl nvidia::ml via CPAN, aguarde..."
 	# opção do comando perl: -e (single line command)
 	# opção do comando if: [ ] = testa uma expressão, == comparação de string 
-	read
 	if [ "$NVIDIA" == "NVIDIA" ]; then
 	echo -e "Você tem o Chip Gráfico da NVIDIA, instalando o Módulo Perl, aguarde..."
-		perl -MCPAN -e 'install nvidia::ml'
-		echo
+		perl -MCPAN -e 'install nvidia::ml' &>> $LOG
 		echo -e "Instalação concluída com sucesso!!!, continuando com o script..."
 		sleep 5
 	else
@@ -242,48 +231,38 @@ echo -e "Instalação das dependências do Perl nvidia::ml via CPAN, pressione <
 		echo
 	fi
 #
-echo -e "Instalação das dependências do Perl Net::Ping via CPAN, pressione <Enter> para continuar"
+echo -e "Instalação das dependências do Perl Net::Ping via CPAN, aguarde..."
 	# opção do comando perl: -e (single line command)
-	read
-	perl -MCPAN -e 'install Net::Ping'
-	echo
+	perl -MCPAN -e 'install Net::Ping' &>> $LOG
 echo -e "Instalação concluída com sucesso!!!, continuando com o script..."
 sleep 5
 echo
 #			
-echo -e "Instalação das dependências do LWP::UserAgent::Cached via CPAN, pressione <Enter> para continuar"
+echo -e "Instalação das dependências do LWP::UserAgent::Cached via CPAN, aguarde..."
 	# opção do comando perl: -e (single line command)
 	# Mensagem: Append this modules to installation queue? [y] <-- Pressione <Enter>
-	read
-	perl -MCPAN -e 'install LWP::UserAgent::Cached'
-	echo
+	perl -MCPAN -e 'install LWP::UserAgent::Cached' &>> $LOG
 echo -e "Instalação concluída com sucesso!!!, continuando com o script..."
 sleep 5
 echo
 #				
-echo -e "Instalação das dependências do Mac::SysProfile via CPAN, pressione <Enter> para continuar"
+echo -e "Instalação das dependências do Mac::SysProfile via CPAN, aguarde..."
 	# opção do comando perl: -e (single line command)
-	read
-	perl -MCPAN -e 'install Mac::SysProfile'
-	echo
+	perl -MCPAN -e 'install Mac::SysProfile' &>> $LOG
 echo -e "Instalação concluída com sucesso!!!, continuando com o script..."
 sleep 5
 echo
 #
-echo -e "Instalação das dependências do Mojolicious::Lite via CPAN, pressione <Enter> para continuar"
+echo -e "Instalação das dependências do Mojolicious::Lite via CPAN, aguarde..."
 	# opção do comando perl: -e (single line command)
-	read
-	perl -MCPAN -e 'install Mojolicious::Lite'
-	echo
+	perl -MCPAN -e 'install Mojolicious::Lite' &>> $LOG
 echo -e "Instalação concluída com sucesso!!!, continuando com o script..."
 sleep 5
 echo
 #
-echo -e "Instalação das dependências do NetSNMP::OID via CPAN, pressione <Enter> para continuar"
+echo -e "Instalação das dependências do NetSNMP::OID via CPAN, aguarde..."
 	# opção do comando perl: -e (single line command)
-	read
-	perl -MCPAN -e 'install NetSNMP::OID'
-	echo
+	perl -MCPAN -e 'install NetSNMP::OID' &>> $LOG
 echo -e "Instalação concluída com sucesso!!!, continuando com o script..."
 sleep 5
 echo
@@ -324,7 +303,7 @@ echo -e "Arquivo editado com sucesso!!!, continuando com o script..."
 sleep 5
 echo
 #
-echo -e "Editando o arquivo do PHP, pressione <Enter> para continuar"
+echo -e "Editando o arquivo do PHP7, pressione <Enter> para continuar"
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando mv: -v (verbose)
 	# opção do comando cp: -v (verbose
@@ -350,8 +329,35 @@ echo -e "Arquivo criado com sucesso!!!, continuando com o script..."
 sleep 5
 echo
 #
-echo -e "Instalação do LAMP Server Feito com Sucesso!!!!!"
-echo -e "Após a instalação do LAMP Server acessar a URL: http://`hostname`/ para verificar se o Apache2 está OK"
+echo -e "Remoção dos aplicativos desnecessários, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando apt-get: -y (yes)
+	apt-get -y autoremove &>> $LOG
+	apt-get -y autoclean &>> $LOG
+echo -e "Remoção dos aplicativos desnecessários concluída com sucesso!!!, continuando com o script..."
+sleep 5
+echo
+#
+echo -e "Limpando o cache do Apt-Get, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando apt-get: -y (yes)
+	apt-get clean &>> $LOG
+echo -e "Cache limpo com sucesso!!!, continuando com o script..."
+sleep 5
+echo
+#
+echo -e "Verificando as portas de conexões do Apache2 e MySQL, aguarde..."
+	# opção do comando netstat: -a (all), -n (numeric)
+	# opção do comando grep: \| (função OU)
+	netstat -an | grep ':80\|:3306'
+echo -e "Portas de conexões verificadas com sucesso!!!, continuando com o script..."
+sleep 5
+echo
+#
+echo -e "Instalação do LAMP Server Feito com Sucesso!!!"
+echo -e "Após a instalação acessar a URL: http://`hostname -I | cut -d ' ' -f1`/ para verificar se o Apache2 está OK"
+echo -e "Após a instalação acessar a URL: http://`hostname -I | cut -d ' ' -f1`/phpinfo.php para verificar se o PHP7 está OK"
+echo -e "Após a instalação acessar a URL: http://`hostname -I | cut -d ' ' -f1`/phpmyadmin para verificar se o PhpMyAdmin está OK"
 echo
 	# script para calcular o tempo gasto (SCRIPT MELHORADO, CORRIGIDO FALHA DE HORA:MINUTO:SEGUNDOS)
 	# opção do comando date: +%T (Time)

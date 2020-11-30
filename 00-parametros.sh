@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 17/06/2017
-# Data de atualização: 10/11/2020
-# Versão: 0.13
+# Data de atualização: 30/11/2020
+# Versão: 0.14
 # Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
 # Kernel >= 4.4.x
 #
@@ -52,18 +52,20 @@ APP_PASS="123456"
 # Github: https://github.com/OCSInventory-NG/OCSInventory-ocsreports/releases
 # Versão antiga utilizada no vídeo: 2.4/OCSNG_UNIX_SERVER_2.4.tar.gz
 # Atualização para a versão 2.8 no dia 08/11/2020 - verificar arquivo CHANGELOG
-OCSVERSION="2.8/OCSNG_UNIX_SERVER_2.8.tar.gz"
-OCSTAR="OCSNG_UNIX_SERVER_2.8.tar.gz"
-OCSINSTALL="OCSNG_UNIX_SERVER_2.8"
+# Voltado para a versão 2.7 no dia 30/11/2020 - verificar arquivo CHANGELOG
+OCSVERSION="2.7/OCSNG_UNIX_SERVER_2.7.tar.gz"
+OCSTAR="OCSNG_UNIX_SERVER_2.7.tar.gz"
+OCSINSTALL="OCSNG_UNIX_SERVER_2.7"
 #
 # Variáveis de download do OCS Inventory Agent
 # Site: https://www.ocsinventory-ng.org/en/
 # Github: https://github.com/OCSInventory-NG/UnixAgent/releases
 # Versão antiga utilizada no vídeo: 2.3/Ocsinventory-Unix-Agent-2.3.tar.gz
 # Atualização para a versão 2.8 no dia 08/11/2020 - verificar arquivo CHANGELOG
-OCSAGENTVERSION="v2.8.0/Ocsinventory-Unix-Agent-2.8.0.tar.gz"
-OCSAGENTTAR="Ocsinventory-Unix-Agent-2.8.0.tar.gz"
-OCSAGENTINSTALL="Ocsinventory-Unix-Agent-2.8.0"
+# Atualização para a versão 2.6.1 no dia 08/11/2020 - verificar arquivo CHANGELOG
+OCSAGENTVERSION="v2.6.1/Ocsinventory-Unix-Agent-2.6.1.tar.gz"
+OCSAGENTTAR="Ocsinventory-Unix-Agent-2.6.1.tar.gz"
+OCSAGENTINSTALL="Ocsinventory-Unix-Agent-2.6.1"
 #
 # Variáveis de download do GLPI Help Desk
 # Site: http://glpi-project.org/spip.php?article41
@@ -120,6 +122,18 @@ NVIDIA=`lshw -class display | grep NVIDIA | cut -d':' -f2 | cut -d' ' -f2`
 # Variável da localização do diretório de download dos Agentes do OCS Inventory
 PATHDOWNLOAD="/var/lib/ocsinventory-reports/download"
 #
+# Variáveis de download do OCS Inventory MIBs para o suporte ao SNMP
+# Site: http://www.circitor.fr/Mibs/Mibs.php
+#
+# Variável da localização do diretório dos arquivos de MIBs do SNMP do OCS Inventory Reports
+MIBS="/var/lib/ocsinventory-reports/snmp"
+#
+# Variável da localização do diretório dos arquivos de MIBs do SNMP do OCS Inventory Reports
+SNMP="/usr/share/snmp/mibs"
+#
+# Variável de localização do diretório dos arquivos de MIB Personalizadas do OCS Inventory Agent
+PM="/usr/local/share/perl/5.22.1/Ocsinventory/Agent/Modules/Snmp"
+#
 # Variáveis de download do OCS Inventory Agent Microsoft, MacOS, Android e Ferramentas de Deploy
 # Site Agent Windows: https://github.com/OCSInventory-NG/WindowsAgent/releases
 # Site Agent Unix, Linux e Mac: https://github.com/OCSInventory-NG/UnixAgent/releases
@@ -155,8 +169,3 @@ UPTIME="https://github.com/PluginsOCSInventory-NG/uptime/releases/download/2.0/u
 # Atualização para a versão 2.0 no dia 07/08/2020 - verificar arquivo CHANGELOG
 LISTPRINTERS="https://github.com/PluginsOCSInventory-NG/listprinters/releases/download/v2.0/listprinters.zip"
 #
-# Variáveis de download do OCS Inventory MIBs para o suporte ao SNMP
-# Site: http://www.circitor.fr/Mibs/Mibs.php
-#
-# Variável da localização do diretório dos arquivos de MIBs do SNMP do OCS Inventory
-MIBS="/var/lib/ocsinventory-reports/snmp"

@@ -5,8 +5,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 08/11/2020
-# Versão: 0.15
+# Data de atualização: 30/11/2020
+# Versão: 0.16
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
@@ -111,22 +111,28 @@ clear
 #07. Which user group is running Apache web server [www-data]?: Deixe o padrão pressione <Enter>;
 #08. Where is Apache Include configuration directory [/etc/apache2/conf-available]?: Deixe o padrão pressione <Enter>;
 #09. Where is PERL Interpreter binary [/usr/bin/perl]?: Deixe o padrão pressione <Enter>;
-#10. Do you wish to setup Rest API server on this computer ([y]/n)? y <-- digite y pressione <Enter>;
-#11. Where do you want the API code to be store [/usr/local/share/perl/5.22.1]? Deixe o padrão pressione <Enter>;
-#12. Do you allow Setup renaming Communication Server Apache configuration file to 'z-ocsinventory-server.conf' ([y]/n)?: y <-- digite y pressione <Enter>;
-#13. Do you wish to setup Administration Server (Web Administration Console) on this computer ([y]/n)?: y <-- digite y pressione <Enter>;
-#14. Do you wish to continue ([y]/n)?: y <-- digite y pressione <Enter>;
+#10. Do you wish to setup Communication Server on this computer ([y]/n)? y <-- digite y pressione <Enter>;
+#11. Where to put Communication server log directory [/var/log/ocsinventory-server]? Deixe o padrão pressione <Enter>;
+#12. Where to put Communication server plugins configuration files [/etc/ocsinventory-server/plugins]? Deixe o padrão pressione <Enter>;
+#13. Where to put Communication server plugins Perl modules files [/etc/ocsinventory-server/perl]? Deixe o padrão pressione <Enter>;
+#14. Do you wish to setup Rest API server on this computer ([y]/n)? y <-- digite y pressione <Enter>;
+#15. Where do you want the API code to be store [/usr/local/share/perl/5.22.1]? Deixe o padrão pressione <Enter>;
+#16. Do you allow Setup renaming Communication Server Apache configuration file to 'z-ocsinventory-server.conf' ([y]/n)?: y <-- digite y pressione <Enter>;
+#17. Do you wish to setup Administration Server (Web Administration Console) on this computer ([y]/n)?: y <-- digite y pressione <Enter>;
+#18. Do you wish to continue ([y]/n)?: y <-- digite y pressione <Enter>;
 #15. Where to copy Administration Server static files for PHP Web Console [/usr/share/ocsinventory-reports]?: Deixe o padrão pressione <Enter>;
 #16. Where to create writable/cache directories for deployment packages administration console logs, IPDiscover and SNMP [/var/lib/ocsinventory-reports]?: Deixe o padrão pressione <Enter>;
 #
-#INFORMAÇÕES QUE SERÃO SOLICITADAS VIA NAVEGADOR:
-#01. MySQL login: root
-#02. MySQL password: 123456
-#03. Name of Database: ocsweb
-#04. MySQL HostName: localhost
-#05. MySQL Port: 3306
+#INFORMAÇÕES QUE SERÃO SOLICITADAS VIA WEB (NAVEGADOR) DO OCS INVENTORY SERVER:
+#01. MySQL login: root (usuário padrão do MySQL)
+#02. MySQL password: 123456 (senha criada no arquivo 00-parametros.sh)
+#03. Name of Database: ocsweb (base de dados padrão do OCS Inventory, não mudar)
+#04. MySQL HostName: localhost (servidor local do MySQL)
+#05. MySQL Port: 3306 (porta padrão do MySQL)
 #06. Enable SSL: no
 #OBS: opções: SSL mode, SSL key path, SSL certificate path e CA certificate path será configurada futuramente.
+#
+#USUÁRIO E SENHA PADRÃO DO OCS INVENTORY SERVER: USER=admin | PASSWORD=admin
 #
 #APÓS A INSTALAÇÃO VIA NAVEGADOR DO OCS INVENTORY, REMOVER O ARQUIVO INSTALL, ELE SERÁ REMOVIDO AUTOMÁTICAMENTE NO SCRIPT 04-pos_ocs_server.sh
 #
