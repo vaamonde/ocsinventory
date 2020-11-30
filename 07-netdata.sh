@@ -106,7 +106,7 @@ echo
 echo -e "Fazendo o backup das configurações do arquivo do MySQL do Netdata, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando mv: v (verbose)
-	mv -v /usr/lib/netdata/conf.d/python.d/mysql.conf /usr/lib/netdata/conf.d/python.d/mysql.conf.old &>> $LOG
+	mv -v /usr/lib/netdata/conf.d/python.d/mysql.conf /usr/lib/netdata/conf.d/python.d/mysql.conf.bkp &>> $LOG
 echo -e "Backup das configurações do MySQL feito com sucesso!!!, continuando com o script..."
 sleep 2
 echo

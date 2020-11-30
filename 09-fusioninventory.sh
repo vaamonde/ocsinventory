@@ -110,7 +110,7 @@ echo
 #
 echo -e "Backup do arquivo de configuração do FusionInventory Agent, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
-	cp -v /usr/local/etc/fusioninventory/agent.cfg /usr/local/etc/fusioninventory/agent.cfg.old &>> $LOG
+	cp -v /usr/local/etc/fusioninventory/agent.cfg /usr/local/etc/fusioninventory/agent.cfg.bkp &>> $LOG
 echo -e "Backup do arquivo de configuração feito com sucesso!!!, continuando com o script..."
 sleep 2
 echo
@@ -136,8 +136,8 @@ echo -e "Inventário do FusionInventory feito com sucesso!!!!, continuando com o
 sleep 2
 echo
 #
-echo -e "Instalação do FusionInventory Feito com Sucesso!!!!!"
-echo -e "Após a instalação do FusionInventory acessar a URL do GLPI: http://`hostname`/glpi para finalizar a configuração."
+echo -e "Instalação do FusionInventory Feito com Sucesso!!!!!\n"
+echo -e "Após a instalação do FusionInventory acessar a URL do GLPI: http://`hostname -I | cut -d ' ' -f1`/glpi para finalizar a configuração."
 echo
 	# script para calcular o tempo gasto (SCRIPT MELHORADO, CORRIGIDO FALHA DE HORA:MINUTO:SEGUNDOS)
 	# opção do comando date: +%T (Time)
