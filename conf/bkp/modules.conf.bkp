@@ -1,0 +1,11 @@
+# this list of module will be load by the at run time
+# to check its syntax do:
+# #perl modules.conf
+# You must have NO error. Else the content will be ignored
+# This mechanism goal is to launch agent extension modules
+
+use Ocsinventory::Agent::Modules::Download;
+use Ocsinventory::Agent::Modules::Snmp;
+
+# DO NOT REMOVE THE 1;
+1;
