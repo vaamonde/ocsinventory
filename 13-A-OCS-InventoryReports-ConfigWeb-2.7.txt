@@ -192,5 +192,5 @@
 					Networks scans
 						IPDISCOVER <-- Revert back to standard state (alterar se necessário)
 						SNMP_SWITCH <-- ON
-						SNMP_NETWORK <-- (adicionar as rede e sub-redes se necessário separados por vírgula)
+						SNMP_NETWORK <-- 192.168.0.0/24, 172.16.251.80, 10.0.0.10, 200.204.0.0/24
 				Update

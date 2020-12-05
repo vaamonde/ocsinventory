@@ -136,6 +136,9 @@ SNMP="/usr/share/snmp/mibs"
 # Variável de localização do diretório dos arquivos de MIB Personalizadas do OCS Inventory Agent
 PM="/usr/local/share/perl/5.22.1/Ocsinventory/Agent/Modules/Snmp"
 #
+# Variável de localização do diretório dos arquivos de Modelos Personalizados do OCS Inventory Agent
+XML="/var/lib/ocsinventory-agent/https:__ocs.pti.intra/snmp/mibs/local"
+#
 # Variáveis de download do OCS Inventory Agent Microsoft, MacOS, Android e Ferramentas de Deploy
 # Site Agent Windows: https://github.com/OCSInventory-NG/WindowsAgent/releases
 # Site Agent Unix, Linux e Mac: https://github.com/OCSInventory-NG/UnixAgent/releases

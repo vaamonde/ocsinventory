@@ -209,12 +209,13 @@ echo -e "Arquivo de módulos do OCS Inventory Agent editado com sucesso!!!, cont
 sleep 2
 echo
 #
-echo -e "Aplicando o PATCH de correção do OCS Inventory Agent versão 2.6.1, aguarde..."
+echo -e "Aplicando os PATCHs de correções do OCS Inventory Agent versão 2.6.1, aguarde..."
 sleep 2
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando cp: -v (verbose)
 	cp -v patch/Deb.pm /usr/local/share/perl/5.22.1/Ocsinventory/Agent/Backend/OS/Generic/Packaging/ &>> $LOG
-echo -e "Aplicação do PATCH de correção do OCS Inventory Agent feito com sucesso!!!, continuando com o script..."
+    cp -v patch/Snmp.pm /usr/local/share/perl/5.22.1/Ocsinventory/Agent/Modules/  &>> $LOG
+echo -e "Aplicação dos PATCHs de correções do OCS Inventory Agent feito com sucesso!!!, continuando com o script..."
 sleep 2
 echo
 #

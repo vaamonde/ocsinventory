@@ -1,8 +1,14 @@
 Autor: Robson Vaamonde
 Data de criação: 21/11/2020
-Data de atualização: 21/11/2020
-Versão: 0.1
+Data de atualização: 04/12/2020
+Versão: 0.2
 Testado e homologado para a versão do Ubuntu Server 16.04.7 LTS x64
 Kernel >= 4.4.x
 
 ==================================== FALHAS DO OCS INVENTORY ===========================================
+
+04/12/2020 - Encontrado um BUG no arquivo Deb.pm falha nas linhas: 43 e 45 existência de espaços em branco
+na variável: ${Installed-Size} fazendo causar erros no OCS Inventory Agent
+04/12/2020 - Atualização da opção do Nmap no arquivo Snmp.pm na linha 416, troca da opção: -sP pela opção:
+-sn, com isso as mensagens de erros da opção do comando: ocsinventory-agent --debug --info não são mais
+apresentadas

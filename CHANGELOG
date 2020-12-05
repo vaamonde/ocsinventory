@@ -4,8 +4,8 @@ Facebook: facebook.com/ProcedimentosEmTI
 Facebook: facebook.com/BoraParaPratica
 YouTube: youtube.com/BoraParaPratica
 Data de criação: 11/12/2018
-Data de atualização: 30/11/2020
-Versão: 0.15
+Data de atualização: 04/12/2020
+Versão: 0.16
 Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 Testado e homologado para a versão do Ubuntu Server 16.04.5 LTS x64
 Testado e homologado para a versão do Ubuntu Server 16.04.6 LTS x64
@@ -13,15 +13,23 @@ Testado e homologado para a versão do Ubuntu Server 16.04.7 LTS x64
 Kernel >= 4.4.x
 
 ==================================== ATUALIZAÇÕES DO OCS INVENTORY ===========================================
-30/11/2020 - Atualização do arquivo 00-parametros.sh com o acréscimo das variáveis de MIBs personalizadas e correção de BUGs
-30/11/2020 - Atualização do arquivo 01-lamp.sh acréscimo de dependências do SNMP e automatização da instalação das dependências
-do Perl para não solicitar mais interação com usuário, acréscimo da verificação das portas do Apache2 e MySQL no final do script
-30/11/2020 - Atualização do arquivo 03-ocs_server.sh melhoria na documentação de ajuda na instalação do OCS Inventory Server, 
-atualização de todos os arquivos de de configuração do OCS Inventory para a versão 2.7
-30/11/2020 - Atualização do arquivo 04-pos_ocs_server.sh com o acréscimo da configuração do Logroted referente aos Logs do OCS
-Inventory Server, correção das falhas do SNMP e criação dos Links simbólicos, copia das MIBs personalizadas
-30/11/2020 - Atualização do arquivo 05-ocs_agent.sh, acréscimo das configurações do arquivo de Módulos, aplicando o PATCH de
-correção do arquivo do Agent (Deb.pm), acréscimo das opções --debug e --info no ocsinventory-agent, 
+04/12/2020 - Criação dos Diretórios: mibs (MIB personalizadas convertidas para TXT), mibs-privadas (MIB privadas
+de fornecedores de hardware de rede), patch (arquivos com correções do OCS Inventory Server ou Agent), pm (arquivos
+de MIBs personalizadas para o SNMP Scan), xml (arquivos de XML personalizadas para o inventário).
+
+30/11/2020 - Atualização do arquivo 00-parametros.sh com o acréscimo das variáveis de MIBs personalizadas e 
+correção de BUGs gerais nos scripts
+30/11/2020 - Atualização do arquivo 01-lamp.sh acréscimo de dependências do SNMP e automatização da instalação 
+das dependências do Perl para não solicitar mais interação com usuário, acréscimo da verificação das portas do 
+Apache2 e MySQL no final do script
+30/11/2020 - Atualização do arquivo 03-ocs_server.sh melhoria na documentação de ajuda na instalação do OCS 
+Inventory Server, atualização de todos os arquivos de configuração do OCS Inventory para a versão 2.7.
+30/11/2020 - Atualização do arquivo 04-pos_ocs_server.sh com o acréscimo da configuração do Logroted referente 
+aos Logs do OCS Inventory Server, correção das falhas do SNMP e criação dos Links simbólicos, copia das MIBs 
+personalizadas para o diretório de MIBs do Ubuntu
+30/11/2020 - Atualização do arquivo 05-ocs_agent.sh, acréscimo das configurações do arquivo de Módulos, aplicando
+o PATCH de correção do arquivo do Agent (Deb.pm) v2.6.1, acréscimo das opções --debug e --info no arquivo de 
+configuração do ocsinventory-agent
 30/11/2020 - Atualização do arquivo 06-glpi.sh com a automatização da instalação do APCU-BC-BETA
 30/11/2020 - Criação do arquivo BUG e arquivo 13-A-OCS-InventoryReports-ConfigWeb-2.7.txt
 
@@ -39,12 +47,12 @@ configuação do Daemon do SNMPD no servidor local e criação das arquivos de c
 15/07/2019 - Robson Vaamonde - Atualização do arquivo 02-lamp.sh, acréscimo da dependência nova do Netdata para monitorar
 o MySQL Server: python-mysqldb.
 
-14/07/2019 - Robson Vaamonde - Atualização do arquivo 00-parametros.sh, melhoria na documentação, acréscimo do bloco de 
-configuação do download dos Plugins
+14/07/2019 - Robson Vaamonde - Atualização do arquivo 00-parametros.sh, melhoria na documentação, acréscimo do bloco
+de configuração do download dos Plugins
 14/07/2019 - Robson Vaamonde - Atualização do arquivo phpinfo.php, acréscimo de quebra de linhas para facilitar a leitura
 do arquivo
-14/07/2019 - Robson Vaamonde - Criação do script 12-plugins.sh, esse script tem o objetivo de baixar, descompactar e instalar
-alguns Plugins no OCS Inventory Server.
+14/07/2019 - Robson Vaamonde - Criação do script 12-plugins.sh, esse script tem o objetivo de baixar, descompactar e 
+instalar alguns Plugins no OCS Inventory Server.
 14/07/2019 - Robson Vaamonde - Atualização do arquivo req.conf com as configurações para a geração do certificado com
 multiplos FQDN.
 
@@ -71,8 +79,8 @@ python-pymsql.
 
 13/06/2019 - Robson Vaamonde - Atualização do arquivo 02-lamp.sh com a nova dependência do GLPI php-cas.
 13/06/2019 - Robson Vaamonde - Atualização da versão do GLPI para 9.4.2 e Plugin do OCS Inventory para 1.6.0.
-13/06/2019 - Robson Vaamonde - Atualização do arquivo 02-lamp.sh acréscimo da nova dependência do Perl perl -MCPAN -e 'install
-Mojolicious::Lite'.
+13/06/2019 - Robson Vaamonde - Atualização do arquivo 02-lamp.sh acréscimo da nova dependência do Perl perl -MCPAN -e 
+'install Mojolicious::Lite'.
 13/06/2019 - Robson Vaamonde - Atualização da versão do Agent do OCS Inventory para 2.4.2.
 13/06/2019 - Robson Vaamonde - Atualização dos arquivos de configuração: ocsinventory-reports.conf, z-ocsinventory-server.conf
 e zz-ocsinventory-restapi.conf.
