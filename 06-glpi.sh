@@ -10,7 +10,8 @@
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
-# Instalação e Configuração do GLPI Help Desk, plugin do OCS Inventory, alteração das permissões do diretório do GLPI e instalação das dependência do GLPI
+# Instalação e Configuração do GLPI Help Desk, plugin do OCS Inventory, alteração das permissões do diretório do GLPI
+# e instalação das dependência do GLPI
 #
 #MENSAGENS QUE SERÃO SOLICITADAS NA INSTALAÇÃO DO GLPI HELP DESK VIA NAVEGADOR:
 #01. Select your language.: Português do Brasil <OK>;

@@ -10,8 +10,8 @@
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
-# Instalação e configuração do sistema de monitoramento em Tempo Real do Netdata, instalação das dependências, configuração do monitoramento do
-# MySQL
+# Instalação e configuração do sistema de monitoramento em Tempo Real do Netdata, instalação das dependências, configuração
+# do monitoramento do MySQL
 #
 # Arquivo de configuração dos parâmetros
 source 00-parametros.sh

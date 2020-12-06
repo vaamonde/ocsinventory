@@ -1,6 +1,0 @@
-tag=Server
-basevardir=/var/lib/ocsinventory-agent
-logfile=/var/log/ocsinventory-agent/activity.log
-server=http://localhost/ocsinventory
-debug=1
-ssl=0

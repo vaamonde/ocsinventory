@@ -10,8 +10,8 @@
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
-# Instalação do OCS Inventory Server e OCS Inventory Reports, configuração dos Hosts Virtual no Apache2, alteração de permissão dos diretórios e
-# arquivos do OCS Inventory
+# Instalação do OCS Inventory Server e OCS Inventory Reports, configuração dos Hosts Virtual no Apache2, alteração 
+# de permissão dos diretórios e arquivos do OCS Inventory
 #
 # Arquivo de configuração dos parâmetros
 source 00-parametros.sh

@@ -10,7 +10,7 @@
 # Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
 # Kernel >= 4.4.x
 #
-# Download dos Plugins do OCS Inventory: DriverList, UpTime
+# Download dos Plugins do OCS Inventory: DriverList, UpTime, ListPrinters
 #
 # Arquivo de configuração dos parâmetros
 source 00-parametros.sh

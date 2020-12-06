@@ -14,15 +14,15 @@
 define("DB_NAME", "ocsweb");
 // Nome do Servidor de Leitura da Base de Dados do OCS Inventory Server
 define("SERVER_READ","localhost");
-// Nome do Servidor de Escrita da Base de Dados do OCS Invetory Server
+// Nome do Servidor de Escrita da Base de Dados do OCS Inventory Server
 define("SERVER_WRITE","localhost");
 // Porta de Conexão do Banco de Dados do MySQL do OCS Inventory Server
 define("SERVER_PORT","3306");
 // Nome do Usuário de autenticação na Base de Dados do OCS Inventory Server
 define("COMPTE_BASE","ocs");
-// Senha do Usuário de autenticação na Base de Dados do OCS Iventory Server
+// Senha do Usuário de autenticação na Base de Dados do OCS Inventory Server
 define("PSWD_BASE","123456");
-// Configurações do Suporte ao SSL do OCS Inventory Server
+// Configurações do Suporte ao SSL HTTPS do OCS Inventory Server
 define("ENABLE_SSL","0");
 define("SSL_MODE","");
 define("SSL_KEY","");

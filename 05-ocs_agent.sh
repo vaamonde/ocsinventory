@@ -10,8 +10,9 @@
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
-# Instalação do OCS Inventory Agent, configuração dos arquivos: ocsinventory-agent.cfg (arquivo de configuração do agent do ocs inventory) e ocsinventory-agent
-# (arquivo de configuração do agendamento do agente do ocs inventory que oferece suporte ao IPDiscovery e SNMP)
+# Instalação do OCS Inventory Agent, configuração dos arquivos: ocsinventory-agent.cfg (arquivo de configuração do agent
+# do ocs inventory) e ocsinventory-agent (arquivo de configuração do agendamento do agente do ocs inventory que oferece 
+# suporte ao IPDiscovery e SNMP)
 #
 # Arquivo de configuração dos parâmetros
 source 00-parametros.sh
@@ -103,7 +104,7 @@ sleep 2
 echo
 #
 echo -e "CUIDADO!!! com as opções que serão solicitadas no decorrer da instalação do OCS Inventory Agent."
-echo -e "Veja a documentação das opções de instalação a partir da linha: 124 do arquivo $0"
+echo -e "Veja a documentação das opções de instalação a partir da linha: 123 do arquivo $0"
 echo -e "Download do OCS Inventory Agent feito com Sucesso!!!, pressione <Enter> para instalar"
 echo
 read

@@ -61,7 +61,6 @@ OCSINSTALL="OCSNG_UNIX_SERVER_2.7"
 # Site: https://www.ocsinventory-ng.org/en/
 # Github: https://github.com/OCSInventory-NG/UnixAgent/releases
 # Versão antiga utilizada no vídeo: 2.3/Ocsinventory-Unix-Agent-2.3.tar.gz
-# Atualização para a versão 2.8 no dia 08/11/2020 - verificar arquivo CHANGELOG
 # Atualização para a versão 2.6.1 no dia 08/11/2020 - verificar arquivo CHANGELOG
 OCSAGENTVERSION="v2.6.1/Ocsinventory-Unix-Agent-2.6.1.tar.gz"
 OCSAGENTTAR="Ocsinventory-Unix-Agent-2.6.1.tar.gz"
