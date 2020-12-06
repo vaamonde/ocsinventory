@@ -130,19 +130,21 @@ PATHDOWNLOAD="/var/lib/ocsinventory-reports/download"
 # Variáveis de download do OCS Inventory MIBs para o suporte ao SNMP
 # Site: http://www.circitor.fr/Mibs/Mibs.php
 #
-# Variável da localização do diretório dos arquivos de MIBs do SNMP do OCS Inventory Reports
-MIBS="/var/lib/ocsinventory-reports/snmp"
-#
 # Variável da localização do diretório dos arquivos de MIBs do SNMP do Ubuntu Server e do OCS Inventory Reports
 # Utilizado na configuração das opções do SNMP do OCS Inventory Reports, ver arquivo 13-A-OCS-InventoryReports-ConfigWeb-2.7
-# na linha: 103
+# na linha: 103, para manter o diretório atualizado digite o comando: download-mibs
 SNMP="/usr/share/snmp/mibs"
+#
+# Variável da localização do diretório dos arquivos de MIBs do SNMP do OCS Inventory Reports
+MIBS="/var/lib/ocsinventory-reports/snmp"
 #
 # Variável de localização do diretório dos arquivos de MIBs Personalizados do OCS Inventory Agent
 PM="/usr/local/share/perl/5.22.1/Ocsinventory/Agent/Modules/Snmp"
 #
 # Variável de localização do diretório dos arquivos de Modelos de MIBs XML Personalizados do OCS Inventory Agent
-XML="/var/lib/ocsinventory-agent/https:__ocs.pti.intra/snmp/mibs/local"
+# OBSERVAÇÃO: alterar o endereço HTTPS para FQDN ou IP do seu servidor de OCS Inventory Reports
+XMLLOCAL="/var/lib/ocsinventory-agent/https:__ocs.pti.intra/snmp/mibs/local"
+XMLREMOTE="/var/lib/ocsinventory-agent/https:__ocs.pti.intra/snmp/mibs/remote"
 #
 # Variáveis de download do OCS Inventory Agent Microsoft, MacOS, Android e Ferramentas de Deploy
 # Site Agent Windows: https://github.com/OCSInventory-NG/WindowsAgent/releases

@@ -14,6 +14,7 @@ Kernel >= 4.4.x
 
 ==================================== ATUALIZAÇÕES DO OCS INVENTORY ===========================================
 06/12/2020 - Atualização do arquivo de configuração: z-ocsinventory-server.conf com o Bloco do SOAP.
+06/12/2020 - Atualização dos arquivos de configuração: snmp.conf e snmpd.conf
 
 04/12/2020 - Criação dos Diretórios: mibs (MIB personalizadas convertidas para TXT), mibs-privadas (MIB privadas
 de fornecedores de hardware de rede), patch (arquivos com correções do OCS Inventory Server ou Agent), pm (arquivos
