@@ -218,7 +218,7 @@ Criar o arquivo de XML do host descoberto..: perl ipdiscover-util.pl -xml -ip=17
 			Configuration
 				Edit
 					Networks scans
-						IPDISCOVER <-- Revert back to standard state (alterar se necessário)
+						IPDISCOVER <-- 172.16.10.0
 						SNMP_SWITCH <-- ON
-						SNMP_NETWORK <-- 192.168.0.0/24, 172.16.251.80, 10.0.0.10, 200.204.0.0/24 (redes ou IP para escanear)
+						SNMP_NETWORK <-- 172.16.10.0/24, 172.16.251.80, 10.0.0.10, 200.204.0.0/24 (redes ou IP para escanear)
 				Update

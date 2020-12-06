@@ -15,6 +15,9 @@ Kernel >= 4.4.x
 ==================================== ATUALIZAÇÕES DO OCS INVENTORY ===========================================
 06/12/2020 - Atualização do arquivo de configuração: z-ocsinventory-server.conf com o Bloco do SOAP.
 06/12/2020 - Atualização dos arquivos de configuração: snmp.conf e snmpd.conf
+06/12/2020 - Criação do arquivo de atualização da Base de Dados do CVE Search e Reports: ocsinventory-cve-cron
+atualização do script 05-ocs_agent.sh com as opções de agendamento do CVE Search.
+06/12/2020 - Atualização do arquivo de configuração: ocsinventory-agent.cfg com opções de autenticação de usuário
 
 04/12/2020 - Criação dos Diretórios: mibs (MIB personalizadas convertidas para TXT), mibs-privadas (MIB privadas
 de fornecedores de hardware de rede), patch (arquivos com correções do OCS Inventory Server ou Agent), pm (arquivos

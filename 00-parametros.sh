@@ -124,6 +124,9 @@ FLUSH="FLUSH PRIVILEGES;"
 # NVIDIA cut -d':' delimitador -f2 mostrar segunda coluna
 NVIDIA=`lshw -class display | grep NVIDIA | cut -d':' -f2 | cut -d' ' -f2`
 #
+# Variável da localização do diretório de CRONTAB do CVE Search do OCS Inventory Reports
+CVE="/usr/share/ocsinventory-reports/ocsreports/crontab/ "
+#
 # Variável da localização do diretório de download dos Agentes do OCS Inventory Reports
 PATHDOWNLOAD="/var/lib/ocsinventory-reports/download"
 #

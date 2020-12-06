@@ -5,14 +5,15 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 31/05/2016
-# Data de atualização: 08/11/2020
-# Versão: 0.13
+# Data de atualização: 06/12/2020
+# Versão: 0.14
 # Testado e homologado para a versão do Ubuntu Server 16.04 LTS x64
 # Kernel >= 4.4.x
 #
 # Instalação do OCS Inventory Agent, configuração dos arquivos: ocsinventory-agent.cfg (arquivo de configuração do agent
-# do ocs inventory) e ocsinventory-agent (arquivo de configuração do agendamento do agente do ocs inventory que oferece 
-# suporte ao IPDiscovery e SNMP)
+# do ocs inventory), ocsinventory-agent (arquivo de configuração do agendamento do agente do ocs inventory que oferece 
+# suporte ao IPDiscovery e SNMP), ocsinventory-cve-cron (arquivo de atualização da base de dados do CVE Search e Reports),
+# modules.conf (arquivo de configuração do módulos do agente do ocs inventory), 
 #
 # Arquivo de configuração dos parâmetros
 source 00-parametros.sh
@@ -104,7 +105,7 @@ sleep 2
 echo
 #
 echo -e "CUIDADO!!! com as opções que serão solicitadas no decorrer da instalação do OCS Inventory Agent."
-echo -e "Veja a documentação das opções de instalação a partir da linha: 123 do arquivo $0"
+echo -e "Veja a documentação das opções de instalação a partir da linha: 124 do arquivo $0"
 echo -e "Download do OCS Inventory Agent feito com Sucesso!!!, pressione <Enter> para instalar"
 echo
 read
@@ -215,7 +216,7 @@ sleep 2
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando cp: -v (verbose)
 	cp -v patch/Deb.pm /usr/local/share/perl/5.22.1/Ocsinventory/Agent/Backend/OS/Generic/Packaging/ &>> $LOG
-    cp -v patch/Snmp.pm /usr/local/share/perl/5.22.1/Ocsinventory/Agent/Modules/  &>> $LOG
+    cp -v patch/Snmp.pm /usr/local/share/perl/5.22.1/Ocsinventory/Agent/Modules/ &>> $LOG
 echo -e "Aplicação dos PATCHs de correções do OCS Inventory Agent feito com sucesso!!!, continuando com o script..."
 sleep 2
 echo
@@ -240,12 +241,41 @@ echo -e "Arquivo de configuração do OCS Inventory Agent editado com sucesso!!!
 sleep 2
 echo
 #
-#
 echo -e "Forçando o inventário do OCS Inventory Agent com as novas configurações, aguarde..."
 sleep 2
 	# opção do comando: &>> (redirecionar a saída padrão)
 	ocsinventory-agent --debug --info &>> $LOG
 echo -e "Inventário do OCS Inventory Agent feito com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Editando o arquivo do Agendamento do CVE Search Reports ocsinventory-cve-cron, pressione <Enter> para continuar"
+read
+sleep 2
+echo
+#
+echo -e "Atualizando do arquivo de agendamento do CVE Search Reports, aguarde..."
+	# opção do comando: &>> (redirecionar a saída padrão)
+	# opção do comando cp: -v (verbose)
+	cp -v conf/ocsinventory-cve-cron /etc/cron.d/ocsinventory-cve-cron &>> $LOG
+echo -e "Atualização do arquivo de agendamento do OCS Inventory Agent feita com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Editando do arquivo de configuração do CVE Search Reports, aguarde..."
+sleep 2	
+	vim /etc/cron.d/ocsinventory-cve-cron
+echo -e "Arquivo de configuração do CVE Search Reports editado com sucesso!!!, continuando com o script..."
+sleep 2
+echo
+#
+echo -e "Forçando a atualização da Base de Dados do CVE Search Reports, aguarde esse processo demora um pouco..."
+sleep 2
+	# opção do comando: &>> (redirecionar a saída padrão)
+    # opção do comando cd: - (retorne to path)
+	cd /usr/share/ocsinventory-reports/ocsreports/crontab/ && php cron_cve.php &>> /var/log/ocsinventory-server/cveupdate.log
+    cd -
+echo -e "Atualização da Base de Dados do CVE Search Reports feito com sucesso!!!, continuando com o script..."
 sleep 2
 echo
 #
