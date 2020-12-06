@@ -1,0 +1,14 @@
+<T_4526>
+<PARAMETERS>
+        <PARSER>1</PARSER>
+	<VERSION>1</VERSION>
+	    <NAME>Netgear</NAME>
+	    <EXECUTE>
+            <RUN>Host_Resources_Mib</RUN>
+            <RUN>If_Mib</RUN>
+            <RUN>Entity_Mib</RUN>
+            <RUN>Default</RUN>
+            <RUN>4526</RUN>
+        </EXECUTE>
+</PARAMETERS>
+</T_4526>

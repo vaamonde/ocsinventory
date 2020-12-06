@@ -33,18 +33,16 @@ sub snmp_run {
     my $snmp_physAddr="1.3.6.1.2.1.2.2.1.6.";
     my $snmp_ifadminstatus="1.3.6.1.2.1.2.2.1.7.";
     my $snmp_description="1.3.6.1.4.1.9.2.2.1.1.28.";
+    my $snmp_dot1dTpFdbPort="1.3.6.1.2.1.17.7.1.2.2.1";
+    my $snmp_vtp_vlan_state="1.3.6.1.4.1.9.9.46.1.3.1.1.2";
     my $snmp_cisco_deviceAddress="1.3.6.1.4.1.9.9.23.1.2.1.1.4.";
     my $snmp_cisco_deviceId="1.3.6.1.4.1.9.9.23.1.2.1.1.6.";
     my $snmp_cisco_devicePort="1.3.6.1.2.1.17.7.1.2.2.1.";
     my $snmp_cisco_devicePlatform="1.3.6.1.4.1.9.9.23.1.2.1.1.8.";
-    my $snmp_vtp_vlan_state="1.3.6.1.4.1.9.9.46.1.3.1.1.2";
-    my $snmp_dot1dTpFdbPort="1.3.6.1.2.1.17.7.1.2.2.1";
-
     my $snmp_cisco_ImageTable="1.3.6.1.4.1.9.9.25.1.1.1.2.4";
     my $snmp_cisco_ImageVersion="1.3.6.1.4.1.9.9.25.1.1.1.2.5";
     my $snmp_cisco_cpmProcessName="1.3.6.1.4.1.9.9.109.1.2.1.1.2";
     my $snmp_cisco_cpmProcessCPU="1.3.6.1.4.1.9.9.109.1.2.1.1.6.";
-
 
     my $oid;
     my $oid_complet;
