@@ -4,8 +4,8 @@
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 30/11/2020
-# Data de atualização: 06/12/2020
-# Versão: 0.2
+# Data de atualização: 07/12/2020
+# Versão: 0.3
 # Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
 # Kernel >= 4.4.x
 #
@@ -25,6 +25,10 @@ Verificar se o host foi inventáriado.......: perl ipdiscover-util.pl -a -ip=172
 Criar o arquivo XML dos hosts descobertos..: perl ipdiscover-util.pl -xml -net=172.16.10.0 -p=123456
 Criar o arquivo de XML do host descoberto..: perl ipdiscover-util.pl -xml -ip=172.16.10.20/255.255.255.0 -net=255.255.255.0 -p=123456
 #
+# Sites de CVE Search para configurar no OCS Inventory
+Site01: https://cve.circl.lu/
+Site02: https://cve.mitre.org/index.html
+Site03: https://www.cvedetails.com/
 
 #01_ Instalação das Extensões do OCS Inventory Server
 	Extensions
@@ -205,17 +209,82 @@ Criar o arquivo de XML do host descoberto..: perl ipdiscover-util.pl -xml -ip=17
 				VULN_CVESEARCH_VERBOSE <-- ON
 			Update
 
-#16_ Networks
+#16_ Configurações do Perfil e Usuário para o inventário do Agente
+    Configuration
+        Users 
+            Create Profile 
+                Identifier (ex: admin): ocsagent <-- ADD
+                Display name (ex: Administrators): Perfil Agentes OCS <-- ADD
+                Copy profile data: Administrators <-- ADD
+            OK
+            Edit profile (Perfil Agentes OCS)
+                Restrictions:
+                    On computers: <-- NO
+                    On package activation: <-- YES
+                    on invisible packages: <-- YES
+                    On the generation of an XML inventory: <-- YES
+                    On Wake On Lan: <-- YES
+                Blacklist
+                    On MAC addresses: <-- YES
+                    On serial numbers: <-- YES
+                    On the ipdiscover's subnet: <-- YES
+                Configuration:
+                    Manage ipdiscover: <-- NO
+                    Manage teledeploy: <-- NO
+                    Update Configuration: <-- NO
+                    Manage groups: <-- NO
+                    Manage console: <-- NO
+                    See warning messages of the GUI: <-- NO
+                    Manage accounts info: NO
+                    may change accounts info computers: <-- NO
+                    may change their membership group: <-- NO
+                    Manage profiles: <-- NO
+                    Manage profiles group: <-- NO
+                    Manage SNMP communities: <-- NO
+                    Delete his computers: <-- NO
+                Pages
+                    DISABLE: ALL (desabilitar todas as opções)
+                    ENABLE: (habilitar somente)
+                        computer: <-- YES
+                        visu_computers: <-- YES
+            OK
+            Create User 
+                Login: ocsagent <-- ADD
+                Type: Perfil Agentes OCS <-- ADD
+                Group: ocsagent (adicionar o grupo depois voltar para criar o usuário)
+                    New data:
+                        Caption: ocsagent <-- ADD
+                    OK
+                First name: OCS <-- ADD
+                Last name: Agent <-- ADD
+                E-mail: ocsagent@pti.intra <-- ADD
+                Comments: Usuário utilizado no Inventário do Agentes do OCS <-- ADD
+                Password: 123456 <-- ADD
+            OK
+
+#17_ Configurações das Comunidades do SNMP (v1, v2, v2c e v3) 
+    Networks
 		Administer
 			Manage SNMP Communities
 				Version 1 (public) <-- ADD
 				Version 2 (public) <-- ADD
 				Version 2c (public) <-- ADD
 				Version 3 (public) <-- ADD (se necessário configurar a autenticação do SNMPv3)
-				
-#17_ All Computers
+
+#18_ Configuração do Grupo para o descoberta do IpDiscovery 
+    Inventory
+        Groups
+            Static Groups
+                New static group
+                    Group name: IPDiscovery <-- ADD
+                    Description: Grupo de IpDiscovery <-- ADD
+                OK
+
+#19_ Configuração do Agente de escaneamento do IpDiscovery e SNMP
+    All Computers
 		Computer (selecionar o Server OCS Inventory configurado em HTTPS)
 			Configuration
+                IpDiscovery <-- Statically add to this group
 				Edit
 					Networks scans
 						IPDISCOVER <-- 172.16.10.0
