@@ -17,14 +17,14 @@ sub snmp_run {
     my $common=$snmp->{common};
     #habilitando os módulos auxiliares para facilitar o inventário
     my $list_mib=["Entity_Mib","If_Mib","Host_Resources_Mib","Default"];
-
+    #configuração do Log de Debug e Info do OCS Inventory Agent
     $logger->debug("Running Netgear (4526) MIB module");
 
     foreach my $mib ( @{$list_mib} ) {
         $snmp->snmp_oid_run($mib);
     }
 
-    # OID 
+    #OID personalizados do switch 
     my $snmp_osversion="1.3.6.1.4.1.9.2.1.73.0";
     my $snmp_dot1dBasePortIfIndex="1.3.6.1.2.1.17.1.4.1.2.";
     my $snmp_ifdesc="1.3.6.1.2.1.2.2.1.2.";
@@ -35,14 +35,14 @@ sub snmp_run {
     my $snmp_description="1.3.6.1.4.1.9.2.2.1.1.28.";
     my $snmp_dot1dTpFdbPort="1.3.6.1.2.1.17.7.1.2.2.1";
     my $snmp_vtp_vlan_state="1.3.6.1.4.1.9.9.46.1.3.1.1.2";
-    my $snmp_cisco_deviceAddress="1.3.6.1.4.1.9.9.23.1.2.1.1.4.";
-    my $snmp_cisco_deviceId="1.3.6.1.4.1.9.9.23.1.2.1.1.6.";
-    my $snmp_cisco_devicePort="1.3.6.1.2.1.17.7.1.2.2.1.";
-    my $snmp_cisco_devicePlatform="1.3.6.1.4.1.9.9.23.1.2.1.1.8.";
-    my $snmp_cisco_ImageTable="1.3.6.1.4.1.9.9.25.1.1.1.2.4";
-    my $snmp_cisco_ImageVersion="1.3.6.1.4.1.9.9.25.1.1.1.2.5";
-    my $snmp_cisco_cpmProcessName="1.3.6.1.4.1.9.9.109.1.2.1.1.2";
-    my $snmp_cisco_cpmProcessCPU="1.3.6.1.4.1.9.9.109.1.2.1.1.6.";
+    my $snmp_deviceAddress="1.3.6.1.4.1.9.9.23.1.2.1.1.4.";
+    my $snmp_deviceId="1.3.6.1.4.1.9.9.23.1.2.1.1.6.";
+    my $snmp_devicePort="1.3.6.1.2.1.17.7.1.2.2.1.";
+    my $snmp_devicePlatform="1.3.6.1.4.1.9.9.23.1.2.1.1.8.";
+    my $snmp_ImageTable="1.3.6.1.4.1.9.9.25.1.1.1.2.4";
+    my $snmp_ImageVersion="1.3.6.1.4.1.9.9.25.1.1.1.2.5";
+    my $snmp_cpmProcessName="1.3.6.1.4.1.9.9.109.1.2.1.1.2";
+    my $snmp_cpmProcessCPU="1.3.6.1.4.1.9.9.109.1.2.1.1.6.";
 
     my $oid;
     my $oid_complet;
@@ -75,22 +75,16 @@ sub snmp_run {
     my $CPU=undef;
 
     $common->setSnmpCommons( {TYPE => "Network"} );
-    # Info interessante SNMPv2-SMI::enterprises.9.9.23.1.2.1.1.6.10140.1
-    # SNMPv2-SMI::enterprises.9.9.25.1.1.1.2.1 
-    # version IOS
     $result_snmp=$session->get_request(-varbindlist => [$snmp_osversion]);
     if ( defined($result_snmp->{$snmp_osversion}) ) {
         $osversion=$result_snmp->{$snmp_osversion};
     }
 
-    # We are going to look for the vlan existing on this equipment
     $result_snmp=$session->get_entries(-columns => [$snmp_vtp_vlan_state]);
     foreach my $resultmac ( keys  %{$result_snmp} ) {
         if ( $resultmac =~ /1\.3\.6\.1\.4\.1\.9\.9\.46\.1\.3\.1\.1\.2\.1\.(\S+)/ ) {
             my $ref_vlan=$1;
             my $sub_session;
-            # Now we can scan this vlan for mac address
-            # We must first open a new session with the index associated with the vlan
             if ( $session->version eq 3 ) {
                 $sub_session= Net::SNMP->session(
                     -retries     => 1 ,
@@ -119,26 +113,16 @@ sub snmp_run {
             if ( defined ( $sub_session ) ) {
                 my $result_snmp_mac=$sub_session->get_entries(-columns => [$snmp_dot1dTpFdbPort ]);
                 if ( defined ($result_snmp_mac ) ) {
-                    # We scan all lines 
                     for my $ligne_snmp_mac ( keys %{$result_snmp_mac} ) {
-                        # We first take in the OID the 6 last numbers indicate in decimal the mac address
                         if ( $ligne_snmp_mac =~ /17\.4\.3\.1\.2\.(\S+)\.(\S+)\.(\S+)\.(\S+)\.(\S+)\.(\S+)$/ ) {
                             my $distant_mac=sprintf("%.2x:%.2x:%.2x:%.2x:%.2x:%.2x",$1,$2,$3,$4,$5,$6);
                             my $data_values={};
                             my $index_bridge=$result_snmp_mac->{$ligne_snmp_mac};
 
-                            # We have no table for this reference
                             if ( ! defined ( $index_mac->{$index_bridge}) ) {
-                                # init of the table
                                 $index_mac->{$index_bridge}=[];
-                                # we take the value gived by the OID
                                 my $snmp_intero=$snmp_dot1dBasePortIfIndex.$index_bridge;
-                                # We take the index reference for the ifdesc
-                                # So when we scan this ifdesc, we can add the vlans and mac 
                                 my $ref_snmp_line=$sub_session->get_request(-varbindlist => [ $snmp_intero ]);
-                                # We transmit the ointer value to the ref_mac so we can have a double access for the data
-                                # If we have no information: the mac is not associated with a port
-                                # It's the switch mac address
                                 if ( defined ( $ref_snmp_line->{$snmp_intero}) ) {
                                     $ref_mac->{$ref_snmp_line->{$snmp_intero}}=$index_mac->{$index_bridge};
                                 }
@@ -153,10 +137,9 @@ sub snmp_run {
            }
         }
     }
-    # We look for interfaces
+
     $result_snmp=$session->get_entries(-columns => [$snmp_iftype]);
     foreach my $result ( keys  %{$result_snmp} ) {
-        # We work on real interface and no vlan
         if ( $result_snmp->{$result} == 6 ) {
             if ( $result =~ /1\.3\.6\.1\.2\.1\.2\.2\.1\.3\.(\S+)/ ) {
                 $ref=$1;
@@ -181,7 +164,6 @@ sub snmp_run {
                 }
                 $MACADDR=$session->get_request(-varbindlist => [$snmp_physAddr.$ref]);
                 if ( defined( $MACADDR->{$snmp_physAddr.$ref}) ) {
-                    # For MACADDR, we need a translation beetween Hexa and string
                     $MACADDR=$MACADDR->{$snmp_physAddr.$ref};
                     if ( length ($MACADDR) == 14 ) {
                         $MACADDR=substr($MACADDR,2,2).":".
@@ -207,7 +189,7 @@ sub snmp_run {
                 if ( defined( $DESCRIPTION ) ) {
                     $DESCRIPTION=$DESCRIPTION->{$snmp_description.$ref};
                 }
-                $DEVICEADDRESS=$session->get_entries( -columns => [ $snmp_cisco_deviceAddress.$ref ] );
+                $DEVICEADDRESS=$session->get_entries( -columns => [ $snmp_deviceAddress.$ref ] );
                 if ( defined( $DEVICEADDRESS ) ) {
                     my $DEVICEADDRESS_uniq;
                     foreach my $key ( keys %{$DEVICEADDRESS} ) {
@@ -223,7 +205,7 @@ sub snmp_run {
                     }
                     $DEVICEADDRESS=$DEVICEADDRESS_uniq;
                 }
-                $DEVICENAME=$session->get_entries( -columns => [ $snmp_cisco_deviceId.$ref ] );
+                $DEVICENAME=$session->get_entries( -columns => [ $snmp_deviceId.$ref ] );
                 if ( defined( $DEVICENAME ) ) {
                     my $DEVICENAME_uniq;
                     my $DEVICETYPE_uniq;
@@ -233,15 +215,14 @@ sub snmp_run {
                         $DEVICENAME_uniq=$DEVICENAME->{$key};
                     }
                     $DEVICENAME=$DEVICENAME_uniq;
-                    # If we have the device name, the cdp can be used for the other informations
-                    $DEVICETYPE=$session->get_entries( -columns => [ $snmp_cisco_devicePlatform.$ref ] );
+                    $DEVICETYPE=$session->get_entries( -columns => [ $snmp_devicePlatform.$ref ] );
                     if ( defined( $DEVICETYPE ) ) {
                         foreach my $key ( keys %{$DEVICETYPE} ) {
                             $DEVICETYPE_uniq=$DEVICETYPE->{$key};
                         }
                         $DEVICETYPE=$DEVICETYPE_uniq;
                     }
-                    $DEVICEPORT=$session->get_entries( -columns => [ $snmp_cisco_devicePort.$ref ] );
+                    $DEVICEPORT=$session->get_entries( -columns => [ $snmp_devicePort.$ref ] );
                     if ( defined( $DEVICEPORT ) ) {
                         foreach my $key ( keys %{$DEVICEPORT} ) {
                             $DEVICEPORT_uniq=$DEVICEPORT->{$key};
@@ -278,23 +259,20 @@ sub snmp_run {
            $VLAN=undef;
        }
     }
-    # We have finished for interfaces  
-    # We look for Softwares on the switch
-    # We look for feature
-    # All feature are separated by a pipe
-    $result_snmp=$session->get_request ( -varbindlist => [ $snmp_cisco_ImageTable ]) ;
+
+    $result_snmp=$session->get_request ( -varbindlist => [ $snmp_ImageTable ]) ;
     if ( defined ( $result_snmp ) ) {
-        $result_snmp=$result_snmp->{$snmp_cisco_ImageTable};
+        $result_snmp=$result_snmp->{$snmp_ImageTable};
         my @tab_feature=split(/\$/,$result_snmp);
         @tab_feature=split(/\|/,$tab_feature[1]);
         foreach $result_sub ( @tab_feature ) {
             $common->addSoftware( { NAME => $result_sub , COMMENTS => "Feature" } );
         }
     }
-    # We look for IOS version
-    $result_snmp=$session->get_request ( -varbindlist => [ $snmp_cisco_ImageVersion ]) ;
+
+    $result_snmp=$session->get_request ( -varbindlist => [ $snmp_ImageVersion ]) ;
     if ( defined ( $result_snmp ) ) {
-        $result_snmp=$result_snmp->{$snmp_cisco_ImageVersion};
+        $result_snmp=$result_snmp->{$snmp_ImageVersion};
         my @tab_feature=split(/\$/,$result_snmp);
         $common->addSoftware( { NAME => $tab_feature[1] , COMMENTS => "IOS" } );
     }
