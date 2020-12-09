@@ -1,0 +1,293 @@
+# Autor: Robson Vaamonde
+# Site: www.procedimentosemti.com.br
+# Facebook: facebook.com/ProcedimentosEmTI
+# Facebook: facebook.com/BoraParaPratica
+# YouTube: youtube.com/BoraParaPratica
+# Data de criação: 08/12/2020
+# Data de atualização: 08/12/2020
+# Versão: 0.1
+# Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
+# Kernel >= 4.4.x
+#
+# Procedimentos de configuração do OCS Inventory Reports e informações do Servidor e Agente
+#
+Versão do OCS Inventory Server e Reports: 2.8 (Information, Server Information)
+Versão do OCS Inventory Agent: 2.8.0 (ocsinventory-agent --version)
+#
+# Opções do comando ocsinventory-agent (ocsinventory-agent --version ou man ocsinventory-agent)
+Forçar o Agente com as opções de Depurar e Informações detalhadas: ocsinventory-agent --debug --info
+Forçar o Agente com a opção de não contatar o Servidor durante o PROLOG_FREQ: ocsinventory-agent --lazy (veja a linha 54)
+#
+# Opções do comando ipdiscover-util.pl (localizado em: /usr/share/ocsinventory-reports/ocsreports/ perl ipdiscover-util.pl --help)
+Listar hosts descobertos...................: perl ipdiscover-util.pl -net=172.16.10.0 -p=123456
+Forçar a descoberta de hosts...............: perl ipdiscover-util.pl -a -net=172.16.10.0 -p=123456
+Verificar se o host foi inventáriado.......: perl ipdiscover-util.pl -a -ip=172.16.10.20/255.255.255.0 -net=172.16.10.0 -p=123456
+Criar o arquivo XML dos hosts descobertos..: perl ipdiscover-util.pl -xml -net=172.16.10.0 -p=123456
+Criar o arquivo de XML do host descoberto..: perl ipdiscover-util.pl -xml -ip=172.16.10.20/255.255.255.0 -net=255.255.255.0 -p=123456
+#
+# Sites de CVE Search para configurar no OCS Inventory
+Site01: https://cve.circl.lu/
+Site02: https://cve.mitre.org/index.html
+Site03: https://www.cvedetails.com/
+
+#01_ Instalação das Extensões do OCS Inventory Server
+	Extensions
+		Extensions Manager
+			driverslist <-- Install
+			listprinters <-- Install
+			uptime <-- Install
+	Logout - Login
+
+#02_ Habilitar as configurações avançadas do OCS Inventory
+	Configuration
+		General Configuration
+			Server
+				ADVANCE_CONFIGURATION <-- ON
+			Update
+				FREQUENCY <-- Always inventoried
+				INVENTORY_DIFF <-- ON
+				INVENTORY_TRANSACTION <-- ON
+				INVENTORY_WRITE_DIFF <-- OFF
+				INVENTORY_SESSION_ONLY <-- OFF
+				INVENTORY_CACHE_REVALIDATE <-- 1 days
+				INVENTORY_CACHE_ENABLED <-- ON
+				INVENTORY_VALIDITY <-- OFF 
+				INVENTORY_SAAS_ENABLED <-- ON
+			Update
+
+#03_ Configurações do Servidor de Inventário do OCS Inventory Server
+	Configuration
+		General Configuration
+			Server
+				LOGLEVEL <-- ON
+				PROLOG_FREQ <-- 24 hours
+				AUTO_DUPLICATE_LVL <-- (hostname, Serial, macaddress)
+				LOCK_REUSE_TIME <-- 600 seconds
+				SESSION_VALIDITY_TIME <-- 600 seconds
+				TRACE_DELETED <-- ON
+				INVENTORY_ON_STARTUP <-- ON
+				ADVANCE_CONFIGURATION <-- ON
+			Update
+
+#04_ Configurações do Servidor de Inventário do OCS Inventory Server
+	Configuration
+		General Configuration
+			IpDiscovery
+				IPDISCOVER <-- ON (2 computers)
+				IPDISCOVER_BETTER_THRESHOLD <-- 1 days
+				IPDISCOVER_LATENCY <-- 100 milliseconds (aumentar se necessário)
+				IPDISCOVER_MAX_ALIVE <-- 1 days
+				IPDISCOVER_NO_POSTPONE <-- OFF
+				IPDISCOVER_USE_GROUPS <-- ON (configurar o grupo do IpDiscovery)
+			Update
+
+#05_ Configurações do Servidor de Inventário do OCS Inventory Server
+	Configuration
+		General Configuration
+			Deployment
+				DOWNLOAD <-- ON
+				DOWNLOAD_CYCLE_LATENCY <-- 60 seconds (aumentar se necessário)
+				DOWNLOAD_FRAG_LATENCY <-- 10 seconds (aumentar se necessário)
+				DOWNLOAD_GROUPS_TRACE_EVENTS <-- ON
+				DOWNLOAD_PERIOD_LATENCY <-- 1 seconds (aumentar se necessário)
+				DOWNLOAD_TIMEOUT <-- 30 days (aumentar se necessário)
+				DOWNLOAD_PERIOD_LENGTH <-- 10 (aumentar se necessário)
+				DEPLOY <-- ON
+				DOWNLOAD_URI_FRAG <-- HTTP://localhost/download (customizar após as configurações do DNS)
+				DOWNLOAD_URI_INFO <-- HTTP://localhost/download (customizar após as configurações do DNS)
+			Update
+
+#06_ Configurações do Servidor de Inventário do OCS Inventory Server
+	Configuration
+		General Configuration
+			Groups
+				ENABLE_GROUPS <-- ON
+				GROUPS_CACHE_OFFSET <-- 43200 seconds (aumentar se necessário)
+				GROUPS_CACHE_REVALIDATE <-- 43200 seconds (aumentar se necessário)
+			Update
+
+#07_ Configurações do Servidor de Inventário do OCS Inventory Server
+	Configuration
+		General Configuration
+			Registry
+				REGISTRY <-- ON
+			Update
+
+#08_ Configurações do Servidor de Inventário do OCS Inventory Server
+	Configuration
+		General Configuration
+			Interface
+				ACTIVE_NEWS <-- OFF
+				CUSTOM_THEME <-- OCS
+				LOCAL_URI_SERVER <-- http://localhost:80/ocsinventory (customizar após as configurações do DNS)
+				DOWNLOAD_PACK_DIR <-- /var/lib/ocsinventory-reports/download (manter o padrão)
+				IPDISCOVER_IPD_DIR <-- (/var/lib/ocsinventory-reports/ipd (manter o padrão)
+				LOG_GUI <-- ON
+				LOG_DIR <-- /var/lib/ocsinventory-reports/logs (manter o padrão)
+				LOG_SCRIPT <-- (/var/lib/ocsinventory-reports/scripts (manter o padrão)
+				CONF_PROFILS_DIR <-- usr/share/ocsinventory-reports/ocsreports//usr/share/ocsinventory-reports/ocsreports/plugins/main_sections/conf/ (manter o padrão)
+				OLD_CONF_DIR <-- /usr/share/ocsinventory-reports/ocsreports//usr/share/ocsinventory-reports/ocsreports/plugins/main_sections/old_conf/ (manter o padrão)
+				EXPORT_SEP <-- (sem utilização nesse projeto)
+				TAB_CACHE <-- OFF
+				WARN_UPDATE <-- OFF
+			Update
+
+#09_ Configurações do Servidor de Inventário do OCS Inventory Server
+	Configuration
+		General Configuration
+			Snmp
+				SNMP <-- ON
+				SNMP_INVENTORY_DIFF <-- ON
+				SNMP_MIB_DIRECTORY <-- /usr/share/snmp/mibs
+			Update
+
+#10_ Configurações do Servidor de Inventário do OCS Inventory Server
+	Configuration
+		General Configuration
+			Wol
+				WOL_PORT <-- 7,9 (sem utilização nesse projeto)
+			Update
+
+#11_ Configurações do Servidor de Inventário do OCS Inventory Server
+	Configuration
+		General Configuration
+			Redistribution Servers
+				DOWNLOAD_REDISTRIB <-- ON (sem utilização nesse projeto)
+				DOWNLOAD_SERVER_URI <-- HTTP://$IP$/local (manter o padrão)
+				DOWNLOAD_SERVER_DOCROOT <-- d:\tele_ocs (alterar a localização se necessário)
+				DOWNLOAD_REP_CREAT <-- /var/www/htmldownload/server (alterar se necessário)
+			Update
+
+#12_ Configurações do Servidor de Inventário do OCS Inventory Server
+	Configuration
+		General Configuration
+			Inventory Files
+				GENERATE_OCS_FILES <-- OFF (sem utilização nesse projeto)
+				OCS_FILES_FORMAT <-- OCS (manter o padrão)
+				OCS_FILES_OVERWRITE <-- OFF
+				OCS_FILES_PATH <-- /tmp (manter o padrão)
+			Update
+
+#13_ Configurações do Servidor de Inventário do OCS Inventory Server
+	Configuration
+		General Configuration
+			Filters
+				PROLOG_FILTER_ON <-- OFF (sem utilização nesse projeto)
+				INVENTORY_FILTER_ENABLED <-- OFF
+				INVENTORY_FILTER_FLOOD_IP <-- OFF
+				INVENTORY_FILTER_FLOOD_IP_CACHE_TIME <-- 300 seconds (manter o padrão)
+				INVENTORY_FILTER_ON <-- OFF
+			Update
+
+#14_ Configurações do Servidor de Inventário do OCS Inventory Server
+	Configuration
+		General Configuration
+			Ldap
+				CONEX_LDAP_SERVEUR <-- (sem utilização nesse projeto)
+				CONEX_ROOT_DN
+				CONEX_ROOT_PW
+				CONEX_LDAP_PORT
+				CONEX_DN_BASE_LDAP
+				CONEX_LOGIN_FIELD
+				CONEX_LDAP_PROTOCOL_VERSION
+				CONEX_LDAP_CHECK_FIELD1_NAME
+				CONEX_LDAP_CHECK_FIELD1_VALUE
+				CONEX_LDAP_CHECK_FIELD1_ROLE <-- Administrators
+				CONEX_LDAP_CHECK_FIELD2_NAME
+				CONEX_LDAP_CHECK_FIELD2_VALUE
+				CONEX_LDAP_CHECK_FIELD2_ROLE <-- Administrators
+				CONEX_LDAP_CHECK_DEFAULT_ROLE
+			Update
+
+#15_ Configurações do Servidor de Inventário do OCS Inventory Server
+	Configuration
+		General Configuration
+			CVE Search Management (esse serviço pode causar lentidão na rede)
+				VULN_CVESEARCH_ENABLE <-- ON
+				VULN_CVESEARCH_HOST <-- https://cve.circl.lu/ (utilizar somente se necessário)
+				VULN_BAN_LIST[]
+				VULN_CVESEARCH_VERBOSE <-- ON
+			Update
+
+#16_ Configurações do Perfil e Usuário para o inventário do Agente
+    Configuration
+        Users 
+            Create Profile 
+                Identifier (ex: admin): ocsagent <-- ADD
+                Display name (ex: Administrators): Perfil Agentes OCS <-- ADD
+                Copy profile data: Administrators <-- ADD
+            OK
+            Edit profile (Perfil Agentes OCS)
+                Restrictions:
+                    On computers: <-- NO
+                    On package activation: <-- YES
+                    on invisible packages: <-- YES
+                    On the generation of an XML inventory: <-- YES
+                    On Wake On Lan: <-- YES
+                Blacklist
+                    On MAC addresses: <-- YES
+                    On serial numbers: <-- YES
+                    On the ipdiscover's subnet: <-- YES
+                Configuration:
+                    Manage ipdiscover: <-- NO
+                    Manage teledeploy: <-- NO
+                    Update Configuration: <-- NO
+                    Manage groups: <-- NO
+                    Manage console: <-- NO
+                    See warning messages of the GUI: <-- NO
+                    Manage accounts info: NO
+                    may change accounts info computers: <-- NO
+                    may change their membership group: <-- NO
+                    Manage profiles: <-- NO
+                    Manage profiles group: <-- NO
+                    Manage SNMP communities: <-- NO
+                    Delete his computers: <-- NO
+                Pages
+                    DISABLE: ALL (desabilitar todas as opções)
+                    ENABLE: (habilitar somente)
+                        computer: <-- YES
+                        visu_computers: <-- YES
+            OK
+            Create User 
+                Login: ocsagent <-- ADD
+                Type: Perfil Agentes OCS <-- ADD
+                Group: ocsagent (adicionar o grupo depois voltar para criar o usuário)
+                    New data:
+                        Caption: ocsagent <-- ADD
+                    OK
+                First name: OCS <-- ADD
+                Last name: Agent <-- ADD
+                E-mail: ocsagent@pti.intra <-- ADD
+                Comments: Usuário utilizado no Inventário do Agentes do OCS <-- ADD
+                Password: 123456 <-- ADD
+            OK
+
+#17_ Configurações das Comunidades do SNMP (v1, v2, v2c e v3) 
+    Networks
+		Administer
+			Manage SNMP Communities
+				Version 1 (public) <-- ADD
+				Version 2 (public) <-- ADD
+				Version 2c (public) <-- ADD
+				Version 3 (public) <-- ADD (se necessário configurar a autenticação do SNMPv3)
+
+#18_ Configuração do Grupo para o descoberta do IpDiscovery 
+    Inventory
+        Groups
+            Static Groups
+                New static group
+                    Group name: IPDiscovery <-- ADD
+                    Description: Grupo de IpDiscovery <-- ADD
+                OK
+
+#19_ Configuração do Agente de escaneamento do IpDiscovery e SNMP
+    All Computers
+		Computer (selecionar o Server OCS Inventory configurado em HTTPS)
+			Configuration
+                IpDiscovery <-- Statically add to this group
+				Edit
+					Networks scans
+						IPDISCOVER <-- 172.16.10.0
+						SNMP_SWITCH <-- ON
+						SNMP_NETWORK <-- 172.16.10.0/24, 172.16.251.80, 10.0.0.10, 200.204.0.0/24 (redes ou IP para escanear)
+				Update

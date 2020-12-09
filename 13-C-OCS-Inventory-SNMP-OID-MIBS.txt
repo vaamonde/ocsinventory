@@ -1,0 +1,22 @@
+# Autor: Robson Vaamonde
+# Site: www.procedimentosemti.com.br
+# Facebook: facebook.com/ProcedimentosEmTI
+# Facebook: facebook.com/BoraParaPratica
+# YouTube: youtube.com/BoraParaPratica
+# Data de criação: 08/12/2020
+# Data de atualização: 08/12/2020
+# Versão: 0.1
+# Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
+# Kernel >= 4.4.x
+#
+# Procedimentos de mapeamento de OID das MIBS de Impressora, Switch, Routers, Access Point, etc.
+#
+Versão do OCS Inventory Server e Reports: 2.7 ou 2.8 (Information, Server Information)
+Versão do OCS Inventory Agent: 2.6.1 ou 2.8.0 (ocsinventory-agent --version)
+#
+# Sites de OID Search
+Site01: 
+Site02: 
+Site03: 
+#
+# Mapeamento das OID em relação do Tipo do Equipamento.

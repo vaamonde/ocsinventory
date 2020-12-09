@@ -139,7 +139,7 @@ echo
 echo -e "Alterando o dono e grupo padrão do diretório do GLPI Help Desk, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando chown: -R (recursive), -v (verbose), www-data.www-data (user and group)
-	chown -Rf www-data.www-data /var/www/html/glpi/ &>> $LOG
+	chown -Rv www-data.www-data /var/www/html/glpi/ &>> $LOG
 echo -e "Alteração do dono e grupo do OCS Inventory Reports alteradas com sucesso!!!, continuando com o script..."
 sleep 2
 echo

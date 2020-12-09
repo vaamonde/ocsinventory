@@ -91,7 +91,7 @@ echo
 echo -e "Alterando o dono e grupo padrão do diretório do FusionInventory Server, aguarde..."
 	# opção do comando: &>> (redirecionar a saída padrão)
 	# opção do comando chown: -R (recursive), -v (verbose), www-data.www-data (user and group)
-	chown -Rf www-data.www-data /var/www/html/glpi/plugins/$GLPIFISINSTALL &>> $LOG
+	chown -Rv www-data.www-data /var/www/html/glpi/plugins/$GLPIFISINSTALL &>> $LOG
 echo -e "Permissões do dono e grupo do FusionInventory Server alteradas com sucesso!!!, continuando com o script..."
 sleep 2
 echo
