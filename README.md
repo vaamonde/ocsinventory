@@ -11,7 +11,7 @@ Facebook Bora para Prática: https://www.facebook.com/boraparapratica<br>
 Instagram Procedimentos em TI: https://www.instagram.com/procedimentoem<br>
 YouTUBE Bora Para Prática: https://www.youtube.com/boraparapratica
 
-Esse curso tem como objetivo de demonstrar a instalação e configuração da solução Open Source OCS Inventory NG que foi criada para facilitar o inventário de redes de computadores é a gestão de equipamentos em rede, sua integração com o Sistema de Chamados Técnico GLPI oferece todos os recursos de documentação e gerenciamento de rede de forma fácil, rápida e eficiente.
+Esse curso tem como objetivo de demonstrar a instalação e configuração da solução Open Source OCS Inventory NG que foi criada para facilitar o inventário de redes de computadores é a gestão de equipamentos em rede, sua integração com o Sistema de Chamados Técnico GLPI Help Desk oferece todos os recursos de documentação e gerenciamento de rede de forma fácil, rápida e eficiente.
 
 Para esse curso as metodologias de DevOps, utilizando o Git e Github serão empregadas de forma dinâmica, desenvolvendo scripts e automatizando todo os processos de instalação e configuração.
 
@@ -98,6 +98,56 @@ Link da vídeo aula: https://www.youtube.com/watch?v=LlOICFCok2E
 Nessa vídeo aula eu vou mostrar como instalar o Git e Notepadqq que vou utilizar para baixar todos os script de automação de instalação e configuração do OCS Inventory, GLPI e FusionInventory no nosso servidor Ubuntu Server 16.04.x LTS, todo o projeto está hospedado no meu Github facilitando o desenvolvimento e o compartilhamento das informações.
 
 Link da vídeo aula: https://www.youtube.com/watch?v=SCDx0jhFzkE&t
+
+## **BASH SHELL Básico com o Linux Mint 19.1 Tessa**
+
+Vídeo mostrando os procedimentos básicos para a utilização do Bash/Shell no GNU/Linux, esse vídeo tem como objetivo auxiliar nos primeiros passos no Terminal do GNU/Linux, facilitando o entendimento dos comandos digitados nesse curso.
+
+O bash é um interpretador de comandos, um entre os diversos tradutores entre o usuário e o sistema operacional conhecidos como shell.
+
+Acrônimo para "Bourne-Again SHell, o bash é uma evolução retro-compatível muito mais interativa do Bourne Shell (sh). Os shells Bourne permitem a execução de sequências de comandos inseridos diretamente na linha de comandos ("prompt") ou ainda lidos de arquivos de texto conhecidos como shell scripts. Neles se podem invocar comandos internos aos próprios shells (conhecidos como comandos "builtins") ou ainda arquivos binários ou scripts de terceiros arquivados nos dispositivos de armazenamento do sistema.
+
+Link da vídeo aula: https://www.youtube.com/watch?v=xs1zGEBf-wc&t
+
+Link do script utilizado nesse vídeo: https://github.com/vaamonde/ubuntu-1804/blob/master/Bash.sh
+
+## **SHELL SCRIPT Básico com o Linux Mint 19.1 Tessa**
+
+Vídeo mostrando os procedimentos básicos para a programação Shell Script no GNU/Linux, esse vídeo tem como objetivo auxiliar nos primeiros passos na criação dos primeiros scripts em shell, facilitando o entendimento dos scripts criados nesse curso.
+
+Shell script é uma linguagem de script usada em vários sistemas operacionais, dependendo do interpretador de comandos utilizado. Um exemplo de interpretador de comandos é o bash, usado na grande maioria das distribuições GNU/Linux.
+
+A maior parte dos usuários classificam shell script como uma linguagem de fácil aprendizagem. O primeiro passo é, saber o que se deseja fazer, então ver qual o código que executa este comando em shell e aí criar, basta escrever o código em algum editor de texto e salvar.
+
+Link da vídeo aula: https://www.youtube.com/watch?v=MkKkZA8wxHU&t
+
+Link do script utilizado nesse vídeo: https://github.com/vaamonde/ubuntu-1804/blob/master/Shell.sh
+
+## **GIT e GITHUB Básico com o Linux Mint 19.1 Tessa**
+
+Vídeo mostrando os procedimentos básicos para utilizar o comando Git e o site Github no GNU/Linux, esse vídeo tem como objetivo auxiliar nos primeiros passos na utilização do site do Github e os principais parâmetros e configurações do comando Git, facilitando o entendimento dos scripts criados nesse curso.
+
+O Git é um sistema de controle de versões distribuído, usado principalmente no desenvolvimento de software, mas pode ser usado para registrar o histórico de edições de qualquer tipo de arquivo. O Git foi inicialmente projetado e desenvolvido por Linus Torvalds para o desenvolvimento do kernel Linux, mas foi adotado por muitos outros projetos.
+
+O GitHub é uma plataforma de hospedagem de código-fonte com controle de versão usando o Git. Ele permite que programadores, utilitários ou qualquer usuário cadastrado na plataforma contribuam em projetos privados e/ou Open Source de qualquer lugar do mundo. 
+
+Link da vídeo aula: https://www.youtube.com/watch?v=hrmqRD2k5P0&t
+
+Link do script utilizado nesse vídeo: https://github.com/vaamonde/ubuntu-1804/blob/master/Git-Github.sh
+
+## **VIM Básico com Linux Mint 19.2 Tina x64**
+
+Vídeo mostrando os procedimentos básicos para utilizar editor de texto por linha de comando VIM no GNU/Linux, esse vídeo tem como objetivo auxiliar nos primeiros passos na utilização do editor de texto vim, facilitando na utilização da edição dos scripts criados nesse curso.
+
+O editor de Texto VIM (um acrônimo de Vi IMproved , em português Vi Melhorado) é um clone do  editor de textos VI para Unix. O VIM foi projetado para ser utilizado em linha de comando ou como um aplicativo independente em uma interface gráfica. O VIM é um software livre e de código fonte aberto (Free Software e Open Source).
+
+Desde o seu lançamento para a plataforma do Amiga (em 1991), o seu desenvolvimento permitiu está disponível em vários sistemas operacionais diferentes (como por exemplo o Microsoft Windows). Em 2006, foi eleito o editor de texto mais popular entre os leitores do Linux Journal; em 2015, a pesquisa de desenvolvedores do Stack Overflow descobriu que o VIM era o terceiro editor de texto mais popular e o quinto ambiente de desenvolvimento mais popular em 2019.
+
+Por causa disso, o editor de Texto VIM é o principal Software utilizado em Desktop e Servidores GNU/Linux para a criação de script e modificação de arquivos conf.
+
+Link da vídeo aula: https://www.youtube.com/watch?v=u6Or0rFgltY&t
+
+Link do script utilizado nesse vídeo: https://github.com/vaamonde/ubuntu-1804/blob/master/Vim.sh
 
 ## **Acesso REMOTO via SSH no Servidor Ubuntu do CENÁRIO do OCS Inventory e GLPI**
 
