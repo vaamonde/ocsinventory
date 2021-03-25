@@ -9,7 +9,8 @@ Robson Vaamonde: http://vaamonde.com.br<br>
 Facebook Procedimentos em TI: https://www.facebook.com/ProcedimentosEmTi<br>
 Facebook Bora para Prática: https://www.facebook.com/boraparapratica<br>
 Instagram Procedimentos em TI: https://www.instagram.com/procedimentoem<br>
-YouTUBE Bora Para Prática: https://www.youtube.com/boraparapratica
+YouTUBE Bora Para Prática: https://www.youtube.com/boraparapratica<br>
+LinkedIn Robson Vaamonde: https://www.linkedin.com/in/robson-vaamonde-0b029028/<br>
 
 Esse curso tem como objetivo de demonstrar a instalação e configuração da solução Open Source OCS Inventory NG que foi criada para facilitar o inventário de redes de computadores é a gestão de equipamentos em rede, sua integração com o Sistema de Chamados Técnico GLPI Help Desk oferece todos os recursos de documentação e gerenciamento de rede de forma fácil, rápida e eficiente.
 
